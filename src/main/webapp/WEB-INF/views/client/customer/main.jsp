@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,11 +7,14 @@
 </head>
 <style>
 @font-face {
-    font-family: 'Jal_Onuel';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/Jal_Onuel.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+	font-family: 'Jal_Onuel';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/Jal_Onuel.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
 }
+
 * {
 	font-family: 'Jal_Onuel';
 	margin: 0;
@@ -20,7 +23,7 @@
 }
 
 body {
-	background-color: #F2F2F2	;
+	background-color: #F2F2F2;
 }
 
 #tabs {
@@ -59,18 +62,38 @@ body {
 	width: 90%;
 	height: 100%;
 }
-
-<%@ include file="./css/items.css" %>
-<%@ include file="./css/services.css" %>
-<%@ include file="./css/reviews.css" %>
-
-
+<%@ include file="/resources/css/client/customer/items.css" %>
+<%@ include file="/resources/css/client/customer/services.css" %>
+<%@ include file="/resources/css/client/customer/reviews.css" %>
 </style>
 <script type="text/javascript">
-	<%@ include file="./js/items.js" %>
-	<%@ include file="./js/services.js" %>
-	<%@ include file="./js/reviews.js" %>
 
+	<%@ include file="/resources/js/client/customer/items.js" %>
+	<%@ include file="/resources/js/client/customer/services.js" %>
+	<%-- <%@ include file="/resources/js/client/customer/reviews.js" %> --%>
+
+	//----reviews.js에서 encoding 문제가 있어 임시로 reviews.js의 내용을 붙여넣는다
+	function modeChange(param) {
+
+		var contentTd = param.parentNode.parentNode.childNodes[5];
+		var contentTagName = contentTd.childNodes[0].tagName;
+
+		var buttonTd = param.parentNode.parentNode.childNodes[9];
+
+		if(contentTagName == "P") {  //보기 모드일 때, 수정 버튼을 누르면...
+			var contentText = contentTd.childNodes[0].innerText;
+			contentTd.innerHTML = "<textArea style=\"width:100%;font-size:16px\">" + contentText + "</textArea>";
+			buttonTd.childNodes[0].innerText = "확인";
+		} else if(contentTagName == "TEXTAREA") {  //수정 모드일 때, 확인 버튼을 누르면...
+			var contentText = contentTd.childNodes[0].value;
+			console.log(contentText);
+			contentTd.innerHTML = "<p>" + contentText + "</p>";
+			buttonTd.childNodes[0].innerText = "수정";
+		}
+
+	}	
+	
+	//----Tab 전환 function----
 	function openTab(evt, tabName) {
 		var i, tabcontent, tab;
 
@@ -92,6 +115,7 @@ body {
 		openTab(event, 'items'); //initial tab울 items로 설정
 		document.getElementsByClassName("tab")[0].className += " active"; //inital tab을 시각적으로 items로 설정
 	});
+	
 </script>
 <body>
 
@@ -100,11 +124,10 @@ body {
 		<button class="tab" onclick="openTab(event, 'services')">서비스</button>
 		<button class="tab" onclick="openTab(event, 'reviews')">리뷰</button>
 	</div>
-	
-	<%@ include file="items.jsp" %>
-	<%@ include file="services.jsp" %>
-	<%@ include file="reviews.jsp" %>
-	
+
+	<%@ include file="./items.jsp"%>
+	<%@ include file="./services.jsp"%>
+	<%@ include file="./reviews.jsp"%>
 
 </body>
 </html>

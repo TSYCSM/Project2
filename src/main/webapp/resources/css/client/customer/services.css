@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-#itemlist {
+#servicelist {
 	float: left;
 	width: 70%;
 	height: 100%;
@@ -8,25 +8,25 @@
 	scrollbar-width: none;
 }
 
-#itemlist>h1 {
+#servicelist>h1 {
 	padding: 30px;
 }
 
-#itemlist::-webkit-scrollbar {
+#servicelist::-webkit-scrollbar {
 	display: none;
 }
 
-#cartlist {
+#requestlist {
 	float: right;
 	width: 30%;
 	text-align: center;
 }
 
-#cartlist>h1 {
+#requestlist>h1 {
 	padding: 30px;
 }
 
-#cartlist>textArea {
+#requestlist>textArea {
 	text-align: center;
 	width: 80%;
 	margin: 20px;
@@ -35,7 +35,7 @@
 	border-radius: 5px;
 }
 
-#cartlist>button {
+#requestlist>button {
 	font-size: 20px;
 	border: none;
 	border-radius: 5px;
@@ -44,74 +44,68 @@
 	padding: 15px 40px;
 }
 
-#cartlist>button:hover {
+#requestlist>button:hover {
 	opacity: 0.7;
 	transition: 0.3s;
 }
 
-.item {
+.service {
 	float: left;
 	width: 200px;
 	height: 350px;
 	text-align: center;
 	background-color: white;
-	border: 1px solid #BDBDBD;
+	border: 2px solid #E6E6E6;
 	margin: 30px;
 }
 
-.item:hover {
+.service:hover {
 	background-color: white;
-	border: 1px solid black;
+	border: 2px solid black;
 	transition: 0.3s;
 }
 
-.item img {
+.service img {
 	width: 100%;
 }
 
-.item h2 {
-	width: 100%;
-	padding: 10px;
-	font-weight: normal;
-}
-
-.item h3 {
+.service h2 {
 	width: 100%;
 	padding: 10px;
 	font-weight: normal;
 }
 
-#cartlist table {
+.service h3 {
+	width: 100%;
+	padding: 10px;
+	font-weight: normal;
+}
+#requestlist table {
 	font-size: 20px;
 	width: 90%;
 	text-align: center;
 }
 
-#cartlist td {
+#requestlist td {
 	border-bottom: 1px solid black;
 	padding: 10px 15px 11px 15px;
 }
 
-#cartlist p {
-	font-size: 25px;
-	color: black;
-	margin: 30px;
+#requestlist td:nth-child(1) {
+	width: 95%;
+}
+#requestlist td:nth-last-child(1) {
+	width: 5%;
 }
 
-#cartlist input {
-	font-size: 17px;
-	width: 80px;
-	text-align: center;
-}
-
-#cartlist td:last-child button {
+#requestlist td:last-child button {
 	border: 1px solid red;
 	color: red;
 	background-color: transparent;
 	padding: 3px 5px;
 	border-radius: 3px;
 }
-#cartlist td:last-child button:hover {
+#requestlist td:last-child button:hover {
 	background-color: red;
 	color: white;
 }

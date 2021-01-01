@@ -10,6 +10,18 @@ public class ViewController {
 		System.out.println("view");
 		return "client/owner/index";
 	}
+
+	@RequestMapping("/test/first")
+	public String viewFirst() {
+		System.out.println("view");
+		return "client/first";
+	}
+	
+	@RequestMapping("/test/customerMain")
+	public String viewCustomerMain() {
+		System.out.println("view");
+		return "client/customer/main";
+	}
 	
 	@RequestMapping("/test/subdir")
 	public String viewSub() {

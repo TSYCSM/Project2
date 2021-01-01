@@ -55,13 +55,13 @@
 	height: 350px;
 	text-align: center;
 	background-color: white;
-	border: 1px solid #BDBDBD;
+	border: 2px solid #E6E6E6;
 	margin: 30px;
 }
 
 .item:hover {
 	background-color: white;
-	border: 1px solid black;
+	border: 2px solid black;
 	transition: 0.3s;
 }
 
@@ -102,6 +102,10 @@
 	font-size: 17px;
 	width: 80px;
 	text-align: center;
+}
+
+#cartlist td:last-child {
+	width: 5%;
 }
 
 #cartlist td:last-child button {
