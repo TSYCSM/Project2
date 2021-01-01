@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+/*fixed sidebar*/
+.fixednav {
+  height: 100%;
+  width: 80px;
+  position: fixed;
+  z-index: 1;
+  top: 46px;
+  left: 0;
+  background-color: #c7cdff;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.fixednav a {
+  padding: 6px 8px 6px 0px;
+  text-decoration: none;
+  font-size: 25px;
+  font-style: Sans-serif;
+  color: #818181;
+  display: block;
+}
+
+.fixednav div{
+  display: block;
+  color: #575757;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+

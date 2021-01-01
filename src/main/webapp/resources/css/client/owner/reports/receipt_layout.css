@@ -1,0 +1,57 @@
+@charset "UTF-8";
+
+body {
+  font-family: "Lato", sans-serif;
+}
+
+.receiptbar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 5;
+  top: 0;
+  right: 0;
+  background-color: #f0f4ff;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  text-align: left;
+}
+.receiptbar .total_cost, .total_name{
+	text-align: center;
+}
+
+.receiptbar .total_name{
+	text-align: center;
+	padding-bottom: 40px;
+}
+
+.receiptbar div{
+	margin-top: 10px;
+	margin-left: 10px;
+}
+
+.receiptbar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.1s;
+}
+
+.receiptbar a:hover {
+  color: #f1f1f1;
+}
+
+.receiptbar .closebtn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 36px;
+}
+
+@media screen and (max-height: 450px) {
+  .receiptbar {padding-top: 15px;}
+  .receiptbar a {font-size: 18px;}
+}

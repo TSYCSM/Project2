@@ -1,0 +1,39 @@
+@charset "UTF-8";
+
+#main .mypagebar, .reportsbar, .itembar{
+	display: none;
+	position: fixed;
+	z-index: 2;
+	text-align: center;
+	left: 80px;
+	width:150px;
+	background-color:#e8e8e8;
+	border-style: groove;
+}
+
+.childbar a{
+	color: black;
+}
+.test{
+	width: 100%;
+}
+
+.test:hover{
+	background-color: #d6d6d6;	
+}
+
+.mypagebar{
+	top:46px;
+	height:80px;
+	
+}
+.reportsbar{
+	top:126px;
+	height:280px;
+}
+
+.itembar{
+	top:206px;
+	height:120px;
+	
+}

@@ -1,0 +1,108 @@
+@charset "UTF-8";
+
+#servicelist {
+	float: left;
+	width: 70%;
+	height: 100%;
+	overflow: auto;
+	scrollbar-width: none;
+}
+
+#servicelist>h1 {
+	padding: 30px;
+}
+
+#servicelist::-webkit-scrollbar {
+	display: none;
+}
+
+#requestlist {
+	float: right;
+	width: 30%;
+	text-align: center;
+}
+
+#requestlist>h1 {
+	padding: 30px;
+}
+
+#requestlist>textArea {
+	text-align: center;
+	width: 80%;
+	margin: 20px;
+	padding: 10px;
+	border: 1px solid gray;
+	border-radius: 5px;
+}
+
+#requestlist>button {
+	font-size: 20px;
+	border: none;
+	border-radius: 5px;
+	background-color: black;
+	color: white;
+	padding: 15px 40px;
+}
+
+#requestlist>button:hover {
+	opacity: 0.7;
+	transition: 0.3s;
+}
+
+.service {
+	float: left;
+	width: 200px;
+	height: 350px;
+	text-align: center;
+	background-color: white;
+	border: 1px solid #BDBDBD;
+	margin: 30px;
+}
+
+.service:hover {
+	background-color: white;
+	border: 1px solid black;
+	transition: 0.3s;
+}
+
+.service img {
+	width: 100%;
+}
+
+.service h2 {
+	width: 100%;
+	padding: 10px;
+	font-weight: normal;
+}
+
+.service h3 {
+	width: 100%;
+	padding: 10px;
+	font-weight: normal;
+}
+#requestlist table {
+	font-size: 20px;
+	width: 90%;
+	text-align: center;
+}
+
+#requestlist td {
+	border-bottom: 1px solid black;
+	padding: 10px 15px 11px 15px;
+}
+
+#requestlist td:last-child {
+	width: 40px;
+}
+
+#requestlist td:last-child button {
+	border: 1px solid red;
+	color: red;
+	background-color: transparent;
+	padding: 3px 5px;
+	border-radius: 3px;
+}
+#requestlist td:last-child button:hover {
+	background-color: red;
+	color: white;
+}
