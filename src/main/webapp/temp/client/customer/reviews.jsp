@@ -1,5 +1,5 @@
 <%@page import="com.tsycsm.agileoffice.common.board.Pager"%>
-<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ page contentType="text/html;charset=utf-8"%>
 <%
 	int listSize = 234;
 	Pager pager = new Pager();
