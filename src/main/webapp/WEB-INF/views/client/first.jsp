@@ -90,14 +90,14 @@ div.mask:hover {
 
 #customer_mask {
 	left: 0;
-	background-image: url("resources/image/client/customer.jpg");
+	background-image: url(/resources/image/client/customer.jpg);
 	color: #2E2E2E;
 	font-weight: bold;
 }
 
 #owner_mask {
 	left: 50%;
-	background-image: url(resources/image/client/owner.jpg);
+	background-image: url(/resources/image/client/owner.jpg);
 	color: #F2F2F2;
 }
 

@@ -90,14 +90,14 @@ div.mask:hover {
 
 #customer_mask {
 	left: 0;
-	background-image: url("resources/image/client/customer.jpg");
+	background-image: url(/resources/image/client/customer.jpg);
 	color: #2E2E2E;
 	font-weight: bold;
 }
 
 #owner_mask {
 	left: 50%;
-	background-image: url(resources/image/client/owner.jpg);
+	background-image: url(/resources/image/client/owner.jpg);
 	color: #F2F2F2;
 }
 
@@ -157,12 +157,10 @@ div.loginArea>h2, div.registArea>h2 {
 		var owner_mask = document.getElementById("owner_mask");
 
 		customer_mask.addEventListener("click", function() {
-			console.log(true);
 			flag = true;
 			changeMask(flag);
 		});
 		owner_mask.addEventListener("click", function() {
-			console.log(false);
 			flag = false;
 			changeMask(flag);
 		});

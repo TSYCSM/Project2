@@ -1,0 +1,90 @@
+username: project2
+password: 1234
+
+
+
+
+create table owner(
+ owner_id number primary key
+ , email varchar(50) not null
+ , id varchar(20) not null
+ , password varchar(20) not null
+ , shopname varchar(30) not null
+ , regdate date default sysdate
+);
+
+create  sequence seq_owner
+increment by 1
+start with 1;
+
+create table customer(
+ customer_id number primary key
+ , owner_id number
+ , customer_name varchar(20) not null
+ , phone varchar(30) not null
+ , point number default 0
+ , regdate date default sysdate
+ , constraint fk_owner_customer foreign key(owner_id) references owner(owner_id)
+	on delete cascade
+);
+
+create  sequence seq_customer
+increment by 1
+start with 1;
+
+create table category(
+ category_id number primary key
+ , owner_id number
+ , category_name varchar(20) not null
+ , regdate date default sysdate
+ , constraint fk_owner_category foreign key(owner_id) references owner(owner_id)
+	on delete cascade
+);
+
+create  sequence seq_category
+increment by 1
+start with 1;
+
+create table item(
+ item_id number primary key
+ , owner_id number
+ , category_id number
+ , item_name varchar(20) not null
+ , price varchar(30) not null
+ , filename varchar(200) not null
+ , stock number default 0
+ , regdate date default sysdate
+ , constraint fk_owner_item foreign key(owner_id) references owner(owner_id)
+	on delete cascade
+ , constraint fk_category_item foreign key(category_id) references category(category_id)
+	on delete set null
+);
+
+create  sequence seq_item
+increment by 1
+start with 1;
+
+create table sale(
+ sale_id number primary key,
+ owner_id number,
+ item_id number,
+ customer_id number,
+ category_id number,
+ regdate date default sysdate,
+ price number not null,
+ constraint fk_owner_sale foreign key(owner_id) references owner(owner_id)
+	on delete cascade,
+ constraint fk_item_sale foreign key(item_id) references item(item_id)
+	on delete set null,
+ constraint fk_category_sale foreign key(category_id) references category(category_id)
+	on delete set null,
+ constraint fk_customer_sale foreign key(customer_id) references customer(customer_id)
+	on delete set null
+);
+
+create  sequence seq_sale
+increment by 1
+start with 1;
+
+
+
