@@ -12,6 +12,7 @@ public class Pager {
 	private int lastPage;
 	private int curPos;
 	private int num;
+
 	
 	public void init(HttpServletRequest request, int listSize) {
 		totalRecord = listSize;
@@ -24,7 +25,7 @@ public class Pager {
 		curPos = (currentPage - 1) * pageSize;
 		num = totalRecord - curPos;
 	}
-
+	
 	public int getTotalRecord() {
 		return totalRecord;
 	}

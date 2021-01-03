@@ -1,0 +1,39 @@
+@charset "UTF-8";
+
+#main .homebar, .memberbar, .customerbar{
+	display: none;
+	position: fixed;
+	z-index: 2;
+	text-align: center;
+	left: 80px;
+	width:150px;
+	background-color:#e8e8e8;
+	border-style: groove;
+}
+
+.childbar a{
+	color: black;
+}
+.barbox{
+	width: 100%;
+}
+
+.barbox:hover{
+	background-color: #d6d6d6;	
+}
+
+.homebar{
+	top:46px;
+	height:80px;
+	
+}
+.memberbar{
+	top:126px;
+	height:80px;
+}
+
+.customerbar{
+	top:206px;
+	height:80px;
+	
+}

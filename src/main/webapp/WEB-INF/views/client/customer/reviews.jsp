@@ -34,12 +34,21 @@
 		<%} %>
 		<tr>
 			<td colspan="6" style="text-align:center">
-				<a href="/customer/main.jsp?currentPage=<%=pager.getFirstPage()-1%>">◀</a>
+				<%if(pager.getFirstPage() >1){ %>
+					<a href="/customer/main.jsp?currentPage=<%=pager.getFirstPage()-1%>">◀</a>					
+				<%}else{ %>
+					<a href = "javascript:alert('처음 페이지 입니다')">◀</a>
+				<%} %>
 				<%for(int i=pager.getFirstPage(); i<=pager.getLastPage(); i++){ %>
 				<%if(i > pager.getTotalPage()) break; %>
 				<a href="/customer/main.jsp?currentPage=<%=i %>">[<%=i %>]</a>
 				<%} %>
-				<a href="/customer/main.jsp?currentPage=<%=pager.getLastPage()+1%>">▶</a>
+				<%if(pager.getLastPage() < pager.getTotalPage()) {%>
+					<a href="/customer/main.jsp?currentPage=<%=pager.getLastPage()+1%>">▶</a>
+				<%}else{ %>
+					<a href = "javascript:alert('마지막 페이지입니다.')">▶</a>
+				<%} %>
+				
 			</td>
 		</tr>
 	</table>
