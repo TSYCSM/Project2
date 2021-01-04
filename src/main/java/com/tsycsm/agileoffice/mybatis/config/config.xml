@@ -6,9 +6,11 @@
  
  <typeAliases>
  	<typeAlias type="com.tsycsm.agileoffice.model.domain.Item" alias="Item"/>
+ 	<typeAlias type="com.tsycsm.agileoffice.model.domain.Category" alias="Category"/>
  </typeAliases>
  
   <mappers>
     <mapper resource="com/tsycsm/agileoffice/mybatis/mapper/ItemMapper.xml"/>
+    <mapper resource="com/tsycsm/agileoffice/mybatis/mapper/CategoryMapper.xml"/>
   </mappers>
 </configuration>
