@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class MemberController {
 	/* service를 여러 개 autowired 해도 될까???? ㅠㅠㅠㅠ(1/3) */
 	
-	
 	@RequestMapping(value="/list")
 	public String memberList(int currentPage) {
 		System.out.println("currentPage: "+currentPage);

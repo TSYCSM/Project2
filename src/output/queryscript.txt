@@ -2,8 +2,6 @@ username: project2
 password: 1234
 
 
-
-
 create table owner(
  owner_id number primary key
  , email varchar(50) not null
