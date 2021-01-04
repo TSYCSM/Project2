@@ -6,6 +6,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.tsycsm.agileoffice.model.domain.Item;
+
 @Repository
 public class MybatisItemDAO implements ItemDAO{
 	@Autowired
@@ -17,6 +19,14 @@ public class MybatisItemDAO implements ItemDAO{
 		list = sessionTemplate.selectList("Item.selectByOwner", owner_id);
 		return list;
 	}
+
+
+	@Override
+	public void insert(Item item) {
+		sessionTemplate.insert("Item.insert", item);
+	}
+	
+	
 
 
 }
