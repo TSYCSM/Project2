@@ -5,6 +5,15 @@
 	Pager pager = new Pager();
 	pager.init(request, listSize);
 %>
+
+<!-- 일단 memberdetail에 들어오면 owner_id로 select 된 itemlist를 받아온다.
+	각 페이지를 클릭할때 currentPage를 getPage function에 매개변수로 넘겨준다.
+	$.ajax해서 각 페이지에 있는 subList를 제이슨으로 가져온다.
+	table단에 새롭게 subList를 차례대로 뿌려준다.
+	문제) subList를 가져올때 controller에 어느 변수를 넘겨주어야 할까??
+		currentPage로 새롭게 갱신된 Pager객체로 넘겨야 될까????
+		정말 모르겠다.... -->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,23 +38,10 @@ function getPage(page){
 		url: "/admin/member/getpage",
 		type: "get",
 		data: {
-			"currentPage": page,
-			"request": request
+			currentPage = page
 		},
 		success: function(result){
-			currentPage = result[0];
-			<% int currentPage = (Integer)session.getAttribute("page");%>
-			<%
-			int asyncNum = pager.getNum();
-			int asyncCurPos = pager.getCurPos();
-			%>
-			tag = "";
-			tag += "<td>"+<%=asyncNum-- %>+"</td>"
-			tag += "<td>redbox</td>"
-			tag += "<td>box</td>"
-			tag += "<td>5</td>"
-			tag += "<td>2021-01-03</td>"
-			$(".asynctr").html(tag);
+			
 		}
 	});
 }

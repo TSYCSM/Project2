@@ -12,10 +12,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/admin/member")
+@RequestMapping("/member")
 public class MemberController {
+	/* service를 여러 개 autowired 해도 될까???? ㅠㅠㅠㅠ(1/3) */
+	
+	
+	@RequestMapping(value="/list")
+	public String memberList(int currentPage) {
+		System.out.println("currentPage: "+currentPage);
+		return "/admin/member/memberlist";
+	}
+	
 	@RequestMapping(value="/detail")
-	public String membetDetail(int currentPage) {
+	public String memberDetail(int currentPage) {
 		System.out.println("currentPage: "+currentPage);
 		return "/admin/member/memberdetail";
 	}

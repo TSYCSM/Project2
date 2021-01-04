@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Item">
+
+	<select id="selectAll" resultType="Item">
+		select * from item order by item_id desc
+	</select>
+
+	<select id="selectByOwner" parameterType="int" resultType="Item">
+		select * from item order by item_id desc where owner_id=#{owner_id}
+	</select>
+</mapper>

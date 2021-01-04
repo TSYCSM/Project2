@@ -22,17 +22,17 @@
 		p:dataSource-ref="dataSource"/>
 
 	<!-- Mybatis Spring -->	
-	<!-- 
+	 
 	<bean id="sqlSessionFactoryBean" 
 		class="org.mybatis.spring.SqlSessionFactoryBean"
 		p:dataSource-ref="dataSource"
 		p:configLocation="classpath:com/tsycsm/agileoffice/mybatis/config/config.xml"/>
-	-->
+	
 
-	<!-- <bean id="sqlSessionTemplate" 
+	<bean id="sqlSessionTemplate" 
 		class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSessionFactoryBean"/>
-	</bean> -->
+	</bean>
 	
 	<!-- 모든 servlet에서 공용으로 사용할 영역 -->
 	<context:component-scan base-package="com.tsycsm.agileoffice.model"/>
