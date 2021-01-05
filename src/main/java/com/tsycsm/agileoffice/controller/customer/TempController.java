@@ -10,5 +10,10 @@ public class TempController {
 	public String viewMain() {
 		return "customer/main";
 	}
+	
+	@RequestMapping(value="/", method=RequestMethod.GET)
+	public String viewFirst() {
+		return "first";
+	}
 
 }

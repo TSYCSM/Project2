@@ -35,22 +35,17 @@ function regist(){
 						<label for="fname">상품이름</label>
 						<div class="box">
 							<input type="hidden" name="owner_id" value="1"/>
-							<input type="text" name="category_name" placeholder="카테고리 이름을 등록하세요">
+							<input type="text" name="category_name" placeholder="카테고리 이름을 등록하세요" required>
 						</div>					
 					</div>
 					
 					<div class="outerbox">
 						<label for="lname">색상 및 모양</label><br>
 						<div class="box">
-							<p>
-								<input type="color" name="color" value="#dedede"/>
-								<!-- <input type="color" name="color" value="#ff0808"/>
-								<input type="color" name="color" value="#f308ff"/>
-								<input type="color" name="color" value="#fc9c00"/>
-								<input type="color" name="color" value="#19fc00"/>
-								<input type="color" name="color" value="#0093fc"/>
-								<input type="color" name="color" value="#000000"/> -->
-							</p>
+							<input type="color" name="color" list="presetColors">
+							  <datalist id="presetColors">
+
+							  </datalist>
 						</div>
 					</div>					
 					<div>

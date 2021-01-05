@@ -1,4 +1,9 @@
+<%@page import="com.tsycsm.agileoffice.model.domain.Category"%>
+<%@page import="java.util.List"%>
 <%@ page contentType="text/html;charset=utf-8"%>
+<%
+	List<Category> categoryList = (List)request.getAttribute("categoryList");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +15,10 @@
 	position: absolute;
 	left: 300px;
 }
-
+.colorBox{
+	width: 50px;
+	border-radius:15px;
+}
 </style>
 <script type="text/javascript" src="../common/library.js"></script>
 
@@ -23,10 +31,13 @@
 					<th>모양</th>
 					<th>이름</th>
 				</tr>
-				<tr>
-					<td>모양나올곳</td>
-					<td>Box</td>
-				</tr>
+				<%for(int i=0; i<categoryList.size(); i++){ %>
+					<%Category category = categoryList.get(i); %>
+					<tr onclick="location.href='/owner/item/categorydetail?category_id=<%=category.getCategory_id() %>'" style="cursor: pointer;">
+						<td><div class="colorBox" style=" background-color: <%=category.getColor() %>">ee</div></td>
+						<td><%=category.getCategory_name() %></td>
+					</tr>
+				<%} %>
 			</table>
 			</table>
 <%@ include file="../inc/footer.jsp" %>
