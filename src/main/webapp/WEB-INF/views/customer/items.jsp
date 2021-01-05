@@ -5,7 +5,7 @@
 		<h1>상품 목록</h1>
 
 		<div class="item" onclick="appendItem(this)">
-			<img src="/resources/image/client/customer/machine.png" />
+			<img src="/resources/image/customer/machine.png" />
 			<h2>복사기</h2>
 			<h3>
 				<span>30000</span>원
@@ -13,7 +13,7 @@
 		</div>
 
 		<div class="item" onclick="appendItem(this)">
-			<img src="/resources/image/client/customer/cycle.jpg" />
+			<img src="/resources/image/customer/cycle.jpg" />
 			<h2>자전거</h2>
 			<h3>
 				<span>90000</span>원
@@ -21,7 +21,7 @@
 		</div>
 
 		<div class="item" onclick="appendItem(this)">
-			<img src="/resources/image/client/customer/ball.jpg" />
+			<img src="/resources/image/customer/ball.jpg" />
 			<h2>공</h2>
 			<h3>
 				<span>500</span>원
@@ -29,7 +29,7 @@
 		</div>
 
 		<div class="item" onclick="appendItem(this)">
-			<img src="/resources/image/client/customer/cup.jpg" />
+			<img src="/resources/image/customer/cup.jpg" />
 			<h2>컵</h2>
 			<h3>
 				<span>300</span>원
@@ -37,7 +37,7 @@
 		</div>
 
 		<div class="item" onclick="appendItem(this)">
-			<img src="/resources/image/client/customer/plate.jpg" />
+			<img src="/resources/image/customer/plate.jpg" />
 			<h2>그릇</h2>
 			<h3>
 				<span>1000</span>원

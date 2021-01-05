@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <title>owner page</title>
 <%@ include file="../inc/header.jsp" %>
-<link rel="stylesheet" type="text/css" href="/resources/css/client/owner/reports/receipt_layout.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/owner/reports/receipt_layout.css">
 
 <script>
 function showReceipt(){

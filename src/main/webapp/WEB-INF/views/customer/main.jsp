@@ -62,14 +62,14 @@ body {
 	width: 90%;
 	height: 100%;
 }
-<%@ include file="/resources/css/client/customer/items.css" %>
-<%@ include file="/resources/css/client/customer/services.css" %>
-<%@ include file="/resources/css/client/customer/reviews.css" %>
+<%@ include file="/resources/css/customer/items.css" %>
+<%@ include file="/resources/css/customer/services.css" %>
+<%@ include file="/resources/css/customer/reviews.css" %>
 </style>
 <script type="text/javascript">
 
-	<%@ include file="/resources/js/client/customer/items.js" %>
-	<%@ include file="/resources/js/client/customer/services.js" %>
+	<%@ include file="/resources/js/customer/items.js" %>
+	<%@ include file="/resources/js/customer/services.js" %>
 	<%-- <%@ include file="/resources/js/client/customer/reviews.js" %> --%>
 
 	//----reviews.js에서 encoding 문제가 있어 임시로 reviews.js의 내용을 붙여넣는다
