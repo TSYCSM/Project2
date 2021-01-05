@@ -27,20 +27,21 @@ public class ItemServiceImpl implements ItemService {
 
 	@Override
 	public void regist(Item item) {
-	
-		
-		System.out.println(item.getPrice());
-		System.out.println(item.getRepImg());
-		MultipartFile repImg = item.getRepImg();
-	
-		String ext = fileManager.getExtend(item.getRepImg().getOriginalFilename());
-		String newFilename = item.getItem_id() + "." + ext;
-		//fileManager.saveFile(fileManager.getSaveDir() + File.separator + newFilename, image);
-		fileManager.saveFile("/resources/data" + File.separator + newFilename, repImg);
 
-		item.setFilename(newFilename);
+		MultipartFile photo = item.getPhoto();
+
+		String ext = fileManager.getExtend(item.getPhoto().getOriginalFilename());
+		String newFilename = item.getItem_id() + "." + ext;
+	
+		//item.setFilename(pk+"."+ext);
+
+		//fileManager.saveFile(fileManager.getSaveDir() + File.separator + newFilename, image);
+		fileManager.saveFile("/resources/data" + File.separator + newFilename, photo);
+
 		itemDAO.insert(item);
+
 		
+		System.out.println(item.getItem_id());
 	}
 
 }
