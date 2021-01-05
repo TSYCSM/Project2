@@ -21,8 +21,9 @@
 	
 	function regist() {
 		$("form").attr({
-			action: "/owner/item/regist",
-			method: "post"
+			action:"/owner/item/regist",
+			enctype:"multipart/form-data",
+			method:"post"
 		});
 		$("form").submit();
 	}
@@ -67,7 +68,7 @@
 		<div class="outerbox">
 			<label for="lname">대표 이미지</label><br>
 			<div class="box">
-				<input type="file" name="filename" required />
+				<input type="file" name="repImg" required />
 			</div>
 		</div>
 		<div>

@@ -1,4 +1,4 @@
-<%@page import="com.tsycsm.agileoffice.common.board.Pager"%>
+<%@page import="com.tsycsm.agileoffice.common.Pager"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%
 	int listSize = 234;

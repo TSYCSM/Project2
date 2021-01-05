@@ -1,6 +1,14 @@
 username: project2
 password: 1234
 
+create tablespace project2 
+datafile 'C:\oraclexe\app\oracle\oradata\XE\project2.dbf'
+size 10m;
+
+create user project2 identified by 1234 default tablespace project2;
+
+grant connect, resource, dba to project2;
+
 
 create table owner(
  owner_id number primary key

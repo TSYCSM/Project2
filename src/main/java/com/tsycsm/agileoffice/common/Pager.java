@@ -1,4 +1,4 @@
-package com.tsycsm.agileoffice.common.board;
+package com.tsycsm.agileoffice.common;
 
 import javax.servlet.http.HttpServletRequest;
 
