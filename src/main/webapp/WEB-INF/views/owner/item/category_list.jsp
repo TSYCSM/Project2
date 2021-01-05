@@ -17,6 +17,7 @@
 }
 .colorBox{
 	width: 50px;
+	height: 50px;
 	border-radius:15px;
 }
 </style>
@@ -34,7 +35,7 @@
 				<%for(int i=0; i<categoryList.size(); i++){ %>
 					<%Category category = categoryList.get(i); %>
 					<tr onclick="location.href='/owner/item/categorydetail?category_id=<%=category.getCategory_id() %>'" style="cursor: pointer;">
-						<td><div class="colorBox" style=" background-color: <%=category.getColor() %>">ee</div></td>
+						<td><div class="colorBox" style=" background-color: <%=category.getColor() %>"></div></td>
 						<td><%=category.getCategory_name() %></td>
 					</tr>
 				<%} %>

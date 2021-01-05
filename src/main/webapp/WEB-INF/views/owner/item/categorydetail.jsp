@@ -99,6 +99,7 @@ function update(){
 					</div>					
 					<div>
 						<div class="buttonbox">
+							<input type="button" onClick="location.href='/owner/item/categorylist'" value="목록으로">
 							<input type="button" class= "update_btn" value="수정">
 							<input type="button" class="delete_btn" value="삭제">
 						</div>
