@@ -4,10 +4,11 @@ password: 1234
 
 create table owner(
  owner_id number primary key
- , email varchar(50) not null
- , id varchar(20) not null
- , password varchar(20) not null
+ , user_id varchar(20) not null
+ , password varchar(100) not null
  , shopname varchar(30) not null
+ , email_id varchar(20) not null
+ , email_server varchar(20) not null
  , regdate date default sysdate
 );
 
@@ -83,6 +84,14 @@ create table sale(
 create  sequence seq_sale
 increment by 1
 start with 1;
+
+
+
+
+
+
+
+
 
 
 

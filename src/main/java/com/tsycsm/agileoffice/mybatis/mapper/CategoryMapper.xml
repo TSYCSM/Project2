@@ -7,7 +7,11 @@
 	</select>
 
 	<select id="selectByOwner" parameterType="int" resultType="Category">
-		select * from category order by category_id desc where owner_id=#{owner_id}
+		select * from category where owner_id=#{owner_id} order by category_id desc
+	</select>
+	
+	<select id="select" parameterType="int" resultType="Category">
+		select * from category where category_id = #{category_id}
 	</select>
 	
 	<insert id="insert" parameterType="Category">
@@ -17,6 +21,22 @@
 			select seq_category.currval from dual
 		</selectKey>
 	</insert>
+
+	<delete id="delete" parameterType="int">
+		delete from category where category_id = #{category_id}
+	</delete>
+	
+	<update id="update" parameterType="Category">
+		update category set category_name=#{category_name}, color=#{color}
+		where category_id =#{category_id}
+	</update>
 	
 </mapper>
+
+
+
+
+
+
+
 
