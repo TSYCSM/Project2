@@ -1,13 +1,22 @@
 username: project2
 password: 1234
 
+create tablespace project2 
+datafile 'C:\oraclexe\app\oracle\oradata\XE\project2.dbf'
+size 10m;
+
+create user project2 identified by 1234 default tablespace project2;
+
+grant connect, resource, dba to project2;
+
 
 create table owner(
  owner_id number primary key
- , email varchar(50) not null
- , id varchar(20) not null
- , password varchar(20) not null
+ , user_id varchar(20) not null
+ , password varchar(100) not null
  , shopname varchar(30) not null
+ , email_id varchar(20) not null
+ , email_server varchar(20) not null
  , regdate date default sysdate
 );
 
