@@ -15,6 +15,6 @@ public class Item {
 	private int stock;
 	private String regdate;
 
-	private MultipartFile repImg;
+	private MultipartFile photo;
 	
 }

@@ -37,16 +37,12 @@ public class ItemController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String AddItem() {
-
 		return "owner/item/item_add";
 	}
 
 	/*---------------------------------------------------------------------
 	  category CRUD
-	  
-	  
-	 --------------------------------------------------------------------- 
-	 */
+	 --------------------------------------------------------------------- */
 	@RequestMapping(value = "/categorylist", method = RequestMethod.GET)
 	public ModelAndView getCategoryList() {
 		ModelAndView mav = new ModelAndView();
@@ -98,6 +94,7 @@ public class ItemController {
 	}
 	
 		
+
 	@RequestMapping(value="/registform", method=RequestMethod.GET)
 	public String registForm() {
 		return "owner/item/item_add";
@@ -118,12 +115,6 @@ public class ItemController {
 		return sb.toString();
 	}
 
-	/*---------------------------------------------------------------------
-	   CRUD
-	  
-	  
-	 --------------------------------------------------------------------- 
-	 */
 
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
 	public String registItem(Item item) {
