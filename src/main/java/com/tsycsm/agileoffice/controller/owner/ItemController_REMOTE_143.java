@@ -103,6 +103,7 @@ public class ItemController {
 		return "owner/item/item_add";
 	}
 	
+	@RequestMapping(value="/regist", method=RequestMethod.POST)
 	@RequestMapping(value = "/categoryupdate", method = RequestMethod.POST, produces="text/html;charset=utf-8")
 	@ResponseBody
 	public String updateCategory(Category category) {
@@ -143,3 +144,15 @@ public class ItemController {
 			return sb.toString();
 		}
 }
+
+
+
+
+
+
+
+
+
+
+
+

@@ -35,6 +35,7 @@ public class ItemController {
 		return "owner/item/item_list";
 	}
 
+
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String AddItem() {
 
@@ -97,12 +98,7 @@ public class ItemController {
 		return sb.toString();
 	}
 	
-		
-	@RequestMapping(value="/registform", method=RequestMethod.GET)
-	public String registForm() {
-		return "owner/item/item_add";
-	}
-	
+
 	@RequestMapping(value = "/categoryupdate", method = RequestMethod.POST, produces="text/html;charset=utf-8")
 	@ResponseBody
 	public String updateCategory(Category category) {
@@ -125,7 +121,14 @@ public class ItemController {
 	 --------------------------------------------------------------------- 
 	 */
 
-	@RequestMapping(value = "/regist", method = RequestMethod.POST)
+	
+	@RequestMapping(value="/registform", method=RequestMethod.GET)
+	public String registForm() {
+		return "owner/item/item_add";
+	}
+	
+	@RequestMapping(value="/regist", method=RequestMethod.POST)
+
 	public String registItem(Item item) {
 		itemService.regist(item);
 		return "owner/item/item_list";
@@ -143,3 +146,15 @@ public class ItemController {
 			return sb.toString();
 		}
 }
+
+
+
+
+
+
+
+
+
+
+
+
