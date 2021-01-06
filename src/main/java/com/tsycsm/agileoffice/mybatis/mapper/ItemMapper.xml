@@ -2,19 +2,32 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Item">
 
-	<select id="selectAll" resultType="com.tsycsm.agileoffice.model.domain.Item">
+	<select id="select" parameterType="int" resultType="com.tsycsm.agileoffice.model.domain.Item">
+		select * from item where item_id=#{item_id}
+	</select>
+
+	<select id="selectAll" resultType="Item">
 		select * from item order by item_id desc
 	</select>
 
-	<select id="selectByOwner" parameterType="int" resultType="Item">
-		select * from item order by item_id desc where owner_id=#{owner_id}
+	<select id="selectByOwner" parameterType="int" resultType="com.tsycsm.agileoffice.model.domain.Item">
+		select * from item where owner_id=#{owner_id} order by item_id desc
 	</select>
 	
-	<insert id="insert" parameterType="Item">
+	<insert id="insert" parameterType="com.tsycsm.agileoffice.model.domain.Item">
 		insert into item(item_id, owner_id, category_id, item_name, price, filename, stock)
 		values(seq_item.nextval, #{owner_id}, #{category_id}, #{item_name}, #{price}, #{filename}, #{stock})
 		<selectKey keyProperty="item_id" resultType="int" order="AFTER">
 			select seq_item.currval from dual
 		</selectKey>
 	</insert>
+	
+	<update id="update" parameterType="com.tsycsm.agileoffice.model.domain.Item">
+		update item set category_id=#{category_id}, item_name=#{item_name}, price=#{price}, filename=#{filename}, stock=#{stock}
+		where item_id=#{item_id}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from item where item_id=#{item_id}
+	</delete>
 </mapper>

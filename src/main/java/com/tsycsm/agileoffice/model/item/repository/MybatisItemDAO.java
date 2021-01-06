@@ -15,15 +15,31 @@ public class MybatisItemDAO implements ItemDAO{
 	
 	
 	public List selectByOwner(int owner_id) {
-		List list = null;
-		list = sessionTemplate.selectList("Item.selectByOwner", owner_id);
-		return list;
+		return sessionTemplate.selectList("Item.selectByOwner", owner_id);
 	}
 
 
 	@Override
 	public void insert(Item item) {
 		sessionTemplate.insert("Item.insert", item);
+	}
+
+
+	@Override
+	public Item select(int item_id) {
+		return sessionTemplate.selectOne("Item.select", item_id);
+	}
+
+
+	@Override
+	public void update(Item item) {
+		sessionTemplate.update("Item.update", item);
+	}
+
+
+	@Override
+	public void delete(int item_id) {
+		sessionTemplate.delete("Item.delete", item_id);
 	}
 	
 	

@@ -19,10 +19,15 @@ public class ItemServiceImpl implements ItemService {
 	@Autowired
 	private FileManager fileManager;
 
+
+	@Override
+	public Item select(int item_id) {
+		return itemDAO.select(item_id);
+	}
+
 	@Override
 	public List selectByOwner(int owner_id) {
-		// TODO Auto-generated method stub
-		return null;
+		return itemDAO.selectByOwner(owner_id);
 	}
 
 	@Override
@@ -35,6 +40,16 @@ public class ItemServiceImpl implements ItemService {
 
 		String newFilename = item.getItem_id() + "." + ext;
 		fileManager.saveFile(fileManager.getSaveDir() + File.separator + newFilename, photo);
+	}
+
+	@Override
+	public void update(Item item) {
+		itemDAO.update(item);
+	}
+
+	@Override
+	public void delete(int item_id) {
+		itemDAO.delete(item_id);
 	}
 
 }
