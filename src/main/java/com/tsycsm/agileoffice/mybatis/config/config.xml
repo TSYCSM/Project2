@@ -13,6 +13,6 @@
   <mappers>
     <mapper resource="com/tsycsm/agileoffice/mybatis/mapper/ItemMapper.xml"/>
     <mapper resource="com/tsycsm/agileoffice/mybatis/mapper/CategoryMapper.xml"/>
-    <mapper resource="com/tsycsm/agileoffice/mybatis/mapper/MemberMapper.xml"/>
+    <mapper resource="com/tsycsm/agileoffice/mybatis/mapper/OwnerMapper.xml"/>
   </mappers>
 </configuration>

@@ -138,6 +138,32 @@ hr {
      width: 100%;
   }
 }
+
+.loader {
+  position: fixed;
+  z-index: 2;
+  left: 45%;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
@@ -153,23 +179,60 @@ $(function(){
 
 
 function regist(){
-	var formData = $(".signup_form").serialize();
-	$.ajax({
-		url: "/admin/member/regist",
-		type: "post",
-		data: formData,
-		success: function(responseData){
-			alert(responseData);
-		}
+	//로딩바 시작
+	
+
+	if($(".signup_form")[0].checkValidity()){
+		$("#loader").addClass("loader");//class 동적 적용
+		$("body").show().css({"opacity":"0.5"});
+		var formData = $(".signup_form").serialize();
+		$.ajax({
+			url: "/main/ownerregist",
+			type: "POST",
+			data: formData,
+			success: function(responseData){
+				//서버로 부터 완료 응답을 받으면 로딩바 효과를 중단!!
+				$("#loader").removeClass("loader");//클래스 동작 제거
+				$("body").show().css({"opacity":"1"});
+				var json = JSON.parse(responseData);
+				if(json.result ==1){
+					alert(json.msg);
+					location.href="/main/mainchoice";
+				}else{
+					alert(json.msg);				
+				}
+			}
+		});
 		
+	}else{
+		alert("입력을 해주세요");
+	}
+}
+
+function checkId(){
+	$.ajax({
+		url:"/main/checkid",
+		type: "POST",
+		data: {
+			user_id: $("[name='user_id']").val()
+		},
+		success: function(responseData){
+			if(responseData >0){
+				alert('중복된 ID입니다.');
+			}else{
+				alert('사용가능한 ID입니다.');				
+			}
+		}
 	});
 }
 
+
 </script>
 <body>
-
 <div id="credentialBox">
+<div id="loader" style="margin:auto"></div>
 	<h2>Agile Office</h2>
+	
 	<button class="open_login_btn" onclick="document.getElementById('id02').style.display='block'" style="width:auto;">Login</button>
 	<button class="open_signup_btn" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Sign Up</button>
 </div>
@@ -178,18 +241,23 @@ function regist(){
   <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
   <form class="signup_form">
     <div class="container">
+ 
       <h1>Sign Up</h1>
       <p>Please fill in this form to create an account.</p>
       <hr>
       
-      <label for="ID"><b>ID</b></label>
-      <input type="text" placeholder="Enter ID" name="user_id" required>
+      <label for="ID"><b>ID<span style="margin:20px; font-size: 12px; display:lnline-block"> (6~15자 사이로 입력하세요)</span></b></label>
+      <button type="button" onclick="checkId()">중복체크</button>
+      <input type="text" placeholder="Enter ID" name="user_id" minlength="6" maxlength="15" required>
 
+      <label for="id"><b>Name</b></label>
+      <input type="text" name = "user_name" placeholder="Enter your name...." required>
+      
       <label for="id"><b>Shop Name</b></label>
-      <input type="text" name = "shopname" placeholder="Enter shopname....">
+      <input type="text" name = "shopname" placeholder="Enter shopname...." required>
 
-      <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="password" required>
+      <label for="psw"><b>Password <span style="margin:20px; font-size: 12px; display:lnline-block">(6~15자 사이로 입력하세요)</span></b></label>
+      <input type="password" placeholder="Enter Password" name="password" minlength="6" maxlength="15" required>
 
       <!-- <label for="psw-repeat"><b>Repeat Password</b></label>
       <input type="password" placeholder="Repeat Password" name="repassword" required>
@@ -247,11 +315,11 @@ function regist(){
 var modal = document.getElementById('id01');
 
 // When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
+/* window.onclick = function(event) {
   if (event.target == modal) {
     modal.style.display = "none";
   }
-}
+} */
 </script>
 
 </body>

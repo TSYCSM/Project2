@@ -8,6 +8,7 @@ public class Owner {
 	private String user_id;
 	private String password;
 	private String shopname;
+	private String user_name;
 	private String email_id;
 	private String email_server;
 	private String regdate;
