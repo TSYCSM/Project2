@@ -13,7 +13,7 @@ import lombok.Data;
 public class FileManager {
 	private String saveDir = "/resources/data";
 	
-	public static String getExtend(String path) {
+	public String getExtend(String path) {
 		int lastIndex = path.lastIndexOf(".");
 		String ext = path.substring(lastIndex+1, path.length());
 		return ext;

@@ -2,6 +2,8 @@ package com.tsycsm.agileoffice.controller.owner;
 
 import java.util.List;
 
+import javax.servlet.ServletContext;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +12,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.tsycsm.agileoffice.common.FileManager;
 import com.tsycsm.agileoffice.exception.DMLException;
 import com.tsycsm.agileoffice.model.category.service.CategoryService;
 import com.tsycsm.agileoffice.model.domain.Category;
@@ -20,9 +24,22 @@ import com.tsycsm.agileoffice.model.item.service.ItemService;
 
 @Controller
 @RequestMapping("/item")
-public class ItemController {
+public class ItemController implements ServletContextAware {
 	private static final Logger logger = LoggerFactory.getLogger(ItemController.class);
 	
+	private ServletContext servletContext;
+	@Autowired
+	private FileManager fileManager;
+	
+	@Override
+	public void setServletContext(ServletContext servletContext) {
+		this.servletContext = servletContext;
+		
+		fileManager.setSaveDir(servletContext.getRealPath(fileManager.getSaveDir()));
+		
+		logger.debug(fileManager.getSaveDir());
+	}
+
 	@Autowired
 	private CategoryService categoryService;
 
@@ -67,24 +84,24 @@ public class ItemController {
 		return "redirect:/owner/item/categorylist";
 	}
 
-	@RequestMapping(value="/categorydetail", method=RequestMethod.GET)
+	@RequestMapping(value = "/categorydetail", method = RequestMethod.GET)
 	public ModelAndView detailCategory(int category_id) {
 		ModelAndView mav = new ModelAndView();
-		Category category =  categoryService.select(category_id);
-		
+		Category category = categoryService.select(category_id);
+
 		mav.addObject("category", category);
 		mav.setViewName("/owner/item/categorydetail");
-		
+
 		return mav;
 	}
 
-	@RequestMapping(value = "/categorydelete", method = RequestMethod.POST, produces="text/html;charset=utf-8")
+	@RequestMapping(value = "/categorydelete", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
 	@ResponseBody
 	public String deleteCategory(int category_id) {
-		logger.info("category_id: "+category_id);
-		
+		logger.info("category_id: " + category_id);
+
 		categoryService.delete(category_id);
-		
+
 		StringBuffer sb = new StringBuffer();
 		sb.append("{");
 		sb.append("\"result\": 1,");
@@ -92,21 +109,18 @@ public class ItemController {
 		sb.append("}");
 		return sb.toString();
 	}
-	
-		
 
-	@RequestMapping(value="/registform", method=RequestMethod.GET)
+	@RequestMapping(value = "/registform", method = RequestMethod.GET)
 	public String registForm() {
 		return "owner/item/item_add";
 	}
-	
-	@RequestMapping(value = "/categoryupdate", method = RequestMethod.POST, produces="text/html;charset=utf-8")
+
+	@RequestMapping(value = "/categoryupdate", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
 	@ResponseBody
 	public String updateCategory(Category category) {
-		
-		
+
 		categoryService.update(category);
-		
+
 		StringBuffer sb = new StringBuffer();
 		sb.append("{");
 		sb.append("\"result\": 1,");
@@ -115,22 +129,23 @@ public class ItemController {
 		return sb.toString();
 	}
 
-
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
 	public String registItem(Item item) {
 		itemService.regist(item);
 		return "owner/item/item_list";
 	}
 
-	//예외 핸들러 2가지 처리
-		@ExceptionHandler(DMLException.class)
-		@ResponseBody
-		public String handleException(DMLException e) {
-			StringBuffer sb = new StringBuffer();
-			sb.append("{");
-			sb.append("\"result\": 0,");
-			sb.append("\"msg\": \""+e.getMessage()+"\"");
-			sb.append("}");
-			return sb.toString();
-		}
+	// 예외 핸들러 2가지 처리
+	@ExceptionHandler(DMLException.class)
+	@ResponseBody
+	public String handleException(DMLException e) {
+		StringBuffer sb = new StringBuffer();
+		sb.append("{");
+		sb.append("\"result\": 0,");
+		sb.append("\"msg\": \"" + e.getMessage() + "\"");
+		sb.append("}");
+		return sb.toString();
+	}
+
+
 }

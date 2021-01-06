@@ -66,9 +66,9 @@
 		</div>
 
 		<div class="outerbox">
-			<label for="lname">대표 이미지</label><br>
+			<label for="lname">이미지</label><br>
 			<div class="box">
-				<input type="file" name="repImg" required />
+				<input type="file" name="photo" required />
 			</div>
 		</div>
 		<div>
