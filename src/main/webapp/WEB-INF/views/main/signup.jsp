@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8"%>
 <!DOCTYPE html>
 <html>
 <style>
@@ -7,18 +8,18 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
 #credentialBox{
 	position: absolute;
-	width: 300px;
-	height: 200px;
+	width: 500px;
+	height: 300px;
 	top: 40%;
 	left: 50%;
-	margin-left: -150px;
+	margin-left: -250px;
 	margin-top: -80px;
 	border-style: solid;
 	border-color: black;
 }
 
 /* Full-width input fields */
-input[type=text], input[type=password] {
+input[type=text], input[type=password], select {
   width: 100%;
   padding: 15px;
   margin: 5px 0 22px 0;
@@ -28,7 +29,7 @@ input[type=text], input[type=password] {
 }
 
 /* Add a background color when the inputs get focus */
-input[type=text]:focus, input[type=password]:focus {
+input[type=text]:focus, input[type=password]:focus, select:focus{
   background-color: #ddd;
   outline: none;
 }
@@ -49,11 +50,14 @@ button {
 
 #credentialBox button{
 	position: absolute;
-	margin-left: 100px;
-	width: 100px;
+	margin-left: 170px;
+	width: 150px;
 }
-#credentialBox .signup_btn{
-	top: 130px;
+#credentialBox .open_login_btn{
+	top: 90px;
+}
+#credentialBox .open_signup_btn{
+	top: 180px;
 }
 
 button:hover {
@@ -92,7 +96,7 @@ button:hover {
 }
 
 /* Modal Content/Box */
-.modal-content {
+.modal form {
   background-color: #fefefe;
   margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
   border: 1px solid #888;
@@ -137,43 +141,76 @@ hr {
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-	$(function(){
-		$(".login_btn").removeAttr("style");	
-		$(".signup_btn").removeAttr("style");	
-	})
+$(function(){
+	
+	$(".open_login_btn").removeAttr("style");	
+	$(".open_signup_btn").removeAttr("style");
+	$(".signupbtn").click(function(){
+		regist();
+	});
+	
+})
+
+
+function regist(){
+	var formData = $(".signup_form").serialize();
+	$.ajax({
+		url: "/admin/member/regist",
+		type: "post",
+		data: formData,
+		success: function(responseData){
+			alert(responseData);
+		}
+		
+	});
+}
+
 </script>
 <body>
 
 <div id="credentialBox">
-	<h2>Modal Signup Form</h2>
-	<button class="login_btn" onclick="document.getElementById('id02').style.display='block'" style="width:auto;">Login</button>
-	<button class="signup_btn" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Sign Up</button>
+	<h2>Agile Office</h2>
+	<button class="open_login_btn" onclick="document.getElementById('id02').style.display='block'" style="width:auto;">Login</button>
+	<button class="open_signup_btn" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Sign Up</button>
 </div>
+
 <div id="id01" class="modal">
   <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-  <form class="modal-content">
+  <form class="signup_form">
     <div class="container">
       <h1>Sign Up</h1>
       <p>Please fill in this form to create an account.</p>
       <hr>
-      <label for="email"><b>Email</b></label>
-      <input type="text" placeholder="Enter Email" name="email" required>
+      
+      <label for="ID"><b>ID</b></label>
+      <input type="text" placeholder="Enter ID" name="user_id" required>
+
+      <label for="id"><b>Shop Name</b></label>
+      <input type="text" name = "shopname" placeholder="Enter shopname....">
 
       <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required>
+      <input type="password" placeholder="Enter Password" name="password" required>
 
-      <label for="psw-repeat"><b>Repeat Password</b></label>
-      <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+      <!-- <label for="psw-repeat"><b>Repeat Password</b></label>
+      <input type="password" placeholder="Repeat Password" name="repassword" required>
+       -->
+      <label for="email"><b>Email</b></label><br>
+      <input type="text" placeholder="Enter Email_ID" name="email_id" style="width: 20%" required>
+      <select name="email_server" style="width: 30%">
+      		<option value="gmail.com">gmail.com</option>
+      		<option value="naver.com">naver.com</option>
+      		<option value="daum.net">daum.net</option>
+      </select><br>
       
-      <label>
+      <!-- <label>
         <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
-      </label>
+      </label> -->
 
       <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
 
       <div class="clearfix">
         <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-        <button type="submit" class="signupbtn">Sign Up</button>
+        <button type="button" class="signupbtn">Sign Up</button>
       </div>
     </div>
   </form>
@@ -181,16 +218,17 @@ hr {
 
 <div id="id02" class="modal">
   <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
-  <form class="modal-content">
+  <form class="login_form">
     <div class="container">
       <h1>Login</h1>
       <p>Please fill in this form to create an account.</p>
       <hr>
-      <label for="id"><b>id</b></label>
-      <input type="text" placeholder="Enter id" name="id" required>
+      <label for="id"><b>ID</b></label>
+      <input type="text" name = "user_id" placeholder="Enter ID....">
+      
 
       <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required>
+      <input type="password" placeholder="Enter Password" name="password" required>
 
       <label>
         <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
@@ -198,7 +236,7 @@ hr {
 
       <div class="clearfix">
         <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
-        <button type="submit" class="signupbtn">Login</button>
+        <button type="button" class="signupbtn">Login</button>
       </div>
     </div>
   </form>

@@ -3,18 +3,19 @@ package com.tsycsm.agileoffice.controller.admin;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.tsycsm.agileoffice.model.domain.Owner;
+
 @Controller
 @RequestMapping("/member")
 public class MemberController {
-	/* service를 여러 개 autowired 해도 될까???? ㅠㅠㅠㅠ(1/3) */
+	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
 	@RequestMapping(value="/list")
 	public String memberList(int currentPage) {
@@ -36,6 +37,20 @@ public class MemberController {
 		currenPageList.add(currentPage);
 
 		return currenPageList;
+	}
+	
+	//owner-member 등록
+	@RequestMapping(value="/regist", method=RequestMethod.POST, produces="text/html;charset=utf-8")
+	@ResponseBody
+	public String ownerMemberRegist(Owner owner) {
+		logger.debug("owner의 user_id "+owner.getUser_id());
+		logger.debug("owner의 password "+owner.getPassword());
+		logger.debug("owner의 shopname "+owner.getShopname());
+		logger.debug("owner의 email_id "+owner.getEmail_id());
+		logger.debug("owner의 email_server "+owner.getEmail_server());
+		
+		return "비동기까지 되네?";
+		
 	}
 }
 
