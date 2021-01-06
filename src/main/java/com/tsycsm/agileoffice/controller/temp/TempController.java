@@ -1,4 +1,4 @@
-package com.tsycsm.agileoffice.controller.customer;
+package com.tsycsm.agileoffice.controller.temp;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

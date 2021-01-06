@@ -44,6 +44,7 @@ create table category(
  , owner_id number
  , category_name varchar(20) not null
  , regdate date default sysdate
+ , color varchar(20) not null
  , constraint fk_owner_category foreign key(owner_id) references owner(owner_id)
 	on delete cascade
 );

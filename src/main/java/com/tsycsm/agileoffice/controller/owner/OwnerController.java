@@ -1,4 +1,4 @@
-package com.tsycsm.agileoffice.controller.admin;
+package com.tsycsm.agileoffice.controller.owner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +14,8 @@ import com.tsycsm.agileoffice.model.domain.Owner;
 
 @Controller
 @RequestMapping("/member")
-public class MemberController {
-	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
+public class OwnerController {
+	private static final Logger logger = LoggerFactory.getLogger(OwnerController.class);
 	
 	@RequestMapping(value="/list")
 	public String memberList(int currentPage) {

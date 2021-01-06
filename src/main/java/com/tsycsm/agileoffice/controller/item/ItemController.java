@@ -1,4 +1,4 @@
-package com.tsycsm.agileoffice.controller.owner;
+package com.tsycsm.agileoffice.controller.item;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ import com.tsycsm.agileoffice.model.domain.Item;
 import com.tsycsm.agileoffice.model.item.service.ItemService;
 
 @Controller
-@RequestMapping("/item")
+@RequestMapping("/범용적인거")
 public class ItemController implements ServletContextAware {
 	private static final Logger logger = LoggerFactory.getLogger(ItemController.class);
 	
@@ -60,7 +60,7 @@ public class ItemController implements ServletContextAware {
 	/*---------------------------------------------------------------------
 	  category CRUD
 	 --------------------------------------------------------------------- */
-	@RequestMapping(value = "/categorylist", method = RequestMethod.GET)
+	@RequestMapping(value = "/category/list", method = RequestMethod.GET)
 	public ModelAndView getCategoryList() {
 		ModelAndView mav = new ModelAndView();
 		int owner_id = 1;
@@ -70,7 +70,7 @@ public class ItemController implements ServletContextAware {
 		return mav;
 	}
 
-	@RequestMapping(value = "/categoryadd", method = RequestMethod.GET)
+	@RequestMapping(value = "/category/add", method = RequestMethod.GET)
 	public String getCategoryAdd(Category category) {
 
 		return "owner/item/category_add";
