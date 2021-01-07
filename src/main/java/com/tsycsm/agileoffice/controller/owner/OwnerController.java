@@ -1,6 +1,7 @@
 package com.tsycsm.agileoffice.controller.owner;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -13,8 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.tsycsm.agileoffice.common.MessageData;
 import com.tsycsm.agileoffice.exception.MailSendException;
-import com.tsycsm.agileoffice.exception.OwnerDMLException;
+import com.tsycsm.agileoffice.exception.OwnerException;
 import com.tsycsm.agileoffice.model.domain.Owner;
 import com.tsycsm.agileoffice.model.owner.service.OwnerService;
 
@@ -50,21 +52,20 @@ public class OwnerController {
 	//owner-member 등록
 	@RequestMapping(value="/main/ownerregist", method=RequestMethod.POST, produces="text/html;charset=utf-8")
 	@ResponseBody
-	public String ownerMemberRegist(Owner owner) {
+	public MessageData ownerMemberRegist(Owner owner) {
 		logger.debug("owner의 user_id "+owner.getUser_id());
 		logger.debug("owner의 password "+owner.getPassword());
 		logger.debug("owner의 shopname "+owner.getShopname());
 		logger.debug("owner의 email_id "+owner.getEmail_id());
 		logger.debug("owner의 email_server "+owner.getEmail_server());
-		
+		ownerService.duplicateCheck(owner.getUser_id());
 		ownerService.regist(owner);
 		
-		StringBuffer sb = new StringBuffer();
-		sb.append("{");
-		sb.append("\"result\": 1,");
-		sb.append("\"msg\": \"회원 등록 성공\"");
-		sb.append("}");
-		return sb.toString();
+		MessageData messageData = new MessageData();
+		messageData.setResultCode(1);
+		messageData.setMsg("회원이 등록 되었습니다.");
+		
+		return messageData;
 	}
 	
 	@RequestMapping(value="/main/mainchoice", method=RequestMethod.GET)
@@ -72,29 +73,32 @@ public class OwnerController {
 		return "main/main_choice";
 	}
 	
+	
 	//owner id 중복체크
-	@RequestMapping(value="/main/checkid", method=RequestMethod.POST,
-			produces="text/html;charset=utf-8")
+	@RequestMapping(value="/main/checkid", method=RequestMethod.POST)
 	@ResponseBody
-	public String checkId(String user_id) {
+	public MessageData checkId(String user_id) {
 		
-		int result = ownerService.checkId(user_id);
+		System.out.println("예외처리 전");
+		ownerService.duplicateCheck(user_id);
+		System.out.println("예외처리 후");
+		MessageData messageData = new MessageData();
+		messageData.setResultCode(1);
+		messageData.setMsg("사용가능한 아이디 입니다.");
 		
-		return Integer.toString(result);
+		return messageData;
 	}
 	
 	
 	
 	// 예외 핸들러 2가지 처리
-	@ExceptionHandler(OwnerDMLException.class)
+	@ExceptionHandler(OwnerException.class)
 	@ResponseBody
-	public String handleException(OwnerDMLException e) {
-		StringBuffer sb = new StringBuffer();
-		sb.append("{");
-		sb.append("\"result\": 0,");
-		sb.append("\"msg\": \"" + e.getMessage() + "\"");
-		sb.append("}");
-		return sb.toString();
+	public MessageData handleException(OwnerException e) {
+		MessageData messageData = new MessageData();
+		messageData.setResultCode(0);
+		messageData.setMsg(e.getMessage());
+		return messageData;
 	}
 	
 	@ExceptionHandler(MailSendException.class)

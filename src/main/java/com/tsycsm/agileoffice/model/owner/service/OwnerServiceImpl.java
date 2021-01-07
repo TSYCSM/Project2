@@ -2,13 +2,14 @@ package com.tsycsm.agileoffice.model.owner.service;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tsycsm.agileoffice.common.MailSender;
 import com.tsycsm.agileoffice.common.SecureManager;
 import com.tsycsm.agileoffice.exception.MailSendException;
-import com.tsycsm.agileoffice.exception.OwnerDMLException;
+import com.tsycsm.agileoffice.exception.OwnerException;
 import com.tsycsm.agileoffice.model.domain.Owner;
 import com.tsycsm.agileoffice.model.owner.repository.OwnerDAO;
 
@@ -36,7 +37,7 @@ public class OwnerServiceImpl implements OwnerService{
 	}
 
 	@Override
-	public void regist(Owner owner) throws OwnerDMLException, MailSendException{
+	public void regist(Owner owner) throws OwnerException, MailSendException{
 		//비밀번호 암호화 하기
 		String secureData = secureManager.getSecureData(owner.getPassword());
 		System.out.println(secureData);
@@ -64,10 +65,10 @@ public class OwnerServiceImpl implements OwnerService{
 	}
 
 	@Override
-	public int checkId(String user_id) {
-		
-		return ownerDAO.checkId(user_id);
+	public void duplicateCheck(String user_id) throws OwnerException{
+		ownerDAO.duplicateCheck(user_id);
 	}
+
 	
 	
 

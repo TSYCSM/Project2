@@ -217,10 +217,12 @@ function checkId(){
 			user_id: $("[name='user_id']").val()
 		},
 		success: function(responseData){
-			if(responseData >0){
-				alert('중복된 ID입니다.');
+			if(responseData.resultCode ==1){
+				alert("성공! "+responseData.msg);
+				
 			}else{
-				alert('사용가능한 ID입니다.');				
+				alert(responseData.msg);				
+
 			}
 		}
 	});

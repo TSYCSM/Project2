@@ -11,5 +11,5 @@ public interface OwnerDAO {
 	public void delete(Owner owner);
 	public void update(Owner owner);
 	
-	public int checkId(String user_id);
+	public void duplicateCheck(String user_id);
 }

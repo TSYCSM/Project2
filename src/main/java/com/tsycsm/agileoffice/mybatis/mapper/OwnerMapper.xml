@@ -6,8 +6,8 @@
 		values(seq_owner.nextval, #{user_id}, #{password}, #{shopname}, #{user_name}, #{email_id}, #{email_server})
 	</insert>
 	
-	<select id="selectUserId" parameterType="String" resultType="int">
-		select count(user_id) as cnt from owner where user_id=#{user_id}
+	<select id="duplicateCheck" parameterType="String" resultType="Owner">
+		select * from owner where user_id=#{user_id}
 	</select>
 	
 </mapper>
