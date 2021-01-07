@@ -33,7 +33,8 @@ public class MybatisItemDAO implements ItemDAO{
 
 	@Override
 	public void update(Item item) {
-		sessionTemplate.update("Item.update", item);
+		int result = sessionTemplate.update("Item.update", item);
+		System.out.println(result);
 	}
 
 

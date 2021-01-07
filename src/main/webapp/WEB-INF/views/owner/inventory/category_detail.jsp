@@ -34,7 +34,7 @@ $(function(){
 function del(){
 	if(confirm("삭제하시겠습니까")){
 		$.ajax({
-			url: "/owner/item/categorydelete",
+			url: "/owner/inventory/category/delete",
 			type: "post",
 			data: {
 				category_id : <%=category.getCategory_id()%>
@@ -44,7 +44,7 @@ function del(){
 				var json = JSON.parse(responseData);
 				if(json.result==1){
 					alert(json.msg);
-					location.href="/owner/item/categorylist";
+					location.href="/owner/inventory/category/list";
 				}else{
 					alert(json.msg);					
 				}
@@ -57,14 +57,14 @@ function update(){
 	var formData = $("#category_form").serialize();//전부 문자열화 시킨다.
 	if(confirm("수정하시겠습니까")){
 		$.ajax({
-			url: "/owner/item/categoryupdate",
+			url: "/owner/inventory/category/update",
 			type: "post",
 			data: formData,
 			success: function(responseData){
 				var json = JSON.parse(responseData);
 				if(json.result==1){
 					alert(json.msg);
-					location.href="/owner/item/categorydetail?category_id="+<%=category.getCategory_id()%>;
+					location.href="/owner/inventory/category/detail?category_id="+<%=category.getCategory_id()%>;
 				}else{
 					alert(json.msg);					
 				}
@@ -99,7 +99,7 @@ function update(){
 					</div>					
 					<div>
 						<div class="buttonbox">
-							<input type="button" onClick="location.href='/owner/item/categorylist'" value="목록으로">
+							<input type="button" onClick="location.href='/owner/inventory/category/list'" value="목록으로">
 							<input type="button" class= "update_btn" value="수정">
 							<input type="button" class="delete_btn" value="삭제">
 						</div>

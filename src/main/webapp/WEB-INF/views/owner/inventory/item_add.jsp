@@ -1,4 +1,9 @@
+<%@page import="com.tsycsm.agileoffice.model.domain.Category"%>
+<%@page import="java.util.List"%>
 <%@ page contentType="text/html;charset=utf-8"%>
+<%
+	List<Category> categoryList = (List<Category>)request.getAttribute("categoryList");
+ %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +26,7 @@
 	
 	function regist() {
 		$("form").attr({
-			action:"/owner/item/regist",
+			action:"/owner/inventory/item/regist",
 			enctype:"multipart/form-data",
 			method:"post"
 		});
@@ -34,20 +39,22 @@
 	<form>
 		<input type="hidden" name="owner_id" value="1"/>
 		<div class="outerbox">
-			<label for="fname">상품이름</label>
+			<label for="item_name">상품이름</label>
 			<div class="box">
-				<input type="text" id="fname" name="item_name" placeholder="상품이름을 등록하세요">
+				<input type="text" id="item_name" name="item_name" placeholder="상품이름을 등록하세요">
 			</div>
 		</div>
 		<div class="outerbox">
-			<label for="lname">카테고리</label>
+			<label>카테고리</label>
 			<div class="box">
 				<div style="width: 60%;">
 					<select name="category_id">
 						<option value="0">선택하세요</option>
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
+						<%for(Category category : categoryList){ %>
+						<option value="<%=category.getCategory_id() %>">
+							<%=category.getCategory_name() %>
+						</option>
+						<%} %>
 					</select>
 				</div>
 			</div>

@@ -3,6 +3,7 @@ package com.tsycsm.agileoffice.controller.inventory;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,7 +46,8 @@ public class InventoryController implements ServletContextAware {
 		
 		fileManager.setSaveDir(servletContext.getRealPath(fileManager.getSaveDir()));
 		
-		logger.debug(fileManager.getSaveDir());
+		logger.info(fileManager.getSaveDir());
+		System.out.println(fileManager.getSaveDir());
 	}
 
 
@@ -73,7 +75,7 @@ public class InventoryController implements ServletContextAware {
 	public String registCategory(Category category) {
 		categoryService.insert(category);
 
-		return "redirect:/owner/inventory/categorylist";
+		return "redirect:/owner/inventory/category/list";
 	}
 
 	@RequestMapping(value = "/owner/inventory/category/detail", method = RequestMethod.GET)
@@ -128,9 +130,11 @@ public class InventoryController implements ServletContextAware {
 	@RequestMapping(value = "/owner/inventory/item/list", method = RequestMethod.GET)
 	public ModelAndView getItemList() {
 		int owner_id = 1;
-		List itemList = itemService.selectByOwner(owner_id);
+		List<Category> categoryList = categoryService.selectByOwner(owner_id);
+		List<Item> itemList = itemService.selectByOwner(owner_id);
 		
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("categoryList", categoryList);
 		mav.addObject("itemList", itemList);
 		mav.setViewName("owner/inventory/item_list");
 
@@ -138,22 +142,32 @@ public class InventoryController implements ServletContextAware {
 	}
 
 	@RequestMapping(value = "/owner/inventory/item/registform", method = RequestMethod.GET)
-	public String getRegistForm() {
-		return "owner/inventory/item_add";
+	public ModelAndView getItemRegistForm() {
+		int owner_id = 1;
+		List categoryList = categoryService.selectByOwner(owner_id);
+	
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("categoryList", categoryList);
+		mav.setViewName("owner/inventory/item_add");
+
+		return mav;
 	}
 
 	@RequestMapping(value = "/owner/inventory/item/regist", method = RequestMethod.POST)
 	public String registItem(Item item) {
-		itemService.regist(item);
-		return "owner/inventory/item_list";
+		itemService.regist(item, fileManager);
+		return "redirect:/owner/inventory/item/list";
 	}
 	
 	@RequestMapping(value = "/owner/inventory/item/detail", method = RequestMethod.GET)
-	public ModelAndView getDetail(int item_id) {
+	public ModelAndView getItemDetail(int item_id) {
+		int owner_id = 1;
 		Item item = itemService.select(item_id);
+		List categoryList = categoryService.selectByOwner(owner_id);
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("item", item);
+		mav.addObject("categoryList", categoryList);
 		mav.setViewName("owner/inventory/item_detail");
 
 		return mav;
@@ -161,19 +175,19 @@ public class InventoryController implements ServletContextAware {
 	
 	@RequestMapping(value = "/owner/inventory/item/update", method = RequestMethod.POST)
 	public String updateItem(Item item) {
-		itemService.update(item);
-		return "owner/inventory/item_detail" + item.getItem_id();
+		itemService.update(item, fileManager);
+
+		return "redirect:/owner/inventory/item/detail?item_id=" + item.getItem_id();
 	}
 	
-	@RequestMapping(value = "/owner/inventory/item/delete", method = RequestMethod.GET)
-	public String deleteItem(int item_id) {
-		itemService.delete(item_id);
+	@RequestMapping(value = "/owner/inventory/item/del", method = RequestMethod.POST)
+	public String deleteItem(Item item) {
+		itemService.delete(item, fileManager);
 		return "redirect:/owner/inventory/item/list";
 	}
 	
 	
-
-
+	
 
 
 	//----예외 핸들러 처리----

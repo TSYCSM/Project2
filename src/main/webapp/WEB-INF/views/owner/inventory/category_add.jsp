@@ -20,7 +20,7 @@
 function regist(){
 	$("form").attr({
 		method: "post",
-		action: "/owner/item/categoryregist"
+		action: "/owner/inventory/category/regist"
 	});
 	$("form").submit();
 }

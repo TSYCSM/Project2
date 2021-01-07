@@ -28,5 +28,10 @@ public class FileManager {
 			e.printStackTrace();
 		}
 	}
+	
+	public boolean deleteFile(String path) {
+		File file = new File(path);
+		return file.delete();
+	}
 
 }

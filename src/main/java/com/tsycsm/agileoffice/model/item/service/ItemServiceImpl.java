@@ -16,9 +16,6 @@ public class ItemServiceImpl implements ItemService {
 	@Autowired
 	private ItemDAO itemDAO;
 	
-	@Autowired
-	private FileManager fileManager;
-
 
 	@Override
 	public Item select(int item_id) {
@@ -31,7 +28,7 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public void regist(Item item) {
+	public void regist(Item item, FileManager fileManager) {
 		MultipartFile photo = item.getPhoto();
 		String ext = fileManager.getExtend(photo.getOriginalFilename());
 	
@@ -43,13 +40,27 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public void update(Item item) {
-		itemDAO.update(item);
+	public void update(Item item, FileManager fileManager) {
+		MultipartFile photo = item.getPhoto();
+
+		if(photo.getOriginalFilename() == "") {
+			itemDAO.update(item);
+		} else {
+			String ext = fileManager.getExtend(photo.getOriginalFilename());
+			fileManager.deleteFile(fileManager.getSaveDir() + File.separator + item.getItem_id() + "." + item.getFilename());
+			item.setFilename(ext);
+			itemDAO.update(item);
+			String newFilename = item.getItem_id() + "." + ext;
+			fileManager.saveFile(fileManager.getSaveDir() + File.separator + newFilename, photo);
+		}
+		
 	}
 
 	@Override
-	public void delete(int item_id) {
-		itemDAO.delete(item_id);
+	public void delete(Item item, FileManager fileManager) {
+		itemDAO.delete(item.getItem_id());
+		fileManager.deleteFile(fileManager.getSaveDir() + File.separator + item.getItem_id() + "." + item.getFilename());
+		System.out.println(fileManager.getSaveDir() + File.separator + item.getItem_id() + "." + item.getFilename());
 	}
 
 }

@@ -1,7 +1,10 @@
+<%@page import="com.tsycsm.agileoffice.model.domain.Category"%>
+<%@page import="java.util.List"%>
 <%@page import="com.tsycsm.agileoffice.model.domain.Item"%>
 <%@ page contentType="text/html;charset=utf-8"%>
 <%
 	Item item = (Item)request.getAttribute("item");
+	List<Category> categoryList = (List<Category>)request.getAttribute("categoryList");
 %>
 <!DOCTYPE html>
 <html>
@@ -25,7 +28,7 @@
 	
 	function update() {
 		$("form").attr({
-			action:"/owner/sale/item/update",
+			action:"/owner/inventory/item/update",
 			enctype:"multipart/form-data",
 			method:"post"
 		});
@@ -33,7 +36,12 @@
 	}
 
 	function del() {
-		location.href="/owner/sale/item/delete?item_id=" + <%=item.getItem_id()%>;
+		$("form").attr({
+			action:"/owner/inventory/item/del",
+			enctype:"multipart/form-data",
+			method:"post"
+		});
+		$("form").submit();
 	}
 
 </script>
@@ -42,6 +50,8 @@
 <div class="container">
 	<form>
 		<input type="hidden" name="owner_id" value="1"/>
+		<input type="hidden" name="item_id" value="<%=item.getItem_id()%>"/>
+		<input type="hidden" name="filename" value="<%=item.getFilename()%>"/>
 		<div class="outerbox">
 			<label for="fname">상품이름</label>
 			<div class="box">
@@ -54,9 +64,11 @@
 				<div style="width: 60%;">
 					<select name="category_id">
 						<option value="0">선택하세요</option>
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
+						<%for(Category category : categoryList){ %>
+						<option value="<%=category.getCategory_id() %>" <%if(item.getCategory_id()==category.getCategory_id()) {%>selected<%}%>>
+							<%=category.getCategory_name() %>
+						</option>
+						<%} %>
 					</select>
 				</div>
 			</div>
