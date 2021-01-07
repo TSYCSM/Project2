@@ -10,6 +10,7 @@ import com.tsycsm.agileoffice.common.MailSender;
 import com.tsycsm.agileoffice.common.SecureManager;
 import com.tsycsm.agileoffice.exception.MailSendException;
 import com.tsycsm.agileoffice.exception.OwnerException;
+import com.tsycsm.agileoffice.exception.OwnerNotFoundException;
 import com.tsycsm.agileoffice.model.domain.Owner;
 import com.tsycsm.agileoffice.model.owner.repository.OwnerDAO;
 
@@ -31,9 +32,12 @@ public class OwnerServiceImpl implements OwnerService{
 	}
 
 	@Override
-	public Owner select(int owner_id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Owner select(Owner owner) throws OwnerNotFoundException{
+		String secureData = secureManager.getSecureData(owner.getPassword());
+		owner.setPassword(secureData);
+		Owner obj = ownerDAO.select(owner);
+		
+		return obj;
 	}
 
 	@Override

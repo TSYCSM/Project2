@@ -1,14 +1,20 @@
+<%@page import="com.tsycsm.agileoffice.common.MessageData"%>
 <%@ page contentType="text/html;charset=utf-8"%>
+<%
+	MessageData messageData= (MessageData)request.getAttribute("messageData");
+%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<title>Insert title here</title>
+<script type="text/javascript">
+	alert("<%=messageData.getMsg()%>");
+	<%if(messageData.getResultCode()==1){%>
+		location.href="<%=messageData.getUrl()%>";
+	<%}else{%>
+		history.back();
+	<%}%>
+</script>
 </head>
 <body>
-	<div class="container">
-			<h1>이용에 불편을 드려 죄송합니다.</h1>
-			<%=request.getAttribute("msg")%>		
-		</div>			
 </body>
 </html>

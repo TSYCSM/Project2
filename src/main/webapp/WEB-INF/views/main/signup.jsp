@@ -71,7 +71,7 @@ button:hover {
 }
 
 /* Float cancel and signup buttons and add an equal width */
-.cancelbtn, .signupbtn {
+.cancelbtn, .signupbtn, .loginbtn {
   float: left;
   width: 100px;
 }
@@ -134,7 +134,7 @@ hr {
 
 /* Change styles for cancel button and signup button on extra small screens */
 @media screen and (max-width: 300px) {
-  .cancelbtn, .signupbtn {
+  .cancelbtn, .signupbtn, .loginbtn {
      width: 100%;
   }
 }
@@ -177,55 +177,70 @@ $(function(){
 	
 })
 
+function login(){
+	$(".login_form").attr({
+		action: "/main/ownerLogin",
+		method: "POST"
+	});
+	
+	$(".login_form").submit();
+}
+
 
 function regist(){
 	//로딩바 시작
-	
-
 	if($(".signup_form")[0].checkValidity()){
 		$("#loader").addClass("loader");//class 동적 적용
 		$("body").show().css({"opacity":"0.5"});
 		var formData = $(".signup_form").serialize();
 		$.ajax({
-			url: "/main/ownerregist",
+			url: "/main/ownerRegist",
 			type: "POST",
 			data: formData,
 			success: function(responseData){
+				console.log(responseData);
 				//서버로 부터 완료 응답을 받으면 로딩바 효과를 중단!!
 				$("#loader").removeClass("loader");//클래스 동작 제거
 				$("body").show().css({"opacity":"1"});
-				var json = JSON.parse(responseData);
-				if(json.result ==1){
-					alert(json.msg);
-					location.href="/main/mainchoice";
+				
+				if(responseData.resultCode ==1){
+					alert(responseData.msg);
+					$("#id01").hide();
 				}else{
-					alert(json.msg);				
+					alert(responseData.msg);				
 				}
 			}
 		});
 		
 	}else{
-		alert("입력을 해주세요");
+		alert("아이디와 비밀번호는 6자 이상입니다.");
 	}
 }
 
 function checkId(){
-	$.ajax({
-		url:"/main/checkid",
-		type: "POST",
-		data: {
-			user_id: $("[name='user_id']").val()
-		},
-		success: function(responseData){
-			if(responseData.resultCode ==1){
-				alert("성공! "+responseData.msg);
-				
-			}else{
-				alert(responseData.msg);				
-
+	var id = $("[name='user_id']").val()
+	
+	if(id.length<6){
+		alert("아이디는 6자 이상 입력하세요");
+	}else{
+		$.ajax({
+			url:"/main/checkid",
+			type: "POST",
+			data: {
+				user_id: id
+			},
+			success: function(responseData){
+				if(responseData.resultCode ==1){
+					alert("성공! "+responseData.msg);
+					
+				}else{
+					alert(responseData.msg);				
+	
+				}
 			}
-		}
-	});
+		});
+		
+	}
 }
 
 
@@ -300,13 +315,14 @@ function checkId(){
       <label for="psw"><b>Password</b></label>
       <input type="password" placeholder="Enter Password" name="password" required>
 
+ 
       <label>
         <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
       </label>
 
       <div class="clearfix">
         <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
-        <button type="button" class="signupbtn">Login</button>
+        <button type="button" class="loginbtn" onClick="login()">Login</button>
       </div>
     </div>
   </form>

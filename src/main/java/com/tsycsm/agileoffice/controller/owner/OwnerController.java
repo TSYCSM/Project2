@@ -1,8 +1,9 @@
 package com.tsycsm.agileoffice.controller.owner;
 
 import java.util.ArrayList;
-
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.tsycsm.agileoffice.common.MessageData;
 import com.tsycsm.agileoffice.exception.MailSendException;
 import com.tsycsm.agileoffice.exception.OwnerException;
+import com.tsycsm.agileoffice.exception.OwnerNotFoundException;
 import com.tsycsm.agileoffice.model.domain.Owner;
 import com.tsycsm.agileoffice.model.owner.service.OwnerService;
 
@@ -26,6 +28,13 @@ public class OwnerController {
 	
 	@Autowired
 	private OwnerService ownerService;
+	
+	
+	/************************************************
+	  
+	  
+	 * ***********************************************/
+	
 	
 	@RequestMapping(value="/admin/list")
 	public String memberList(int currentPage) {
@@ -49,8 +58,24 @@ public class OwnerController {
 		return currenPageList;
 	}
 	
+	/************************************************
+	  main 폴더에서 이동
+	  
+	 * ***********************************************/
+	@RequestMapping(value="/main/ownerMain", method=RequestMethod.GET)
+	public String viewOwnerMain() {
+		return "main/owner_main";
+	}
+	
+	
+	/************************************************
+	  owner 등록, 중복체크,  로그인, 로그아웃
+	  
+	 * ***********************************************/
+	
+	
 	//owner-member 등록
-	@RequestMapping(value="/main/ownerregist", method=RequestMethod.POST, produces="text/html;charset=utf-8")
+	@RequestMapping(value="/main/ownerRegist", method=RequestMethod.POST)
 	@ResponseBody
 	public MessageData ownerMemberRegist(Owner owner) {
 		logger.debug("owner의 user_id "+owner.getUser_id());
@@ -64,24 +89,16 @@ public class OwnerController {
 		MessageData messageData = new MessageData();
 		messageData.setResultCode(1);
 		messageData.setMsg("회원이 등록 되었습니다.");
-		
 		return messageData;
-	}
-	
-	@RequestMapping(value="/main/mainchoice", method=RequestMethod.GET)
-	public String viewMainChoice() {
-		return "main/main_choice";
-	}
-	
+	}	
 	
 	//owner id 중복체크
 	@RequestMapping(value="/main/checkid", method=RequestMethod.POST)
 	@ResponseBody
 	public MessageData checkId(String user_id) {
 		
-		System.out.println("예외처리 전");
 		ownerService.duplicateCheck(user_id);
-		System.out.println("예외처리 후");
+
 		MessageData messageData = new MessageData();
 		messageData.setResultCode(1);
 		messageData.setMsg("사용가능한 아이디 입니다.");
@@ -89,6 +106,22 @@ public class OwnerController {
 		return messageData;
 	}
 	
+	//로그인
+	@RequestMapping(value="/main/ownerLogin", method=RequestMethod.POST)
+	public String OwnerLogin(Owner owner, HttpSession session) {
+		
+		Owner obj = ownerService.select(owner);
+		session.setAttribute("owner", obj);
+		
+		return "redirect:/main/ownerMain";
+	}
+	
+	
+	
+	/************************************************
+	  exception handler 메소드
+	  
+	 * ***********************************************/
 	
 	
 	// 예외 핸들러 2가지 처리
@@ -99,6 +132,19 @@ public class OwnerController {
 		messageData.setResultCode(0);
 		messageData.setMsg(e.getMessage());
 		return messageData;
+	}
+	
+	@ExceptionHandler(OwnerNotFoundException.class)
+	
+	public ModelAndView handleException(OwnerNotFoundException e) {
+		MessageData messageData = new MessageData();
+		messageData.setResultCode(0);
+		messageData.setMsg(e.getMessage());
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/error/result");
+		mav.addObject("messageData", messageData);
+		return mav;
 	}
 	
 	@ExceptionHandler(MailSendException.class)

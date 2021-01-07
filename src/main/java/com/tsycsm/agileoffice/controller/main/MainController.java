@@ -6,17 +6,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class MainController {
-	@RequestMapping(value="/first", method=RequestMethod.GET)
+	@RequestMapping(value="/main/first", method=RequestMethod.GET)
 	public String viewFirst() {
 		return "main/first";
 	}
 	
-	@RequestMapping(value="/signup", method=RequestMethod.GET)
+	@RequestMapping(value="/main/signup", method=RequestMethod.GET)
 	public String viewSignup() {
 		return "main/signup";
 	}
 	
-	@RequestMapping(value="/preorder", method=RequestMethod.GET)
+	@RequestMapping(value="/main/preorder", method=RequestMethod.GET)
 	public String viewPreOrder() {
 		return "main/preorder";
 	}

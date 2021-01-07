@@ -10,6 +10,10 @@
 		select * from owner where user_id=#{user_id}
 	</select>
 	
+	<select id="select" parameterType="Owner" resultType="Owner">
+		select * from owner where user_id=#{user_id} and password=#{password}
+	</select>
+	
 </mapper>
 
 
