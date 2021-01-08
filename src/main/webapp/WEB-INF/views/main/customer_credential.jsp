@@ -1,9 +1,14 @@
+<%@page import="com.tsycsm.agileoffice.model.domain.Owner"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
+<%-- <%
+	Owner owner = (Owner)session.getAttribute("owner");
+%> --%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
 @font-face {
 	font-family: 'Jal_Onuel';
@@ -27,7 +32,7 @@ body {
 	text-align: center;
 }
 
-input[type=text] {
+input[type=text], input[type=tel] {
 	font-size: 16px;
 	border-radius: 5px;
 	padding: 10px;
@@ -105,66 +110,76 @@ div.loginArea>h2, div.registArea>h2 {
 
 </style>
 <script>
-	window.addEventListener("load", function() {
-		var flag = null;
-		var customer_mask = document.getElementById("customer_mask");
-		var owner_mask = document.getElementById("owner_mask");
-
-		customer_mask.addEventListener("click", function() {
-			console.log(true);
-			flag = true;
-			changeMask(flag);
-		});
-		owner_mask.addEventListener("click", function() {
-			console.log(false);
-			flag = false;
-			changeMask(flag);
-		});
-
-		function changeMask(flag) {
-			if (flag == true) {
-				customer_mask.style.display = "none";
-				owner_mask.style.display = "block";
-			} else {
-				customer_mask.style.display = "block";
-				owner_mask.style.display = "none";
+function regist(){
+	if($(".signup_form")[0].checkValidity()){
+		var formData = $(".signup_form").serialize();
+		$.ajax({
+			url: "/main/customerRegist",
+			type: "POST",
+			data: formData,
+			success: function(responseData){
+				alert(responseData.msg);
 			}
-		}
-	});
+			
+		});
+	}else{
+		alert("잘못된 표기입니다.");
+	}
+}
+
+function login(){
+	$(".login_form").attr({
+		action: "/main/customerLogin",
+		method: "post"
+		
+	})
+	$(".login_form").submit();
+	
+	
+}
+
+	
 </script>
 </head>
 <body>
 	<div id="customer">
 		<div class="loginArea">
 			<h2>로그인</h2>
-			<form>
+			<form class="login_form">
 				<table>
 					<tr>
 						<td>전화번호</td>
-						<td><input type="text" placeholder="ex) 010-1234-5678">
+						<td><input type="text" name="phone" placeholder="ex) 010-1234-5678">
 						</td>
 					</tr>
 				</table>
-				<button type="button">로그인</button>
+				<button type="button" onClick="login()">로그인</button>
 				<br>
-				<button type="button">로그인하지 않고 상품 보러가기</button>
+				<button type="button" onClick="location.href='/order/main'">로그인하지 않고 상품 보러가기</button>
 			</form>
 		</div>
+		
 		<div class="registArea">
 			<h2>가입</h2>
-			<form>
+			<form class="signup_form">
+				<%-- <input type="hidden" name="owner_id" value="<%=owner.getOwner_id()%>"> --%>
 				<table>
 					<tr>
 						<td>이름</td>
-						<td><input type="text" placeholder="이름 입력..."></td>
+						<td>
+							<input type="text" name="customer_name" placeholder="이름 입력..." min="2" required>
+						</td>
 					</tr>
 					<tr>
 						<td>전화번호</td>
-						<td><input type="text" placeholder="전화번호 입력..."></td>
+						<td>
+							<input type="tel" id="phone" name="phone" placeholder="ex) 000-1111-2222" 
+								pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required>
+						</td>
 					</tr>
 					<tr>
 						<td colspan="2" align=center>
-							<button type="button">가입</button>
+							<button type="button" onClick="regist()">가입</button>
 						</td>
 					</tr>
 				</table>

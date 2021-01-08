@@ -1,4 +1,9 @@
+<%@page import="com.tsycsm.agileoffice.model.domain.Customer"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
+<%
+	Customer customer = (Customer)session.getAttribute("customer");
+	/* out.print(customer.getCustomer_name()); */
+%>
 <!DOCTYPE html>
 <html>
 <head>

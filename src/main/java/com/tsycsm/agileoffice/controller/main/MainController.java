@@ -11,14 +11,14 @@ public class MainController {
 		return "main/first";
 	}
 	
-	@RequestMapping(value="/main/signup", method=RequestMethod.GET)
+	@RequestMapping(value="/main/ownerCredential", method=RequestMethod.GET)
 	public String viewSignup() {
-		return "main/signup";
+		return "main/owner_credential";
 	}
 	
-	@RequestMapping(value="/main/preorder", method=RequestMethod.GET)
+	@RequestMapping(value="/main/customerCredential", method=RequestMethod.GET)
 	public String viewPreOrder() {
-		return "main/preorder";
+		return "main/customer_credential";
 	}
 	
 	
