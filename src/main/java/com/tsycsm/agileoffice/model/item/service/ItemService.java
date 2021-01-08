@@ -10,6 +10,7 @@ import com.tsycsm.agileoffice.model.domain.Item;
 @Service
 public interface ItemService {
 	public Item select(int item_id);
+	public Item duplicationCheck(String item_name);
 	public List selectByOwner(int owner_id);
 	public void regist(Item item, FileManager fileManager);
 	public void update(Item item, FileManager fileManager);

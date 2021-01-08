@@ -3,7 +3,6 @@ package com.tsycsm.agileoffice.controller.inventory;
 import java.util.List;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +16,9 @@ import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tsycsm.agileoffice.common.FileManager;
+import com.tsycsm.agileoffice.common.MessageData;
 import com.tsycsm.agileoffice.exception.DMLException;
+import com.tsycsm.agileoffice.exception.NameDuplicatedException;
 import com.tsycsm.agileoffice.model.category.service.CategoryService;
 import com.tsycsm.agileoffice.model.domain.Category;
 import com.tsycsm.agileoffice.model.domain.Item;
@@ -57,7 +58,7 @@ public class InventoryController implements ServletContextAware {
 	@RequestMapping(value = "/owner/inventory/category/list", method = RequestMethod.GET)
 	public ModelAndView getCategoryList() {
 		ModelAndView mav = new ModelAndView();
-		int owner_id = 1;
+		int owner_id = 25;
 		List categoryList = categoryService.selectByOwner(owner_id);
 		mav.setViewName("owner/inventory/category_list");
 		mav.addObject("categoryList", categoryList);
@@ -129,7 +130,7 @@ public class InventoryController implements ServletContextAware {
 	
 	@RequestMapping(value = "/owner/inventory/item/list", method = RequestMethod.GET)
 	public ModelAndView getItemList() {
-		int owner_id = 1;
+		int owner_id = 25;
 		List<Category> categoryList = categoryService.selectByOwner(owner_id);
 		List<Item> itemList = itemService.selectByOwner(owner_id);
 		
@@ -143,7 +144,7 @@ public class InventoryController implements ServletContextAware {
 
 	@RequestMapping(value = "/owner/inventory/item/registform", method = RequestMethod.GET)
 	public ModelAndView getItemRegistForm() {
-		int owner_id = 1;
+		int owner_id = 25;
 		List categoryList = categoryService.selectByOwner(owner_id);
 	
 		ModelAndView mav = new ModelAndView();
@@ -157,6 +158,18 @@ public class InventoryController implements ServletContextAware {
 	public String registItem(Item item) {
 		itemService.regist(item, fileManager);
 		return "redirect:/owner/inventory/item/list";
+	}
+	
+	@RequestMapping(value = "/owner/inventory/item/nameCheck", method = RequestMethod.POST)
+	@ResponseBody
+	public MessageData checkItemName(String item_name) {
+		itemService.duplicationCheck(item_name);
+	
+		MessageData messageData = new MessageData();
+		messageData.setMsg("가능한 상품 이름입니다.");
+		messageData.setResultCode(1);
+	
+		return messageData;
 	}
 	
 	@RequestMapping(value = "/owner/inventory/item/detail", method = RequestMethod.GET)
@@ -200,6 +213,16 @@ public class InventoryController implements ServletContextAware {
 		sb.append("\"msg\": \"" + e.getMessage() + "\"");
 		sb.append("}");
 		return sb.toString();
+	}
+	
+	@ExceptionHandler(NameDuplicatedException.class)
+	@ResponseBody
+	public MessageData handleException(NameDuplicatedException e) {
+		MessageData messageData = new MessageData();
+		messageData.setMsg(e.getMessage());
+		messageData.setResultCode(0);
+	
+		return messageData;
 	}
 
 

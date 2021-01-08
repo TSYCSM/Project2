@@ -12,15 +12,15 @@ import com.tsycsm.agileoffice.model.domain.Category;
 @Repository
 public class MybatisCategoryDAO implements CategoryDAO{
 	@Autowired
-	private SqlSessionTemplate sessionTemplate;
+	private SqlSessionTemplate sqlSessionTemplate;
 	
 	@Override
 	public Category select(int category_id) {
-		return sessionTemplate.selectOne("Category.select", category_id);
+		return sqlSessionTemplate.selectOne("Category.select", category_id);
 	}
 	
 	public List selectByOwner(int owner_id) {
-		return sessionTemplate.selectList("Category.selectByOwner", owner_id);
+		return sqlSessionTemplate.selectList("Category.selectByOwner", owner_id);
 	}
 
 	@Override
@@ -31,7 +31,7 @@ public class MybatisCategoryDAO implements CategoryDAO{
 
 	@Override
 	public void insert(Category category) throws DMLException{
-		int result = sessionTemplate.insert("Category.insert", category);
+		int result = sqlSessionTemplate.insert("Category.insert", category);
 		
 		if(result == 0) {
 			throw new DMLException("카테고리 등록 실패");
@@ -41,7 +41,7 @@ public class MybatisCategoryDAO implements CategoryDAO{
 
 	@Override
 	public void delete(int category_id) throws DMLException{
-		int result = sessionTemplate.delete("Category.delete", category_id);
+		int result = sqlSessionTemplate.delete("Category.delete", category_id);
 		
 		if(result == 0) {
 			throw new DMLException("카테고리 삭제 실패");
@@ -50,7 +50,7 @@ public class MybatisCategoryDAO implements CategoryDAO{
 
 	@Override
 	public void update(Category category) throws DMLException{
-		int result = sessionTemplate.update("Category.update", category);
+		int result = sqlSessionTemplate.update("Category.update", category);
 		System.out.println("result: "+result);
 		
 		if(result == 0) {

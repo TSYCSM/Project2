@@ -23,25 +23,58 @@
 }
 </style>
 <script>
+	var nameCheckFlag = false;
 	
 	function regist() {
-		$("form").attr({
-			action:"/owner/inventory/item/regist",
-			enctype:"multipart/form-data",
-			method:"post"
-		});
-		$("form").submit();
+		if(nameCheckFlag == true) {
+			$("form").attr({
+				action:"/owner/inventory/item/regist",
+				enctype:"multipart/form-data",
+				method:"post"
+			});
+			$("form").submit();
+		} else {
+			alert("상품명 중복 확인을 진행해주세요.");
+		}
 	}
+	
+	function nameCheck() {
+		var item_name = $("#item_name").val();
+		
+		if(item_name.length > 0) {
+			$.ajax({
+				url:"/owner/inventory/item/nameCheck",
+				type: "POST",
+				data: {
+					item_name: item_name
+				},
+				success: function(responseData) {
+					if(responseData.resultCode == 1) {
+						alert(responseData.msg);
+					} else {
+						alert(responseData.msg);				
+					}
+				}
+			});
+			nameCheckFlag = true;
+		} else {
+			alert("상품명을 입력해주세요.");
+			nameCheckFlag = false;
+		}
+	}
+	
+	
 </script>
 </head>
 <%@ include file="../inc/common.jsp"%>
 <div class="container">
 	<form>
-		<input type="hidden" name="owner_id" value="1"/>
+		<input type="hidden" name="owner_id" value="25"/>
 		<div class="outerbox">
 			<label for="item_name">상품이름</label>
 			<div class="box">
 				<input type="text" id="item_name" name="item_name" placeholder="상품이름을 등록하세요">
+				<input type="button" value="중복 확인" onClick="nameCheck()">
 			</div>
 		</div>
 		<div class="outerbox">

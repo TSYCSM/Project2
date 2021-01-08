@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.tsycsm.agileoffice.common.FileManager;
+import com.tsycsm.agileoffice.exception.NameDuplicatedException;
 import com.tsycsm.agileoffice.model.domain.Item;
 import com.tsycsm.agileoffice.model.item.repository.ItemDAO;
 
@@ -20,6 +21,15 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public Item select(int item_id) {
 		return itemDAO.select(item_id);
+	}
+	
+	@Override
+	public Item duplicationCheck(String item_name) throws NameDuplicatedException {
+		Item item = itemDAO.selectByName(item_name);
+		if(item != null) {
+			throw new NameDuplicatedException("상품명(" + item.getItem_name() + ")이 중복됩니다.");
+		}
+		return item;
 	}
 
 	@Override

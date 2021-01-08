@@ -22,9 +22,16 @@
 }
 </style>
 <script>
+	var categoryNameArray_checked = [];
+
 	function filtering() {
-		//alert();
-		console.log($("input[name='categoryIdList']"));
+		console.log($($("input[name='categoryIdList']"))[1]);
+		for(var i=0; i<$("input[name='categoryIdList']").length; i++) {
+			if($($("input[name='categoryIdList']"))[i].is(":checked") == true) {
+				categoryNameArray_checked.push($($("input[name='categoryIdList']"))[i]);
+			}
+		}
+		console.log(categoryNameArray_checked);
 	}
 </script>
 </head>
