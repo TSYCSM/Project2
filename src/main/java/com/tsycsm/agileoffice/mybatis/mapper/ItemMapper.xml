@@ -5,6 +5,10 @@
 	<select id="select" parameterType="int" resultType="Item">
 		select * from item where item_id=#{item_id}
 	</select>
+	
+	<select id="selectByName" parameterType="String" resultType="Item">
+		select * from item where item_name=#{item_name}
+	</select>
 
 	<select id="selectAll" resultType="Item">
 		select * from item order by item_id desc

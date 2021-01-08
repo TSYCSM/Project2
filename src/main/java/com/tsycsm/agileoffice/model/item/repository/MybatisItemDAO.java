@@ -11,36 +11,42 @@ import com.tsycsm.agileoffice.model.domain.Item;
 @Repository
 public class MybatisItemDAO implements ItemDAO{
 	@Autowired
-	private SqlSessionTemplate sessionTemplate;
+	private SqlSessionTemplate sqlSessionTemplate;
 	
 	
 	public List selectByOwner(int owner_id) {
-		return sessionTemplate.selectList("Item.selectByOwner", owner_id);
+		return sqlSessionTemplate.selectList("Item.selectByOwner", owner_id);
 	}
 
 
 	@Override
 	public void insert(Item item) {
-		sessionTemplate.insert("Item.insert", item);
+		sqlSessionTemplate.insert("Item.insert", item);
 	}
 
 
 	@Override
 	public Item select(int item_id) {
-		return sessionTemplate.selectOne("Item.select", item_id);
+		return sqlSessionTemplate.selectOne("Item.select", item_id);
 	}
 
 
 	@Override
 	public void update(Item item) {
-		int result = sessionTemplate.update("Item.update", item);
+		int result = sqlSessionTemplate.update("Item.update", item);
 		System.out.println(result);
 	}
 
 
 	@Override
 	public void delete(int item_id) {
-		sessionTemplate.delete("Item.delete", item_id);
+		sqlSessionTemplate.delete("Item.delete", item_id);
+	}
+
+
+	@Override
+	public Item selectByName(String item_name) {
+		return sqlSessionTemplate.selectOne("Item.selectByName", item_name);
 	}
 	
 	
