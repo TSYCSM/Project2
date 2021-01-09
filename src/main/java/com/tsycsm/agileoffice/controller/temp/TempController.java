@@ -15,5 +15,10 @@ public class TempController {
 	public String viewFirst() {
 		return "first";
 	}
+	
+	@RequestMapping(value="/admin", method=RequestMethod.GET)
+	public String viewAdmin() {
+		return "admin/index";
+	}
 
 }

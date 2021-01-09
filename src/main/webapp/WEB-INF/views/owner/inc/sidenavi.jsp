@@ -1,37 +1,37 @@
+<%@ page contentType="text/html;charset=utf-8"%>
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&#9776;</a>
-  <button class="dropdown-btn">MyPage 
+  <button class="dropdown-btn">마이페이지
     <i class="fa fa-caret-down"></i>
   </button>
   <div class="dropdown-container">
-    <a href="/view/owner/mypage/mypage.jsp">Account</a>
-    <a href="#">Sign Out</a>
+    <a href="/view/owner/mypage/mypage.jsp">내 계정</a>
+    <a href="#">로그아웃</a>
   </div>
   
-  <button class="dropdown-btn">Reports 
+  <button class="dropdown-btn">보고서
     <i class="fa fa-caret-down"></i>
   </button>
   <div class="dropdown-container">
-    <a href="/view/owner/reports/sales_summary.jsp">Sales summary</a>
-    <a href="/view/owner/reports/sales_item.jsp">Sales by item</a>
-    <a href="/view/owner/reports/sales_category.jsp">Sales by category</a>
-    <a href="/view/owner/reports/sales_employee.jsp">Sales by employee</a>
-    <a href="/view/owner/reports/discount.jsp">Discounts</a>
-    <a href="/view/owner/reports/receipts.jsp">Receipts</a>
-    <a href="/view/owner/reports/inventory.jsp">Inventory</a>
+    <a href="/view/owner/reports/sales_summary.jsp">매출 요약</a>
+    <a href="/view/owner/reports/sales_item.jsp">상품별 매출</a>
+    <a href="/view/owner/reports/sales_category.jsp">카테고리별 매출</a>
+    <a href="/view/owner/reports/sales_employee.jsp">직원별 매출</a>
+    <a href="/view/owner/reports/discount.jsp">할인</a>
+    <a href="/view/owner/reports/receipts.jsp">영수증 보관함</a>
   </div>
   
-  <button class="dropdown-btn">items 
+  <button class="dropdown-btn">물품 목록 
     <i class="fa fa-caret-down"></i>
   </button>
   <div class="dropdown-container">
-    <a href="/view/owner/item/item_list.jsp">Item list</a>
-    <a href="#">Categories</a>
-    <a href="#">Discounts</a>
+    <a href="/view/owner/item/item_list.jsp">상품</a>
+    <a href="#">카테고리</a>
+    <a href="#">할인</a>
   </div>
   
-   <a href="#">Customers</a>
-   <a href="#">Employees</a>
+   <a href="#">고객 관리</a>
+   <a href="#">직원 관리</a>
 
   
 </div>

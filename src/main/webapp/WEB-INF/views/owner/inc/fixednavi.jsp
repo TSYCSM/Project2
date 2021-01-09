@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=utf-8"%>
 <div class="fixednav">
   <a href="javascript:showMypage()"><i class="fa fa-user"></i><div class="mypage-tag">Mypage</div></a>
   <a href="javascript:showReports()"><i class="fa fa-line-chart"></i><div class="reports-tag">Reports</div></a> 

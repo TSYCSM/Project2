@@ -20,9 +20,9 @@ a{
 	position : fixed;
 	width: 100%;
 	padding: 10px;
-	background: blue;
-	font: sans-serif;
-	font-weight: bold;
+	background: #3d4c9c;
+	color: #d9d9d9;
+	font-family: Verdana,sans-serif; 
 }
 .footer {
 	left: 100px;

@@ -8,7 +8,7 @@
   z-index: 3;
   top: 0;
   left: 0;
-  background-color: #324eb3;
+  background-color: #3d4c9c;
   overflow-x: hidden;
   transition: 0.3s;
   padding-top: 70px;
@@ -26,6 +26,7 @@
   padding: 6px 8px 15px 16px;
   text-decoration: none;
   font-size: 20px;
+  font-family: Verdana,sans-serif;
   color: #c7cdff;
   display: block;
   border: none;
@@ -51,6 +52,10 @@
   display: none;
   background-color: #5d7ae3;
   padding-left: 8px;
+}
+
+.dropdown-container a{
+  font-size: 18px;
 }
 
 /* Optional: Style the caret down icon */
