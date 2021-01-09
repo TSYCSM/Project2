@@ -3,6 +3,7 @@ package com.tsycsm.agileoffice.controller.inventory;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +23,7 @@ import com.tsycsm.agileoffice.exception.NameDuplicatedException;
 import com.tsycsm.agileoffice.model.category.service.CategoryService;
 import com.tsycsm.agileoffice.model.domain.Category;
 import com.tsycsm.agileoffice.model.domain.Item;
+import com.tsycsm.agileoffice.model.domain.Owner;
 import com.tsycsm.agileoffice.model.item.service.ItemService;
 
 @Controller
@@ -56,9 +58,13 @@ public class InventoryController implements ServletContextAware {
 	  category CRUD
 	 --------------------------------------------------------------------- */
 	@RequestMapping(value = "/owner/inventory/category/list", method = RequestMethod.GET)
-	public ModelAndView getCategoryList() {
+	public ModelAndView getCategoryList(HttpSession session) {
+	
 		ModelAndView mav = new ModelAndView();
-		int owner_id = 25;
+
+		Owner owner = (Owner)session.getAttribute("owner");
+		int owner_id = owner.getOwner_id();
+
 		List categoryList = categoryService.selectByOwner(owner_id);
 		mav.setViewName("owner/inventory/category_list");
 		mav.addObject("categoryList", categoryList);
@@ -129,8 +135,11 @@ public class InventoryController implements ServletContextAware {
 	 --------------------------------------------------------------------- */
 	
 	@RequestMapping(value = "/owner/inventory/item/list", method = RequestMethod.GET)
-	public ModelAndView getItemList() {
-		int owner_id = 25;
+	public ModelAndView getItemList(HttpSession session) {
+
+		Owner owner = (Owner)session.getAttribute("owner");
+		int owner_id = owner.getOwner_id();
+
 		List<Category> categoryList = categoryService.selectByOwner(owner_id);
 		List<Item> itemList = itemService.selectByOwner(owner_id);
 		
@@ -143,8 +152,11 @@ public class InventoryController implements ServletContextAware {
 	}
 
 	@RequestMapping(value = "/owner/inventory/item/registform", method = RequestMethod.GET)
-	public ModelAndView getItemRegistForm() {
-		int owner_id = 25;
+	public ModelAndView getItemRegistForm(HttpSession session) {
+	
+		Owner owner = (Owner)session.getAttribute("owner");
+		int owner_id = owner.getOwner_id();
+	
 		List categoryList = categoryService.selectByOwner(owner_id);
 	
 		ModelAndView mav = new ModelAndView();
@@ -173,8 +185,12 @@ public class InventoryController implements ServletContextAware {
 	}
 	
 	@RequestMapping(value = "/owner/inventory/item/detail", method = RequestMethod.GET)
-	public ModelAndView getItemDetail(int item_id) {
-		int owner_id = 1;
+	public ModelAndView getItemDetail(int item_id, HttpSession session) {
+	
+		Owner owner = (Owner)session.getAttribute("owner");
+		int owner_id = owner.getOwner_id();
+		
+	
 		Item item = itemService.select(item_id);
 		List categoryList = categoryService.selectByOwner(owner_id);
 
