@@ -97,10 +97,42 @@ start with 1;
 alter table owner
 add user_name varchar(20) not null; 
 
+----------------------------------------------------------
+order db
 
+//order 요약
 
+create table order_summary(
+ order_summary_id number primary key
+ , owner_id number
+ , customer_id number
+ , orderdate date default sysdate
+ , constraint fk_owner_order_summary
+ , total_price number
+   foreign key(owner_id) references owner(owner_id)
+   		on delete cascade
+);
 
+//order 상세정보
 
+create table order_detail(
+ order_detail_id number primary key
+ , order_summary_id number
+ , item_id number
+ , quantity number
+ , price number
+ , constraint fk_order_summary_order_detail
+   foreign key(order_summary_id) references order_summary(order_summary_id)
+   		on delete cascade
+);
+
+create  sequence seq_order_summary
+increment by 1
+start with 1;
+
+create  sequence seq_order_detail
+increment by 1
+start with 1;
 
 
 

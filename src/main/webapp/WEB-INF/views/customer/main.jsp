@@ -1,8 +1,8 @@
+<%@page import="java.util.List"%>
 <%@page import="com.tsycsm.agileoffice.model.domain.Customer"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%
 	Customer customer = (Customer)session.getAttribute("customer");
-	/* out.print(customer.getCustomer_name()); */
 %>
 <!DOCTYPE html>
 <html>
@@ -120,6 +120,10 @@ body {
 		openTab(event, 'items'); //initial tab울 items로 설정
 		document.getElementsByClassName("tab")[0].className += " active"; //inital tab을 시각적으로 items로 설정
 	});
+	
+function order(){
+	$("")
+}
 	
 </script>
 <body>

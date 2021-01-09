@@ -55,6 +55,7 @@ function appendItem(param) {
 	}
 
 	document.getElementById("cartlist").getElementsByTagName("p")[0].getElementsByTagName("span")[0].innerText = returnTotalPrice();  //totalPrice 계산 및 출력
+	document.getElementById("cartlist").getElementsByTagName("p")[0].getElementsByTagName("input")[0].value= returnTotalPrice();  //totalPrice 계산 및 출력
 }
 
 function removeItem(param) {
@@ -66,6 +67,7 @@ function removeItem(param) {
 	table.removeChild(param.parentNode.parentNode); //시각적으로 table에서 item 하나를 지운다
 
 	document.getElementById("cartlist").getElementsByTagName("p")[0].getElementsByTagName("span")[0].innerText = returnTotalPrice();  //totalPrice 계산 및 출력
+	document.getElementById("cartlist").getElementsByTagName("p")[0].getElementsByTagName("input")[0].value = returnTotalPrice();  //totalPrice 계산 및 출력
 }
 
 function changeItemAmount(param) {
@@ -77,6 +79,7 @@ function changeItemAmount(param) {
 	itemTotalPrice.innerText = itemAmount * itemPrice;
 
 	document.getElementById("cartlist").getElementsByTagName("p")[0].getElementsByTagName("span")[0].innerText = returnTotalPrice();  //totalPrice 계산 및 출력
+	document.getElementById("cartlist").getElementsByTagName("p")[0].getElementsByTagName("input")[0].value= returnTotalPrice();  //totalPrice 계산 및 출력
 }
 
 function returnTotalPrice() {
