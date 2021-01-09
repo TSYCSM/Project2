@@ -21,9 +21,12 @@ public class MybatisItemDAO implements ItemDAO{
 
 	@Override
 	public void insert(Item item) {
-		sqlSessionTemplate.insert("Item.insert", item);
+		if(item.getCategory_id() != 0) {
+			sqlSessionTemplate.insert("Item.insert", item);
+		} else {
+			sqlSessionTemplate.insert("Item.insertWithoutCategoryId", item);
+		}
 	}
-
 
 	@Override
 	public Item select(int item_id) {

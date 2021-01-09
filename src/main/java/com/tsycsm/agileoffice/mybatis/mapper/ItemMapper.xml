@@ -26,6 +26,14 @@
 		</selectKey>
 	</insert>
 	
+	<insert id="insertWithoutCategoryId">
+		insert into item(item_id, owner_id, item_name, price, filename, stock)
+		values(seq_item.nextval, #{owner_id}, #{item_name}, #{price}, #{filename}, #{stock})
+		<selectKey keyProperty="item_id" resultType="int" order="AFTER">
+			select seq_item.currval from dual
+		</selectKey>
+	</insert>
+	
 	<update id="update" parameterType="Item">
 		update item set category_id=#{category_id}, item_name=#{item_name}, price=#{price}, filename=#{filename}, stock=#{stock}
 		where item_id=#{item_id}
