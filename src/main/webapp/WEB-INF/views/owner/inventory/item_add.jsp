@@ -69,7 +69,7 @@
 <%@ include file="../inc/common.jsp"%>
 <div class="container">
 	<form>
-		<input type="hidden" name="owner_id" value="25"/>
+		<input type="hidden" name="owner_id" value="<%=owner.getOwner_id()%>"/>
 		<div class="outerbox">
 			<label for="item_name">상품이름</label>
 			<div class="box">

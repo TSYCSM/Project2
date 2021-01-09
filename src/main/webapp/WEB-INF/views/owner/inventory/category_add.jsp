@@ -26,6 +26,7 @@ function regist(){
 }
 </script>
 </head>
+
 <%@ include file="../inc/common.jsp"%>
 
 			category add <br><br>
@@ -34,7 +35,7 @@ function regist(){
 					<div class="outerbox">
 						<label for="fname">카테고리이름</label>
 						<div class="box">
-							<input type="hidden" name="owner_id" value="25"/>
+							<input type="hidden" name="owner_id" value="<%=owner.getOwner_id()%>"/>
 							<input type="text" name="category_name" placeholder="카테고리 이름 입력" required>
 						</div>					
 					</div>
