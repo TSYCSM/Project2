@@ -3,7 +3,7 @@ var itemNameArray = [];
 function appendItem(param) {
 
 	var itemName = param.getElementsByTagName("h2")[0].innerText;
-	var itemPrice = param.getElementsByTagName("h3")[0].innerText;
+	var itemPrice = param.getElementsByTagName("span")[0].innerText;
 	var itemId = param.getElementsByTagName("input")[0].value;
 	var table = document.getElementById("itemTable");
 	var items_table = table.getElementsByTagName("tr"); //table의 item들이 들어있는 array

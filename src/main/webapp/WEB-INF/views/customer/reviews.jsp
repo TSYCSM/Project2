@@ -1,6 +1,9 @@
+<%@page import="com.tsycsm.agileoffice.model.domain.Item"%>
+<%@page import="java.util.List"%>
 <%@page import="com.tsycsm.agileoffice.common.Pager"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%
+	List<Item> itemList =(List)request.getAttribute("itemList");
 	int listSize = 234;
 	Pager pager = new Pager();
 	pager.init(request, listSize);
@@ -9,7 +12,7 @@
 <div id="reviews" class="tabcontent">
 	<h1>리뷰</h1>
 	<table id="reviewTable">
-		<tr>
+		<tr class="first-tr">
 			<th>No</th>
 			<th>상품명</th>
 			<th>제목</th>
@@ -52,5 +55,14 @@
 			</td>
 		</tr>
 	</table>
-	<button>등록</button>
+	<button type="button" class="registReview_btn" onClick="registReview()">등록</button>
 </div>
+
+
+
+
+
+
+
+
+

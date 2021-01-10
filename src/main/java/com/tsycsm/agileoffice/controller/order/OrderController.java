@@ -1,5 +1,6 @@
 package com.tsycsm.agileoffice.controller.order;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -11,16 +12,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tsycsm.agileoffice.common.MessageData;
-import com.tsycsm.agileoffice.exception.CustomerNotFoundException;
 import com.tsycsm.agileoffice.exception.OrderException;
 import com.tsycsm.agileoffice.model.category.service.CategoryService;
 import com.tsycsm.agileoffice.model.domain.Category;
 import com.tsycsm.agileoffice.model.domain.Customer;
 import com.tsycsm.agileoffice.model.domain.Item;
+import com.tsycsm.agileoffice.model.domain.OrderDetail;
 import com.tsycsm.agileoffice.model.domain.OrderSummary;
 import com.tsycsm.agileoffice.model.domain.Owner;
 import com.tsycsm.agileoffice.model.item.service.ItemService;
@@ -67,23 +69,32 @@ public class OrderController {
 	
 	@PostMapping(value="/order/orderRegist")
 	@ResponseBody
-	public MessageData orderRegist(HttpSession session, OrderSummary orderSummary) {
+	public MessageData orderRegist(HttpSession session, OrderSummary orderSummary, 
+			@RequestParam("item_id") int[] item_id_arr
+			,@RequestParam("quantity") int[] quantity_arr
+			,@RequestParam("price") int[] price_arr) {
+		//owner_id, customer_id 전해주시
 		Owner owner = (Owner)session.getAttribute("owner");
 		Customer customer = (Customer)session.getAttribute("customer");
-		
-		logger.debug("전) orderSummary customer_id: "+orderSummary.getCustomer_id());
-		
+
 		if(customer !=null) {
 			orderSummary.setCustomer_id(customer.getCustomer_id());			
 		}
-		
 		orderSummary.setOwner_id(owner.getOwner_id());
 		
-		logger.debug("후) orderSummary customer_id: "+orderSummary.getCustomer_id());
-		logger.debug("orderSummary owner_id: "+orderSummary.getOwner_id());
-		logger.debug("orderSummary total_price: "+orderSummary.getTotal_price());
 		
-		orderService.regist(orderSummary);
+		//orderDetailArr 선언...(속상함)
+		OrderDetail[] orderDetailArr = new OrderDetail[item_id_arr.length];
+		for(int i=0; i<orderDetailArr.length; i++) {
+			OrderDetail orderDetail = new OrderDetail();
+			orderDetailArr[i] = orderDetail;
+			orderDetailArr[i].setItem_id(item_id_arr[i]);
+			orderDetailArr[i].setQuantity(quantity_arr[i]);
+			orderDetailArr[i].setPrice(price_arr[i]);
+		}
+		
+		
+		orderService.regist(orderSummary, orderDetailArr);
 		
 		MessageData messageData = new MessageData();
 		messageData.setResultCode(1);

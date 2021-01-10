@@ -7,7 +7,7 @@
 	Owner owner = (Owner)session.getAttribute("owner");
 	List<Item> itemList =(List)request.getAttribute("itemList");
 	List<Category> categoryList =(List)request.getAttribute("categoryList");
-
+ 
 %>
 
 <div id="items" class="tabcontent">
