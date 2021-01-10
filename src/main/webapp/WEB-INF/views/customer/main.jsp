@@ -1,8 +1,12 @@
+<%@page import="java.awt.event.ItemListener"%>
 <%@page import="java.util.List"%>
 <%@page import="com.tsycsm.agileoffice.model.domain.Customer"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%
 	Customer customer = (Customer)session.getAttribute("customer");
+	List<Item> itemList =(List)request.getAttribute("itemList");
+	List<Category> categoryList =(List)request.getAttribute("categoryList");
+
 %>
 <!DOCTYPE html>
 <html>
@@ -10,6 +14,7 @@
 <meta charset="UTF-8">
 <title>Items</title>
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
 @font-face {
 	font-family: 'Jal_Onuel';
@@ -122,7 +127,44 @@ body {
 	});
 	
 function order(){
-	$("")
+	if(confirm("주문하시겠습니까")){
+		
+		var formData = $(".order-form").serialize()
+		console.log(formData)
+		$.ajax({
+			url: "/order/orderRegist",
+			method: "post",
+			data: formData,
+			success : function(responseData){
+				alert(responseData.msg);
+				if(responseData.resultCode==1){
+					location.href= responseData.url;					
+				}
+			}
+		})
+	}
+}
+
+function registReview(len){
+	var tag = "";
+	tag += "<tr>" 
+	tag += "<td></td>" 
+	tag += "<td><select>" 
+	tag += "<option>상품을 선택하세요</option>"
+	for(var i=0; i<len;i++){
+		
+		tag += "<option>"++"</option>"
+		
+	}
+	tag += "</select></td>" 
+	tag += "<td colspan='4'>" 
+	tag += "<input type='text' name='comments' width='60%'>"
+	tag += "</td>" 
+	tag += "</tr>" 
+	
+	$(".first-tr").first().after(tag)
+	
+	$(".registReview_btn").hide();
 }
 	
 </script>

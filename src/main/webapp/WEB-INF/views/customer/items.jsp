@@ -7,7 +7,7 @@
 	Owner owner = (Owner)session.getAttribute("owner");
 	List<Item> itemList =(List)request.getAttribute("itemList");
 	List<Category> categoryList =(List)request.getAttribute("categoryList");
-
+ 
 %>
 
 <div id="items" class="tabcontent">
@@ -15,6 +15,7 @@
 		<h1>상품 목록</h1>
 		<%for(Item item : itemList){ %>		
 			<div class="item" onclick="appendItem(this)">
+				<input type="hidden" value="<%=item.getItem_id() %>"> 
 				<img src="/resources/data/<%=item.getItem_id() %>.<%=item.getFilename() %>" />
 				<h2><%=item.getItem_name() %></h2>
 				<h3>
