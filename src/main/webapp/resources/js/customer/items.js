@@ -4,6 +4,7 @@ function appendItem(param) {
 
 	var itemName = param.getElementsByTagName("h2")[0].innerText;
 	var itemPrice = param.getElementsByTagName("h3")[0].innerText;
+	var itemId = param.getElementsByTagName("input")[0].value;
 	var table = document.getElementById("itemTable");
 	var items_table = table.getElementsByTagName("tr"); //table의 item들이 들어있는 array
 
@@ -26,7 +27,7 @@ function appendItem(param) {
 	} else { //table에 item이 없다면 추가
 		itemNameArray.push(itemName);
 
-		var price = param.getElementsByTagName("span")[0].innerText;
+		/*var price = param.getElementsByTagName("span")[0].innerText;*/
 
 		var table = document.getElementById("itemTable");
 		var row = document.createElement("tr");
@@ -34,10 +35,12 @@ function appendItem(param) {
 		var col2 = document.createElement("td");
 		var col3 = document.createElement("td");
 		var col4 = document.createElement("td");
+		var col5 = document.createElement("td");
 
-		var html1 = param.getElementsByTagName("h2")[0].innerText + "<input type='hidden' value='" + price + "'/>";
-		var html2 = "<input onchange='changeItemAmount(this)' type='number' value='1' min='1'/>";
-		var html3 = "<span>" + price + "</span>";
+		var html1 = param.getElementsByTagName("h2")[0].innerText + "<input type='hidden' name='price' value='" + itemPrice + "'/>"
+				+ "<input type='hidden' name='item_id' value='" + itemId + "'/>";
+		var html2 = "<input onchange='changeItemAmount(this)' type='number' name='quantity' value='1' min='1'/>";
+		var html3 = "<span>" + itemPrice + "</span>";
 		var html4 = "<button onclick='removeItem(this)'>X</button>";
 
 		row.appendChild(col1);

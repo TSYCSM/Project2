@@ -10,6 +10,7 @@
 <meta charset="UTF-8">
 <title>Items</title>
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
 @font-face {
 	font-family: 'Jal_Onuel';
@@ -122,7 +123,20 @@ body {
 	});
 	
 function order(){
-	$("")
+	if(confirm("주문하시겠습니까")){
+		var formData = $(".order-form").serialize()
+		$.ajax({
+			url: "/order/orderRegist",
+			method: "post",
+			data: formData,
+			success : function(responseData){
+				alert(responseData.msg);
+				if(responseData.resultCode==1){
+					location.href= responseData.url;					
+				}
+			}
+		})
+	}
 }
 	
 </script>

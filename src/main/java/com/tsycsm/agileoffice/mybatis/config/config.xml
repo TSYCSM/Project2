@@ -9,6 +9,7 @@
  	<typeAlias type="com.tsycsm.agileoffice.model.domain.Category" alias="Category"/>
  	<typeAlias type="com.tsycsm.agileoffice.model.domain.Owner" alias="owner"/>
  	<typeAlias type="com.tsycsm.agileoffice.model.domain.Customer" alias="Customer"/>
+ 	<typeAlias type="com.tsycsm.agileoffice.model.domain.OrderSummary" alias="OrderSummary"/>
  </typeAliases>
  
   <mappers>
@@ -16,5 +17,6 @@
     <mapper resource="com/tsycsm/agileoffice/mybatis/mapper/CategoryMapper.xml"/>
     <mapper resource="com/tsycsm/agileoffice/mybatis/mapper/OwnerMapper.xml"/>
     <mapper resource="com/tsycsm/agileoffice/mybatis/mapper/CustomerMapper.xml"/>
+    <mapper resource="com/tsycsm/agileoffice/mybatis/mapper/OrderSummaryMapper.xml"/>
   </mappers>
 </configuration>
