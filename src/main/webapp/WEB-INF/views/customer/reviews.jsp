@@ -1,9 +1,7 @@
 <%@page import="com.tsycsm.agileoffice.model.domain.Item"%>
-<%@page import="java.util.List"%>
 <%@page import="com.tsycsm.agileoffice.common.Pager"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%
-	List<Item> itemList =(List)request.getAttribute("itemList");
 	int listSize = 234;
 	Pager pager = new Pager();
 	pager.init(request, listSize);
@@ -19,6 +17,21 @@
 			<th>작성일</th>
 			<th></th>
 			<th></th>
+		</tr>
+		<tr class="regist-tr" style="display: none;">
+			<td></td>
+			<td>
+				<select>
+					<option>선택하세요</option>
+					<%for(int i =0; i<itemList.size();i++){ %>
+						<%Item item = itemList.get(i); %>
+						<option><%=item.getItem_name() %></option>
+					<%} %>
+				</select>
+			</td>
+			<td colspan='4'>
+				<input type='text' name='comments' width='60%'>
+			</td>
 		</tr>
 		<%
 		int num = pager.getNum();
@@ -57,12 +70,5 @@
 	</table>
 	<button type="button" class="registReview_btn" onClick="registReview()">등록</button>
 </div>
-
-
-
-
-
-
-
 
 

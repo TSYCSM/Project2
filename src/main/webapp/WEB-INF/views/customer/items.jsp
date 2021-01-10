@@ -5,7 +5,6 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%
 	Owner owner = (Owner)session.getAttribute("owner");
-	List<Item> itemList =(List)request.getAttribute("itemList");
 	List<Category> categoryList =(List)request.getAttribute("categoryList");
  
 %>
