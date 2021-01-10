@@ -6,6 +6,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.tsycsm.agileoffice.exception.AsyncDMLException;
+import com.tsycsm.agileoffice.exception.DMLException;
 import com.tsycsm.agileoffice.model.domain.Item;
 
 @Repository
@@ -38,11 +40,16 @@ public class MybatisItemDAO implements ItemDAO{
 	}
 
 	@Override
-	public void insert(Item item) {
+	public void insert(Item item) throws DMLException {
+		int result = 0;
 		if(item.getCategory_id() != 0) {
-			sqlSessionTemplate.insert("Item.insert", item);
+			result = sqlSessionTemplate.insert("Item.insert", item);
 		} else {
-			sqlSessionTemplate.insert("Item.insertWithoutCategoryId", item);
+			result = sqlSessionTemplate.insert("Item.insertWithoutCategoryId", item);
+		}
+		result = 0;
+		if(result == 0) {
+			throw new DMLException("상품 등록에 실패하였습니다.");
 		}
 	}
 
@@ -53,18 +60,28 @@ public class MybatisItemDAO implements ItemDAO{
 
 
 	@Override
-	public void update(Item item) {
+	public void update(Item item) throws AsyncDMLException {
+		int result = 0;
+
 		if(item.getCategory_id() != 0) {
-			sqlSessionTemplate.update("Item.update", item);
+			result = sqlSessionTemplate.update("Item.update", item);
 		} else {
-			sqlSessionTemplate.update("Item.updateNullifingCategoryId", item);
+			result = sqlSessionTemplate.update("Item.updateNullifingCategoryId", item);
+		}
+		result = 0;
+		if(result == 0) {
+			throw new DMLException("상품 정보 수정에 실패하였습니다.");
 		}
 	}
 
 
 	@Override
-	public void delete(int item_id) {
-		sqlSessionTemplate.delete("Item.delete", item_id);
+	public void delete(int item_id) throws DMLException {
+		int result = sqlSessionTemplate.delete("Item.delete", item_id);
+		result = 0;
+		if(result == 0) {
+			throw new DMLException("상품 삭제에 실패하였습니다");
+		}
 	}
 
 

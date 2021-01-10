@@ -33,26 +33,11 @@ $(function(){
 
 function del(){
 	if(confirm("삭제하시겠습니까")){
-		$.ajax({
-			url: "/owner/inventory/category/delete",
-			type: "post",
-			data: {
-				category_id : <%=category.getCategory_id()%>
-				
-			},
-			success: function(responseData){
-				var json = JSON.parse(responseData);
-				if(json.result==1){
-					alert(json.msg);
-					location.href="/owner/inventory/category/list";
-				}else{
-					alert(json.msg);					
-				}
-			}
-		});
+		location.href = "/owner/inventory/category/delete?category_id=" + <%=category.getCategory_id()%>;
 	}	
-	
 }
+
+
 function update(){
 	var formData = $("#category_form").serialize();//전부 문자열화 시킨다.
 	if(confirm("수정하시겠습니까")){

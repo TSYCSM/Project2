@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.tsycsm.agileoffice.common.FileManager;
 import com.tsycsm.agileoffice.common.MessageData;
+import com.tsycsm.agileoffice.exception.AsyncDMLException;
 import com.tsycsm.agileoffice.exception.DMLException;
 import com.tsycsm.agileoffice.exception.NameDuplicatedException;
 import com.tsycsm.agileoffice.model.category.service.CategoryService;
@@ -96,19 +97,12 @@ public class InventoryController implements ServletContextAware {
 		return mav;
 	}
 
-	@RequestMapping(value = "/owner/inventory/category/delete", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
+	@RequestMapping(value = "/owner/inventory/category/delete", method = RequestMethod.GET)
 	@ResponseBody
 	public String deleteCategory(int category_id) {
-		logger.info("category_id: " + category_id);
-
 		categoryService.delete(category_id);
 
-		StringBuffer sb = new StringBuffer();
-		sb.append("{");
-		sb.append("\"result\": 1,");
-		sb.append("\"msg\": \"카테고리 삭제 성공\"");
-		sb.append("}");
-		return sb.toString();
+		return "redirect:/owner/inventory/category/list";
 	}
 
 	@RequestMapping(value = "/owner/inventory/category/update", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
@@ -169,7 +163,7 @@ public class InventoryController implements ServletContextAware {
 		Owner owner = (Owner)session.getAttribute("owner");
 		int owner_id = owner.getOwner_id();
 	
-		List categoryList = categoryService.selectByOwner(owner_id);
+		List<Category> categoryList = categoryService.selectByOwner(owner_id);
 	
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("categoryList", categoryList);
@@ -204,7 +198,7 @@ public class InventoryController implements ServletContextAware {
 		
 	
 		Item item = itemService.select(item_id);
-		List categoryList = categoryService.selectByOwner(owner_id);
+		List<Category> categoryList = categoryService.selectByOwner(owner_id);
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("item", item);
@@ -227,21 +221,33 @@ public class InventoryController implements ServletContextAware {
 		return "redirect:/owner/inventory/item/list";
 	}
 	
-	
-	
 
 
 	//----예외 핸들러 처리----
 	@ExceptionHandler(DMLException.class)
 	@ResponseBody
-	public String handleException(DMLException e) {
-		StringBuffer sb = new StringBuffer();
-		sb.append("{");
-		sb.append("\"result\": 0,");
-		sb.append("\"msg\": \"" + e.getMessage() + "\"");
-		sb.append("}");
-		return sb.toString();
+	public ModelAndView handleException(DMLException e) {
+		MessageData messageData = new MessageData();
+		messageData.setMsg(e.getMessage());
+		messageData.setResultCode(0);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("messageData", messageData);
+		mav.setViewName("/error/result");
+	
+		return mav;
 	}
+	
+	@ExceptionHandler(AsyncDMLException.class)
+	@ResponseBody
+	public MessageData handleException(AsyncDMLException e) {
+		MessageData messageData = new MessageData();
+		messageData.setMsg(e.getMessage());
+		messageData.setResultCode(0);
+	
+		return messageData;
+	}
+
 	
 	@ExceptionHandler(NameDuplicatedException.class)
 	@ResponseBody

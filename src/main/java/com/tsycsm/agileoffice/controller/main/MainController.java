@@ -6,8 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.tsycsm.agileoffice.model.domain.Customer;
-
 @Controller
 public class MainController {
 	@RequestMapping(value="/main/first", method=RequestMethod.GET)
@@ -27,7 +25,10 @@ public class MainController {
 		return "main/customer_credential";
 	}
 	
-	
+	@RequestMapping(value="/error/result", method=RequestMethod.GET)
+	public String viewErrorPage() {
+		return "error/result";
+	}
 	
 	
 }

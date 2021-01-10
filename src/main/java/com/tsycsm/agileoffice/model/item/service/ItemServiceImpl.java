@@ -1,7 +1,6 @@
 package com.tsycsm.agileoffice.model.item.service;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.tsycsm.agileoffice.common.FileManager;
+import com.tsycsm.agileoffice.exception.AsyncDMLException;
+import com.tsycsm.agileoffice.exception.DMLException;
 import com.tsycsm.agileoffice.exception.NameDuplicatedException;
 import com.tsycsm.agileoffice.model.domain.Item;
 import com.tsycsm.agileoffice.model.item.repository.ItemDAO;
@@ -46,7 +47,7 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public void regist(Item item, FileManager fileManager) {
+	public void regist(Item item, FileManager fileManager) throws DMLException {
 		MultipartFile photo = item.getPhoto();
 		String ext = fileManager.getExtend(photo.getOriginalFilename());
 	
@@ -58,7 +59,7 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public void update(Item item, FileManager fileManager) {
+	public void update(Item item, FileManager fileManager) throws AsyncDMLException {
 		MultipartFile photo = item.getPhoto();
 
 		if(photo.getOriginalFilename() == "") {
@@ -75,7 +76,7 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public void delete(Item item, FileManager fileManager) {
+	public void delete(Item item, FileManager fileManager) throws DMLException {
 		itemDAO.delete(item.getItem_id());
 		fileManager.deleteFile(fileManager.getSaveDir() + File.separator + item.getItem_id() + "." + item.getFilename());
 		System.out.println(fileManager.getSaveDir() + File.separator + item.getItem_id() + "." + item.getFilename());

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.tsycsm.agileoffice.exception.AsyncDMLException;
 import com.tsycsm.agileoffice.exception.DMLException;
 import com.tsycsm.agileoffice.model.category.repository.CategoryDAO;
 import com.tsycsm.agileoffice.model.domain.Category;
@@ -44,7 +45,7 @@ public class CategoryServiceImpl implements CategoryService{
 	}
 
 	@Override
-	public void update(Category category) throws DMLException{
+	public void update(Category category) throws AsyncDMLException{
 		categoryDAO.update(category);
 		
 	}

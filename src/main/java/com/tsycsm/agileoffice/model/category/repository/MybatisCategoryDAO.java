@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.tsycsm.agileoffice.exception.AsyncDMLException;
 import com.tsycsm.agileoffice.exception.DMLException;
 import com.tsycsm.agileoffice.model.domain.Category;
 
@@ -32,7 +33,7 @@ public class MybatisCategoryDAO implements CategoryDAO{
 	@Override
 	public void insert(Category category) throws DMLException{
 		int result = sqlSessionTemplate.insert("Category.insert", category);
-		
+		result = 0;
 		if(result == 0) {
 			throw new DMLException("카테고리 등록 실패");
 		}
@@ -42,17 +43,16 @@ public class MybatisCategoryDAO implements CategoryDAO{
 	@Override
 	public void delete(int category_id) throws DMLException{
 		int result = sqlSessionTemplate.delete("Category.delete", category_id);
-		
+		result = 0;
 		if(result == 0) {
 			throw new DMLException("카테고리 삭제 실패");
 		}
 	}
 
 	@Override
-	public void update(Category category) throws DMLException{
+	public void update(Category category) throws AsyncDMLException{
 		int result = sqlSessionTemplate.update("Category.update", category);
-		System.out.println("result: "+result);
-		
+		result = 0;
 		if(result == 0) {
 			throw new DMLException("카테고리 수정 실패");
 		}
