@@ -21,52 +21,42 @@
 	left: 300px;
 }
 </style>
-<script>
-	var categoryNameArray_checked = [];
-
-	function filtering() {
-		console.log($($("input[name='categoryIdList']"))[1]);
-		for(var i=0; i<$("input[name='categoryIdList']").length; i++) {
-			if($($("input[name='categoryIdList']"))[i].is(":checked") == true) {
-				categoryNameArray_checked.push($($("input[name='categoryIdList']"))[i]);
-			}
-		}
-		console.log(categoryNameArray_checked);
-	}
-</script>
 </head>
 <%@ include file="../inc/common.jsp"%>
 <button class="add_btn" type="button" onclick="location.href='/owner/inventory/item/registform'">상품추가</button>
 <br>
 <br>
+<input name="categoryIdList" onChange="filtering()" type="checkbox" value="0" checked/>카테고리 없음  |  
 <%for(Category category : categoryList) { %>
-<input name="categoryIdList" onChange="filtering()" type="checkbox" value="<%=category.getCategory_id() %>"/><%=category.getCategory_name() %>  |  
+<input name="categoryIdList" onChange="filtering()" type="checkbox" value="<%=category.getCategory_id() %>" checked/><%=category.getCategory_name() %>  |  
 <%} %>
 <br>
 <br>
-<table>
-	<tr>
+<table id="item-list">
+	<tr id="list-title">
 		<th>No</th>
 		<th>품명</th>
 		<th>가격</th>
 		<th>재고</th>
 		<th>등록일</th>
 	</tr>
-	<%
-	int num = pager.getNum();
-	int curPos = pager.getCurPos();
-	%>
-	<%for(int i=0; i<pager.getPageSize(); i++){ %>
-	<%if(num < 1) break; %>
-	<%Item item = itemList.get(i); %>
-	<tr>
-		<td><%=num-- %></td>
-		<td><a href="/owner/inventory/item/detail?item_id=<%=item.getItem_id()%>"><%=item.getItem_name() %></a></td>
-		<td><%=item.getPrice() %></td>
-		<td><%=item.getStock() %></td>
-		<td><%=item.getRegdate() %></td>
-	</tr>
-	<%} %>
+	<tbody id="list-contents">
+		<%
+		int num = pager.getNum();
+		int curPos = pager.getCurPos();
+		%>
+		<%for(int i=0; i<pager.getPageSize(); i++){ %>
+		<%if(num < 1) break; %>
+		<%Item item = itemList.get(i); %>
+		<tr>
+			<td><%=num-- %></td>
+			<td><a href="/owner/inventory/item/detail?item_id=<%=item.getItem_id()%>"><%=item.getItem_name() %></a></td>
+			<td><%=item.getPrice() %></td>
+			<td><%=item.getStock() %></td>
+			<td><%=item.getRegdate() %></td>
+		</tr>
+		<%} %>
+	</tbody>
 	<tr>
 		<td colspan="6" style="text-align:center">
 			<%if(pager.getFirstPage() >1){ %>
@@ -83,13 +73,44 @@
 			<%}else{ %>
 				<a href = "javascript:alert('마지막 페이지입니다.')">▶</a>
 			<%} %>
-			
 		</td>
 	</tr>
-
 </table>
 <%@ include file="../inc/footer.jsp" %>
 
+<script>
+	
+	$(function() {
+		filtering();
+	});
+
+	function filtering() {
+		$("#list-contents").html("");
+
+		for(var i=0; i<$("input[name='categoryIdList']").length; i++) {
+			if($($("input[name='categoryIdList']")[i]).is(":checked") == true) {
+				$.ajax({
+					url: "/owner/inventory/item/list/filtered?category_id=" + $($("input[name='categoryIdList']"))[i].value
+						+ "&owner_id=" + <%=owner.getOwner_id() %>,
+					success: function(data) {
+						for(var i=0; i<data.length; i++) {
+							var tag = "";
+							tag += "<tr>";
+							tag += "<td>1</td>";
+							tag += "<td>" + data[i].item_name + "</td>";
+							tag += "<td>" + data[i].price + "</td>";
+							tag += "<td>" + data[i].stock + "</td>";
+							tag += "<td>" + data[i].regdate + "</td>";
+							tag += "</tr>";
+							
+							$("#list-contents").append(tag);
+						}
+					}
+				});
+			} 
+		}
+	}
+</script>
 
 
 

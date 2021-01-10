@@ -141,7 +141,7 @@ public class InventoryController implements ServletContextAware {
 		int owner_id = owner.getOwner_id();
 
 		List<Category> categoryList = categoryService.selectByOwner(owner_id);
-		List<Item> itemList = itemService.selectByOwner(owner_id);
+		List<Item> itemList = itemService.selectByOwnerId(owner_id);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("categoryList", categoryList);
@@ -150,6 +150,18 @@ public class InventoryController implements ServletContextAware {
 
 		return mav;
 	}
+	
+	@RequestMapping(value = "/owner/inventory/item/list/filtered", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Item> getFilteredItemList(int category_id, int owner_id) {
+		Item item = new Item();
+		item.setOwner_id(owner_id);
+		item.setCategory_id(category_id);
+		System.out.println("controller owner_id" + owner_id);
+		System.out.println("controller category_id" + category_id);
+		return itemService.selectByCategoryId(item);
+	}
+	
 
 	@RequestMapping(value = "/owner/inventory/item/registform", method = RequestMethod.GET)
 	public ModelAndView getItemRegistForm(HttpSession session) {

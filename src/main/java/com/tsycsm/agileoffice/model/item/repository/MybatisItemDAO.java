@@ -14,10 +14,28 @@ public class MybatisItemDAO implements ItemDAO{
 	private SqlSessionTemplate sqlSessionTemplate;
 	
 	
-	public List selectByOwner(int owner_id) {
-		return sqlSessionTemplate.selectList("Item.selectByOwner", owner_id);
+	public List<Item> selectByOwnerId(int owner_id) {
+		return sqlSessionTemplate.selectList("Item.selectByOwnerId", owner_id);
 	}
 
+	@Override
+	public List<Item> selectByCategoryId(Item item) {
+		List<Item> itemList = null;
+		
+		System.out.println("DAO category_id" + item.getCategory_id());
+		System.out.println("DAO owner_id" + item.getOwner_id());
+
+		if(item.getCategory_id() != 0) {
+			itemList = sqlSessionTemplate.selectList("Item.selectByCategoryId", item.getCategory_id());
+			System.out.println(itemList);
+		} else {
+			itemList = sqlSessionTemplate.selectList("Item.selectByCategoryIdNull", item.getOwner_id());
+			System.out.println(itemList);
+		}
+		
+	
+		return itemList;
+	}
 
 	@Override
 	public void insert(Item item) {
@@ -36,8 +54,11 @@ public class MybatisItemDAO implements ItemDAO{
 
 	@Override
 	public void update(Item item) {
-		int result = sqlSessionTemplate.update("Item.update", item);
-		System.out.println(result);
+		if(item.getCategory_id() != 0) {
+			sqlSessionTemplate.update("Item.update", item);
+		} else {
+			sqlSessionTemplate.update("Item.updateNullifingCategoryId", item);
+		}
 	}
 
 

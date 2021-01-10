@@ -1,6 +1,7 @@
 package com.tsycsm.agileoffice.model.item.service;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +34,15 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public List selectByOwner(int owner_id) {
-		return itemDAO.selectByOwner(owner_id);
+	public List<Item> selectByOwnerId(int owner_id) {
+		return itemDAO.selectByOwnerId(owner_id);
+	}
+	
+	@Override
+	public List<Item> selectByCategoryId(Item item) {
+		System.out.println("service category_id" + item.getCategory_id());
+		System.out.println("service owner_id" + item.getOwner_id());
+		return itemDAO.selectByCategoryId(item);
 	}
 
 	@Override

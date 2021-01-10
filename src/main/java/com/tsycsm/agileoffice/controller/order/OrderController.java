@@ -32,7 +32,7 @@ public class OrderController {
 		int owner_id = owner.getOwner_id();
 
 		List<Category> categoryList = categoryService.selectByOwner(owner_id);
-		List<Item> itemList = itemService.selectByOwner(owner_id);
+		List<Item> itemList = itemService.selectByOwnerId(owner_id);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("categoryList", categoryList);

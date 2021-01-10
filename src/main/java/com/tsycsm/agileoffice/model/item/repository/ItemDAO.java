@@ -10,7 +10,8 @@ import com.tsycsm.agileoffice.model.domain.Item;
 public interface ItemDAO {
 	public Item select(int item_id);
 	public Item selectByName(String item_name);
-	public List selectByOwner(int owner_id);
+	public List selectByOwnerId(int owner_id);
+	public List selectByCategoryId(Item item);
 	public void insert(Item item);
 	public void update(Item item);
 	public void delete(int item_id);

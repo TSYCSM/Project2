@@ -10,12 +10,20 @@
 		select * from item where item_name=#{item_name}
 	</select>
 
-	<select id="selectAll" resultType="Item">
-		select * from item order by item_id desc
+	<select id="selectByOwnerId" parameterType="int" resultType="Item">
+		select * from item where owner_id=#{owner_id} order by item_id desc
+	</select>
+	
+	<select id="selectByCategoryId" parameterType="int" resultType="Item">
+		select * from item where category_id=#{category_id} order by item_id desc
 	</select>
 
-	<select id="selectByOwner" parameterType="int" resultType="Item">
-		select * from item where owner_id=#{owner_id} order by item_id desc
+	<select id="selectByCategoryIdNull" parameterType="int" resultType="Item">
+		select * from item where category_id is null and owner_id=#{owner_id} order by item_id desc
+	</select>
+
+	<select id="selectAll" resultType="Item">
+		select * from item order by item_id desc
 	</select>
 	
 	<insert id="insert" parameterType="Item">
@@ -36,6 +44,11 @@
 	
 	<update id="update" parameterType="Item">
 		update item set category_id=#{category_id}, item_name=#{item_name}, price=#{price}, filename=#{filename}, stock=#{stock}
+		where item_id=#{item_id}
+	</update>
+	
+	<update id="updateNullifingCategoryId" parameterType="Item">
+		update item set category_id=null, item_name=#{item_name}, price=#{price}, filename=#{filename}, stock=#{stock}
 		where item_id=#{item_id}
 	</update>
 	
