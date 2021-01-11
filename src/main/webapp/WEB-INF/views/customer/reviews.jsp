@@ -36,9 +36,9 @@
 			</tr>
 		</table>
 		
-			<table class="review-box">
-		
-			</table>
+		<table class="review-box">
+	
+		</table>
 			
 		<table width= "90%" class="page-box">
 		

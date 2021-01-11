@@ -115,6 +115,12 @@ a{
 		}
 	}	
 	
+	
+	function deleteComment(param) {
+		
+		
+	}
+	
 	function getAsyncList(cPage){
 		
 		$.ajax({
@@ -136,7 +142,7 @@ a{
 					tag+="<td>"+reivew.comments+"</td>";
 					tag+="<td>"+reivew.regdate+"</td>";
 					tag += "<td><button type='button' onclick='modeChange(this)'>수정</button></td>"
-					tag += "<td><button type='button'>삭제</button></td>"
+					tag += "<td><button type='button' onclick='deleteComment(this)'>삭제</button></td>"
 					tag+="</tr>";
 								   
 				}
