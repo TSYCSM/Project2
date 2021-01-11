@@ -83,6 +83,8 @@ public class OrderController {
 		Owner owner = (Owner)session.getAttribute("owner");
 		Customer customer = (Customer)session.getAttribute("customer");
 
+		Item[] itemArr = new Item[item_id_arr.length];
+		
 		if(customer !=null) {
 			orderSummary.setCustomer_id(customer.getCustomer_id());			
 		}
@@ -93,6 +95,12 @@ public class OrderController {
 		OrderDetail[] orderDetailArr = new OrderDetail[item_id_arr.length];
 		for(int i=0; i<orderDetailArr.length; i++) {
 			OrderDetail orderDetail = new OrderDetail();
+			Item item = new Item();
+			
+			itemArr[i] = item;
+			itemArr[i].setItem_id(item_id_arr[i]);
+			itemArr[i].setQuantity(quantity_arr[i]);
+			
 			orderDetailArr[i] = orderDetail;
 			orderDetailArr[i].setItem_id(item_id_arr[i]);
 			orderDetailArr[i].setQuantity(quantity_arr[i]);
@@ -100,7 +108,7 @@ public class OrderController {
 		}
 		
 		
-		orderService.regist(orderSummary, orderDetailArr);
+		orderService.regist(itemArr, orderSummary, orderDetailArr);
 		
 		MessageData messageData = new MessageData();
 		messageData.setResultCode(1);

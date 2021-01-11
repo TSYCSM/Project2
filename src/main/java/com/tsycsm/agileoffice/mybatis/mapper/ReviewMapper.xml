@@ -1,12 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Review">
+	
+	<resultMap type="Review" id="reviewJoinItem">
+		<id column="review_id" property="review_id"/>
+		<result column="owner_id" property="owner_id"/>
+		<result column="customer_id" property="customer_id"/>
+		<result column="comments" property="comments"/>
+		<result column="regdate" property="regdate"/>
+		<association
+			column="item_id"
+			property="item"
+			javaType="Item"
+			select="Item.select"
+			/>
+		
+	</resultMap>
+
 	<insert id="insert" parameterType="Review">
 		insert into review(review_id, owner_id, customer_id, comments, item_id)
-		values(seq_review.nextval, #{owner_id}, #{customer_id}, #{comments}, #{item_id})
+		values(seq_review.nextval, #{owner_id}, #{customer_id}, #{comments}, #{item.item_id})
 	</insert>
 	
-	<select id="selectAllByOwner" parameterType="int" resultType="Review">
+	<select id="selectAllByOwner" parameterType="int" resultMap="reviewJoinItem">
 		select * from review where owner_id = #{owner_id} order by review_id desc
 	</select>
 	

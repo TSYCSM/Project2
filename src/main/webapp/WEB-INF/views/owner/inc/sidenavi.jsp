@@ -25,8 +25,8 @@
     <i class="fa fa-caret-down"></i>
   </button>
   <div class="dropdown-container">
-    <a href="/view/owner/item/item_list.jsp">상품</a>
-    <a href="#">카테고리</a>
+    <a href="/owner/inventory/item/list">상품</a>
+    <a href="/owner/inventory/category/list">카테고리</a>
     <a href="#">할인</a>
   </div>
   

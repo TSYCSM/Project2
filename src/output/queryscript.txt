@@ -159,10 +159,14 @@ create sequence seq_review
 increment by 1
 start with 1;
 
+--------------------------------------
+order_detail¿¡ orderdate ³Ö±â
+alter table order_detail
+add orderdate date default sysdate;
 
-
-
-
+ alter table item
+ add constraint chkStock
+ check (stock >=0);
 
 
 

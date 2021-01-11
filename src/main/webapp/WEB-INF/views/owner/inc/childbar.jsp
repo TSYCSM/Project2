@@ -19,8 +19,8 @@
 	</div>
 	<div class="itembar">
 		<ul style="list-style: none;">
-			<div class="test"><li><a href="/view/owner/item/item_list.jsp">상품목록</a></li></div>
-			<div class="test"><li><a href="#">카테고리 목록</a></li></div>
+			<div class="test"><li><a href="/owner/inventory/item/list">상품목록</a></li></div>
+			<div class="test"><li><a href="/owner/inventory/category/list">카테고리 목록</a></li></div>
 			<div class="test"><li><a href="#">할인 목록</a></li></div>
 		</ul>                           
 	</div>

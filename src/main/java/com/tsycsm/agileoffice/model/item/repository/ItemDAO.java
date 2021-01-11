@@ -14,5 +14,7 @@ public interface ItemDAO {
 	public List selectByCategoryId(Item item);
 	public void insert(Item item);
 	public void update(Item item);
+	public void updateStock(Item item);
+	
 	public void delete(int item_id);
 }

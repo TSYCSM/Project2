@@ -46,6 +46,11 @@
 		update item set category_id=#{category_id}, item_name=#{item_name}, price=#{price}, filename=#{filename}, stock=#{stock}
 		where item_id=#{item_id}
 	</update>
+	<!-- stock 빼기 -->
+	<update id="updateStock" parameterType="Item">
+		update item set stock = stock - #{quantity}
+		where item_id=#{item_id}
+	</update>
 	
 	<update id="updateNullifingCategoryId" parameterType="Item">
 		update item set category_id=null, item_name=#{item_name}, price=#{price}, filename=#{filename}, stock=#{stock}

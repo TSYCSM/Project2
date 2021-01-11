@@ -71,6 +71,15 @@ public class MybatisItemDAO implements ItemDAO{
 			throw new AsyncDMLException("상품 정보 수정에 실패하였습니다.");
 		}
 	}
+	@Override
+	public void updateStock(Item item) throws DMLException{
+		int result = sqlSessionTemplate.update("Item.updateStock", item);			
+
+		
+		if(result==0) {
+			throw new DMLException("상품 수량이 부족합니다.");
+		}
+	}
 
 
 	@Override
@@ -86,6 +95,7 @@ public class MybatisItemDAO implements ItemDAO{
 	public Item selectByName(String item_name) {
 		return sqlSessionTemplate.selectOne("Item.selectByName", item_name);
 	}
+
 	
 	
 

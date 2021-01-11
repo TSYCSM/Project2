@@ -1,8 +1,9 @@
 @charset "UTF-8";
 
-#reviews>h1 {
+#reviews>h1{
 	padding: 30px;
 }
+
 
 #reviews>button {
 	float: right;
