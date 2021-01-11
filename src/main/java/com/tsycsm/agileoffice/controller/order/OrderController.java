@@ -1,6 +1,5 @@
 package com.tsycsm.agileoffice.controller.order;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -25,8 +24,10 @@ import com.tsycsm.agileoffice.model.domain.Item;
 import com.tsycsm.agileoffice.model.domain.OrderDetail;
 import com.tsycsm.agileoffice.model.domain.OrderSummary;
 import com.tsycsm.agileoffice.model.domain.Owner;
+import com.tsycsm.agileoffice.model.domain.Review;
 import com.tsycsm.agileoffice.model.item.service.ItemService;
 import com.tsycsm.agileoffice.model.order.service.OrderService;
+import com.tsycsm.agileoffice.model.review.service.ReviewService;
 
 @Controller
 public class OrderController {
@@ -41,6 +42,9 @@ public class OrderController {
 	@Autowired
 	private OrderService orderService;
 	
+	@Autowired
+	private ReviewService reviewService;
+	
 	/*******************************************
 	 	order main page
 	 *******************************************/
@@ -53,10 +57,12 @@ public class OrderController {
 
 		List<Category> categoryList = categoryService.selectByOwner(owner_id);
 		List<Item> itemList = itemService.selectByOwnerId(owner_id);
+		List<Review> reviewList = reviewService.selectAllOwner(owner_id);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("categoryList", categoryList);
 		mav.addObject("itemList", itemList);
+		mav.addObject("reviewList", reviewList);
 		mav.setViewName("customer/main");
 
 		return mav;

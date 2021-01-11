@@ -1,9 +1,12 @@
+<%@page import="com.tsycsm.agileoffice.model.domain.Review"%>
 <%@page import="java.util.List"%>
 <%@page import="com.tsycsm.agileoffice.model.domain.Customer"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%
 	Customer customer = (Customer)session.getAttribute("customer");
 	List<Item> itemList =(List)request.getAttribute("itemList");
+	List<Review> reviewList =(List)request.getAttribute("reviewList");
+	Owner owner = (Owner)session.getAttribute("owner");
 	int index =0;
 %>
 <!DOCTYPE html>
@@ -68,6 +71,12 @@ body {
 <%@ include file="/resources/css/customer/reviews.css" %>
 </style>
 <script type="text/javascript">
+$(function(){
+	getAsyncList();
+	
+});
+
+
 	<%@ include file="/resources/js/customer/items.js" %>
 	<%@ include file="/resources/js/customer/services.js" %>
 	<%-- <%@ include file="/resources/js/client/customer/reviews.js" %> --%>
@@ -107,6 +116,36 @@ body {
 		document.getElementsByClassName("tab")[0].className += " active"; //inital tab을 시각적으로 items로 설정
 	});
 	
+function getAsyncList(){
+	var tag="";
+	$.ajax({
+		url:"/review/asyncList",
+		type:"post",
+		data:{
+			owner_id: <%=owner.getOwner_id()%>
+		},
+		success:function(responseData){
+			alert("비동기로 날라온 배열의 크기: "+responseData.length)
+			
+			for(var i=0; i<responseData.length;i++){
+				var reivew = responseData[i];
+				tag+="<tr>";
+			    tag+="<td>"+reivew.item_id+"</td>";
+			    tag+="<td>"+reivew.comments+"</td>";
+			    tag+="<td>"+reivew.regdate+"</td>";
+			    tag += "<td><button onclick='modeChange(this)''>수정</button></td>"
+				tag += "<td><button>삭제</button></td>"
+			    tag+="</tr>";
+			   				
+			}
+		    $(".review-box").html(tag);
+		}
+		
+	})
+	
+}
+	
+	
 function order(){
 	if(confirm("주문하시겠습니까")){
 		
@@ -126,8 +165,24 @@ function order(){
 	}
 }
 
-function registReview(len){
+function showRegist(){
 	$(".regist-tr").show();
+}
+
+function registReview(){
+	var formData = $(".review-form").serialize();
+	console.log(formData);
+	$.ajax({
+		url:"/review/regist",
+		type:"post",
+		data:formData,
+		success:function(responseData){
+			alert(responseData.msg);
+			if(responseData.resultCode==1){
+				getAsyncList();
+			}
+		}
+	})
 }
 </script>
 <body>

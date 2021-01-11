@@ -4,7 +4,6 @@
 <%@page import="com.tsycsm.agileoffice.model.domain.Owner"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%
-	Owner owner = (Owner)session.getAttribute("owner");
 	List<Category> categoryList =(List)request.getAttribute("categoryList");
  
 %>

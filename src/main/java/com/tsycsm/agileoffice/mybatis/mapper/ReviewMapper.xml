@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Review">
+	<insert id="insert" parameterType="Review">
+		insert into review(review_id, owner_id, customer_id, comments, item_id)
+		values(seq_review.nextval, #{owner_id}, #{customer_id}, #{comments}, #{item_id})
+	</insert>
+	
+	<select id="selectAllByOwner" parameterType="int" resultType="Review">
+		select * from review where owner_id = #{owner_id} order by review_id desc
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
