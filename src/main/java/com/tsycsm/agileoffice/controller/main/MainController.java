@@ -44,14 +44,7 @@ public class MainController {
 	public Pager getPager(int curPage, int listSize) {
 		Pager pager = new Pager();
 		pager.init(curPage, listSize);
-		logger.debug("currentPage 农扁: "+pager.getCurrentPage()); 
-		logger.debug("totalRecord 农扁: "+pager.getTotalRecord()); 
-		logger.debug("totalPage 农扁: "+pager.getTotalPage()); 
-		logger.debug("blockSize 农扁: "+pager.getBlockSize()); 
-		logger.debug("firstPage 农扁: "+pager.getFirstPage()); 
-		logger.debug("lastPage 农扁: "+pager.getLastPage()); 
-		logger.debug("curPos 农扁: "+pager.getCurPos()); 
-		logger.debug("num 农扁: "+pager.getNum()); 
+	
 		return pager;
 	}
 	
