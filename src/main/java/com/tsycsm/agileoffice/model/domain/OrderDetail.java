@@ -9,4 +9,5 @@ public class OrderDetail {
 	private int item_id;
 	private int quantity;
 	private int price;
+	private String orderdate; 
 }

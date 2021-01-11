@@ -71,6 +71,11 @@ a{
 	width: 90%;
 	height: 100%;
 }
+
+h1, h3{
+	display: inline;
+}
+
 <%@ include file="/resources/css/customer/items.css" %>
 <%@ include file="/resources/css/customer/services.css" %>
 <%@ include file="/resources/css/customer/reviews.css" %>
@@ -135,12 +140,14 @@ a{
 				var tag="";
 				for(var i=0; i<pager.pageSize;i++){
 					if(pager.num < 1) break;
-					var reivew = reviewArray[pager.curPos++];
+					var review = reviewArray[pager.curPos++];
+					var item = review.item;
+					console.log(review);
 					tag+="<tr>";
 					tag+="<td>"+(pager.num--)+"</td>";
-					tag+="<td>상품명</td>";
-					tag+="<td>"+reivew.comments+"</td>";
-					tag+="<td>"+reivew.regdate+"</td>";
+					tag+="<td>"+item.item_name+"</td>";
+					tag+="<td>"+review.comments+"</td>";
+					tag+="<td>"+review.regdate+"</td>";
 					tag += "<td><button type='button' onclick='modeChange(this)'>수정</button></td>"
 					tag += "<td><button type='button' onclick='deleteComment(this)'>삭제</button></td>"
 					tag+="</tr>";
@@ -213,21 +220,30 @@ a{
 	function showRegist(){
 		$(".regist-tr").show();
 	}
+	
+	function hideRegist(){
+		$(".regist-tr").hide();
+		$(".comments").val("");
+	}
 
 	function registReview(){
 		var formData = $(".review-form").serialize();
-		console.log(formData);
-		$.ajax({
-			url:"/review/regist",
-			type:"post",
-			data:formData,
-			success:function(responseData){
-				alert(responseData.msg);
-				if(responseData.resultCode==1){
-					getAsyncList(1);
+		if($("select[name='item.item_id']").val() !=0){
+			$.ajax({
+				url:"/review/regist",
+				type:"post",
+				data:formData,
+				success:function(responseData){
+					alert(responseData.msg);
+					if(responseData.resultCode==1){
+						getAsyncList(1);
+						hideRegist();
+					}
 				}
-			}
-		})
+			})			
+		}else{
+			alert("상품을 선택하세요");
+		}
 	}
 	
 	

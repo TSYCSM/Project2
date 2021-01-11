@@ -28,11 +28,6 @@ public class ReviewController {
 	@PostMapping("/review/regist")
 	@ResponseBody
 	public MessageData reviewRegist(Review review) {
-		logger.debug("review의 owner_id: "+review.getOwner_id());
-		logger.debug("review의 customer_id: "+review.getCustomer_id());
-		logger.debug("review의 item_id: "+review.getItem_id());
-		logger.debug("review의 comments: "+review.getComments());
-		
 		reviewService.regist(review);
 		MessageData messageData = new MessageData();
 		messageData.setMsg("리뷰 등록 성공");
@@ -45,7 +40,7 @@ public class ReviewController {
 	@ResponseBody
 	public List<Review> asyncReviewList(int owner_id) {
 		List reviewList = reviewService.selectAllOwner(owner_id);
-	
+		
 		return reviewList;
 	}
 	

@@ -14,6 +14,8 @@ public class Item {
 	private String filename;
 	private int stock;
 	private String regdate;
+	
+	private int quantity;
 
 	private MultipartFile photo;
 	

@@ -7,7 +7,7 @@ public class Review {
 	private int review_id;
 	private int owner_id;
 	private int customer_id;
-	private int item_id;
 	private String comments;
 	private String regdate;
+	private Item item;
 }
