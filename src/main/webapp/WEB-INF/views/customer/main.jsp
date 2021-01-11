@@ -72,7 +72,7 @@ body {
 </style>
 <script type="text/javascript">
 $(function(){
-	getAsyncList();
+	pager(1, <%=itemList.size()%>)
 	
 });
 
@@ -116,7 +116,7 @@ $(function(){
 		document.getElementsByClassName("tab")[0].className += " active"; //inital tab을 시각적으로 items로 설정
 	});
 	
-function getAsyncList(){
+function getAsyncList(page, num, curPos, pageSize){
 	var tag="";
 	$.ajax({
 		url:"/review/asyncList",
@@ -126,10 +126,11 @@ function getAsyncList(){
 		},
 		success:function(responseData){
 			alert("비동기로 날라온 배열의 크기: "+responseData.length)
-			
-			for(var i=0; i<responseData.length;i++){
-				var reivew = responseData[i];
+			for(var i=0; i<pageSize;i++){
+				if(num < 1) break;
+				var reivew = responseData[curPos++];
 				tag+="<tr>";
+			    tag+="<td>"+(num--)+"</td>";
 			    tag+="<td>"+reivew.item_id+"</td>";
 			    tag+="<td>"+reivew.comments+"</td>";
 			    tag+="<td>"+reivew.regdate+"</td>";
@@ -144,8 +145,40 @@ function getAsyncList(){
 	})
 	
 }
+
+function getPager(page, size){
+	var tag="";
+	var num = 0;
+	var curPos =0;
+	$.ajax({
+		url: "/getPager",
+		type: "post",
+		data:{
+			curPage: page,
+			listSize : size
+		},
+		success: function(responseData){
+			alert("pager객체"+responseData.totalRecord);
+			getAsyncList(page, resoponseData.num, 
+					responseData.curPos, responseData.pageSize);
+			tag+="<tr>";
+			tag+="<td colspan='6' style='text-align:center'>";
+		  	tag+="<a href=\"javascript:alert('이전 페이지요청')\">◀</a>"
+		  	for(var i=responseData.firstPage; i<responseData.lastPage; i++){
+		  		if(i>responseData.totalPage) break;
+			  	tag+="<a href=\"javascript:alert('해당 페이지요청')\">"+i+"</a>"		  		
+		  	}
+		  	
+		  	tag+="<a href=\"javascript:alert('다음 페이지요청')\">▶</a>"
+
+		    tag+="</tr>";
+			$(".page-box").html(tag);
+		}
+	})
 	
 	
+}
+
 function order(){
 	if(confirm("주문하시겠습니까")){
 		
@@ -179,7 +212,7 @@ function registReview(){
 		success:function(responseData){
 			alert(responseData.msg);
 			if(responseData.resultCode==1){
-				getAsyncList();
+				pager(1, <%=itemList.size()%>);
 			}
 		}
 	})

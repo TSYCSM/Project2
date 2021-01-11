@@ -26,6 +26,16 @@ public class Pager {
 		num = totalRecord - curPos;
 	}
 	
+	public void init(int curPage, int listSize) {
+		totalRecord = listSize;
+		totalPage = (int)Math.ceil((float)totalRecord/pageSize);
+		currentPage = curPage;
+		firstPage = currentPage - (currentPage-1) % blockSize;
+		lastPage = firstPage + blockSize - 1;
+		curPos = (currentPage - 1) * pageSize;
+		num = totalRecord - curPos;
+	}
+	
 	public int getTotalRecord() {
 		return totalRecord;
 	}

@@ -57,6 +57,8 @@
 				<td><button>삭제</button></td>
 			</tr>
 			<%} %>
+			</table>
+			<table class="page-box">
 			<tr>
 				<td colspan="6" style="text-align:center">
 					<%if(pager.getFirstPage() >1){ %>
