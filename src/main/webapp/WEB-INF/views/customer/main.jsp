@@ -35,8 +35,13 @@ body {
 	background-color: #F2F2F2;
 }
 
-a{
+a {
 	text-decoration: none;
+	color: black;
+}
+a:hover {
+	text-decoration: underline;
+	color: black;
 }
 
 #tabs {
@@ -52,7 +57,7 @@ a{
 	font-size: 19px;
 	color: white;
 	width: 80px;
-	height: 33.33%;
+	height: 50%;
 	border: none;
 	text-align: center;
 	transition: 0.3s;
@@ -73,11 +78,10 @@ a{
 }
 
 h1, h3{
-	display: inline;
+	padding: 30px;
 }
 
 <%@ include file="/resources/css/customer/items.css" %>
-<%@ include file="/resources/css/customer/services.css" %>
 <%@ include file="/resources/css/customer/reviews.css" %>
 </style>
 <script type="text/javascript">
@@ -89,40 +93,74 @@ h1, h3{
 
 
 	<%@ include file="/resources/js/customer/items.js" %>
-	<%@ include file="/resources/js/customer/services.js" %>
 	<%-- <%@ include file="/resources/js/client/customer/reviews.js" %> --%>
 	//----reviews.js에서 encoding 문제가 있어 임시로 reviews.js의 내용을 붙여넣는다
 	function modeChange(param) {
 
-		var contentTd = param.parentNode.parentNode.childNodes[5];
+		var contentTd = param.parentNode.parentNode.childNodes[2];
 		var contentTagName = contentTd.childNodes[0].tagName;
-		var buttonTd = param.parentNode.parentNode.childNodes[9];
-		
-		console.log("contentTd : ", contentTd);
+		var buttonTd = param.parentNode.parentNode.childNodes[4];
 		
 		if(contentTagName == "P") {  //보기 모드일 때, 수정 버튼을 누르면...
 			var contentText = contentTd.childNodes[0].innerText;
 			contentTd.innerHTML = "<textArea style=\"width:100%;font-size:16px\">" + contentText + "</textArea>";
-			buttonTd.childNodes[0].innerText = "확인";
-			
-			console.log("P");
-			
-			
+			buttonTd.childNodes[0].style.display = "none";
+			buttonTd.childNodes[1].style.display = "block";
 		} else if(contentTagName == "TEXTAREA") {  //수정 모드일 때, 확인 버튼을 누르면...
 			var contentText = contentTd.childNodes[0].value;
-			console.log(contentText);
 			contentTd.innerHTML = "<p>" + contentText + "</p>";
-			buttonTd.childNodes[0].innerText = "수정";
+			buttonTd.childNodes[0].style.display = "block";
+			buttonTd.childNodes[1].style.display = "none";
 			
+			var review_id = buttonTd.childNodes[2].value;
+			var comments = contentTd.childNodes[0].innerText;
 			
-			console.log("TextArea");
+			console.log(review_id);
+			console.log(comments);
 			
+			updateReview(review_id, comments);
+			
+			getAsyncList(1);
 		}
 	}	
 	
 	
-	function deleteComment(param) {
+	function updateReview(review_id, comments) {
+		$.ajax({
+			url: "/review/update",
+			data: {
+				review_id: review_id,
+				comments: comments
+			},
+			type: "POST",
+			success: function(messageData) {
+				if(messageData.resultCode == 1) {
+					alert(messageData.msg);
+					getAsyncList(1);
+				} else {
+					alert(messageData.msg);
+				}
+			}
+			
+		});
+	}
+	
+	function deleteReview(param) {
+		var review_id = param.getElementsByTagName("input")[0].value;
 		
+		$.ajax({
+			url: "/review/delete",
+			data: {review_id: review_id},
+			type: "GET",
+			success: function(messageData) {
+				if(messageData.resultCode == 1) {
+					alert(messageData.msg);
+					getAsyncList(1);
+				} else {
+					alert(messageData.msg);
+				}
+			}
+		});
 		
 	}
 	
@@ -142,15 +180,18 @@ h1, h3{
 					if(pager.num < 1) break;
 					var review = reviewArray[pager.curPos++];
 					var item = review.item;
-					console.log(review);
-					tag+="<tr>";
-					tag+="<td>"+(pager.num--)+"</td>";
-					tag+="<td>"+item.item_name+"</td>";
-					tag+="<td>"+review.comments+"</td>";
-					tag+="<td>"+review.regdate+"</td>";
-					tag += "<td><button type='button' onclick='modeChange(this)'>수정</button></td>"
-					tag += "<td><button type='button' onclick='deleteComment(this)'>삭제</button></td>"
-					tag+="</tr>";
+					tag += "<tr>";
+					tag += "<td>"+(pager.num--)+"</td>";
+					tag += "<td>"+item.item_name+"</td>";
+					tag += "<td><p>"+review.comments+"</p></td>";
+					tag += "<td>"+review.regdate+"</td>";
+					tag += "<td>";
+					tag += "<button type='button' onclick='modeChange(this)'>수정</button>";
+					tag += "<button type='button' onclick='modeChange(this)' style='display:none'>확인</button>";
+					tag += "<input type='hidden' value='" + review.review_id + "'/>";
+					tag += "</td>";
+					tag += "<td><button type='button' onclick='deleteReview(this)'>삭제<input type='hidden' value='"+review.review_id+"'/></button></td>"
+					tag += "</tr>";
 								   
 				}
 				$(".review-box").html(tag);
@@ -162,7 +203,7 @@ h1, h3{
 
 				for(var i=pager.firstPage; i<=pager.lastPage;i++){
 					if(i>pager.totalPage) break;
-					tag += "<a href=\"javascript:getAsyncList("+i+")\"> ["+i+"]</a>"
+					tag += "<a href=\"javascript:getAsyncList("+i+")\"> ["+i+"] </a>"
 				}
 				
 				tag += "<a href=\"#\">▶</a>";
@@ -191,7 +232,6 @@ h1, h3{
 			}
 			
 		})
-		console.log("result: "+result);
 		return result;
 	}
 
@@ -202,7 +242,6 @@ h1, h3{
 		if(confirm("주문하시겠습니까")){
 			
 			var formData = $(".order-form").serialize()
-			console.log(formData)
 			$.ajax({
 				url: "/order/orderRegist",
 				method: "post",
@@ -248,10 +287,6 @@ h1, h3{
 	
 	
 	
-	
-	
-	
-	
 	//----Tab 전환 function----
 	function openTab(evt, tabName) {
 		var i, tabcontent, tab;
@@ -276,11 +311,9 @@ h1, h3{
 <body>
 	<div id="tabs">
 		<button class="tab" onclick="openTab(event, 'items')">상품</button>
-		<button class="tab" onclick="openTab(event, 'services')">서비스</button>
 		<button class="tab" onclick="openTab(event, 'reviews')">리뷰</button>
 	</div>
 	<%@ include file="./items.jsp"%>
-	<%@ include file="./services.jsp"%>
 	<%@ include file="./reviews.jsp"%>
 </body>
 </html>

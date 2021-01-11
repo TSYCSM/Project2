@@ -107,8 +107,8 @@ create table order_summary(
  , owner_id number
  , customer_id number
  , orderdate date default sysdate
- , constraint fk_owner_order_summary
  , total_price number
+ , constraint fk_owner_order_summary
    foreign key(owner_id) references owner(owner_id)
    		on delete cascade
 );

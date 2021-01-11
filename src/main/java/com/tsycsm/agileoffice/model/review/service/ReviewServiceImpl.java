@@ -27,20 +27,18 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
-	public void regist(Review reivew) throws AsyncDMLException{
-		reviewDAO.insert(reivew);
+	public void regist(Review review) throws AsyncDMLException{
+		reviewDAO.insert(review);
 	}
 
 	@Override
-	public void update(Review reivew) {
-		// TODO Auto-generated method stub
-		
+	public void update(Review review) throws AsyncDMLException {
+		reviewDAO.update(review);
 	}
 
 	@Override
-	public void delete(Review reivew) {
-		// TODO Auto-generated method stub
-		
+	public void delete(int review_id) throws AsyncDMLException {
+		reviewDAO.delete(review_id);
 	}
 
 }

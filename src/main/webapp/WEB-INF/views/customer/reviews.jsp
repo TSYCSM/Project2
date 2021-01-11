@@ -6,19 +6,19 @@
 <div id="reviews" class="tabcontent">
 	<div>
 		<h1>리뷰</h1>
-			<%if(customer != null){ %>
-				<button type="button" class="showRegist_btn" onClick="showRegist()">등록</button>
-			<%}else{ %>
-				<h3>맴버쉽 회원만 댓글을 쓸 수 있습니다.</h3>
-			<%} %>
+		<%if(customer != null){ %>
+			<button class="regist-area" type="button" class="showRegist_btn" onClick="showRegist()">등록</button>
+		<%}else{ %>
+			<h3 class="regist-area">맴버쉽 회원만 댓글을 쓸 수 있습니다.</h3>
+		<%} %>
 	</div>
 	
 	<form class="review-form">
 		<table id="reviewTable">
 			<tr class="first-tr">
 				<th>No</th>
-				<th>상품명</th>
-				<th>제목</th>
+				<th>상품</th>
+				<th>리뷰</th>
 				<th>작성일</th>
 				<th></th>
 				<th></th>
@@ -27,19 +27,23 @@
 				<td></td>
 				<td>
 					<select name="item.item_id">
-						<option value="0">선택하세요</option>
+						<option value="0">상품 선택</option>
 						<%for(int i =0; i<itemList.size();i++){ %>
 							<%Item item = itemList.get(i); %>
 							<option value="<%=item.getItem_id()%>"><%=item.getItem_name() %></option>
 						<%} %>
 					</select>
 				</td>
-				
-				<td colspan='4'>
+				<td>
 					<input type="hidden" name="owner_id" value="<%=owner.getOwner_id()%>">
 					<input type="hidden" name="customer_id" <%if(customer !=null){ %>value="<%=customer.getCustomer_id()%><%}%>">
-					<input type='text' name='comments' class="comments" width='60%'>
-					<button type="button" class="regist_btn" onClick="registReview()">등록</button>
+					<input type='text' name='comments' class="comments" width="100%">
+				</td>
+				<td></td>
+				<td>
+					<button type="button" class="regist_btn" onClick="registReview()">확인</button>
+				</td>
+				<td>
 					<button type="button" class="hide_btn" onClick="hideRegist()">X</button>
 				</td>
 			</tr>
@@ -49,7 +53,7 @@
 	
 		</table>
 			
-		<table width= "90%" class="page-box">
+		<table width="100%" class="page-box">
 		
 		</table>
 	</form>
