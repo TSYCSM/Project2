@@ -33,7 +33,6 @@ public class MybatisCategoryDAO implements CategoryDAO{
 	@Override
 	public void insert(Category category) throws DMLException{
 		int result = sqlSessionTemplate.insert("Category.insert", category);
-		result = 0;
 		if(result == 0) {
 			throw new DMLException("카테고리 등록 실패");
 		}
@@ -43,7 +42,6 @@ public class MybatisCategoryDAO implements CategoryDAO{
 	@Override
 	public void delete(int category_id) throws DMLException{
 		int result = sqlSessionTemplate.delete("Category.delete", category_id);
-		result = 0;
 		if(result == 0) {
 			throw new DMLException("카테고리 삭제 실패");
 		}
@@ -52,9 +50,8 @@ public class MybatisCategoryDAO implements CategoryDAO{
 	@Override
 	public void update(Category category) throws AsyncDMLException{
 		int result = sqlSessionTemplate.update("Category.update", category);
-		result = 0;
 		if(result == 0) {
-			throw new DMLException("카테고리 수정 실패");
+			throw new AsyncDMLException("카테고리 정보 수정 실패");
 		}
 		
 	}

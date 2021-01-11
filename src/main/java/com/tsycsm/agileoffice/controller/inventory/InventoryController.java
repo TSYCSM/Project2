@@ -105,18 +105,16 @@ public class InventoryController implements ServletContextAware {
 		return "redirect:/owner/inventory/category/list";
 	}
 
-	@RequestMapping(value = "/owner/inventory/category/update", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
+	@RequestMapping(value = "/owner/inventory/category/update", method = RequestMethod.POST)
 	@ResponseBody
-	public String updateCategory(Category category) {
-
+	public MessageData updateCategory(Category category) {
 		categoryService.update(category);
 
-		StringBuffer sb = new StringBuffer();
-		sb.append("{");
-		sb.append("\"result\": 1,");
-		sb.append("\"msg\": \"카테고리 수정 성공\"");
-		sb.append("}");
-		return sb.toString();
+		MessageData messageData = new MessageData();
+		messageData.setMsg("카테고리 정보 수정 성공");
+		messageData.setResultCode(1);
+	
+		return messageData;
 	}
 	
 	
@@ -208,14 +206,19 @@ public class InventoryController implements ServletContextAware {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/owner/inventory/item/update", method = RequestMethod.POST)
-	public String updateItem(Item item) {
+	@RequestMapping(value="/owner/inventory/item/update", method=RequestMethod.POST)
+	@ResponseBody
+	public MessageData updateItem(Item item) {
 		itemService.update(item, fileManager);
 
-		return "redirect:/owner/inventory/item/detail?item_id=" + item.getItem_id();
+		MessageData messageData = new MessageData();
+		messageData.setMsg("상품 정보 수정 완료되었습니다.");
+		messageData.setResultCode(1);
+	
+		return messageData;
 	}
 	
-	@RequestMapping(value = "/owner/inventory/item/del", method = RequestMethod.POST)
+	@RequestMapping(value="/owner/inventory/item/del", method=RequestMethod.POST)
 	public String deleteItem(Item item) {
 		itemService.delete(item, fileManager);
 		return "redirect:/owner/inventory/item/list";

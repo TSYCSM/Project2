@@ -62,7 +62,9 @@ public class ItemServiceImpl implements ItemService {
 	public void update(Item item, FileManager fileManager) throws AsyncDMLException {
 		MultipartFile photo = item.getPhoto();
 
-		if(photo.getOriginalFilename() == "") {
+		if(photo == null) {
+			itemDAO.update(item);
+		} else if(photo.getOriginalFilename() == "") {
 			itemDAO.update(item);
 		} else {
 			String ext = fileManager.getExtend(photo.getOriginalFilename());

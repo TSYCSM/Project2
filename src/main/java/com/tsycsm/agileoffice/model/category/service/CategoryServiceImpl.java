@@ -47,7 +47,6 @@ public class CategoryServiceImpl implements CategoryService{
 	@Override
 	public void update(Category category) throws AsyncDMLException{
 		categoryDAO.update(category);
-		
 	}
 
 }

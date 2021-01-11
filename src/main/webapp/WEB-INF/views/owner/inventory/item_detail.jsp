@@ -25,31 +25,49 @@
 }
 </style>
 <script>
-	
+	$(function(){
+		$("#bt_update").click(function(){
+			update();
+		});	
+	});
+
 	function update() {
-		$("form").attr({
-			action:"/owner/inventory/item/update",
-			enctype:"multipart/form-data",
-			method:"post"
-		});
-		$("form").submit();
-	}
+		var formData = $("#item-form").serialize();
+		if(confirm("수정하시겠습니까")){
+			$.ajax({
+				url: "/owner/inventory/item/update",
+				type: "post",
+				data: formData,
+				success: function(responseData){
+					if(responseData.resultCode==1){
+						alert(responseData.msg);
+						location.href="/owner/inventory/item/detail?item_id="+<%=item.getItem_id()%>;
+					}else{
+						alert(responseData.msg);					
+					}
+				}
+			});
+		}	
+	}		
+		
 
 	function del() {
-		$("form").attr({
-			action:"/owner/inventory/item/del",
-			enctype:"multipart/form-data",
-			method:"post"
-		});
-		$("form").submit();
+		if(confirm("삭제하시겠습니까?")){
+			$("form").attr({
+				action:"/owner/inventory/item/del",
+				enctype:"multipart/form-data",
+				method:"post"
+			});
+			$("form").submit();
+		}
 	}
 
 </script>
 </head>
 <%@ include file="../inc/common.jsp" %>
 <div class="container">
-	<form>
-		<input type="hidden" name="owner_id" value="1"/>
+	<form id="item-form">
+		<input type="hidden" name="owner_id" value="<%=item.getOwner_id()%>"/>
 		<input type="hidden" name="item_id" value="<%=item.getItem_id()%>"/>
 		<input type="hidden" name="filename" value="<%=item.getFilename()%>"/>
 		<div class="outerbox">
@@ -94,7 +112,7 @@
 		</div>
 		<div>
 			<div class="buttonbox">
-				<input onClick="update()" type="button" value="수정">
+				<input id="bt_update" type="button" value="수정">
 				<input onClick="del()" type="button" value="삭제">
 			</div>
 		</div>
