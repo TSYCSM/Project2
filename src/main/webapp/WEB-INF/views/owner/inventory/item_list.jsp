@@ -97,7 +97,7 @@
 							var tag = "";
 							tag += "<tr>";
 							tag += "<td>1</td>";
-							tag += "<td>" + data[i].item_name + "</td>";
+							tag += "<td><a href='/owner/inventory/item/detail?item_id=" + data[i].item_id + "'>" + data[i].item_name + "</a></td>";
 							tag += "<td>" + data[i].price + "</td>";
 							tag += "<td>" + data[i].stock + "</td>";
 							tag += "<td>" + data[i].regdate + "</td>";

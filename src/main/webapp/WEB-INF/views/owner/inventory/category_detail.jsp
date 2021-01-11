@@ -39,19 +39,18 @@ function del(){
 
 
 function update(){
-	var formData = $("#category_form").serialize();//전부 문자열화 시킨다.
+	var formData = $("#category_form").serialize();
 	if(confirm("수정하시겠습니까")){
 		$.ajax({
 			url: "/owner/inventory/category/update",
 			type: "post",
 			data: formData,
 			success: function(responseData){
-				var json = JSON.parse(responseData);
-				if(json.result==1){
-					alert(json.msg);
+				if(responseData.resultCode==1){
+					alert(responseData.msg);
 					location.href="/owner/inventory/category/detail?category_id="+<%=category.getCategory_id()%>;
 				}else{
-					alert(json.msg);					
+					alert(responseData.msg);					
 				}
 			}
 		});
@@ -61,7 +60,6 @@ function update(){
 </head>
 <%@ include file="../inc/common.jsp"%>
 
-			category add <br><br>
 			<div class="container">
 				<form id="category_form">
 					<div class="outerbox">

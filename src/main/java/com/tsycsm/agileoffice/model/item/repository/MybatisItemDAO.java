@@ -47,7 +47,6 @@ public class MybatisItemDAO implements ItemDAO{
 		} else {
 			result = sqlSessionTemplate.insert("Item.insertWithoutCategoryId", item);
 		}
-		result = 0;
 		if(result == 0) {
 			throw new DMLException("상품 등록에 실패하였습니다.");
 		}
@@ -68,9 +67,8 @@ public class MybatisItemDAO implements ItemDAO{
 		} else {
 			result = sqlSessionTemplate.update("Item.updateNullifingCategoryId", item);
 		}
-		result = 0;
 		if(result == 0) {
-			throw new DMLException("상품 정보 수정에 실패하였습니다.");
+			throw new AsyncDMLException("상품 정보 수정에 실패하였습니다.");
 		}
 	}
 
@@ -78,7 +76,6 @@ public class MybatisItemDAO implements ItemDAO{
 	@Override
 	public void delete(int item_id) throws DMLException {
 		int result = sqlSessionTemplate.delete("Item.delete", item_id);
-		result = 0;
 		if(result == 0) {
 			throw new DMLException("상품 삭제에 실패하였습니다");
 		}
