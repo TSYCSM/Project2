@@ -76,11 +76,11 @@ a{
 <%@ include file="/resources/css/customer/reviews.css" %>
 </style>
 <script type="text/javascript">
-var review_len = <%=reviewList.size()%>;
-$(function(){
-	getAsyncList(1);
-	
-});
+	var review_len = <%=reviewList.size()%>;
+	$(function(){
+		getAsyncList(1);
+		
+	});
 
 
 	<%@ include file="/resources/js/customer/items.js" %>
@@ -88,20 +88,147 @@ $(function(){
 	<%-- <%@ include file="/resources/js/client/customer/reviews.js" %> --%>
 	//----reviews.js에서 encoding 문제가 있어 임시로 reviews.js의 내용을 붙여넣는다
 	function modeChange(param) {
+
 		var contentTd = param.parentNode.parentNode.childNodes[5];
 		var contentTagName = contentTd.childNodes[0].tagName;
 		var buttonTd = param.parentNode.parentNode.childNodes[9];
+		
+		console.log("contentTd : ", contentTd);
+		
 		if(contentTagName == "P") {  //보기 모드일 때, 수정 버튼을 누르면...
 			var contentText = contentTd.childNodes[0].innerText;
 			contentTd.innerHTML = "<textArea style=\"width:100%;font-size:16px\">" + contentText + "</textArea>";
 			buttonTd.childNodes[0].innerText = "확인";
+			
+			console.log("P");
+			
+			
 		} else if(contentTagName == "TEXTAREA") {  //수정 모드일 때, 확인 버튼을 누르면...
 			var contentText = contentTd.childNodes[0].value;
 			console.log(contentText);
 			contentTd.innerHTML = "<p>" + contentText + "</p>";
 			buttonTd.childNodes[0].innerText = "수정";
+			
+			
+			console.log("TextArea");
+			
 		}
 	}	
+	
+	function getAsyncList(cPage){
+		
+		$.ajax({
+			url:"/review/asyncList",
+			type:"post",
+			data:{
+				owner_id: <%=owner.getOwner_id()%>
+			},
+			success:function(reviewArray){
+				review_len =reviewArray.length;
+				var pager = getPager(cPage, review_len);
+				var tag="";
+				for(var i=0; i<pager.pageSize;i++){
+					if(pager.num < 1) break;
+					var reivew = reviewArray[pager.curPos++];
+					tag+="<tr>";
+					tag+="<td>"+(pager.num--)+"</td>";
+					tag+="<td>상품명</td>";
+					tag+="<td>"+reivew.comments+"</td>";
+					tag+="<td>"+reivew.regdate+"</td>";
+					tag += "<td><button type='button' onclick='modeChange(this)'>수정</button></td>"
+					tag += "<td><button type='button'>삭제</button></td>"
+					tag+="</tr>";
+								   
+				}
+				$(".review-box").html(tag);
+				
+				tag = "";
+				tag += "<tr>";
+				tag += "<td style=\"text-align:center\">";
+				tag += "<a href=\"#\">◀</a>";
+
+				for(var i=pager.firstPage; i<=pager.lastPage;i++){
+					if(i>pager.totalPage) break;
+					tag += "<a href=\"javascript:getAsyncList("+i+")\"> ["+i+"]</a>"
+				}
+				
+				tag += "<a href=\"#\">▶</a>";
+				
+				tag += "</td>";
+				tag += "</tr>";
+				
+				$(".page-box").html(tag);
+			}
+		})
+	}
+		
+	function getPager(cPage, size){
+		var result;
+		$.ajax({
+			url: "/getPager",
+			dataType: "json",
+			async: false,
+			type: "post",
+			data:{
+				curPage: cPage,
+				listSize: size
+			},
+			success:function(pager){
+				result = pager;
+			}
+			
+		})
+		console.log("result: "+result);
+		return result;
+	}
+
+
+
+
+	function order(){
+		if(confirm("주문하시겠습니까")){
+			
+			var formData = $(".order-form").serialize()
+			console.log(formData)
+			$.ajax({
+				url: "/order/orderRegist",
+				method: "post",
+				data: formData,
+				success : function(responseData){
+					alert(responseData.msg);
+					if(responseData.resultCode==1){
+						location.href= responseData.url;					
+					}
+				}
+			})
+		}
+	}
+
+	function showRegist(){
+		$(".regist-tr").show();
+	}
+
+	function registReview(){
+		var formData = $(".review-form").serialize();
+		console.log(formData);
+		$.ajax({
+			url:"/review/regist",
+			type:"post",
+			data:formData,
+			success:function(responseData){
+				alert(responseData.msg);
+				if(responseData.resultCode==1){
+					getAsyncList(1);
+				}
+			}
+		})
+	}
+	
+	
+	
+	
+	
+	
 	
 	//----Tab 전환 function----
 	function openTab(evt, tabName) {
@@ -117,119 +244,12 @@ $(function(){
 		document.getElementById(tabName).style.display = "block";
 		evt.currentTarget.className += " active";
 	}
+
 	window.addEventListener("load", function() {
 		openTab(event, 'items'); //initial tab울 items로 설정
 		document.getElementsByClassName("tab")[0].className += " active"; //inital tab을 시각적으로 items로 설정
 	});
-	
-function getAsyncList(cPage){
-	
-	$.ajax({
-		url:"/review/asyncList",
-		type:"post",
-		data:{
-			owner_id: <%=owner.getOwner_id()%>
-		},
-		success:function(reviewArray){
-			review_len =reviewArray.length;
-			var pager = getPager(cPage, review_len);
-			var tag="";
-			for(var i=0; i<pager.pageSize;i++){
-				if(pager.num < 1) break;
-				var reivew = reviewArray[pager.curPos++];
-				tag+="<tr>";
-			    tag+="<td>"+(pager.num--)+"</td>";
-			    tag+="<td>상품명</td>";
-			    tag+="<td>"+reivew.comments+"</td>";
-			    tag+="<td>"+reivew.regdate+"</td>";
-			    tag += "<td><button onclick='modeChange(this)''>수정</button></td>"
-				tag += "<td><button>삭제</button></td>"
-			    tag+="</tr>";
-			   				
-			}
-		    $(".review-box").html(tag);
-		    
-			tag = "";
-			tag += "<tr>";
-			tag += "<td style=\"text-align:center\">";
-			tag += "<a href=\"#\">◀</a>";
-
-			for(var i=pager.firstPage; i<=pager.lastPage;i++){
-				if(i>pager.totalPage) break;
-				tag += "<a href=\"javascript:getAsyncList("+i+")\"> ["+i+"]</a>"
-			}
-			
-			tag += "<a href=\"#\">▶</a>";
-			
-			tag += "</td>";
-			tag += "</tr>";
-			
-		    $(".page-box").html(tag);
-		}
-	})
-}
-	
-function getPager(cPage, size){
-	var result;
-	$.ajax({
-		url: "/getPager",
-		dataType: "json",
-		async: false,
-		type: "post",
-		data:{
-			curPage: cPage,
-			listSize: size
-		},
-		success:function(pager){
-			result = pager;
-		}
 		
-	})
-	console.log("result: "+result);
-	return result;
-}
-
-
-
-
-function order(){
-	if(confirm("주문하시겠습니까")){
-		
-		var formData = $(".order-form").serialize()
-		console.log(formData)
-		$.ajax({
-			url: "/order/orderRegist",
-			method: "post",
-			data: formData,
-			success : function(responseData){
-				alert(responseData.msg);
-				if(responseData.resultCode==1){
-					location.href= responseData.url;					
-				}
-			}
-		})
-	}
-}
-
-function showRegist(){
-	$(".regist-tr").show();
-}
-
-function registReview(){
-	var formData = $(".review-form").serialize();
-	console.log(formData);
-	$.ajax({
-		url:"/review/regist",
-		type:"post",
-		data:formData,
-		success:function(responseData){
-			alert(responseData.msg);
-			if(responseData.resultCode==1){
-				getAsyncList(1);
-			}
-		}
-	})
-}
 </script>
 <body>
 	<div id="tabs">
