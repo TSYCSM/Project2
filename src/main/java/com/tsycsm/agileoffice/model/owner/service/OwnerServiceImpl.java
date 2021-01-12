@@ -27,8 +27,7 @@ public class OwnerServiceImpl implements OwnerService{
 	
 	@Override
 	public List selectAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return ownerDAO.selectAll();
 	}
 
 	@Override

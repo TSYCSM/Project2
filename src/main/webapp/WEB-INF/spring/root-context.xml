@@ -26,7 +26,6 @@
 		p:dataSource-ref="dataSource"/>
 
 	<!-- Mybatis Spring -->	
-	 
 	<bean id="sqlSessionFactoryBean" 
 		class="org.mybatis.spring.SqlSessionFactoryBean"
 		p:dataSource-ref="dataSource"
