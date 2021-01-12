@@ -3,7 +3,7 @@
 <mapper namespace="Owner">
 
 	<select id="selectAll" resultType="Owner">
-		select * from owner desc
+		select * from owner order by owner_id desc
 	</select>
 
 	<insert id="insert" parameterType="Owner">

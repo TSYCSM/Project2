@@ -16,6 +16,7 @@ public class MybatisItemDAO implements ItemDAO{
 	private SqlSessionTemplate sqlSessionTemplate;
 	
 	
+	@Override
 	public List<Item> selectByOwnerId(int owner_id) {
 		return sqlSessionTemplate.selectList("Item.selectByOwnerId", owner_id);
 	}
