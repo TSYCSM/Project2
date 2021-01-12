@@ -40,13 +40,15 @@
 	
 	function nameCheck() {
 		var item_name = $("#item_name").val();
+		var owner_id = $("input[name='owner_id']").val();
 		
 		if(item_name.length > 0) {
 			$.ajax({
 				url:"/owner/inventory/item/nameCheck",
 				type: "POST",
 				data: {
-					item_name: item_name
+					item_name: item_name,
+					owner_id: owner_id
 				},
 				success: function(responseData) {
 					if(responseData.resultCode == 1) {

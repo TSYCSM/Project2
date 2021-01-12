@@ -59,7 +59,7 @@ public class AdminController {
 
 	@RequestMapping(value="/admin/owner/detail", method=RequestMethod.GET)
 	public ModelAndView viewOwnerDetail(int owner_id) {
-		List<Item> itemList = itemService.selectByOwnerId(owner_id);
+		List<Item> itemList = itemService.selectAllJoinCategory(owner_id);
 		List<Category> categoryList = categoryService.selectByOwner(owner_id);
 		int customer_amount = customerService.getTotalNumberOfCutomer(owner_id);
 
@@ -76,7 +76,7 @@ public class AdminController {
 	@RequestMapping(value="/admin/owner/detail/item/list", method=RequestMethod.GET, produces="application/text;charset=utf-8")
 	@ResponseBody
 	public String viewItemDetail(int item_id) {
-		Item item = itemService.select(item_id);
+		Item item = itemService.selectJoinCategory(item_id);
 
 		StringBuffer sb = new StringBuffer();
 		sb.append("{");

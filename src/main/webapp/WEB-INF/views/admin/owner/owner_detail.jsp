@@ -67,7 +67,13 @@ int customer_amount = (Integer)request.getAttribute("customer_amount");
 						<tr>
 							<td>No</td>
 							<td><a href="javascript:getItemDetail(<%=item.getItem_id() %>) "><%=item.getItem_name()%></a></td>
-							<td><%=item.getCategory_id()%></td>
+							<td>
+							<%if(item.getCategory() != null) { %>
+								<%=item.getCategory().getCategory_name() %>
+							<%} else { %>
+								카테고리 없음
+							<%} %>
+							</td>
 							<td><%=item.getStock()%></td>
 							<td><%=item.getRegdate()%></td>
 						</tr>

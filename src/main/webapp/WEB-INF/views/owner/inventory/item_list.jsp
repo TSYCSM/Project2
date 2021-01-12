@@ -47,7 +47,7 @@
 		%>
 		<%for(int i=0; i<pager.getPageSize(); i++){ %>
 		<%if(num < 1) break; %>
-		<%Item item = itemList.get(i); %>
+		<%Item item = itemList.get(curPos++); %>
 		<tr>
 			<td><%=num-- %></td>
 			<td><a href="/owner/inventory/item/detail?item_id=<%=item.getItem_id()%>"><%=item.getItem_name() %></a></td>

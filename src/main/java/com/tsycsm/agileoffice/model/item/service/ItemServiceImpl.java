@@ -26,17 +26,22 @@ public class ItemServiceImpl implements ItemService {
 	}
 	
 	@Override
-	public Item duplicationCheck(String item_name) throws NameDuplicatedException {
-		Item item = itemDAO.selectByName(item_name);
-		if(item != null) {
+	public Item duplicationCheck(Item item) throws NameDuplicatedException {
+		Item item_result = itemDAO.selectByNameInOwner(item);
+		if(item_result != null) {
 			throw new NameDuplicatedException("상품명(" + item.getItem_name() + ")이 중복됩니다.");
 		}
-		return item;
+		return item_result;
 	}
 	
 	@Override
 	public Item selectJoinCategory(int item_id) {
 		return itemDAO.selectJoinCategory(item_id);
+	}
+
+	@Override
+	public List<Item> selectAllJoinCategory(int owner_id) {
+		return itemDAO.selectAllJoinCategory(owner_id);
 	}
 
 	@Override

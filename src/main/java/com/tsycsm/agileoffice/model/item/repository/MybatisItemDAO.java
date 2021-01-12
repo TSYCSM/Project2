@@ -61,11 +61,14 @@ public class MybatisItemDAO implements ItemDAO{
 	@Override
 	public Item selectJoinCategory(int item_id) {
 		Item item = sqlSessionTemplate.selectOne("Item.selectJoinCategory", item_id);
-		
-		System.out.println(item);
 
 		return item;
 	}	
+	
+	@Override
+	public List<Item> selectAllJoinCategory(int owner_id) {
+		return sqlSessionTemplate.selectList("Item.selectAllJoinCategory", owner_id);
+	}
 
 
 	@Override
@@ -102,8 +105,10 @@ public class MybatisItemDAO implements ItemDAO{
 
 
 	@Override
-	public Item selectByName(String item_name) {
-		return sqlSessionTemplate.selectOne("Item.selectByName", item_name);
+	public Item selectByNameInOwner(Item item) {
+		Item item_result = sqlSessionTemplate.selectOne("Item.selectByNameInOwner", item);
+		System.out.println("simin test" + item_result);
+		return item_result;
 	}
 
 	

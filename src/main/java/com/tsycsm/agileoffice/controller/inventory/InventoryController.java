@@ -176,10 +176,15 @@ public class InventoryController implements ServletContextAware {
 		return "redirect:/owner/inventory/item/list";
 	}
 	
+	
+	
 	@RequestMapping(value = "/owner/inventory/item/nameCheck", method = RequestMethod.POST)
 	@ResponseBody
-	public MessageData checkItemName(String item_name) {
-		itemService.duplicationCheck(item_name);
+	public MessageData checkItemName(Item item) {
+		System.out.println("simin owner_id : " + item.getOwner_id());
+		System.out.println("simin item_name : " + item.getItem_name());
+	
+		itemService.duplicationCheck(item);
 	
 		MessageData messageData = new MessageData();
 		messageData.setMsg("가능한 상품 이름입니다.");

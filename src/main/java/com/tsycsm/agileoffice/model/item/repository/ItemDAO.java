@@ -9,8 +9,9 @@ import com.tsycsm.agileoffice.model.domain.Item;
 @Repository
 public interface ItemDAO {
 	public Item select(int item_id);
-	public Item selectByName(String item_name);
+	public Item selectByNameInOwner(Item item);
 	public Item selectJoinCategory(int item_id);
+	public List<Item> selectAllJoinCategory(int owner_id);
 	public List selectByOwnerId(int owner_id);
 	public List selectByCategoryId(Item item);
 	public void insert(Item item);

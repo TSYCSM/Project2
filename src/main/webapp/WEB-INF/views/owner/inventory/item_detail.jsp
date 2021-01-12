@@ -61,6 +61,33 @@
 			$("form").submit();
 		}
 	}
+	
+	function nameCheck() {
+		var item_name = $("#item_name").val();
+		var owner_id = $("input[name='owner_id']").val();
+		
+		if(item_name.length > 0) {
+			$.ajax({
+				url:"/owner/inventory/item/nameCheck",
+				type: "POST",
+				data: {
+					item_name: item_name,
+					owner_id: owner_id
+				},
+				success: function(responseData) {
+					if(responseData.resultCode == 1) {
+						alert(responseData.msg);
+					} else {
+						alert(responseData.msg);				
+					}
+				}
+			});
+			nameCheckFlag = true;
+		} else {
+			alert("상품명을 입력해주세요.");
+			nameCheckFlag = false;
+		}
+	}
 
 </script>
 </head>
@@ -73,7 +100,8 @@
 		<div class="outerbox">
 			<label for="fname">상품이름</label>
 			<div class="box">
-				<input type="text" id="fname" name="item_name" value="<%=item.getItem_name() %>">
+				<input type="text" id="item_name" name="item_name" value="<%=item.getItem_name() %>">
+				<input type="button" value="중복 확인" onClick="nameCheck()">
 			</div>
 		</div>
 		<div class="outerbox">
