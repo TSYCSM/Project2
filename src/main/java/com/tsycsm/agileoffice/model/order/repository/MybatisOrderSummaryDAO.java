@@ -17,7 +17,12 @@ public class MybatisOrderSummaryDAO implements OrderSummaryDAO{
 	
 	@Override
 	public List selectAllByOwner(int owner_id) {
-		return sqlSessionTemplate.selectList("OrderSummary.selectAllByOwner", owner_id);
+		return sqlSessionTemplate.selectList("OrderSummary.selectJoinCustomer", owner_id);
+	}
+	
+	@Override
+	public List selectAllByOwnerWithDate(int owner_id) {
+		return sqlSessionTemplate.selectList("OrderSummary.selectAllByOwnerWithDate", owner_id);
 	}
 
 	@Override
@@ -28,7 +33,7 @@ public class MybatisOrderSummaryDAO implements OrderSummaryDAO{
 
 	@Override
 	public void insert(OrderSummary orderSummary) throws OrderException{
-		int customer_id = orderSummary.getCustomer_id();
+		int customer_id = orderSummary.getCustomer().getCustomer_id();
 		int result = 0;
 		if(customer_id !=0) {
 			result = sqlSessionTemplate.insert("OrderSummary.insert", orderSummary);			
@@ -51,5 +56,6 @@ public class MybatisOrderSummaryDAO implements OrderSummaryDAO{
 		// TODO Auto-generated method stub
 		
 	}
+
 
 }

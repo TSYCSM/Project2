@@ -6,8 +6,8 @@ import lombok.Data;
 public class OrderSummary {
 	private int order_summary_id;
 	private int owner_id;
-	private int customer_id;
 	private String orderdate;
 	private int total_price;
 	
+	private Customer customer;
 }

@@ -10,6 +10,10 @@
 		select * from customer where phone=#{phone}
 	</select>
 	
+	<select id="selectById" parameterType="int" resultType="Customer">
+		select * from customer where customer_id=#{customer_id}
+	</select>
+	
 </mapper>
 
 

@@ -6,7 +6,8 @@ import com.tsycsm.agileoffice.model.domain.OrderDetail;
 
 public interface OrderDetailDAO {
 	public List selectAll();
-	public List selectAllByOrderSummaryId(int owner_summary_id);
+	public List selectAll(int owner_summary_id);
+	public List selectAll(OrderDetail orderDetail);
 	public OrderDetail select(int order_detail_id);
 	public void insert(OrderDetail orderDetail);
 	public void update(OrderDetail orderDetail);

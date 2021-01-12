@@ -86,7 +86,7 @@ public class OrderController {
 		Item[] itemArr = new Item[item_id_arr.length];
 		
 		if(customer !=null) {
-			orderSummary.setCustomer_id(customer.getCustomer_id());			
+			orderSummary.setCustomer(customer);			
 		}
 		orderSummary.setOwner_id(owner.getOwner_id());
 		
@@ -96,13 +96,13 @@ public class OrderController {
 		for(int i=0; i<orderDetailArr.length; i++) {
 			OrderDetail orderDetail = new OrderDetail();
 			Item item = new Item();
+			item.setItem_id(item_id_arr[i]);
+			item.setQuantity(quantity_arr[i]);
 			
 			itemArr[i] = item;
-			itemArr[i].setItem_id(item_id_arr[i]);
-			itemArr[i].setQuantity(quantity_arr[i]);
 			
 			orderDetailArr[i] = orderDetail;
-			orderDetailArr[i].setItem_id(item_id_arr[i]);
+			orderDetailArr[i].setItem(item);
 			orderDetailArr[i].setQuantity(quantity_arr[i]);
 			orderDetailArr[i].setPrice(price_arr[i]);
 		}

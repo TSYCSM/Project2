@@ -1,4 +1,11 @@
+<%@page import="com.tsycsm.agileoffice.model.domain.OrderSummary"%>
+<%@page import="java.util.List"%>
+<%@page import="com.tsycsm.agileoffice.common.Pager"%>
 <%@ page contentType="text/html;charset=utf-8"%>
+<%
+	Pager pager = (Pager)request.getAttribute("pager");
+	List<OrderSummary> orderSummaryList = pager.getList();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,20 +32,37 @@ function hideReceipt(){
 			receipts <br><br>
 			<table>
 				<tr>
-					<th>영수증 번호</th>
+					<th>No</th>
 					<th>날짜</th>
-					<th>직원</th>
 					<th>고객</th>
 					<th>합계</th>
 					
 				</tr>
-				<tr onClick="showReceipt()" onmouseover="this.style.color='#fc9003'"
-					onmouseout="this.style.color='black'">
-					<td>1-1000</td>
-					<td>2020-12-25</td>
-					<td>james</td>
-					<td>customer1</td>
-					<td>100</td>
-				</tr>
+				<%
+					int num = pager.getNum();
+					int curPos = pager.getCurPos();
+				%>
+				<%for(int i=0; i<pager.getPageSize(); i++){ %>
+					<%if(num < 1) break; %>
+					<%OrderSummary orderSummary = orderSummaryList.get(curPos++); %>
+					<tr onClick="showReceipt()" onmouseover="this.style.color='#fc9003'"
+						onmouseout="this.style.color='black'">
+						<td><%=num-- %></td>
+						<td><%=orderSummary.getOrderdate().substring(0, 10) %></td>
+						<td>
+							<%if(orderSummary.getCustomer() !=null ){ %>
+								<%=orderSummary.getCustomer().getCustomer_name() %>
+							<%}else{ %>
+								맴버십 고객이 아닙니다.
+							<%} %>
+						</td>
+						<td><%=orderSummary.getTotal_price() %></td>
+					</tr>
+				<%} %>
 			</table>
 <%@ include file="../inc/footer.jsp" %>
+
+
+
+
+

@@ -3,7 +3,7 @@
 <mapper namespace="OrderSummary">
 	<insert id="insert" parameterType="OrderSummary">
 		insert into order_summary(order_summary_id, owner_id, customer_id, total_price)
-		values(seq_order_summary.nextval, #{owner_id}, #{customer_id}, #{total_price})
+		values(seq_order_summary.nextval, #{owner_id}, #{customer.customer_id}, #{total_price})
 		<selectKey order="AFTER" resultType="int" keyProperty="order_summary_id">
 			select seq_order_summary.currval from dual
 		</selectKey>
@@ -18,11 +18,43 @@
 	</insert>
 	
 	<select id="selectAllByOwner" parameterType="int" resultType="OrderSummary">
+		select * from order_summary where owner_id =#{owner_id} order by order_summary_id desc
+	</select>
+	
+	<select id="selectAllByOwnerWithDate" parameterType="int" resultType="OrderSummary">
 		select to_char(orderdate,'yyyy-mm-dd') as orderdate, sum(total_price) as total_price
 		from order_summary
 		where owner_id = #{owner_id}
 		group by to_char(orderdate,'yyyy-mm-dd')
 	</select>
+	
+	<!-- 모든 영수증 mapping -->
+	<resultMap type="OrderSummary" id="orderSummaryJoinCustomer">
+		<id column="order_summary_id" property="order_summary_id"/>
+		<result column="owner_id" property="owner_id"/>
+		<result column="orderdate" property="orderdate"/>
+		<result column="total_price" property="total_price"/>
+		<association
+			column="customer_id"
+			property="customer"
+			javaType="Customer"
+			select="Customer.selectById"
+			/>
+	</resultMap>
+	
+	<select id="selectJoinCustomer" parameterType="int" resultMap="orderSummaryJoinCustomer">
+		select * from order_summary where owner_id =#{owner_id} order by order_summary_id desc
+	</select>
+	
+	<!-- 개별 영수증 mapping -->
+	<resultMap type="OrderSummary" id="orderSummaryJoinOrderDetail">
+		
+	</resultMap>
+	
+	<select id="selectOneJoinCustomer" parameterType="int" resultMap="orderSummaryJoinOrderDetail">
+		select * from order_summary where order_summary_id =#{order_summary_id}
+	</select>
+	
 	
 </mapper>
 
