@@ -26,6 +26,32 @@
 		select * from item order by item_id desc
 	</select>
 	
+	
+	<resultMap type="Item" id="itemJoinCategory">
+		<id column="item_id" property="item_id"/>
+		<result column="owner_id" property="owner_id"/>
+		<result column="category_id" property="category_id"/>
+		<result column="item_name" property="item_name"/>
+		<result column="price" property="price"/>
+		<result column="filename" property="filename"/>
+		<result column="stock" property="stock"/>
+		<result column="regdate" property="regdate"/>
+		<association
+			column="category_id"
+			property="category"
+			javaType="Category"
+			select="Category.select"/>
+	</resultMap>	
+
+	<select id="selectJoinCategory" parameterType="int" resultMap="itemJoinCategory">
+		select * from item where item_id=#{item_id}
+	</select>
+	
+	
+	
+	
+	
+	
 	<insert id="insert" parameterType="Item">
 		insert into item(item_id, owner_id, category_id, item_name, price, filename, stock)
 		values(seq_item.nextval, #{owner_id}, #{category_id}, #{item_name}, #{price}, #{filename}, #{stock})

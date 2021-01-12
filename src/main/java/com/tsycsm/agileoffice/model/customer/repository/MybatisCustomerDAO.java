@@ -32,6 +32,11 @@ public class MybatisCustomerDAO implements CustomerDAO{
 		
 		return obj;
 	}
+	
+	@Override
+	public List<Customer> selectAllByOwnerId(int owner_id) {
+		return sqlSessionTemplate.selectList("Customer.selectAllByOwnerId", owner_id);
+	}
 
 	@Override
 	public void insert(Customer customer) throws CustomerException{

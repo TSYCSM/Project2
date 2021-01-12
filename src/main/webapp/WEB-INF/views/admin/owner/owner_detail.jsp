@@ -5,7 +5,8 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%
 List<Item> itemList = (List) request.getAttribute("itemList");
-List<Category> categoryList = (List) request.getAttribute("categoryList");
+List<Category> categoryList = (List)request.getAttribute("categoryList");
+int customer_amount = (Integer)request.getAttribute("customer_amount");
 %>
 
 <!DOCTYPE html>
@@ -17,10 +18,13 @@ List<Category> categoryList = (List) request.getAttribute("categoryList");
 <script>
 	function getItemDetail(item_id) {
 		$.ajax({
-			url: "admin/owner/detail/item",
+			url: "/admin/owner/detail/item/list",
 			type: "GET",
 			data: {
 				item_id: item_id 
+			},
+			success: function(item) {
+				console.log(item);
 			}
 		});
 	}
@@ -32,16 +36,16 @@ List<Category> categoryList = (List) request.getAttribute("categoryList");
 	<div class="container">
 		<form>
 			<div class="outerbox">
-				<label for="fname">등록된 상품 수</label>
+				<label>등록된 상품 수</label>
 				<div class="box"><%=itemList.size() %> 개</div>
 			</div>
 			<div class="outerbox">
-				<label for="lname">등록된 카테고리 수</label>
+				<label>등록된 카테고리 수</label>
 				<div class="box"><%=categoryList.size() %> 개</div>
 			</div>
 			<div class="outerbox">
-				<label for="lname">등록된 고객 수</label>
-				<div class="box">총 개수</div>
+				<label>등록된 고객 수</label>
+				<div class="box"><%=customer_amount %> 명</div>
 			</div>
 		</form>
 	</div>
@@ -62,9 +66,9 @@ List<Category> categoryList = (List) request.getAttribute("categoryList");
 						<% Item item = itemList.get(i); %>
 						<tr>
 							<td>No</td>
-							<td><a href="javascript:getItemDetail() "><%=item.getItem_name()%></a></td>
+							<td><a href="javascript:getItemDetail(<%=item.getItem_id() %>) "><%=item.getItem_name()%></a></td>
 							<td><%=item.getCategory_id()%></td>
-							<td><%=item.getQuantity()%></td>
+							<td><%=item.getStock()%></td>
 							<td><%=item.getRegdate()%></td>
 						</tr>
 						<% } %>
