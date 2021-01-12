@@ -15,7 +15,39 @@
 <link rel="stylesheet" type="text/css" href="/resources/css/owner/reports/receipt_layout.css">
 
 <script>
-function showReceipt(){
+function showReceipt(summary_id){
+	var tag="";
+	$.ajax({
+		url:"/owner/reports/receiptsInfo",
+		type:"post",
+		data:{
+			order_summary_id:summary_id
+		},
+		success:function(orderSummary){
+			var orderDetailList = orderSummary.orderDetailList
+			$(".total_price").html(orderSummary.total_price)
+			console.log("\n");
+			for(var i=0; i<orderDetailList.length;i++){
+				var orderDetail= orderDetailList[i];
+				var item= orderDetailList[i].item;
+				tag += "<div style=\"border-top : 1px solid black\">"
+				tag += item.item_name
+				tag += "</div>"
+				tag += "<div>"
+				tag += orderDetail.price+" X "+orderDetail.quantity
+				tag += "</div>"
+				
+				
+			}
+			$(".orderDetail").html(tag);
+			$(".date").html(orderSummary.orderdate);
+			
+		}
+		
+		
+	})
+	
+	
 	$(".receipt_content").show();
 	$("#myReceiptbar").width('400px');
 }
@@ -45,7 +77,7 @@ function hideReceipt(){
 				<%for(int i=0; i<pager.getPageSize(); i++){ %>
 					<%if(num < 1) break; %>
 					<%OrderSummary orderSummary = orderSummaryList.get(curPos++); %>
-					<tr onClick="showReceipt()" onmouseover="this.style.color='#fc9003'"
+					<tr onClick="showReceipt('<%=orderSummary.getOrder_summary_id() %>')" onmouseover="this.style.color='#fc9003'"
 						onmouseout="this.style.color='black'">
 						<td><%=num-- %></td>
 						<td><%=orderSummary.getOrderdate().substring(0, 10) %></td>

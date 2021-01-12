@@ -10,10 +10,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tsycsm.agileoffice.common.Pager;
 import com.tsycsm.agileoffice.model.domain.OrderDetail;
+import com.tsycsm.agileoffice.model.domain.OrderSummary;
 import com.tsycsm.agileoffice.model.domain.Owner;
 import com.tsycsm.agileoffice.model.order.service.OrderService;
 
@@ -72,6 +75,16 @@ public class ReportController {
 		mav.addObject("pager", pager);
 		
 		return mav;
+	}
+	
+	@PostMapping("/owner/reports/receiptsInfo")
+	@ResponseBody
+	public OrderSummary viewOneReceipt(int order_summary_id) {
+		
+		OrderSummary orderSummary= orderService.select(order_summary_id);
+		logger.debug("³¯Â¥: "+orderSummary.getOrderdate());
+		
+		return orderSummary;
 	}
 }
 

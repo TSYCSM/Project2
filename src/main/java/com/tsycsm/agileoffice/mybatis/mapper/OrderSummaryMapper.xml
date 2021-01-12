@@ -48,10 +48,21 @@
 	
 	<!-- 개별 영수증 mapping -->
 	<resultMap type="OrderSummary" id="orderSummaryJoinOrderDetail">
-		
+		<id column="order_summary_id" property="order_summary_id"/>
+		<result column="owner_id" property="owner_id"/>
+		<result column="orderdate" property="orderdate"/>
+		<result column="total_price" property="total_price"/>
+		<result column="customer_id" property="customer.customer_id"/>
+		<collection
+			column="order_summary_id"
+			property="orderDetailList"
+			javaType="java.util.List"
+			ofType="OrderDetail"
+			select="OrderDetail.selectJoinItem"
+			/>
 	</resultMap>
 	
-	<select id="selectOneJoinCustomer" parameterType="int" resultMap="orderSummaryJoinOrderDetail">
+	<select id="selectById" parameterType="int" resultMap="orderSummaryJoinOrderDetail">
 		select * from order_summary where order_summary_id =#{order_summary_id}
 	</select>
 	
