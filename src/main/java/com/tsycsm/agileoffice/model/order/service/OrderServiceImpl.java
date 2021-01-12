@@ -27,10 +27,17 @@ public class OrderServiceImpl implements OrderService{
 	@Autowired
 	private ItemDAO itemDAO;
 	
+	/*************************************
+	OwnerSummary CRUD
+	*************************************/
+	
+	
+	
 	@Override
 	public List selectAllByOwner(int owner_id) {
 		return orderSummaryDAO.selectAllByOwner(owner_id);
 	}
+	
 
 	@Override
 	public OrderSummary select(int order_summary_id) {
@@ -49,6 +56,7 @@ public class OrderServiceImpl implements OrderService{
 		
 		for(OrderDetail orderDetail : orderDetailArr) {
 			orderDetail.setOrder_summary_id(orderSummary.getOrder_summary_id());
+			orderDetail.setOwner_id(orderSummary.getOwner_id());
 			orderDetailDAO.insert(orderDetail);
 		}
 	}
@@ -64,5 +72,34 @@ public class OrderServiceImpl implements OrderService{
 		// TODO Auto-generated method stub
 		
 	}
+	
+
+	/*************************************
+	OwnerSummary CRUD
+	*************************************/
+	
+	
+	@Override
+	public List selectAllByOwnerWithDate(OrderDetail orderDetail) {
+		return orderDetailDAO.selectAll(orderDetail);
+	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.tsycsm.agileoffice.model.domain.OrderDetail;
 import com.tsycsm.agileoffice.model.domain.Owner;
 import com.tsycsm.agileoffice.model.order.service.OrderService;
 
@@ -39,11 +40,21 @@ public class ReportController {
 	}
 	
 	@GetMapping("/owner/reports/salesDetail")
-	public ModelAndView viewSalesDetail(String orderdate) {
+	public ModelAndView viewSalesDetail(String orderdate, HttpSession session) {
+		
+		Owner owner = (Owner)session.getAttribute("owner");
 		
 		logger.debug("orderdate: "+orderdate);
+		OrderDetail orderDetail = new OrderDetail();
+		orderDetail.setOrderdate(orderdate);
+		orderDetail.setOwner_id(owner.getOwner_id());
 		
-		return null;
+		List orderDetailList = orderService.selectAllByOwnerWithDate(orderDetail);
+		
+		ModelAndView mav = new ModelAndView("/owner/reports/sales_detail");
+		mav.addObject("orderDetailList", orderDetailList);
+		
+		return mav;
 	}
 }
 

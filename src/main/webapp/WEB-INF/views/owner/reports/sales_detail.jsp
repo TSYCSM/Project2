@@ -1,4 +1,9 @@
+<%@page import="com.tsycsm.agileoffice.model.domain.OrderDetail"%>
+<%@page import="java.util.List"%>
 <%@ page contentType="text/html;charset=utf-8"%>
+<%
+	List<OrderDetail> orderDetailList = (List)request.getAttribute("orderDetailList");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,17 +25,25 @@
 			item list <br><br>
 			<table>
 				<tr>
-					<th>상품</th>
+					<th>상품명</th>
 					<th>카테고리</th>
 					<th>판매수량</th>
 					<th>매출액</th>
 					
 				</tr>
-				<tr>
-					<td>item1</td>
-					<td>box</td>
-					<td>3</td>
-					<td>150</td>
-				</tr>
+				<%for(OrderDetail orderDetail : orderDetailList){ %>
+					<tr>
+						<td><%=orderDetail.getItem().getItem_name() %></td>
+						<td><%=orderDetail.getItem().getCategory_id() %></td>
+						<td><%=orderDetail.getTotal_quantity() %></td>
+						<td><%=orderDetail.getTotal_price() %></td>
+					</tr>
+				<%} %>
 			</table>
 <%@ include file="../inc/footer.jsp" %>
+
+
+
+
+
+

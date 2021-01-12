@@ -8,6 +8,7 @@ import com.tsycsm.agileoffice.model.domain.OrderSummary;
 
 public interface OrderService {
 	public List selectAllByOwner(int owner_id);
+	public List selectAllByOwnerWithDate(OrderDetail orderDetail);
 	public OrderSummary select(int order_summary_id);
 	public void regist(Item[] itemArr, OrderSummary orderSummary, OrderDetail[] orderDetailArr);
 	public void update(OrderSummary orderSummary);
