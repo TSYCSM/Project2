@@ -26,9 +26,9 @@
 					int num = pager.getNum();
 					int curPos = pager.getCurPos();
 				%>
-				<%for(int i=0; i<ownerList.size(); i++) { %>
+				<%for(int i=0; i<pager.getPageSize(); i++) { %>
 				<%if(num < 1) {break;} %>
-				<%Owner owner = ownerList.get(curPos); %>
+				<%Owner owner = ownerList.get(curPos++); %>
 				<tr>
 					<td><a href="/admin/owner/detail?owner_id=<%=owner.getOwner_id()%>"><%=owner.getShopname() %></a></td>
 					<td><%=owner.getUser_name() %></td>
@@ -37,7 +37,6 @@
 				</tr>
 				<%
 					num = num-1; 
-					curPos = curPos + 1;
 				%>
 				<%} %>
 				<tr>

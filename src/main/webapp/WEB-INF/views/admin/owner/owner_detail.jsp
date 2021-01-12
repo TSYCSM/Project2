@@ -1,112 +1,78 @@
+<%@page import="com.tsycsm.agileoffice.model.domain.Category"%>
+<%@page import="com.tsycsm.agileoffice.model.domain.Item"%>
+<%@page import="java.util.List"%>
 <%@page import="com.tsycsm.agileoffice.common.Pager"%>
 <%@ page contentType="text/html;charset=utf-8"%>
 <%
-	int listSize = 234;
-	Pager pager = new Pager();
-	pager.init(request, listSize);
+List<Item> itemList = (List) request.getAttribute("itemList");
+List<Category> categoryList = (List) request.getAttribute("categoryList");
 %>
-
-<!-- 일단 memberdetail에 들어오면 owner_id로 select 된 itemlist를 받아온다.
-	각 페이지를 클릭할때 currentPage를 getPage function에 매개변수로 넘겨준다.
-	$.ajax해서 각 페이지에 있는 subList를 제이슨으로 가져온다.
-	table단에 새롭게 subList를 차례대로 뿌려준다.
-	문제) subList를 가져올때 controller에 어느 변수를 넘겨주어야 할까??
-		currentPage로 새롭게 갱신된 Pager객체로 넘겨야 될까????
-		정말 모르겠다.... -->
 
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>memberlist</title>
-	<%@ include file="../inc/header.jsp" %>
+<meta charset="utf-8">
+<title>ownerDetail</title>
+<%@ include file="../inc/header.jsp"%>
 <script>
-$(function(){
-	/* $("#reportbox").hide(); */
-	
-	
-	
-});
-
-/* function showReport(){
-	$("#reportbox").show();
-} */
-
-function getPage(page){
-	/* 페이징 비동기 처리 미완성 */
-	$.ajax({
-		url: "/admin/member/getpage",
-		type: "get",
-		data: {
-			currentPage = page
-		},
-		success: function(result){
-			
-		}
-	});
-}
-
+	function getItemDetail(item_id) {
+		$.ajax({
+			url: "admin/owner/detail/item",
+			type: "GET",
+			data: {
+				item_id: item_id 
+			}
+		});
+	}
 </script>
 </head>
-	
+
 <%@ include file="../inc/common.jsp"%>
 <div class="bigcontainer">
-	<%@ include file="inc/memberbox.jsp" %>
-		
-	<div id="reportbox" class="container" style="left: 800px;">
-					<div class="bigbox">
-						<label for="fname">등록된 상품</label>
-						<div class="smallbox">
-						<form>
-							<table  style="width: 100%">
-								<tr>
-									<th>No</th>
-									<th>상품명</th>
-									<th>카테고리</th>
-									<th>수량</th>
-									<th>등록일자</th>
-								</tr>
-								<%
-								int num = pager.getNum();
-								int curPos = pager.getCurPos();
-								%>
-								<%for(int i=0; i<pager.getPageSize(); i++){ %>
-									<%if(num < 1) break; %>
-									<tr class="asynctr">
-										<td><%=num-- %></td>
-										<td>redbox</td>
-										<td>box</td>
-										<td>5</td>
-										<td>2021-01-03</td>
-									</tr>
-								<%} %>
-								<tr>
-									<td colspan="5" style="text-align:center">
-										<%if(pager.getFirstPage() >1){ %>
-											<a href="/admin/member/detail?currentPage=<%=pager.getFirstPage()-1%>">◀</a>					
-										<%}else{ %>
-											<a href = "javascript:alert('처음 페이지 입니다')">◀</a>
-										<%} %>
-										<%for(int i=pager.getFirstPage(); i<=pager.getLastPage(); i++){ %>
-										<%if(i > pager.getTotalPage()) break; %>
-										<a href="/admin/member/detail?currentPage=<%=i%>">[<%=i %>]</a>
-										<%} %>
-										<%if(pager.getLastPage() < pager.getTotalPage()) {%>
-											<a href="/admin/member/detail?currentPage=<%=pager.getLastPage()+1%>">▶</a>
-										<%}else{ %>
-											<a href = "javascript:alert('마지막 페이지입니다.')">▶</a>
-										<%} %>
-									</td>
-								</tr>
-							</table>
-							</form>
-							
-						</div>					
-					</div>
+	<div class="container">
+		<form>
+			<div class="outerbox">
+				<label for="fname">등록된 상품 수</label>
+				<div class="box"><%=itemList.size() %> 개</div>
+			</div>
+			<div class="outerbox">
+				<label for="lname">등록된 카테고리 수</label>
+				<div class="box"><%=categoryList.size() %> 개</div>
+			</div>
+			<div class="outerbox">
+				<label for="lname">등록된 고객 수</label>
+				<div class="box">총 개수</div>
+			</div>
+		</form>
+	</div>
 
+	<div id="reportbox" class="container" style="left: 800px;">
+		<div class="bigbox">
+			<div class="smallbox">
+				<form>
+					<table style="width: 100%">
+						<tr>
+							<th>No</th>
+							<th>상품명</th>
+							<th>카테고리</th>
+							<th>수량</th>
+							<th>등록일자</th>
+						</tr>
+						<% for (int i = 0; i < itemList.size(); i++) { %>
+						<% Item item = itemList.get(i); %>
+						<tr>
+							<td>No</td>
+							<td><a href="javascript:getItemDetail() "><%=item.getItem_name()%></a></td>
+							<td><%=item.getCategory_id()%></td>
+							<td><%=item.getQuantity()%></td>
+							<td><%=item.getRegdate()%></td>
+						</tr>
+						<% } %>
+					</table>
+				</form>
 			</div>
 		</div>
+	</div>
 </div>
-		
-<%@ include file="../inc/footer.jsp" %>
-		
+
+<%@ include file="../inc/footer.jsp"%>

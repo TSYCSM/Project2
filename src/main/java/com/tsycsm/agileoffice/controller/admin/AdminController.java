@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sun.mail.imap.protocol.Item;
 import com.tsycsm.agileoffice.common.Pager;
+import com.tsycsm.agileoffice.model.category.service.CategoryService;
+import com.tsycsm.agileoffice.model.domain.Category;
+import com.tsycsm.agileoffice.model.domain.Item;
 import com.tsycsm.agileoffice.model.domain.Owner;
 import com.tsycsm.agileoffice.model.item.service.ItemService;
 import com.tsycsm.agileoffice.model.owner.service.OwnerService;
@@ -24,6 +26,9 @@ public class AdminController {
 	
 	@Autowired
 	private ItemService itemService;
+
+	@Autowired
+	private CategoryService categoryService;
 
 	@Autowired
 	private Pager pager;
@@ -48,8 +53,13 @@ public class AdminController {
 
 	@RequestMapping(value="/admin/owner/detail", method=RequestMethod.GET)
 	public ModelAndView viewOwnerDetail(int owner_id) {
+		List<Item> itemList = itemService.selectByOwnerId(owner_id);
+		List<Category> categoryList = categoryService.selectByOwner(owner_id);
+
 		ModelAndView mav = new ModelAndView();
-		List<com.tsycsm.agileoffice.model.domain.Item> itemList = itemService.selectByOwnerId(owner_id);
+		mav.addObject("itemList", itemList);
+		mav.addObject("categoryList", categoryList);
+		mav.setViewName("admin/owner/owner_detail");
 		
 		return mav;
 	}
