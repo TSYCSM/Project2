@@ -30,10 +30,14 @@
 	</resultMap>
 
 	<select id="selectAllByOwnerIdWithData" parameterType="OrderDetail" resultMap="orderDetailJoinItem">
-		select item_id, sum(quantity) as total_quantity, sum(price*quantity) as total_price
+		select item_id, to_char(orderdate, 'yyyy-mm-dd') as orderdate, sum(quantity) as total_quantity, sum(price*quantity) as total_price
 		from order_detail
 		where owner_id = #{owner_id} and to_char(orderdate, 'yyyy-mm-dd') = #{orderdate}
-		group by item_id
+		group by item_id, to_char(orderdate, 'yyyy-mm-dd')
+	</select>
+	
+	<select id="selectJoinItem" parameterType="int" resultMap="orderDetailJoinItem">
+		select * from order_detail where order_summary_id =#{order_summary_id}
 	</select>
 
 </mapper>

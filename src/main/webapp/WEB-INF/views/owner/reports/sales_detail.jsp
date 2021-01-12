@@ -1,8 +1,11 @@
+<%@page import="com.tsycsm.agileoffice.common.Pager"%>
 <%@page import="com.tsycsm.agileoffice.model.domain.OrderDetail"%>
 <%@page import="java.util.List"%>
 <%@ page contentType="text/html;charset=utf-8"%>
 <%
-	List<OrderDetail> orderDetailList = (List)request.getAttribute("orderDetailList");
+	Pager pager = (Pager)request.getAttribute("pager");
+	List<OrderDetail> orderDetailList = pager.getList();
+	String orderDate = orderDetailList.get(0).getOrderdate().substring(0, 10);
 %>
 <!DOCTYPE html>
 <html>
@@ -26,19 +29,46 @@
 			<table>
 				<tr>
 					<th>상품명</th>
-					<th>카테고리</th>
 					<th>판매수량</th>
 					<th>매출액</th>
+					<th>재고</th>
 					
 				</tr>
-				<%for(OrderDetail orderDetail : orderDetailList){ %>
+				<%
+					int num = pager.getNum();
+					int curPos = pager.getCurPos();
+				%>
+				<%for(int i=0; i<pager.getPageSize(); i++){ %>
+					<%if(num < 1) break; %>
+					<%OrderDetail orderDetail= orderDetailList.get(curPos++); %>
 					<tr>
-						<td><%=orderDetail.getItem().getItem_name() %></td>
-						<td><%=orderDetail.getItem().getCategory_id() %></td>
+						<td>
+							<input type="hidden" value="<%=num--%>">
+							<%=orderDetail.getItem().getItem_name() %>
+						</td>
 						<td><%=orderDetail.getTotal_quantity() %></td>
 						<td><%=orderDetail.getTotal_price() %></td>
+						<td><%=orderDetail.getItem().getStock() %></td>
 					</tr>
 				<%} %>
+				<tr>
+					<td colspan="4" style="text-align:center">
+						<%if(pager.getFirstPage() >1){ %>
+							<a href="/owner/reports/salesDetail?orderdate=<%=orderDate%>&currentPage=<%=pager.getFirstPage()-1%>">◀</a>					
+						<%}else{ %>
+							<a href = "javascript:alert('처음 페이지 입니다')">◀</a>
+						<%} %>
+						<%for(int i=pager.getFirstPage(); i<=pager.getLastPage(); i++){ %>
+						<%if(i > pager.getTotalPage()) break; %>
+						<a href="/owner/reports/salesDetail?orderdate=<%=orderDate%>&currentPage=<%=i%>">[<%=i %>]</a>
+						<%} %>
+						<%if(pager.getLastPage() < pager.getTotalPage()) {%>
+							<a href="/owner/reports/salesDetail?orderdate=<%=orderDate%>&currentPage=<%=pager.getLastPage()+1%>">▶</a>
+						<%}else{ %>
+							<a href = "javascript:alert('마지막 페이지입니다.')">▶</a>
+						<%} %>
+					</td>
+				</tr>
 			</table>
 <%@ include file="../inc/footer.jsp" %>
 

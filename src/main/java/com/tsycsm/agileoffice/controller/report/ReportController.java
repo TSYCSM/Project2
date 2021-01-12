@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.tsycsm.agileoffice.common.Pager;
 import com.tsycsm.agileoffice.model.domain.OrderDetail;
 import com.tsycsm.agileoffice.model.domain.Owner;
 import com.tsycsm.agileoffice.model.order.service.OrderService;
@@ -19,7 +20,8 @@ import com.tsycsm.agileoffice.model.order.service.OrderService;
 @Controller
 public class ReportController {
 	private static final Logger logger = LoggerFactory.getLogger(ReportController.class);
-	
+	@Autowired
+	private Pager pager;
 	
 	@Autowired
 	private OrderService orderService;
@@ -29,19 +31,18 @@ public class ReportController {
 		HttpSession session = request.getSession();
 		Owner owner= (Owner)session.getAttribute("owner");
 		
-		List orderSummaryList = orderService.selectAllByOwner(owner.getOwner_id());
+		List orderSummaryList = orderService.selectAllByOwnerWithDate(owner.getOwner_id());
 		
 		ModelAndView mav =new ModelAndView("owner/reports/sales_summary");
-		mav.addObject("orderSummaryList", orderSummaryList);
-		
-		logger.debug("orderSummaryList¿« ≈©±‚: "+orderSummaryList.size());
+		pager.init(request, orderSummaryList);
+		mav.addObject("pager", pager);
 		
 		return mav;
 	}
 	
 	@GetMapping("/owner/reports/salesDetail")
-	public ModelAndView viewSalesDetail(String orderdate, HttpSession session) {
-		
+	public ModelAndView viewSalesDetail(String orderdate, HttpServletRequest request) {
+		HttpSession session = request.getSession();
 		Owner owner = (Owner)session.getAttribute("owner");
 		
 		logger.debug("orderdate: "+orderdate);
@@ -49,10 +50,26 @@ public class ReportController {
 		orderDetail.setOrderdate(orderdate);
 		orderDetail.setOwner_id(owner.getOwner_id());
 		
-		List orderDetailList = orderService.selectAllByOwnerWithDate(orderDetail);
+		List orderDetailList = orderService.selectAllByOwnerWithDateDetail(orderDetail);
 		
 		ModelAndView mav = new ModelAndView("/owner/reports/sales_detail");
-		mav.addObject("orderDetailList", orderDetailList);
+
+		pager.init(request, orderDetailList);
+		mav.addObject("pager", pager);
+		
+		return mav;
+	}
+	
+	@GetMapping("/owner/reports/receipts")
+	public ModelAndView viewReceipts(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		Owner owner= (Owner)session.getAttribute("owner");
+		
+		List orderSummaryList = orderService.selectAllByOwner(owner.getOwner_id());
+		pager.init(request, orderSummaryList);
+		
+		ModelAndView mav =new ModelAndView("owner/reports/receipts");
+		mav.addObject("pager", pager);
 		
 		return mav;
 	}

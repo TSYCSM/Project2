@@ -38,6 +38,13 @@ public class OrderServiceImpl implements OrderService{
 		return orderSummaryDAO.selectAllByOwner(owner_id);
 	}
 	
+	@Override
+	public List selectAllByOwnerWithDate(int owner_id) {
+		// TODO Auto-generated method stub
+		return orderSummaryDAO.selectAllByOwnerWithDate(owner_id);
+
+	}
+	
 
 	@Override
 	public OrderSummary select(int order_summary_id) {
@@ -80,9 +87,10 @@ public class OrderServiceImpl implements OrderService{
 	
 	
 	@Override
-	public List selectAllByOwnerWithDate(OrderDetail orderDetail) {
+	public List selectAllByOwnerWithDateDetail(OrderDetail orderDetail) {
 		return orderDetailDAO.selectAll(orderDetail);
 	}
+
 
 }
 

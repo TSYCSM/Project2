@@ -14,11 +14,11 @@
   </button>
   <div class="dropdown-container">
     <a href="/owner/reports/salesSummary">매출 요약</a>
-    <a href="/view/owner/reports/sales_item.jsp">상품별 매출</a>
-    <a href="/view/owner/reports/sales_category.jsp">카테고리별 매출</a>
-    <a href="/view/owner/reports/sales_employee.jsp">직원별 매출</a>
-    <a href="/view/owner/reports/discount.jsp">할인</a>
-    <a href="/view/owner/reports/receipts.jsp">영수증 보관함</a>
+    <a href="#">상품별 매출</a>
+    <a href="#">카테고리별 매출</a>
+    <a href="#">직원별 매출</a>
+    <a href="#">할인</a>
+    <a href="/owner/reports/receipts">영수증 보관함</a>
   </div>
   
   <button class="dropdown-btn">물품 목록 
