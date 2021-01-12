@@ -174,7 +174,7 @@ add owner_id number;
 
 alter table order_detail
 add constraint fk_owner_order_detail
-foreign key(owner_id) references owner(owner_id)
+foreign key(owner_id) references owner(owner_id);
 
 
 

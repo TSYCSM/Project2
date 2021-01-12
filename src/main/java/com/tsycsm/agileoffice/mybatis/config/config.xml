@@ -7,7 +7,7 @@
  <typeAliases>
  	<typeAlias type="com.tsycsm.agileoffice.model.domain.Item" alias="Item"/>
  	<typeAlias type="com.tsycsm.agileoffice.model.domain.Category" alias="Category"/>
- 	<typeAlias type="com.tsycsm.agileoffice.model.domain.Owner" alias="owner"/>
+ 	<typeAlias type="com.tsycsm.agileoffice.model.domain.Owner" alias="Owner"/>
  	<typeAlias type="com.tsycsm.agileoffice.model.domain.Customer" alias="Customer"/>
  	<typeAlias type="com.tsycsm.agileoffice.model.domain.OrderSummary" alias="OrderSummary"/>
  	<typeAlias type="com.tsycsm.agileoffice.model.domain.OrderDetail" alias="OrderDetail"/>

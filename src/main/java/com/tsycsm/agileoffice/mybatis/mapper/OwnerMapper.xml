@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Owner">
+
+	<select id="selectAll" resultType="Owner">
+		select * from owner desc
+	</select>
+
 	<insert id="insert" parameterType="Owner">
 		insert into owner(owner_id, user_id, password, user_name, shopname,email_id, email_server)
 		values(seq_owner.nextval, #{user_id}, #{password}, #{shopname}, #{user_name}, #{email_id}, #{email_server})
@@ -15,10 +20,6 @@
 	</select>
 	
 </mapper>
-
-
-
-
 
 
 

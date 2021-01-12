@@ -2,7 +2,6 @@ package com.tsycsm.agileoffice.model.owner.repository;
 
 import java.util.List;
 
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,11 +15,9 @@ public class MybatisOwnerDAO implements OwnerDAO{
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
-	
 	@Override
-	public List selectAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Owner> selectAll() {
+		return sqlSessionTemplate.selectList("Owner.selectAll");
 	}
 
 	@Override
