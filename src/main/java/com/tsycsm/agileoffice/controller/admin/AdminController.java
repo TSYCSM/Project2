@@ -8,11 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tsycsm.agileoffice.common.Pager;
 import com.tsycsm.agileoffice.model.category.service.CategoryService;
+import com.tsycsm.agileoffice.model.customer.service.CustomerService;
 import com.tsycsm.agileoffice.model.domain.Category;
+import com.tsycsm.agileoffice.model.domain.Customer;
 import com.tsycsm.agileoffice.model.domain.Item;
 import com.tsycsm.agileoffice.model.domain.Owner;
 import com.tsycsm.agileoffice.model.item.service.ItemService;
@@ -29,6 +32,9 @@ public class AdminController {
 
 	@Autowired
 	private CategoryService categoryService;
+
+	@Autowired
+	private CustomerService customerService;
 
 	@Autowired
 	private Pager pager;
@@ -55,13 +61,31 @@ public class AdminController {
 	public ModelAndView viewOwnerDetail(int owner_id) {
 		List<Item> itemList = itemService.selectByOwnerId(owner_id);
 		List<Category> categoryList = categoryService.selectByOwner(owner_id);
+		int customer_amount = customerService.getTotalNumberOfCutomer(owner_id);
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("itemList", itemList);
 		mav.addObject("categoryList", categoryList);
+		mav.addObject("customer_amount", customer_amount);
 		mav.setViewName("admin/owner/owner_detail");
 		
 		return mav;
+	}
+	
+	
+	@RequestMapping(value="/admin/owner/detail/item/list", method=RequestMethod.GET, produces="application/text;charset=utf-8")
+	@ResponseBody
+	public String viewItemDetail(int item_id) {
+		Item item = itemService.select(item_id);
+
+		StringBuffer sb = new StringBuffer();
+		sb.append("{");
+		sb.append("\"item_name\" : \"" + item.getItem_name() + "\",");
+		sb.append("\"quantity\" : \"" + item.getQuantity() + "\",");
+		sb.append("\"category_name\" : \"" + item.getCategory().getCategory_name() + "\"");
+		sb.append("}");
+	
+		return sb.toString();
 	}
 	
 	

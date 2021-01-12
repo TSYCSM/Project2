@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.tsycsm.agileoffice.exception.CustomerException;
 import com.tsycsm.agileoffice.model.customer.repository.CustomerDAO;
 import com.tsycsm.agileoffice.model.domain.Customer;
-import com.tsycsm.agileoffice.model.domain.Owner;
 
 @Service
 public class CustomerServiceImpl implements CustomerService{
@@ -27,6 +26,12 @@ public class CustomerServiceImpl implements CustomerService{
 		Customer obj = customerDAO.select(phone);
 		
 		return obj;
+	}
+
+	@Override
+	public int getTotalNumberOfCutomer(int owner_id) {
+		List<Customer> customerList = customerDAO.selectAllByOwnerId(owner_id);
+		return customerList.size();
 	}
 
 	@Override

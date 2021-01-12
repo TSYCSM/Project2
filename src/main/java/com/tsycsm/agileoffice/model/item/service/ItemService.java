@@ -11,6 +11,7 @@ import com.tsycsm.agileoffice.model.domain.Item;
 public interface ItemService {
 	public Item select(int item_id);
 	public Item duplicationCheck(String item_name);
+	public Item selectJoinCategory(int item_id);
 	public List<Item> selectByOwnerId(int owner_id);
 	public List<Item> selectByCategoryId(Item item);
 	public void regist(Item item, FileManager fileManager);

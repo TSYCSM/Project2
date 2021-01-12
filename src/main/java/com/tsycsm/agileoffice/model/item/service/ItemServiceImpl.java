@@ -33,6 +33,11 @@ public class ItemServiceImpl implements ItemService {
 		}
 		return item;
 	}
+	
+	@Override
+	public Item selectJoinCategory(int item_id) {
+		return itemDAO.selectJoinCategory(item_id);
+	}
 
 	@Override
 	public List<Item> selectByOwnerId(int owner_id) {

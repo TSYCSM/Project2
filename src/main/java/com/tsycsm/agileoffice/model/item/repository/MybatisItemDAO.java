@@ -57,6 +57,15 @@ public class MybatisItemDAO implements ItemDAO{
 	public Item select(int item_id) {
 		return sqlSessionTemplate.selectOne("Item.select", item_id);
 	}
+	
+	@Override
+	public Item selectJoinCategory(int item_id) {
+		Item item = sqlSessionTemplate.selectOne("Item.selectJoinCategory", item_id);
+		
+		System.out.println(item);
+
+		return item;
+	}	
 
 
 	@Override
