@@ -161,12 +161,27 @@ start with 1;
 
 --------------------------------------
 order_detail¿¡ orderdate ³Ö±â
+--------------------------------------
 alter table order_detail
 add orderdate date default sysdate;
 
  alter table item
  add constraint chkStock
  check (stock >=0);
+
+alter table order_detail
+add owner_id number;
+
+alter table order_detail
+add constraint fk_owner_order_detail
+foreign key(owner_id) references owner(owner_id)
+
+
+
+
+
+
+
 
 
 

@@ -28,9 +28,8 @@ public class OrderServiceImpl implements OrderService{
 	private ItemDAO itemDAO;
 	
 	@Override
-	public List selectAllByOwner() {
-		// TODO Auto-generated method stub
-		return null;
+	public List selectAllByOwner(int owner_id) {
+		return orderSummaryDAO.selectAllByOwner(owner_id);
 	}
 
 	@Override

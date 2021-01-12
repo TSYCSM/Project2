@@ -13,7 +13,7 @@
     <i class="fa fa-caret-down"></i>
   </button>
   <div class="dropdown-container">
-    <a href="/view/owner/reports/sales_summary.jsp">매출 요약</a>
+    <a href="/owner/reports/salesSummary">매출 요약</a>
     <a href="/view/owner/reports/sales_item.jsp">상품별 매출</a>
     <a href="/view/owner/reports/sales_category.jsp">카테고리별 매출</a>
     <a href="/view/owner/reports/sales_employee.jsp">직원별 매출</a>

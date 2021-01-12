@@ -16,9 +16,8 @@ public class MybatisOrderSummaryDAO implements OrderSummaryDAO{
 	private SqlSessionTemplate sqlSessionTemplate;
 	
 	@Override
-	public List selectAllByOwner() {
-		// TODO Auto-generated method stub
-		return null;
+	public List selectAllByOwner(int owner_id) {
+		return sqlSessionTemplate.selectList("OrderSummary.selectAllByOwner", owner_id);
 	}
 
 	@Override

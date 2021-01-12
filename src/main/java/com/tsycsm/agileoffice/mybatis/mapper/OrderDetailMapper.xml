@@ -9,7 +9,7 @@
 	<select id="selectAllByOrderSummaryId" parameterType="int" resultType="OrderDetail">
 		select * from order_detail where order_summary_id=#{order_summary_id}
 	</select>
-	
+
 </mapper>
 
 
