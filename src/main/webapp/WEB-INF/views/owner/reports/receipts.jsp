@@ -15,6 +15,11 @@
 <link rel="stylesheet" type="text/css" href="/resources/css/owner/reports/receipt_layout.css">
 
 <script>
+const formatter = new Intl.NumberFormat('ko-KR', {
+	  style: 'currency',
+	  currency: 'KRW'
+	})
+
 function showReceipt(summary_id){
 	var tag="";
 	$.ajax({
@@ -25,16 +30,17 @@ function showReceipt(summary_id){
 		},
 		success:function(orderSummary){
 			var orderDetailList = orderSummary.orderDetailList
-			$(".total_price").html(orderSummary.total_price)
-			console.log("\n");
+			$(".total_price").html(formatter.format(orderSummary.total_price))
+			
 			for(var i=0; i<orderDetailList.length;i++){
 				var orderDetail= orderDetailList[i];
 				var item= orderDetailList[i].item;
-				tag += "<div style=\"border-top : 1px solid black\">"
+				tag += "<div style=\"border-top : 1px solid #c7c7c7; padding-top: 8px;\">"
 				tag += item.item_name
 				tag += "</div>"
 				tag += "<div>"
-				tag += orderDetail.price+" X "+orderDetail.quantity
+				tag += formatter.format(orderDetail.price)+" X "+orderDetail.quantity
+				tag += "<span class=\"sub\">"+formatter.format(orderDetail.price*orderDetail.quantity)+"</span>"
 				tag += "</div>"
 				
 				
@@ -91,6 +97,25 @@ function hideReceipt(){
 						<td><%=orderSummary.getTotal_price() %></td>
 					</tr>
 				<%} %>
+				
+				<tr>
+					<td colspan="4" style="text-align:center">
+						<%if(pager.getFirstPage() >1){ %>
+							<a href="/owner/reports/receipts?currentPage=<%=pager.getFirstPage()-1%>">◀</a>					
+						<%}else{ %>
+							<a href = "javascript:alert('처음 페이지 입니다')">◀</a>
+						<%} %>
+						<%for(int i=pager.getFirstPage(); i<=pager.getLastPage(); i++){ %>
+						<%if(i > pager.getTotalPage()) break; %>
+						<a href="/owner/reports/receipts?currentPage=<%=i%>">[<%=i %>]</a>
+						<%} %>
+						<%if(pager.getLastPage() < pager.getTotalPage()) {%>
+							<a href="/owner/reports/receipts?currentPage=<%=pager.getLastPage()+1%>">▶</a>
+						<%}else{ %>
+							<a href = "javascript:alert('마지막 페이지입니다.')">▶</a>
+						<%} %>
+					</td>
+				</tr>
 			</table>
 <%@ include file="../inc/footer.jsp" %>
 
