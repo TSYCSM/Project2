@@ -27,8 +27,8 @@ public class MybatisReviewDAO implements ReviewDAO{
 	}
 
 	@Override
-	public void insert(Review reivew) throws AsyncDMLException{
-		int result = sqlSessionTemplate.insert("Review.insert", reivew);
+	public void insert(Review review) throws AsyncDMLException{
+		int result = sqlSessionTemplate.insert("Review.insert", review);
 		
 		if(result==0) {
 			throw new AsyncDMLException("리뷰 등록 실패");
@@ -36,15 +36,21 @@ public class MybatisReviewDAO implements ReviewDAO{
 	}
 
 	@Override
-	public void update(Review reivew) {
-		// TODO Auto-generated method stub
-		
+	public void update(Review review) {
+		int result = sqlSessionTemplate.update("Review.update", review);
+
+		if(result==0) {
+			throw new AsyncDMLException("리뷰 수정 실패");
+		}
 	}
 
 	@Override
-	public void delete(Review reivew) {
-		// TODO Auto-generated method stub
+	public void delete(int review_id) {
+		int result = sqlSessionTemplate.delete("Review.delete", review_id);
 		
+		if(result == 0) {
+			throw new AsyncDMLException("리뷰 삭제 실패");
+		}
 	}
 	
 }

@@ -9,5 +9,5 @@ public interface ReviewDAO {
 	public Review select(int review_id);
 	public void insert(Review reivew);
 	public void update(Review reivew);
-	public void delete(Review reivew);
+	public void delete(int review_id);
 }
