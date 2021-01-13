@@ -44,7 +44,7 @@ public class MybatisOwnerDAO implements OwnerDAO{
 
 	@Override
 	public void delete(Owner owner) throws OwnerException{
-		int result = sqlSessionTemplate.insert("Owner.delete", owner);
+		int result = sqlSessionTemplate.delete("Owner.delete", owner);
 		
 		if(result == 0) {
 			throw new OwnerException("회원 삭제 실패");
@@ -55,7 +55,17 @@ public class MybatisOwnerDAO implements OwnerDAO{
 
 	@Override
 	public void update(Owner owner) throws OwnerException{
-		int result = sqlSessionTemplate.update("Owner.update", owner);
+		int result = 0;
+		
+		if(owner.getPassword() != null) {
+			result = sqlSessionTemplate.update("Owner.updatePassword", owner);			
+		}else {
+			result = sqlSessionTemplate.update("Owner.updateWithoutPassword", owner);
+		}
+		
+		if(result==0) {
+			throw new OwnerException("회원수정 실패");
+		}
 	}
 
 	public void duplicateCheck(String user_id) throws OwnerException{

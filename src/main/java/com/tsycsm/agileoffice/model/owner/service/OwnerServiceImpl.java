@@ -64,6 +64,10 @@ public class OwnerServiceImpl implements OwnerService{
 
 	@Override
 	public void update(Owner owner) throws OwnerException{
+		if(owner.getPassword()!=null) {
+			SecureManager secureManager = new SecureManager();
+			owner.setPassword(secureManager.getSecureData(owner.getPassword())); 
+		}
 		ownerDAO.update(owner);
 	}
 

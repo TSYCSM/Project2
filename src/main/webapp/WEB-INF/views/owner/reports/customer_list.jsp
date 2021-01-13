@@ -7,17 +7,18 @@
 <%@ include file="../inc/header.jsp" %>
 </head>
 <%@ include file="../inc/common.jsp"%>
-			category list <br><br>
+			customer list <br><br>
 			<table>
 				<tr>
-					<th>카테고리</th>
-					<th>판매수량</th>
-					<th>매출액</th>
-					
+					<th>이름</th>
+					<th>point</th>
+					<th>전화번호</th>
+					<th>등록일자</th>
 				</tr>
 				<tr>
-					<td>box</td>
-					<td>7</td>
+					<td>james</td>
+					<td>350</td>
+					<td>350</td>
 					<td>350</td>
 				</tr>
 			</table>

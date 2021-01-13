@@ -22,12 +22,20 @@ public class CustomerServiceImpl implements CustomerService{
 	}
 
 	@Override
+	public List selectAll(int owner_id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
 	public Customer select(Customer customer) {
 		Customer obj = customerDAO.select(customer);
 		
 		return obj;
 	}
 
+	
+	
 	@Override
 	public int getTotalNumberOfCutomer(int owner_id) {
 		List<Customer> customerList = customerDAO.selectAllByOwnerId(owner_id);

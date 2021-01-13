@@ -22,20 +22,47 @@ input[name='email_server']{
 
 </style>
 <script>
-function changeInfo() {
-	var top = window.screen.height;
-    top = top > 0 ? top/2 : 0;
-            
-	var left = window.screen.width;
-	    left = left > 0 ? left/2 : 0;
-	    
-	window.open("/owner/account/checkPassword", "","width=350 height=100 left="+left+" top="+top);
-	
-	
+
+function showCheckBox() {
+	$(".check-box").show();
+
 }
-function checkIdFormClose(sId) {
-	opener.joinForm.user_id.value = sId;
-	window.close();
+
+function hideCheckBox(){
+	$(".check-box").hide();
+}
+
+function hideNewBox(){
+	$(".new-box").hide();
+}
+
+function checkPassword(){
+	var formData = $("#check-box-form").serialize();
+	$.ajax({
+		url: "/main/checkPassword",
+		type: "post",
+		data: formData,
+		success:function(responseData){
+			alert(responseData.msg)
+			$(".check-box").html("");
+			$(".check-box").hide();
+			$(".new-box").show();
+		}
+	});
+}
+
+function changePassword(){
+	var formData = $("#new-box-form").serialize();
+	$.ajax({
+		url: "/main/ownerPasswordUpdate",
+		type: "post",
+		data: formData,
+		success:function(responseData){
+			alert(responseData.msg)
+			$(".new-box").hide();
+			$(".new-box").html("");
+		}
+	});
 }
 
 function deleteAccount(){
@@ -63,14 +90,12 @@ function updateInfo(){
 		success:function(responseData){
 			alert(responseData.msg)
 			location.href=responseData.url;
+			
 		}
 	});
-	
-	
 }
-
-
 </script>
+
 </head>
 <%@ include file="../inc/common.jsp"%>
 			<div class="container">
@@ -78,7 +103,6 @@ function updateInfo(){
 					<input type="hidden" name="owner_id" value="<%=owner.getOwner_id()%>"/>
 					<input type="hidden" name="user_id" value="<%=owner.getUser_id()%>"/>
 					<input type="hidden" name="regdate" value="<%=owner.getRegdate()%>"/>
-					<input type="hidden" name="password" value="<%=owner.getPassword()%>"/>
 					
 					<div class="outerbox">
 						<label for="fname">상호명</label>
@@ -105,15 +129,31 @@ function updateInfo(){
 							<input type="text" width="40%" name="email_server"  value="<%=owner.getEmail_server() %>" required>
 						</div>
 					</div>
-					<div class="outerbox">
+					<div class="passwordbox" >
 						<label for="lname">비밀번호</label><br>
 						<div class="box">
 							<div>*******</div>
-							<input type="button" onclick="changeInfo()" value="변경"><br>
+							<input type="button" class="change_btn" onclick="showCheckBox()" value="변경"><br>
 						</div>
 					</div>
-										
-					<div class="outerbox">
+					</form>
+					<form id="check-box-form">
+						<div class="check-box" style ="display:none;">
+							<input type="password" name="password" placeholder="비밀번호를 입력하세요">
+							<input type="hidden" name="user_id" value="<%=owner.getUser_id()%>">
+							<input type="button" onClick="checkPassword()" value="확인">
+							<input type="button" onClick="hideCheckBox()" value="취소">
+						</div>
+					</form>
+					<form id="new-box-form">
+						<div class="new-box" style ="display:none;">
+								<input type="password" name="password" placeholder="새로운 비밀번호를 입력하세요">
+								<input type="hidden" name="owner_id" value="<%=owner.getOwner_id()%>">
+								<input type="button" onClick="changePassword()" value="확인">
+								<input type="button" onClick="hideNewBox()" value="취소">
+						</div>
+					</form>		
+					<div class="outerbox" style ="padding-top:30px">
 						<label for="lname">계정삭제</label><br>
 						<div class="box">
 							<div>계정과 관련된 모든 데이터를 영구적으로 <br>삭제할 수 있습니다.</div>
@@ -126,7 +166,6 @@ function updateInfo(){
 							<input type="button" class="save_btn" onClick="updateInfo()" value="저장">
 						</div>
 					</div>
-				</form>
 			</div>
 		</div>
 		<%@ include file="../inc/footer.jsp"%>

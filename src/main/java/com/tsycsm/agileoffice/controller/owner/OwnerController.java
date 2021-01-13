@@ -133,7 +133,7 @@ public class OwnerController {
 		return messageData;
 	}
 	
-	//로그아웃
+	//회원정보 수정
 	@PostMapping("/main/ownerUpdate")
 	@ResponseBody
 	public MessageData ownerUpdate(Owner owner, HttpSession session) {
@@ -141,7 +141,6 @@ public class OwnerController {
 		logger.debug("email_id: "+owner.getEmail_id());
 		logger.debug("email_server: "+owner.getEmail_server());
 		logger.debug("shopname: "+owner.getShopname());
-		logger.debug("password: "+owner.getPassword());
 		
 		ownerService.update(owner);
 		session.setAttribute("owner", owner);
@@ -197,17 +196,22 @@ public class OwnerController {
 		MessageData messageData = new MessageData();
 		messageData.setResultCode(1);
 		messageData.setMsg("비밀번호가 확인되었습니다.");
-		messageData.setUrl("/owner/account/getNewPassword");
 		
 		return messageData;
 	}
 	
 	//새로운 비밀번호 등록
-	@GetMapping(value="/owner/account/getNewPassword")
-	public String getNewPassword() {
+	@PostMapping(value="/main/ownerPasswordUpdate")
+	@ResponseBody
+	public MessageData changePassword(Owner owner) {
 		
+		ownerService.update(owner);
 		
-		return "owner/mypage/get_newpassword";
+		MessageData messageData = new MessageData();
+		messageData.setResultCode(1);
+		messageData.setMsg("비밀번호가 바뀌었습니다.");
+		
+		return messageData;
 	}
 	
 	

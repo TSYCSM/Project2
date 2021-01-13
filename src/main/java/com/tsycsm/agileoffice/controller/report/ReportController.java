@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tsycsm.agileoffice.common.Pager;
+import com.tsycsm.agileoffice.model.customer.service.CustomerService;
 import com.tsycsm.agileoffice.model.domain.OrderDetail;
 import com.tsycsm.agileoffice.model.domain.OrderSummary;
 import com.tsycsm.agileoffice.model.domain.Owner;
@@ -28,6 +29,9 @@ public class ReportController {
 	
 	@Autowired
 	private OrderService orderService;
+	
+	@Autowired
+	private CustomerService customerService;
 	
 	@GetMapping("/owner/reports/salesSummary")
 	public ModelAndView viewSalesSummary(HttpServletRequest request) {
@@ -85,6 +89,15 @@ public class ReportController {
 		logger.debug("날짜: "+orderSummary.getOrderdate());
 		
 		return orderSummary;
+	}
+	
+	//고객 가져오기
+	@GetMapping("/owner/reports/customerList")
+	@ResponseBody
+	public ModelAndView viewCustomerList() {
+		ModelAndView mav = new ModelAndView("owner/reports/customer_list");
+		
+		return mav;
 	}
 }
 

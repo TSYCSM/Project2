@@ -94,24 +94,6 @@ function logout(){
 	}
 }
 
-function checkPassword(){
-	var formData = $("#checkPassword-box").serialize();
-	$.ajax({
-		url: "/main/checkPassword",
-		type: "post",
-		data: formData,
-		success:function(responseData){
-			alert(responseData.msg)
-			if(responseData.resultCode==1){
-				location.href=responseData.url
-			}
-		}
-	});
-}
-
-function getNewPassword(){
-	alert(opener.mypage-form.password.value);
-}
 
 
 

@@ -14,11 +14,9 @@
   </button>
   <div class="dropdown-container">
     <a href="/owner/reports/salesSummary">매출 요약</a>
-    <a href="#">상품별 매출</a>
-    <a href="#">카테고리별 매출</a>
-    <a href="#">직원별 매출</a>
-    <a href="#">할인</a>
     <a href="/owner/reports/receipts">영수증 보관함</a>
+    <a href="/owner/reports/customerList">고객 관리</a>
+    <a href="#">할인</a>
   </div>
   
   <button class="dropdown-btn">물품 목록 
@@ -30,7 +28,6 @@
     <a href="#">할인</a>
   </div>
   
-   <a href="#">고객 관리</a>
    <a href="#">직원 관리</a>
 
   

@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-input[type=text], input[type=number], select{
+input[type=text], input[type=number], input[type=password], select{
 
   padding: 12px;
   border: 1px solid #ccc;
@@ -80,6 +80,23 @@ select{
 	
 	float:right;
 }
+
+.check-box input[type=button]{
+	background: #d9d9d9;
+	color: #666666;
+	height: 30px;
+	width: 50px;
+	padding: 0px 0px 0px 0px;
+	font-size:15px;
+	font-weight: bold;
+	
+}
+
+.new-box input[type=password]{
+	background: #ffbdbd;
+	width:50%;
+}
+
 .outerbox{
 	padding-bottom: 30px;
 }

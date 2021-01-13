@@ -6,6 +6,7 @@ import com.tsycsm.agileoffice.model.domain.Customer;
 
 public interface CustomerService {
 	public List selectAll();
+	public List selectAll(int owner_id);
 	public Customer select(Customer customer);
 	public int getTotalNumberOfCutomer(int owner_id);
 	public void regist(Customer customer);
