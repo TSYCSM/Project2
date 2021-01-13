@@ -34,6 +34,11 @@ public class MybatisCustomerDAO implements CustomerDAO{
 	}
 	
 	@Override
+	public Customer selectJoinOrderSummary(int customer_id) {
+		return sqlSessionTemplate.selectOne("Customer.selectJoinOrderSummary", customer_id);
+	}
+	
+	@Override
 	public List<Customer> selectAllByOwnerId(int owner_id) {
 		return sqlSessionTemplate.selectList("Customer.selectAllByOwnerId", owner_id);
 	}

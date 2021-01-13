@@ -8,6 +8,7 @@ public interface CustomerService {
 	public List selectAll();
 	public List selectAll(int owner_id);
 	public Customer select(Customer customer);
+	public Customer selectJoinOrderSummary(int customer_id);
 	public int getTotalNumberOfCutomer(int owner_id);
 	public void regist(Customer customer);
 	public void update(Customer customer);

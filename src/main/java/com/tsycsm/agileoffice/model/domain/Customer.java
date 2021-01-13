@@ -1,5 +1,7 @@
 package com.tsycsm.agileoffice.model.domain;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -10,4 +12,6 @@ public class Customer {
 	private String phone;
 	private int point;
 	private String regdate;
+	
+	private List<OrderSummary> orderSummaryList;
 }

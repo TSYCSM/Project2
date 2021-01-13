@@ -1,10 +1,13 @@
+<%@page import="com.tsycsm.agileoffice.common.Formatter"%>
+<%@page import="com.tsycsm.agileoffice.model.domain.OrderSummary"%>
 <%@page import="com.tsycsm.agileoffice.common.Pager"%>
 <%@page import="com.tsycsm.agileoffice.model.domain.Customer"%>
 <%@page import="java.util.List"%>
 <%@ page contentType="text/html;charset=utf-8"%>
 <%
 	Pager pager = (Pager)request.getAttribute("pager");
-	List<Customer> customerList = pager.getList();
+	Customer customer = (Customer)request.getAttribute("customer");
+	List<OrderSummary> orderSummaryList = pager.getList();
 %>
 <!DOCTYPE html>
 <html>
@@ -14,14 +17,16 @@
 <%@ include file="../inc/header.jsp" %>
 </head>
 <%@ include file="../inc/common.jsp"%>
-			customer list <br><br>
+			<div style="width: 80%">
+				<div><%=customer.getCustomer_name() %>님 정보</div>
+				<div style="float: right; margin-right: 30px">연락처: <%=customer.getPhone() %></div>
+			</div>
+			<br>
 			<table>
 				<tr>
 					<th>No</th>
-					<th>이름</th>
-					<th>point</th>
-					<th>전화번호</th>
-					<th>등록일자</th>
+					<th>합계</th>
+					<th>날짜</th>
 				</tr>
 				
 				<%
@@ -30,28 +35,29 @@
 				%>
 				<%for(int i=0; i<pager.getPageSize(); i++){ %>
 					<%if(num < 1) break; %>
-					<%Customer customer= customerList.get(curPos++); %>
+					<%OrderSummary orderSummary= orderSummaryList.get(curPos++); %>
 					<tr>
 						<td><%=num-- %></td>
-						<td><a href="/owner/reports/customerDetail?customer_id=<%=customer.getCustomer_id()%>"><%=customer.getCustomer_name() %></a></td>
-						<td><%=customer.getPoint() %></td>
-						<td><%=customer.getPhone() %></td>
-						<td><%=customer.getRegdate().substring(0, 10) %></td>
+						<td><%=Formatter.getCurrency(orderSummary.getTotal_price()) %></td>
+						<td><%=orderSummary.getOrderdate().substring(0, 10) %></td>
 					</tr>
 				<%} %>
 				<tr>
-					<td colspan="5" style="text-align:center">
+					<td colspan="3" style="text-align:center">
 						<%if(pager.getFirstPage() >1){ %>
-							<a href="/owner/reports/customerList?currentPage=<%=pager.getFirstPage()-1%>">◀</a>					
+							<a href="/owner/reports/customerDetail?currentPage=<%=pager.getFirstPage()-1%>
+								&customer_id=<%=customer.getCustomer_id()%>">◀</a>					
 						<%}else{ %>
 							<a href = "javascript:alert('처음 페이지 입니다')">◀</a>
 						<%} %>
 						<%for(int i=pager.getFirstPage(); i<=pager.getLastPage(); i++){ %>
 						<%if(i > pager.getTotalPage()) break; %>
-						<a href="/owner/reports/customerList?currentPage=<%=i%>">[<%=i %>]</a>
+						<a href="/owner/reports/customerDetail?currentPage=<%=i%>
+							&customer_id=<%=customer.getCustomer_id()%>">[<%=i %>]</a>
 						<%} %>
 						<%if(pager.getLastPage() < pager.getTotalPage()) {%>
-							<a href="/owner/reports/customerList?currentPage=<%=pager.getLastPage()+1%>">▶</a>
+							<a href="/owner/reports/customerDetail?currentPage=<%=pager.getLastPage()+1%>
+								&customer_id=<%=customer.getCustomer_id()%>">▶</a>
 						<%}else{ %>
 							<a href = "javascript:alert('마지막 페이지입니다.')">▶</a>
 						<%} %>

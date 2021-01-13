@@ -66,6 +66,10 @@
 		select * from order_summary where order_summary_id =#{order_summary_id}
 	</select>
 	
+	<select id="selectByCustomerId" parameterType="int" resultType="OrderSummary">
+		select * from order_summary where customer_id =#{customer_id} order by order_summary_id desc
+	</select>
+	
 	
 </mapper>
 

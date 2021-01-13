@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.tsycsm.agileoffice.common.Pager;
 import com.tsycsm.agileoffice.model.customer.service.CustomerService;
+import com.tsycsm.agileoffice.model.domain.Customer;
 import com.tsycsm.agileoffice.model.domain.OrderDetail;
 import com.tsycsm.agileoffice.model.domain.OrderSummary;
 import com.tsycsm.agileoffice.model.domain.Owner;
@@ -94,8 +95,34 @@ public class ReportController {
 	//고객 가져오기
 	@GetMapping("/owner/reports/customerList")
 	@ResponseBody
-	public ModelAndView viewCustomerList() {
+	public ModelAndView viewCustomerList(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("owner/reports/customer_list");
+		
+		HttpSession session = request.getSession();
+		Owner owner =  (Owner)session.getAttribute("owner"); 
+		int owner_id = owner.getOwner_id();
+		List<Customer> customerList =  customerService.selectAll(owner_id);
+		pager.init(request, customerList);
+		
+		mav.addObject("pager", pager);
+		
+		return mav;
+	}
+	
+	//고객 가져오기
+	@GetMapping("/owner/reports/customerDetail")
+	@ResponseBody
+	public ModelAndView viewCustomerDetail(HttpServletRequest request, int customer_id) {
+		ModelAndView mav = new ModelAndView("owner/reports/customer_detail");
+		
+		HttpSession session = request.getSession();
+
+		Customer customer =  customerService.selectJoinOrderSummary(customer_id);
+		List<OrderSummary> orderSummaryList =  customer.getOrderSummaryList();
+		pager.init(request, orderSummaryList);
+		
+		mav.addObject("pager", pager);
+		mav.addObject("customer", customer);
 		
 		return mav;
 	}
