@@ -20,7 +20,7 @@ int customer_amount = (Integer)request.getAttribute("customer_amount");
 <script>
 	var item_len = <%=itemList.size()%>;
 	$(function(){
-		//getAsyncList(1);
+		getAsyncList(1);
 	});
 	function getItemDetail(item_id) {
 		$.ajax({
@@ -31,7 +31,6 @@ int customer_amount = (Integer)request.getAttribute("customer_amount");
 			},
 			success: function(responseData) {
 				var itemJson= JSON.parse(responseData);
-				console.log(itemJson);
 				$("#show-box").html("");
 
 				var tag = "";
@@ -42,13 +41,23 @@ int customer_amount = (Integer)request.getAttribute("customer_amount");
 				tag += "</div>";
 
 				tag += "<div class=\"outerbox\">";
-				tag += "<label>카테고리</label>";
+				tag += "<label>범주</label>";
 				tag += "<div class=\"box\">" + itemJson.category_name + "</div>";
 				tag += "</div>";
 
 				tag += "<div class=\"outerbox\">";
 				tag += "<label>남은 수량</label>";
 				tag += "<div class=\"box\">" + itemJson.stock + "</div>";
+				tag += "</div>";
+
+				tag += "<div class=\"outerbox\">";
+				tag += "<div class=\"box\">";
+				tag += "<img width=\"80%\" src='/resources/data/" + itemJson.item_id + "." + itemJson.filename + "'/>"
+				tag += "</div>";
+				tag += "</div>";
+
+				tag += "<div class=\"outerbox\">";
+				tag += "등록 : <div style=\"display:inline-block\" class=\"box\">" + itemJson.regdate + "</div>";
 				tag += "</div>";
 
 				$("#show-box").html(tag);
@@ -72,40 +81,39 @@ int customer_amount = (Integer)request.getAttribute("customer_amount");
 				owner_id: getParameterByName("owner_id")
 			},
 			success:function(itemArray){
-				alert(itemArray);
 				item_len = itemArray.length;
 				var pager = getPager(cPage, item_len);
 				var tag="";
+				tag += "<tr>";
+				tag += "<th>No</th>";
+				tag += "<th>상품명</th>";
+				tag += "<th>범주</th>";
+				tag += "<th>재고</th>";
+				tag += "<th>등록일</th>";
+				tag += "</tr>"
+
 				for(var i=0; i<pager.pageSize;i++){
 					if(pager.num < 1) break;
 					var item = itemArray[pager.curPos++];
 					tag += "<tr>";
 					tag += "<td>" + (pager.num--) + "</td>";
-					tag += "<td>" + item.item_name + "</td>";
-					tag += "<td><p>" + item.category.category_name + "</p></td>";
+					tag += "<td><a href='javascript:getItemDetail(" + item.item_id + ")'>" + item.item_name + "</a></td>";
+					tag += "<td>" + item.category.category_name + "</td>";
 					tag += "<td>" + item.stock + "</td>";
-					tag += "<td>" + item.regdate + "</td>";
+					tag += "<td>" + item.regdate.substring(0, 10) + "</td>";
 					tag += "</tr>";
 				}
-
-				$("#item-list").html(tag);
-				
-				tag = "";
 				tag += "<tr>";
-				tag += "<td style=\"text-align:center\">";
-				tag += "<a href=\"#\">◀</a>";
-
+				tag += "<td colspan='5' style=\"text-align:center\">";
+				tag += "<a href=\"javascript:getAsyncList(" + (parseInt(pager.firstPage)-1) + ")\">◀</a>";
 				for(var i=pager.firstPage; i<=pager.lastPage;i++){
 					if(i>pager.totalPage) break;
-					tag += "<a href=\"javascript:getAsyncList("+i+")\"> ["+i+"] </a>"
+					tag += "<a href=\"javascript:getAsyncList(" + i + ")\"> [" + i + "] </a>"
 				}
-				
-				tag += "<a href=\"#\">▶</a>";
-				
+				tag += "<a href=\"javascript:getAsyncList(" + (parseInt(pager.lastPage)+1) + ")\">▶</a>";
 				tag += "</td>";
 				tag += "</tr>";
-				
-				$(".page-box").html(tag);
+				$("#item-list").html(tag);
 			}
 		})
 	}
@@ -150,40 +158,10 @@ int customer_amount = (Integer)request.getAttribute("customer_amount");
 		</div>
 	</div>
 
-	<div id="item-list" class="container" style="left: 800px;">
-		<div class="bigbox">
-			<div class="smallbox">
-				<form>
-					<table style="width: 100%">
-						<tr>
-							<th>No</th>
-							<th>상품명</th>
-							<th>카테고리</th>
-							<th>수량</th>
-							<th>등록일자</th>
-						</tr>
-						<% for (int i = 0; i < itemList.size(); i++) { %>
-						<% Item item = itemList.get(i); %>
-						<tr>
-							<td>No</td>
-							<td><a href="javascript:getItemDetail(<%=item.getItem_id() %>) "><%=item.getItem_name()%></a></td>
-							<td>
-							<%if(item.getCategory() != null) { %>
-								<%=item.getCategory().getCategory_name() %>
-							<%} else { %>
-								카테고리 없음
-							<%} %>
-							</td>
-							<td><%=item.getStock() %></td>
-							<td><%=item.getRegdate().substring(0, 10) %></td>
-						</tr>
-						<% } %>
-						
-					</table>
-				</form>
-				<button type="button" onClick="getAsyncList(1)"></button>
-			</div>
-		</div>
+	<div id="item-list" class="container" style="background: transparent; left: 800px;">
+		<table>
+				
+		</table>
 	</div>
 </div>
 

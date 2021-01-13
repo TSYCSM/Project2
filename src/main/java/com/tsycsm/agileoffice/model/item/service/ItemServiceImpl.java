@@ -11,6 +11,7 @@ import com.tsycsm.agileoffice.common.FileManager;
 import com.tsycsm.agileoffice.exception.AsyncDMLException;
 import com.tsycsm.agileoffice.exception.DMLException;
 import com.tsycsm.agileoffice.exception.NameDuplicatedException;
+import com.tsycsm.agileoffice.model.domain.Category;
 import com.tsycsm.agileoffice.model.domain.Item;
 import com.tsycsm.agileoffice.model.item.repository.ItemDAO;
 
@@ -36,12 +37,32 @@ public class ItemServiceImpl implements ItemService {
 	
 	@Override
 	public Item selectJoinCategory(int item_id) {
-		return itemDAO.selectJoinCategory(item_id);
+		Item item = itemDAO.selectJoinCategory(item_id);
+		
+		System.out.println(item.getCategory());
+		
+		if(item.getCategory() == null) {
+			Category category = new Category();
+			category.setCategory_name("카테고리 없음");
+			item.setCategory(category);
+		}
+		
+		return item;
 	}
 
 	@Override
 	public List<Item> selectAllJoinCategory(int owner_id) {
-		return itemDAO.selectAllJoinCategory(owner_id);
+		List<Item> itemList = itemDAO.selectAllJoinCategory(owner_id);
+		for(int i=0; i<itemList.size(); i++) {
+			Item item = itemList.get(i);
+			if(item.getCategory() == null) {
+				Category category = new Category();
+				category.setCategory_name("카테고리 없음");
+				item.setCategory(category);
+			}
+		}
+		
+		return itemList;
 	}
 
 	@Override
