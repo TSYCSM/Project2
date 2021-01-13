@@ -49,8 +49,7 @@ public class MybatisOwnerDAO implements OwnerDAO{
 
 	@Override
 	public void update(Owner owner) throws OwnerException{
-		// TODO Auto-generated method stub
-		
+		int result = sqlSessionTemplate.update("Owner.update", owner);
 	}
 
 	public void duplicateCheck(String user_id) throws OwnerException{

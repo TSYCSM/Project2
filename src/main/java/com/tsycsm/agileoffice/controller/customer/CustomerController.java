@@ -51,8 +51,8 @@ public class CustomerController {
 	}
 	
 	@PostMapping("/main/customerLogin")
-	public String customerLogin(HttpSession session, String phone) {
-		Customer obj = customerService.select(phone);
+	public String customerLogin(HttpSession session, Customer customer) {
+		Customer obj = customerService.select(customer);
 		session.setAttribute("customer", obj);
 		
 		return "redirect:/order/main";

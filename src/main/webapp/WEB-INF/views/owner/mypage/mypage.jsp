@@ -5,15 +5,21 @@
 <meta charset="UTF-8">
 <title>owner page</title>
 <%@ include file="../inc/header.jsp" %>
+
+<style>
+.email_id{
+	width:20%;
+}
+
+.email_server{
+	width:40%;
+}
+
+
+</style>
 <script>
 function changeInfo() {
-	var top = window.screen.height;
-    top = top > 0 ? top/2 : 0;
-            
-	var left = window.screen.width;
-	    left = left > 0 ? left/2 : 0;
-	    
-	window.open("checkpassword.jsp", "","width=350 height=100 left="+left+" top="+top);
+	
 	
 }
 function checkIdFormClose(sId) {
@@ -21,29 +27,55 @@ function checkIdFormClose(sId) {
 	window.close();
 }
 
+function updateInfo(){
+	var formData = $("#mypage-form").serialize();
+	$.ajax({
+		url:"/main/ownerUpdate",
+		type:"post",
+		data:formData,
+		success:function(responseData){
+			alert(responseData.msg)
+			location.href=responseData.url;
+		}
+	});
+	
+	
+}
+
+
 </script>
 </head>
 <%@ include file="../inc/common.jsp"%>
-			여기는 mypage 메인
 			<div class="container">
-				<form>
+				<form id="mypage-form">
+					<input type="hidden" name="owner_id" value="<%=owner.getOwner_id()%>"/>
+					<input type="hidden" name="user_id" value="<%=owner.getUser_id()%>"/>
+					<input type="hidden" name="regdate" value="<%=owner.getRegdate()%>"/>
+					<input type="hidden" name="password" value="<%=owner.getPassword()%>"/>
+					
 					<div class="outerbox">
 						<label for="fname">상호명</label>
 						<div class="box">
-							<input type="text" id="fname" name="shopname" placeholder="Your name..">
+							<input type="text" id="fname" name="shopname"  value="<%=owner.getShopname() %>" placeholder="Your shop name..">
+						</div>					
+					</div>
+					<div class="outerbox">
+						<label for="fname">사용자 이름</label>
+						<div class="box">
+							<input type="text" id="fname" name="user_name"  value="<%=owner.getUser_name() %>" placeholder="Your name..">
 						</div>					
 					</div>
 					<div class="outerbox">
 						<label for="lname">id</label>
 						<div class="box">
-							<div style="width:60%;">아이디 들어올 곳</div>
+							<div style="width:60%;"><%=owner.getUser_id() %></div>
 						</div>
 					</div>
 					<div class="outerbox">
 						<label for="lname">이메일</label>
 						<div class="box">
-							<div style="width:60%;">fge503@naver.com</div>
-							<button type="button" onclick="changeInfo()">변경</button>
+							<input type="text" width="20%" class="email_id" name="email_id"  value="<%=owner.getEmail_id() %>" required>@
+							<input type="text" width="40%" class="email_server" name="email_server"  value="<%=owner.getEmail_server() %>" required>
 						</div>
 					</div>
 					<div class="outerbox">
@@ -64,7 +96,7 @@ function checkIdFormClose(sId) {
 					<div>
 						<div class="buttonbox">
 							<input type="reset" value="취소">
-							<input type="submit" value="저장">
+							<input type="button" class="save_btn" onClick="updateInfo()" value="저장">
 						</div>
 					</div>
 				</form>

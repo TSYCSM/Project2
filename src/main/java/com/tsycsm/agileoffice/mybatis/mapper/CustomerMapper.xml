@@ -6,8 +6,8 @@
 		values(seq_customer.nextval, #{owner_id}, #{customer_name}, #{phone})
 	</insert>
 	
-	<select id="select" parameterType="String" resultType="Customer">
-		select * from customer where phone=#{phone}
+	<select id="select" parameterType="Customer" resultType="Customer">
+		select * from customer where phone=#{phone} and owner_id=#{owner_id}
 	</select>
 	
 	<select id="selectById" parameterType="int" resultType="Customer">

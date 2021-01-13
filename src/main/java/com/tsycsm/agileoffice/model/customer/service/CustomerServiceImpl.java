@@ -22,8 +22,8 @@ public class CustomerServiceImpl implements CustomerService{
 	}
 
 	@Override
-	public Customer select(String phone) {
-		Customer obj = customerDAO.select(phone);
+	public Customer select(Customer customer) {
+		Customer obj = customerDAO.select(customer);
 		
 		return obj;
 	}

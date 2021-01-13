@@ -80,3 +80,38 @@ function loadNav() {
 		});
 	}
 }
+
+function test(){
+	if(confirm("로그아웃 하시겠습니까?")){
+		$.ajax({
+			url: "/main/ownerLogout",
+			type: "get",
+			success:function(responseData){
+				alert(responseData.msg);
+				location.href = responseData.url;
+			}			
+		});
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

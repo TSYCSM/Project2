@@ -23,11 +23,11 @@ public class MybatisCustomerDAO implements CustomerDAO{
 	}
 
 	@Override
-	public Customer select(String phone) throws CustomerNotFoundException{
-		Customer obj = sqlSessionTemplate.selectOne("Customer.select", phone);
+	public Customer select(Customer Customer) throws CustomerNotFoundException{
+		Customer obj = sqlSessionTemplate.selectOne("Customer.select", Customer);
 		
 		if(obj==null) {
-			throw new CustomerNotFoundException("전화번호가 올바르지 않습니다.");
+			throw new CustomerNotFoundException("회원 정보가 올바르지 않습니다.");
 		}
 		
 		return obj;

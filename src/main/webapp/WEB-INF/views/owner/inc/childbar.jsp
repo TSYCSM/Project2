@@ -2,8 +2,8 @@
 <div class="childbar">
 	<div class="mypagebar">
 		<ul style="list-style: none;">
-			<div class="test"><li><a href="/view/owner/mypage/mypage.jsp">마이페이지</a></li></div>
-			<div class="test"><li><a href="#">로그아웃</a></li></div>
+			<div class="test"><li><a href="/owner/account/mypage">마이페이지</a></li></div>
+			<div class="test"><li><a href="javascript:test()">로그아웃</a></li></div>
 		</ul>                           
 	</div>
 	<div class="reportsbar">

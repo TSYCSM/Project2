@@ -1,8 +1,8 @@
 <%@page import="com.tsycsm.agileoffice.model.domain.Owner"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
-<%-- <%
+<%
 	Owner owner = (Owner)session.getAttribute("owner");
-%> --%>
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -149,7 +149,9 @@ function login(){
 				<table>
 					<tr>
 						<td>전화번호</td>
-						<td><input type="text" name="phone" placeholder="ex) 010-1234-5678">
+						<td>
+							<input type="text" name="phone" placeholder="ex) 010-1234-5678">
+							<input type="hidden" name="owner_id" value="<%=owner.getOwner_id()%>">
 						</td>
 					</tr>
 				</table>

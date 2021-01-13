@@ -62,9 +62,8 @@ public class OwnerServiceImpl implements OwnerService{
 	}
 
 	@Override
-	public void update(Owner owner) {
-		// TODO Auto-generated method stub
-		
+	public void update(Owner owner) throws OwnerException{
+		ownerDAO.update(owner);
 	}
 
 	@Override

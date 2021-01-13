@@ -7,7 +7,7 @@ import com.tsycsm.agileoffice.model.domain.Customer;
 public interface CustomerDAO {
 	public List selectAll();
 	public List<Customer> selectAllByOwnerId(int owner_id);
-	public Customer select(String phone);
+	public Customer select(Customer customer);
 	public void insert(Customer customer);
 	public void update(Customer customer);
 	public void delete(Customer customer);

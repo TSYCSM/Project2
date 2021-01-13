@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -108,13 +110,65 @@ public class OwnerController {
 	
 	//로그인
 	@RequestMapping(value="/main/ownerLogin", method=RequestMethod.POST)
-	public String OwnerLogin(Owner owner, HttpSession session) {
+	public String ownerLogin(Owner owner, HttpSession session) {
 		
 		Owner obj = ownerService.select(owner);
 		session.setAttribute("owner", obj);
 		
 		return "redirect:/main/ownerMain";
 	}
+	
+	//로그아웃
+	@GetMapping(value="/main/ownerLogout")
+	@ResponseBody
+	public MessageData ownerLogout(HttpSession session) {
+		session.removeAttribute("owner");
+		
+		MessageData messageData = new MessageData();
+		//messageData.setResultCode(1);
+		messageData.setMsg("로그아웃되었습니다.");
+		messageData.setUrl("/main/ownerCredential");
+		
+		return messageData;
+	}
+	
+	//로그아웃
+	@PostMapping("/main/ownerUpdate")
+	@ResponseBody
+	public MessageData ownerUpdate(Owner owner, HttpSession session) {
+		logger.debug("owner_id: "+owner.getOwner_id());
+		logger.debug("email_id: "+owner.getEmail_id());
+		logger.debug("email_server: "+owner.getEmail_server());
+		logger.debug("shopname: "+owner.getShopname());
+		logger.debug("password: "+owner.getPassword());
+		
+		ownerService.update(owner);
+		session.setAttribute("owner", owner);
+		
+		MessageData messageData = new MessageData();
+		messageData.setResultCode(1);
+		messageData.setMsg("회원정보 수정되었습니다.");
+		messageData.setUrl("/owner/account/mypage");
+		
+		return messageData;
+	}
+	
+	//마이페이지 가기
+	@GetMapping(value="/owner/account/mypage")
+	public String viewMypage() {
+		
+		
+		return "owner/mypage/mypage";
+	}
+	
+	//마이페이지 비밀번호 확인 페이지 가기
+	@GetMapping(value="/owner/account/checkPassword")
+	public String viewCheckPassword() {
+		
+		
+		return "owner/mypage/checkpassword";
+	}
+	
 	
 	
 	

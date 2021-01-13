@@ -1,4 +1,8 @@
+<%@page import="com.tsycsm.agileoffice.model.domain.Owner"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
+<%
+	Owner owner = (Owner)session.getAttribute("owner");
+%>
 <!DOCTYPE html>
 <html>
 <style>
@@ -59,6 +63,20 @@ button {
 #credentialBox .open_signup_btn{
 	top: 180px;
 }
+
+#credentialBox .welcome_back_btn{
+	margin-left : 180px;
+	margin-top : 50px;
+	width: 200px;
+	height: 50px;
+}
+
+#credentialBox .welcome_box{
+	
+	margin-top : 180px;
+	text-align: center;
+}
+
 
 button:hover {
   opacity:1;
@@ -244,14 +262,20 @@ function checkId(){
 }
 
 
+
 </script>
 <body>
 <div id="credentialBox">
 <div id="loader" style="margin:auto"></div>
 	<h2>Agile Office</h2>
+	<%if(owner !=null){ %>
+		<button class="welcome_back_btn" onclick="location.href='/main/ownerMain'" style="width:auto;">Welcome Back!</button>	
+		<div class="welcome_box"><%=owner.getUser_id() %>님, 로그인 중입니다.</div>
+	<%}else{ %>
+		<button class="open_login_btn" onclick="document.getElementById('id02').style.display='block'" style="width:auto;">Login</button>
+		<button class="open_signup_btn" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Sign Up</button>
 	
-	<button class="open_login_btn" onclick="document.getElementById('id02').style.display='block'" style="width:auto;">Login</button>
-	<button class="open_signup_btn" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Sign Up</button>
+	<%} %>
 </div>
 
 <div id="id01" class="modal">
