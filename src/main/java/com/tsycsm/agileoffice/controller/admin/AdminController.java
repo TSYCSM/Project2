@@ -73,7 +73,7 @@ public class AdminController {
 	}
 	
 	
-	@RequestMapping(value="/admin/owner/detail/item/list", method=RequestMethod.GET, produces="application/text;charset=utf-8")
+	@RequestMapping(value="/admin/owner/detail/item/detail", method=RequestMethod.GET, produces="application/text;charset=utf-8")
 	@ResponseBody
 	public String viewItemDetail(int item_id) {
 		Item item = itemService.selectJoinCategory(item_id);
@@ -81,11 +81,19 @@ public class AdminController {
 		StringBuffer sb = new StringBuffer();
 		sb.append("{");
 		sb.append("\"item_name\" : \"" + item.getItem_name() + "\",");
-		sb.append("\"quantity\" : \"" + item.getQuantity() + "\",");
+		sb.append("\"stock\" : \"" + item.getStock() + "\",");
 		sb.append("\"category_name\" : \"" + item.getCategory().getCategory_name() + "\"");
 		sb.append("}");
 	
 		return sb.toString();
+	}
+	
+	@RequestMapping(value="/admin/owner/detail/item/asyncList", method=RequestMethod.GET)
+	@ResponseBody
+	public List<Item> getAsyncItemList(int owner_id) {
+		List<Item> itemList = itemService.selectAllJoinCategory(owner_id);
+	
+		return itemList;
 	}
 	
 	

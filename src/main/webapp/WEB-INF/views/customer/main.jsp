@@ -161,7 +161,6 @@ h1, h3{
 				}
 			}
 		});
-		
 	}
 	
 	function getAsyncList(cPage){
