@@ -1,4 +1,5 @@
 package com.tsycsm.agileoffice.common;
+
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -14,15 +15,14 @@ import org.springframework.stereotype.Component;
 
 import com.tsycsm.agileoffice.exception.MailSendException;
 
-
 @Component
 public class MailSender {
 	String host = "smtp.gmail.com";
 	String user = "a01055356349@gmail.com";
 	String password = "axdoehxwcchgxnxx";
 	Properties props = new Properties();
-	
-	public void send(String to, String title, String content) throws MailSendException{
+
+	public void send(String to, String title, String content) throws MailSendException {
 		props.put("mail.smtp.host", host);
 		props.put("mail.smtp.port", 465);
 		props.put("mail.smtp.auth", "true");
@@ -31,34 +31,25 @@ public class MailSender {
 
 		Session session = Session.getDefaultInstance(props, new Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
-	               return new PasswordAuthentication(user, password);
-	            }	
+				return new PasswordAuthentication(user, password);
+			}
 		});
-		
+
 		try {
-			
 			MimeMessage message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(user));
+			message.setFrom(new InternetAddress("chltlals961009@gmail.com"));
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 			message.setSubject(title);
 			message.setContent(content, "text/html;charset=utf-8");
-			
+
 			Transport.send(message);
 			System.out.println("Success Message Send");
 		} catch (MessagingException e) {
 			e.printStackTrace();
-			throw new MailSendException("회원가입 메일 발송 실패");
+			throw new MailSendException("Failed to send Message");
 		}
 	}
 
+
+
 }
-
-
-
-
-
-
-
-
-
-

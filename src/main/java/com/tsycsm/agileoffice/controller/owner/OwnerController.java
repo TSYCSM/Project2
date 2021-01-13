@@ -22,8 +22,10 @@ import com.tsycsm.agileoffice.exception.MailSendException;
 import com.tsycsm.agileoffice.exception.OwnerException;
 import com.tsycsm.agileoffice.exception.OwnerNotFoundException;
 import com.tsycsm.agileoffice.exception.OwnerPasswordFailException;
+import com.tsycsm.agileoffice.model.domain.Email;
 import com.tsycsm.agileoffice.model.domain.Owner;
 import com.tsycsm.agileoffice.model.owner.service.OwnerService;
+import com.tsycsm.agileoffice.model.qna.service.QnaService;
 
 @Controller
 public class OwnerController {
@@ -31,6 +33,9 @@ public class OwnerController {
 	
 	@Autowired
 	private OwnerService ownerService;
+	
+	@Autowired
+	private QnaService qnaService;
 	
 	
 	/************************************************
@@ -214,14 +219,26 @@ public class OwnerController {
 		return messageData;
 	}
 	
+	//Q&A Email 보내기 Form
+	@RequestMapping(value="/owner/qna/sendform", method=RequestMethod.GET)
+	public String getQnaSendForm() {
+		return "owner/qna/send_form";
+	}
+	
+	//Q&A Email 보내기
+	@RequestMapping(value="/owner/qna/send", method=RequestMethod.POST)
+	public String sendEmailToAdmin(Email email) {
+		qnaService.send(email);
+		
+		return "redirect:/owner/inventory/item/list";
+	}
+	
 	
 	
 	
 	/************************************************
 	  exception handler 메소드
-	  
-	 * ***********************************************/
-	
+	 ************************************************/
 	
 	// 예외 핸들러 2가지 처리
 	@ExceptionHandler(OwnerException.class)
@@ -243,14 +260,13 @@ public class OwnerController {
 	}
 	
 	@ExceptionHandler(OwnerNotFoundException.class)
-	
 	public ModelAndView handleException(OwnerNotFoundException e) {
 		MessageData messageData = new MessageData();
 		messageData.setResultCode(0);
 		messageData.setMsg(e.getMessage());
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("/error/result");
+		mav.setViewName("error/result");
 		mav.addObject("messageData", messageData);
 		return mav;
 	}
@@ -258,7 +274,7 @@ public class OwnerController {
 	@ExceptionHandler(MailSendException.class)
 	public ModelAndView handleException(MailSendException e) {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("shop/error/result");
+		mav.setViewName("error/result");
 		mav.addObject("msg", e.getMessage());
 		return mav;
 	}
