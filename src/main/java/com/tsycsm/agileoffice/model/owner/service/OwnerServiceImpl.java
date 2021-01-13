@@ -56,8 +56,8 @@ public class OwnerServiceImpl implements OwnerService{
 	}
 
 	@Override
-	public void delete(Owner owner) {
-		// TODO Auto-generated method stub
+	public void delete(Owner owner) throws OwnerException{
+		ownerDAO.delete(owner);
 		
 	}
 

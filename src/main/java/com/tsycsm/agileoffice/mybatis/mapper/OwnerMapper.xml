@@ -19,11 +19,15 @@
 		select * from owner where user_id=#{user_id} and password=#{password}
 	</select>
 	
-	<update id="update">
+	<update id="update" parameterType="Owner">
 		update owner set email_id=#{email_id}, email_server=#{email_server}
 		 ,shopname=#{shopname}, password=#{password}, user_name=#{user_name}
 		where owner_id=#{owner_id}
 	</update>
+	
+	<delete id="delete" parameterType="Owner">
+		delete from owner where owner_id = #{owner_id} and user_id =#{user_id}
+	</delete>
 	
 	
 </mapper>

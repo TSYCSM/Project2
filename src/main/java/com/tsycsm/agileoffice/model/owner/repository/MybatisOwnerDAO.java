@@ -43,8 +43,13 @@ public class MybatisOwnerDAO implements OwnerDAO{
 
 	@Override
 	public void delete(Owner owner) throws OwnerException{
-		// TODO Auto-generated method stub
+		int result = sqlSessionTemplate.insert("Owner.delete", owner);
 		
+		if(result == 0) {
+			throw new OwnerException("회원 삭제 실패");
+			
+		}
+			
 	}
 
 	@Override

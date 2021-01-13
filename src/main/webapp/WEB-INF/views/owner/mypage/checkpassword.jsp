@@ -1,22 +1,26 @@
+<%@page import="com.tsycsm.agileoffice.model.domain.Owner"%>
 <%@ page contentType="text/html;charset=utf-8"%>
+<%
+	Owner owner = (Owner)session.getAttribute("owner");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type = "text/javascript" src="/resources/js/owner/library.js"></script>
 <script>
-function change(){
-	
-	
-}
+
 </script>
 
 </head>
 <body>
-<form>
+<form id="checkPassword-box">
 	비밀번호를 입력하세요
 	<input type="password" name="password">
-	<input type="button" onClick="change()" value="확인">
+	<input type="hidden" name="user_id" value="<%=owner.getUser_id()%>">
+	<input type="button" onClick="checkPassword()" value="확인">
 </form>
 </body>
 </html>

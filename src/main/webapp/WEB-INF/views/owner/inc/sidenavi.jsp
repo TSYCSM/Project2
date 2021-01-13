@@ -6,7 +6,7 @@
   </button>
   <div class="dropdown-container">
     <a href="/owner/account/mypage">내 계정</a>
-    <a href="javascript:test()">로그아웃</a>
+    <a href="javascript:logout()">로그아웃</a>
   </div>
   
   <button class="dropdown-btn">보고서

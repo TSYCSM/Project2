@@ -7,11 +7,15 @@
 <%@ include file="../inc/header.jsp" %>
 
 <style>
-.email_id{
+input[name='user_name'], input[name='shopname']{
+	width:70%;
+}
+
+input[name='email_id']{
 	width:20%;
 }
 
-.email_server{
+input[name='email_server']{
 	width:40%;
 }
 
@@ -19,12 +23,35 @@
 </style>
 <script>
 function changeInfo() {
+	var top = window.screen.height;
+    top = top > 0 ? top/2 : 0;
+            
+	var left = window.screen.width;
+	    left = left > 0 ? left/2 : 0;
+	    
+	window.open("/owner/account/checkPassword", "","width=350 height=100 left="+left+" top="+top);
 	
 	
 }
 function checkIdFormClose(sId) {
 	opener.joinForm.user_id.value = sId;
 	window.close();
+}
+
+function deleteAccount(){
+	if(confirm("회원탈퇴 하시겠습니까?")){
+		var formData = $("#mypage-form").serialize();
+		$.ajax({
+			url:"/main/ownerQuit",
+			type:"post",
+			data:formData,
+			success:function(responseData){
+				alert(responseData.msg)
+				location.href=responseData.url;
+			}
+		});
+	}
+	
 }
 
 function updateInfo(){
@@ -74,15 +101,15 @@ function updateInfo(){
 					<div class="outerbox">
 						<label for="lname">이메일</label>
 						<div class="box">
-							<input type="text" width="20%" class="email_id" name="email_id"  value="<%=owner.getEmail_id() %>" required>@
-							<input type="text" width="40%" class="email_server" name="email_server"  value="<%=owner.getEmail_server() %>" required>
+							<input type="text" width="20%" name="email_id"  value="<%=owner.getEmail_id() %>" required>@
+							<input type="text" width="40%" name="email_server"  value="<%=owner.getEmail_server() %>" required>
 						</div>
 					</div>
 					<div class="outerbox">
 						<label for="lname">비밀번호</label><br>
 						<div class="box">
 							<div>*******</div>
-							<button type="button" onclick="changeInfo()">변경</button><br>
+							<input type="button" onclick="changeInfo()" value="변경"><br>
 						</div>
 					</div>
 										
@@ -90,12 +117,12 @@ function updateInfo(){
 						<label for="lname">계정삭제</label><br>
 						<div class="box">
 							<div>계정과 관련된 모든 데이터를 영구적으로 <br>삭제할 수 있습니다.</div>
-							<button type="button" onclick="changeInfo()">삭제</button><br>
+							<input type="button" onclick="deleteAccount()" value="삭제"><br>
 						</div>
 					</div>					
 					<div>
 						<div class="buttonbox">
-							<input type="reset" value="취소">
+							<input type="reset" value="reset">
 							<input type="button" class="save_btn" onClick="updateInfo()" value="저장">
 						</div>
 					</div>

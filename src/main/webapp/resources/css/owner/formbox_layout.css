@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 input[type=text], input[type=number], select{
-  width: 70%;
+
   padding: 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -11,7 +11,7 @@ input[type=text], input[type=number], select{
   resize: vertical;
 }
 
-input[type=submit], input[type=reset]{
+input[type=submit], input[type=reset], input[type=button]{
   /* float: right; */
   background-color: #99c5ff;
   color: white;
@@ -27,8 +27,9 @@ input[type=number]{
 }
 
 input[type=reset]{
-  background-color: #e8e8e8;
-  color: black;
+  	background: #d9d9d9;
+	color: #666666;
+	font-weight: bold;
 }
 
 input[type=submit]:hover{
@@ -67,7 +68,16 @@ select{
 	display: inline-block;
 }
 
-.box button{
+.box input[type=button]{
+	background: #d9d9d9;
+	color: #666666;
+	margin-right: 10px;
+	height: 20px;
+	width: 50px;
+	padding: 0px 0px 0px 0px;
+	font-size:15px;
+	font-weight: bold;
+	
 	float:right;
 }
 .outerbox{

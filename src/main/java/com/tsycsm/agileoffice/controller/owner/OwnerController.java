@@ -153,6 +153,23 @@ public class OwnerController {
 		return messageData;
 	}
 	
+	//회원탈퇴
+	@PostMapping(value="/main/ownerQuit")
+	@ResponseBody
+	public MessageData ownerQuit(HttpSession session, Owner owner) {
+		
+		ownerService.delete(owner);
+		
+		session.invalidate();
+		
+		MessageData messageData = new MessageData();
+		//messageData.setResultCode(1);
+		messageData.setMsg("회원탈퇴되었습니다. 그동안 이용해주셔서 감사합니다.");
+		messageData.setUrl("/main/ownerCredential");
+		
+		return messageData;
+	}
+	
 	//마이페이지 가기
 	@GetMapping(value="/owner/account/mypage")
 	public String viewMypage() {
@@ -167,6 +184,15 @@ public class OwnerController {
 		
 		
 		return "owner/mypage/checkpassword";
+	}
+	
+	//비밀번호 확인
+	@RequestMapping(value="/main/checkPassword", method=RequestMethod.GET)
+	public String checkPassword(Owner owner, HttpSession session) {
+		
+		ownerService.select(owner);
+		
+		return null;
 	}
 	
 	

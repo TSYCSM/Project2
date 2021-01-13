@@ -81,7 +81,7 @@ function loadNav() {
 	}
 }
 
-function test(){
+function logout(){
 	if(confirm("로그아웃 하시겠습니까?")){
 		$.ajax({
 			url: "/main/ownerLogout",
@@ -92,6 +92,18 @@ function test(){
 			}			
 		});
 	}
+}
+
+function checkPassword(){
+	$("#checkPassword-box").attr({
+		action:"/main/checkPassword",
+		method:"post"
+	})
+
+}
+
+function getNewPassword(){
+	alert("하하")
 }
 
 
