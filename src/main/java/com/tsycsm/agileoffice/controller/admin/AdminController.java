@@ -80,9 +80,12 @@ public class AdminController {
 
 		StringBuffer sb = new StringBuffer();
 		sb.append("{");
+		sb.append("\"item_id\" : \"" + item.getItem_id() + "\",");
 		sb.append("\"item_name\" : \"" + item.getItem_name() + "\",");
 		sb.append("\"stock\" : \"" + item.getStock() + "\",");
-		sb.append("\"category_name\" : \"" + item.getCategory().getCategory_name() + "\"");
+		sb.append("\"category_name\" : \"" + item.getCategory().getCategory_name() + "\",");
+		sb.append("\"regdate\" : \"" + item.getRegdate() + "\",");
+		sb.append("\"filename\" : \"" + item.getFilename() + "\"");
 		sb.append("}");
 	
 		return sb.toString();
