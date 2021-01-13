@@ -36,7 +36,7 @@ public class CustomerServiceImpl implements CustomerService{
 
 	@Override
 	public void regist(Customer customer) throws CustomerException{
-		customerDAO.duplicateCheck(customer.getPhone());
+		customerDAO.duplicateCheck(customer);
 		customerDAO.insert(customer);
 	}
 

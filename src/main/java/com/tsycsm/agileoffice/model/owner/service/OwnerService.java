@@ -12,5 +12,5 @@ public interface OwnerService {
 	public void update(Owner owner);
 	
 	public void duplicateCheck(String user_id);
-
+	public void passwordCheck(Owner owner);
 }

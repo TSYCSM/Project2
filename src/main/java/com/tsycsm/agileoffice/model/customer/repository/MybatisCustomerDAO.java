@@ -60,8 +60,8 @@ public class MybatisCustomerDAO implements CustomerDAO{
 	}
 
 	@Override
-	public void duplicateCheck(String phone) throws CustomerException{
-		List list = sqlSessionTemplate.selectList("Customer.select", phone);
+	public void duplicateCheck(Customer customer) throws CustomerException{
+		List list = sqlSessionTemplate.selectList("Customer.select", customer);
 		
 		if(list.size() > 0) {
 			throw new CustomerException("이미 등록된 전화번호 입니다.");

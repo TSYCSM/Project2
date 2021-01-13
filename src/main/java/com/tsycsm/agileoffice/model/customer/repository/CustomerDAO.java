@@ -11,5 +11,5 @@ public interface CustomerDAO {
 	public void insert(Customer customer);
 	public void update(Customer customer);
 	public void delete(Customer customer);
-	public void duplicateCheck(String phone);
+	public void duplicateCheck(Customer Customer);
 }

@@ -21,6 +21,7 @@ import com.tsycsm.agileoffice.common.MessageData;
 import com.tsycsm.agileoffice.exception.MailSendException;
 import com.tsycsm.agileoffice.exception.OwnerException;
 import com.tsycsm.agileoffice.exception.OwnerNotFoundException;
+import com.tsycsm.agileoffice.exception.OwnerPasswordFailException;
 import com.tsycsm.agileoffice.model.domain.Owner;
 import com.tsycsm.agileoffice.model.owner.service.OwnerService;
 
@@ -187,12 +188,26 @@ public class OwnerController {
 	}
 	
 	//비밀번호 확인
-	@RequestMapping(value="/main/checkPassword", method=RequestMethod.GET)
-	public String checkPassword(Owner owner, HttpSession session) {
+	@RequestMapping(value="/main/checkPassword", method=RequestMethod.POST)
+	@ResponseBody
+	public MessageData checkPassword(Owner owner, HttpSession session) {
 		
-		ownerService.select(owner);
+		ownerService.passwordCheck(owner);
 		
-		return null;
+		MessageData messageData = new MessageData();
+		messageData.setResultCode(1);
+		messageData.setMsg("비밀번호가 확인되었습니다.");
+		messageData.setUrl("/owner/account/getNewPassword");
+		
+		return messageData;
+	}
+	
+	//새로운 비밀번호 등록
+	@GetMapping(value="/owner/account/getNewPassword")
+	public String getNewPassword() {
+		
+		
+		return "owner/mypage/get_newpassword";
 	}
 	
 	
@@ -208,6 +223,15 @@ public class OwnerController {
 	@ExceptionHandler(OwnerException.class)
 	@ResponseBody
 	public MessageData handleException(OwnerException e) {
+		MessageData messageData = new MessageData();
+		messageData.setResultCode(0);
+		messageData.setMsg(e.getMessage());
+		return messageData;
+	}
+	
+	@ExceptionHandler(OwnerPasswordFailException.class)
+	@ResponseBody
+	public MessageData handleException(OwnerPasswordFailException e) {
 		MessageData messageData = new MessageData();
 		messageData.setResultCode(0);
 		messageData.setMsg(e.getMessage());

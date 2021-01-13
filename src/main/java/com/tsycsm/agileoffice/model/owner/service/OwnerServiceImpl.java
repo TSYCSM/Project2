@@ -11,6 +11,7 @@ import com.tsycsm.agileoffice.common.SecureManager;
 import com.tsycsm.agileoffice.exception.MailSendException;
 import com.tsycsm.agileoffice.exception.OwnerException;
 import com.tsycsm.agileoffice.exception.OwnerNotFoundException;
+import com.tsycsm.agileoffice.exception.OwnerPasswordFailException;
 import com.tsycsm.agileoffice.model.domain.Owner;
 import com.tsycsm.agileoffice.model.owner.repository.OwnerDAO;
 
@@ -69,6 +70,14 @@ public class OwnerServiceImpl implements OwnerService{
 	@Override
 	public void duplicateCheck(String user_id) throws OwnerException{
 		ownerDAO.duplicateCheck(user_id);
+	}
+
+	@Override
+	public void passwordCheck(Owner owner) throws OwnerPasswordFailException{
+		SecureManager secureManager = new SecureManager();
+		owner.setPassword(secureManager.getSecureData(owner.getPassword())); 		 
+		ownerDAO.passwordCheck(owner);
+		
 	}
 
 	

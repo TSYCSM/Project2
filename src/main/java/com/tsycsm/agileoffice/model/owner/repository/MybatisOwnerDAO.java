@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.tsycsm.agileoffice.exception.OwnerException;
 import com.tsycsm.agileoffice.exception.OwnerNotFoundException;
+import com.tsycsm.agileoffice.exception.OwnerPasswordFailException;
 import com.tsycsm.agileoffice.model.domain.Owner;
 
 @Repository
@@ -21,8 +22,8 @@ public class MybatisOwnerDAO implements OwnerDAO{
 	}
 
 	@Override
-	public Owner select(Owner Owner) throws OwnerNotFoundException{
-		Owner obj = sqlSessionTemplate.selectOne("Owner.select", Owner);
+	public Owner select(Owner owner) throws OwnerNotFoundException{
+		Owner obj = sqlSessionTemplate.selectOne("Owner.select", owner);
 		
 		if(obj==null) {
 			throw new OwnerNotFoundException("로그인 정보가 올바르지 않습니다.");
@@ -63,6 +64,17 @@ public class MybatisOwnerDAO implements OwnerDAO{
 		if(list.size() > 0) {
 			throw new OwnerException("중복된 ID입니다.");
 		}
+	}
+
+	@Override
+	public void passwordCheck(Owner owner)  throws OwnerPasswordFailException{
+		Owner obj = sqlSessionTemplate.selectOne("Owner.select", owner);
+		
+		if(obj==null) {
+			throw new OwnerPasswordFailException("비밀번호가 다릅니다.");
+		}
+		
+				
 	}
 
 }

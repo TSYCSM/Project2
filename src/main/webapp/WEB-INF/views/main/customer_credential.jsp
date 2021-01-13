@@ -164,7 +164,7 @@ function login(){
 		<div class="registArea">
 			<h2>가입</h2>
 			<form class="signup_form">
-				<%-- <input type="hidden" name="owner_id" value="<%=owner.getOwner_id()%>"> --%>
+				<input type="hidden" name="owner_id" value="<%=owner.getOwner_id()%>">
 				<table>
 					<tr>
 						<td>이름</td>
