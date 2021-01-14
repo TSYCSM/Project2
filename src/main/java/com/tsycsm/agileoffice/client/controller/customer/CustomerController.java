@@ -27,14 +27,11 @@ public class CustomerController {
 	
 	/**************************************** 
 	  customer CRUD
-	   
-	   
-	   
 	 ***************************************/
 	//customer등록
 	@PostMapping("/main/customerRegist")
 	@ResponseBody
-	public MessageData customerRegist(HttpServletRequest request, Customer customer) {
+	public MessageData customerRegist(Customer customer) {
 		logger.debug("customer의 id "+customer.getCustomer_id());
 		logger.debug("customer의 owner_id "+customer.getCustomer_id());
 		logger.debug("customer의 name"+customer.getCustomer_name());
@@ -50,12 +47,9 @@ public class CustomerController {
 	}
 	
 	@PostMapping("/main/customerLogin")
-	public String customerLogin(HttpServletRequest request, Customer customer) {
+	public String customerLogin(HttpSession session, Customer customer) {
 		Customer obj = customerService.select(customer);
-		HttpSession session = request.getSession();
-		
 		session.setAttribute("customer", obj);
-		
 		return "redirect:/client/order/main";
 	}
 	

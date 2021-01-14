@@ -51,10 +51,7 @@ public class OrderController {
 	 *******************************************/
 	
 	@GetMapping(value="/order/main")
-	public ModelAndView viewOrderMain(HttpServletRequest request) {
-
-		HttpSession session = request.getSession();
-		
+	public ModelAndView viewOrderMain(HttpSession session) {
 		Owner owner = (Owner)session.getAttribute("owner");
 		int owner_id = owner.getOwner_id();
 
@@ -78,13 +75,11 @@ public class OrderController {
 	
 	@PostMapping(value="/order/orderRegist")
 	@ResponseBody
-	public MessageData orderRegist(HttpServletRequest request, OrderSummary orderSummary, 
+	public MessageData orderRegist(HttpSession session, OrderSummary orderSummary, 
 			@RequestParam("item_id") int[] item_id_arr
 			,@RequestParam("quantity") int[] quantity_arr
 			,@RequestParam("price") int[] price_arr) {
 		//owner_id, customer_id 전해주시
-		
-		HttpSession session = request.getSession();
 		Owner owner = (Owner)session.getAttribute("owner");
 		Customer customer = (Customer)session.getAttribute("customer");
 

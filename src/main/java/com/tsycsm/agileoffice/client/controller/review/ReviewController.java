@@ -30,7 +30,7 @@ public class ReviewController {
 	
 	@PostMapping("/review/regist")
 	@ResponseBody
-	public MessageData reviewRegist(HttpServletRequest request, Review review) {
+	public MessageData reviewRegist(Review review) {
 		reviewService.regist(review);
 		MessageData messageData = new MessageData();
 		messageData.setMsg("리뷰 등록 성공");
@@ -41,7 +41,7 @@ public class ReviewController {
 
 	@PostMapping("/review/update")
 	@ResponseBody
-	public MessageData updateReview(HttpServletRequest request, Review review) {
+	public MessageData updateReview(Review review) {
 		reviewService.update(review);
 
 		MessageData messageData = new MessageData();
@@ -53,7 +53,7 @@ public class ReviewController {
 	
 	@GetMapping("/review/delete")
 	@ResponseBody
-	public MessageData deleteReview(HttpServletRequest request, int review_id) {
+	public MessageData deleteReview(int review_id) {
 		reviewService.delete(review_id);
 		MessageData messageData = new MessageData();
 		messageData.setMsg("리뷰 삭제 성공");
@@ -64,7 +64,7 @@ public class ReviewController {
 	
 	@PostMapping("/review/asyncList")
 	@ResponseBody
-	public List<Review> asyncReviewList(HttpServletRequest request, int owner_id) {
+	public List<Review> asyncReviewList(int owner_id) {
 		List reviewList = reviewService.selectAllOwner(owner_id);
 		
 		return reviewList;

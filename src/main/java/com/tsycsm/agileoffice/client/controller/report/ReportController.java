@@ -84,7 +84,7 @@ public class ReportController {
 	
 	@PostMapping("/owner/reports/receiptsInfo")
 	@ResponseBody
-	public OrderSummary viewOneReceipt(HttpServletRequest request, int order_summary_id) {
+	public OrderSummary viewOneReceipt(int order_summary_id) {
 		
 		OrderSummary orderSummary= orderService.select(order_summary_id);
 		logger.debug("³¯Â¥: "+orderSummary.getOrderdate());
@@ -127,25 +127,4 @@ public class ReportController {
 		return mav;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
