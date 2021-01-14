@@ -1,3 +1,4 @@
+<%@page import="com.tsycsm.agileoffice.model.common.Formatter"%>
 <%@page import="com.tsycsm.agileoffice.model.domain.OrderSummary"%>
 <%@page import="java.util.List"%>
 <%@page import="com.tsycsm.agileoffice.model.common.Pager"%>
@@ -94,7 +95,7 @@ function hideReceipt(){
 								맴버십 고객이 아닙니다.
 							<%} %>
 						</td>
-						<td><%=orderSummary.getTotal_price() %></td>
+						<td><%=Formatter.getCurrency(orderSummary.getTotal_price() ) %></td>
 					</tr>
 				<%} %>
 				

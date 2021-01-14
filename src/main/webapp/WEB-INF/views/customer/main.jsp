@@ -86,6 +86,9 @@ h1, h3{
 </style>
 <script type="text/javascript">
 	var review_len = <%=reviewList.size()%>;
+	
+	
+	
 	$(function(){
 		getAsyncList(1);
 	});
@@ -168,15 +171,23 @@ h1, h3{
 			url:"/client/review/asyncList",
 			type:"post",
 			data:{
-				owner_id: <%=owner.getOwner_id()%>
+				owner_id: <%=owner.getOwner_id()%>,
+				currentPage:cPage
 			},
-			success:function(reviewArray){
-				review_len =reviewArray.length;
-				var pager = getPager(cPage, review_len);
+			success:function(pager){
+				//review_len =reviewArray.length;
+				//var pager = getPager(cPage, review_len);
 				var tag="";
+				var current_customer_id= 0;
+				
+				<%if(customer != null){%>
+					current_customer_id = <%=customer.getCustomer_id()%>
+				<%}%>
+				
 				for(var i=0; i<pager.pageSize;i++){
 					if(pager.num < 1) break;
-					var review = reviewArray[pager.curPos++];
+					reviewList = pager.list; 
+					var review = reviewList[pager.curPos++];
 					var item = review.item;
 					tag += "<tr>";
 					tag += "<td>"+(pager.num--)+"</td>";
@@ -184,11 +195,21 @@ h1, h3{
 					tag += "<td><p>"+review.comments+"</p></td>";
 					tag += "<td>"+review.regdate+"</td>";
 					tag += "<td>";
-					tag += "<button type='button' onclick='modeChange(this)'>수정</button>";
+					
+					if(current_customer_id == review.customer_id){
+						tag += "<button type='button' onclick='modeChange(this)'>수정</button>";						
+					}
+					
 					tag += "<button type='button' onclick='modeChange(this)' style='display:none'>확인</button>";
 					tag += "<input type='hidden' value='" + review.review_id + "'/>";
 					tag += "</td>";
-					tag += "<td><button type='button' onclick='deleteReview(this)'>삭제<input type='hidden' value='"+review.review_id+"'/></button></td>"
+					tag += "<td>";
+					
+					if(current_customer_id == review.customer_id){
+						tag += "<button type='button' onclick='deleteReview(this)'>삭제<input type='hidden' value='"+review.review_id+"'/></button>"
+					}
+					
+					tag += "</td>"
 					tag += "</tr>";
 								   
 				}
@@ -214,28 +235,6 @@ h1, h3{
 		})
 	}
 		
-	function getPager(cPage, size){
-		var result;
-		$.ajax({
-			url: "/client/getPager",
-			dataType: "json",
-			async: false,
-			type: "post",
-			data:{
-				curPage: cPage,
-				listSize: size
-			},
-			success:function(pager){
-				result = pager;
-			}
-			
-		})
-		return result;
-	}
-
-
-
-
 	function order(){
 		if(confirm("주문하시겠습니까")){
 			
@@ -252,6 +251,21 @@ h1, h3{
 				}
 			})
 		}
+	}
+	
+	function identifyCustomer(){
+		$.ajax({
+			url: "/client/review/identifyCustomer",
+			type: "get",
+			success:function(responseData){
+				if(responseData.resultCode==1){
+					showRegist();
+				}else{
+					alert(responseData.msg);
+				}
+			}
+		
+		});
 	}
 
 	function showRegist(){
