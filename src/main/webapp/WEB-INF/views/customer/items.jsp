@@ -17,7 +17,7 @@
 				<img src="/resources/data/<%=item.getItem_id() %>.<%=item.getFilename() %>" />
 				<h2><%=item.getItem_name() %></h2>
 				<h3>
-					<span><%=item.getPrice() %></span>원
+					<span><%= item.getPrice() %></span>원
 				</h3>
 			</div>
 		<%} %>

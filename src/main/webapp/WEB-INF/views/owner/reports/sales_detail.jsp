@@ -1,3 +1,4 @@
+<%@page import="com.tsycsm.agileoffice.model.common.Formatter"%>
 <%@page import="com.tsycsm.agileoffice.model.common.Pager"%>
 <%@page import="com.tsycsm.agileoffice.model.domain.OrderDetail"%>
 <%@page import="java.util.List"%>
@@ -47,7 +48,7 @@
 							<%=orderDetail.getItem().getItem_name() %>
 						</td>
 						<td><%=orderDetail.getTotal_quantity() %></td>
-						<td><%=orderDetail.getTotal_price() %></td>
+						<td><%=Formatter.getCurrency(orderDetail.getTotal_price()) %></td>
 						<td><%=orderDetail.getItem().getStock() %></td>
 					</tr>
 				<%} %>

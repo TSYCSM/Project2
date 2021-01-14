@@ -18,15 +18,18 @@
 	<context:component-scan base-package="com.tsycsm.agileoffice.client.controller"/>
 	
 
-	<!-- <beans:bean class="com.tsycsm.agileoffice.client.aop.OwnerSessionCheckAspect" id="ownerSessionCheckAspect"/> 
+	<beans:bean class="com.tsycsm.agileoffice.client.aop.OwnerSessionCheckAspect" id="ownerSessionCheckAspect"/> 
 	
 	<aop:config>
 		<aop:aspect id="sessionCheckAspect" ref="ownerSessionCheckAspect">
-			<aop:pointcut expression="execution(public * com.tsycsm.agileoffice.client.controller.customer..*(..))" 
+			<aop:pointcut expression="execution(public * com.tsycsm.agileoffice.client.controller.review.ReviewController.identifyCustomer(..))" 
 				id="sessionPointcut"/>
 			<aop:around method="sessionCheck" pointcut-ref="sessionPointcut"/>
 		</aop:aspect>
-	</aop:config> -->	
+	</aop:config>	
+	
+	<!-- globalExceptionHandler 추가-->
+	<beans:bean id="globalExceptionHandler" class="com.tsycsm.agileoffice.client.aop.GlobalExceptionHandler"/>
 	
 	
 </beans:beans>

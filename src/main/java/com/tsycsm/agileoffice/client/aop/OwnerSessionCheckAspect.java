@@ -38,7 +38,7 @@ public class OwnerSessionCheckAspect {
 		session=request.getSession();
 		Object result=null;
 		
-		if(session.getAttribute("owner")==null) {
+		if(session.getAttribute("customer")==null) {
 			throw new LoginRequiredException("로그인이 필요한 서비스입니다");
 		}else {
 			//원래 요청의 흐름을 그대로 진행..

@@ -6,11 +6,7 @@
 <div id="reviews" class="tabcontent">
 	<div>
 		<h1>리뷰</h1>
-		<%if(customer != null){ %>
-			<button class="regist-area" type="button" class="showRegist_btn" onClick="showRegist()">등록</button>
-		<%}else{ %>
-			<h3 class="regist-area">맴버쉽 회원만 댓글을 쓸 수 있습니다.</h3>
-		<%} %>
+			<button class="regist-area" type="button" class="showRegist_btn" onClick="identifyCustomer()">등록</button>
 	</div>
 	
 	<form class="review-form">

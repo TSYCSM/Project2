@@ -15,12 +15,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tsycsm.agileoffice.exception.AsyncDMLException;
 import com.tsycsm.agileoffice.model.common.MessageData;
+import com.tsycsm.agileoffice.model.common.Pager;
 import com.tsycsm.agileoffice.model.domain.Review;
 import com.tsycsm.agileoffice.model.review.service.ReviewService;
 
 @Controller
 public class ReviewController {
 	private static final Logger logger = LoggerFactory.getLogger(ReviewController.class);
+	
+	@Autowired
+	private Pager pager;
 	
 	@Autowired
 	private ReviewService reviewService;
@@ -64,12 +68,27 @@ public class ReviewController {
 	
 	@PostMapping("/review/asyncList")
 	@ResponseBody
-	public List<Review> asyncReviewList(int owner_id) {
+	public Pager asyncReviewList(HttpServletRequest request, int owner_id) {
 		List reviewList = reviewService.selectAllOwner(owner_id);
 		
-		return reviewList;
+		pager.init(request, reviewList);
+		
+		return pager;
 	}
 	
+	/******************************** 
+	  review 등록 session 여부 판단
+	 ********************************/
+	@GetMapping("/review/identifyCustomer")
+	@ResponseBody
+	public MessageData identifyCustomer(HttpServletRequest request) {
+		
+		MessageData messageData = new MessageData();
+		messageData.setResultCode(1);
+		
+		return messageData;
+		
+	}
 	
 	
 	/****************************

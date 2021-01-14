@@ -1,3 +1,5 @@
+<%@page import="java.time.LocalDate"%>
+<%@page import="com.tsycsm.agileoffice.model.common.Formatter"%>
 <%@page import="com.tsycsm.agileoffice.model.common.Pager"%>
 <%@page import="com.tsycsm.agileoffice.model.domain.OrderSummary"%>
 <%@page import="java.util.List"%>
@@ -8,9 +10,9 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <% 	Calendar cal = Calendar.getInstance();
 	DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-	String today = dateFormat.format(cal.getTime());
-	cal.add(Calendar.DATE, -1);
-	String yesterday = dateFormat.format(cal.getTime());
+	String day = dateFormat.format(cal.getTime());
+	
+	LocalDate date = LocalDate.parse(day);
 	
 	Pager pager = (Pager)request.getAttribute("pager");
 	List<OrderSummary> orderSummaryList = pager.getList();
@@ -43,15 +45,25 @@
 				%>
 				<%for(int i=0; i<pager.getPageSize(); i++){ %>
 					<%if(num < 1) break; %>
-					<%OrderSummary orderSummary = orderSummaryList.get(curPos++); %>
+					<%OrderSummary orderSummary = orderSummaryList.get(curPos); %>
+					
 					<tr>
-						
-						<td>
-							<input type="hidden" value="<%=num--%>">
-							<a href="/client/owner/reports/salesDetail?orderdate=<%=orderSummary.getOrderdate().substring(0, 10) %>&currentPage=1"><%=orderSummary.getOrderdate().substring(0, 10) %></a>
-						</td>
-						<td><%=orderSummary.getTotal_price() %></td>
+						<%if(String.valueOf(date).equals(orderSummary.getOrderdate().substring(0, 10))){ %>
+							<%curPos++; num--; %>
+							<td>
+								<a href="/client/owner/reports/salesDetail?orderdate=<%=orderSummary.getOrderdate().substring(0, 10) %>&currentPage=1"><%=orderSummary.getOrderdate().substring(0, 10) %></a>
+							</td>
+							<td><%=Formatter.getCurrency(orderSummary.getTotal_price() ) %></td>
+							<%}else{ %>
+								<td><%=String.valueOf(date) %></td>
+								<td>0</td>
+							<%} %>				
 					</tr>
+					
+					<%
+						date = date.minusDays(1);
+					%>
+					
 				<%} %>
 				<tr>
 					<td colspan="2" style="text-align:center">
