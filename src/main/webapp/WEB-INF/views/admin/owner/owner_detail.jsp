@@ -2,7 +2,7 @@
 <%@page import="com.tsycsm.agileoffice.model.domain.Category"%>
 <%@page import="com.tsycsm.agileoffice.model.domain.Item"%>
 <%@page import="java.util.List"%>
-<%@page import="com.tsycsm.agileoffice.common.Pager"%>
+<%@page import="com.tsycsm.agileoffice.model.common.Pager"%>
 <%@ page contentType="text/html;charset=utf-8"%>
 <%
 List<Item> itemList = (List) request.getAttribute("itemList");

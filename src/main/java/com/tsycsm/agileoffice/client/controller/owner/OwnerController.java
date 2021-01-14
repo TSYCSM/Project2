@@ -1,8 +1,9 @@
-package com.tsycsm.agileoffice.controller.owner;
+package com.tsycsm.agileoffice.client.controller.owner;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -17,11 +18,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.tsycsm.agileoffice.common.MessageData;
 import com.tsycsm.agileoffice.exception.MailSendException;
 import com.tsycsm.agileoffice.exception.OwnerException;
 import com.tsycsm.agileoffice.exception.OwnerNotFoundException;
 import com.tsycsm.agileoffice.exception.OwnerPasswordFailException;
+import com.tsycsm.agileoffice.model.common.MessageData;
 import com.tsycsm.agileoffice.model.domain.Email;
 import com.tsycsm.agileoffice.model.domain.Owner;
 import com.tsycsm.agileoffice.model.owner.service.OwnerService;
@@ -45,13 +46,13 @@ public class OwnerController {
 	
 	
 	@RequestMapping(value="/admin/list")
-	public String memberList(int currentPage) {
+	public String memberList(HttpServletRequest request, int currentPage) {
 		System.out.println("currentPage: "+currentPage);
 		return "/admin/member/memberlist";
 	}
 	
 	@RequestMapping(value="/admin/memberdetail")
-	public String memberDetail(int currentPage) {
+	public String memberDetail(HttpServletRequest request, int currentPage) {
 		System.out.println("currentPage: "+currentPage);
 		return "/admin/member/memberdetail";
 	}
@@ -59,7 +60,7 @@ public class OwnerController {
 	/*페이징 비동기 구현 미완성*/
 	@RequestMapping(value="/admin/getpage", method=RequestMethod.GET)
 	@ResponseBody
-	public List getPage(int currentPage) {
+	public List getPage(HttpServletRequest request, int currentPage) {
 		List<Integer> currenPageList =  new ArrayList<Integer>();
 		currenPageList.add(currentPage);
 
@@ -69,65 +70,32 @@ public class OwnerController {
 	/************************************************
 	  main 폴더에서 이동
 	  
-	 * ***********************************************/
+	 ************************************************/
 	@RequestMapping(value="/main/ownerMain", method=RequestMethod.GET)
-	public String viewOwnerMain() {
+	public String viewOwnerMain(HttpServletRequest request) {
 		return "main/owner_main_temp";
 	}
 	
+	@RequestMapping(value="/main/customerCredential", method=RequestMethod.GET)
+	public String viewPreOrder(HttpServletRequest request) {
+		HttpSession session = null;
+		session = request.getSession();
+		
+		session.removeAttribute("customer");
+		
+		return "main/customer_credential";
+	}
 	
 	/************************************************
 	  owner 등록, 중복체크,  로그인, 로그아웃
 	  
-	 * ***********************************************/
-	
-	
-	//owner-member 등록
-	@RequestMapping(value="/main/ownerRegist", method=RequestMethod.POST)
-	@ResponseBody
-	public MessageData ownerMemberRegist(Owner owner) {
-		logger.debug("owner의 user_id "+owner.getUser_id());
-		logger.debug("owner의 password "+owner.getPassword());
-		logger.debug("owner의 shopname "+owner.getShopname());
-		logger.debug("owner의 email_id "+owner.getEmail_id());
-		logger.debug("owner의 email_server "+owner.getEmail_server());
-		ownerService.duplicateCheck(owner.getUser_id());
-		ownerService.regist(owner);
-		
-		MessageData messageData = new MessageData();
-		messageData.setResultCode(1);
-		messageData.setMsg("회원이 등록 되었습니다.");
-		return messageData;
-	}	
-	
-	//owner id 중복체크
-	@RequestMapping(value="/main/checkid", method=RequestMethod.POST)
-	@ResponseBody
-	public MessageData checkId(String user_id) {
-		
-		ownerService.duplicateCheck(user_id);
-
-		MessageData messageData = new MessageData();
-		messageData.setResultCode(1);
-		messageData.setMsg("사용가능한 아이디 입니다.");
-		
-		return messageData;
-	}
-	
-	//로그인
-	@RequestMapping(value="/main/ownerLogin", method=RequestMethod.POST)
-	public String ownerLogin(Owner owner, HttpSession session) {
-		
-		Owner obj = ownerService.select(owner);
-		session.setAttribute("owner", obj);
-		
-		return "redirect:/main/ownerMain";
-	}
+	 ************************************************/
 	
 	//로그아웃
 	@GetMapping(value="/main/ownerLogout")
 	@ResponseBody
-	public MessageData ownerLogout(HttpSession session) {
+	public MessageData ownerLogout(HttpServletRequest request) {
+		HttpSession session = request.getSession();
 		session.removeAttribute("owner");
 		
 		MessageData messageData = new MessageData();
@@ -141,13 +109,15 @@ public class OwnerController {
 	//회원정보 수정
 	@PostMapping("/main/ownerUpdate")
 	@ResponseBody
-	public MessageData ownerUpdate(Owner owner, HttpSession session) {
+	public MessageData ownerUpdate(Owner owner, HttpServletRequest request) {
 		logger.debug("owner_id: "+owner.getOwner_id());
 		logger.debug("email_id: "+owner.getEmail_id());
 		logger.debug("email_server: "+owner.getEmail_server());
 		logger.debug("shopname: "+owner.getShopname());
 		
 		ownerService.update(owner);
+		
+		HttpSession session = request.getSession();
 		session.setAttribute("owner", owner);
 		
 		MessageData messageData = new MessageData();
@@ -161,10 +131,11 @@ public class OwnerController {
 	//회원탈퇴
 	@PostMapping(value="/main/ownerQuit")
 	@ResponseBody
-	public MessageData ownerQuit(HttpSession session, Owner owner) {
+	public MessageData ownerQuit(HttpServletRequest request, Owner owner) {
 		
 		ownerService.delete(owner);
 		
+		HttpSession session = request.getSession();
 		session.invalidate();
 		
 		MessageData messageData = new MessageData();
@@ -177,25 +148,20 @@ public class OwnerController {
 	
 	//마이페이지 가기
 	@GetMapping(value="/owner/account/mypage")
-	public String viewMypage() {
-		
-		
+	public String viewMypage(HttpServletRequest request) {
 		return "owner/mypage/mypage";
 	}
 	
 	//마이페이지 비밀번호 확인 페이지 가기
 	@GetMapping(value="/owner/account/checkPassword")
-	public String viewCheckPassword() {
-		
-		
+	public String viewCheckPassword(HttpServletRequest request) {
 		return "owner/mypage/checkpassword";
 	}
 	
 	//비밀번호 확인
 	@RequestMapping(value="/main/checkPassword", method=RequestMethod.POST)
 	@ResponseBody
-	public MessageData checkPassword(Owner owner, HttpSession session) {
-		
+	public MessageData checkPassword(HttpServletRequest request, Owner owner) {
 		ownerService.passwordCheck(owner);
 		
 		MessageData messageData = new MessageData();
@@ -208,8 +174,7 @@ public class OwnerController {
 	//새로운 비밀번호 등록
 	@PostMapping(value="/main/ownerPasswordUpdate")
 	@ResponseBody
-	public MessageData changePassword(Owner owner) {
-		
+	public MessageData changePassword(HttpServletRequest request, Owner owner) {
 		ownerService.update(owner);
 		
 		MessageData messageData = new MessageData();
@@ -221,19 +186,17 @@ public class OwnerController {
 	
 	//Q&A Email 보내기 Form
 	@RequestMapping(value="/owner/qna/sendform", method=RequestMethod.GET)
-	public String getQnaSendForm() {
+	public String getQnaSendForm(HttpServletRequest request) {
 		return "owner/qna/send_form";
 	}
 	
 	//Q&A Email 보내기
 	@RequestMapping(value="/owner/qna/send", method=RequestMethod.POST)
-	public String sendEmailToAdmin(Email email) {
+	public String sendEmailToAdmin(HttpServletRequest request, Email email) {
 		qnaService.send(email);
 		
-		return "redirect:/owner/inventory/item/list";
-	}
-	
-	
+		return "redirect:/client/owner/inventory/item/list";
+	}	
 	
 	
 	/************************************************

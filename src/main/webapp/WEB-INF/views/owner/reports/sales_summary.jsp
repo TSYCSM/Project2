@@ -1,4 +1,4 @@
-<%@page import="com.tsycsm.agileoffice.common.Pager"%>
+<%@page import="com.tsycsm.agileoffice.model.common.Pager"%>
 <%@page import="com.tsycsm.agileoffice.model.domain.OrderSummary"%>
 <%@page import="java.util.List"%>
 <%@page import="java.text.DateFormat"%>

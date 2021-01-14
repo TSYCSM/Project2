@@ -3,8 +3,8 @@ package com.tsycsm.agileoffice.model.qna.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tsycsm.agileoffice.common.MailSender;
 import com.tsycsm.agileoffice.exception.MailSendException;
+import com.tsycsm.agileoffice.model.common.MailSender;
 import com.tsycsm.agileoffice.model.domain.Email;
 
 @Service

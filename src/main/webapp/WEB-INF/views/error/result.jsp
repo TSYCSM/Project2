@@ -1,4 +1,4 @@
-<%@page import="com.tsycsm.agileoffice.common.MessageData"%>
+<%@page import="com.tsycsm.agileoffice.model.common.MessageData"%>
 <%@ page contentType="text/html;charset=utf-8"%>
 <%
 	MessageData messageData= (MessageData)request.getAttribute("messageData");

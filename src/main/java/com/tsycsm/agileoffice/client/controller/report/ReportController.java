@@ -1,4 +1,4 @@
-package com.tsycsm.agileoffice.controller.report;
+package com.tsycsm.agileoffice.client.controller.report;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.tsycsm.agileoffice.common.Pager;
+import com.tsycsm.agileoffice.model.common.Pager;
 import com.tsycsm.agileoffice.model.customer.service.CustomerService;
 import com.tsycsm.agileoffice.model.domain.Customer;
 import com.tsycsm.agileoffice.model.domain.OrderDetail;
@@ -49,7 +49,7 @@ public class ReportController {
 	}
 	
 	@GetMapping("/owner/reports/salesDetail")
-	public ModelAndView viewSalesDetail(String orderdate, HttpServletRequest request) {
+	public ModelAndView viewSalesDetail(HttpServletRequest request, String orderdate) {
 		HttpSession session = request.getSession();
 		Owner owner = (Owner)session.getAttribute("owner");
 		
@@ -84,7 +84,7 @@ public class ReportController {
 	
 	@PostMapping("/owner/reports/receiptsInfo")
 	@ResponseBody
-	public OrderSummary viewOneReceipt(int order_summary_id) {
+	public OrderSummary viewOneReceipt(HttpServletRequest request, int order_summary_id) {
 		
 		OrderSummary orderSummary= orderService.select(order_summary_id);
 		logger.debug("³¯Â¥: "+orderSummary.getOrderdate());

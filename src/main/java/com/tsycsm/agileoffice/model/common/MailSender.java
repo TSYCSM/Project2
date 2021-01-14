@@ -1,4 +1,4 @@
-package com.tsycsm.agileoffice.common;
+package com.tsycsm.agileoffice.model.common;
 
 import java.util.Properties;
 

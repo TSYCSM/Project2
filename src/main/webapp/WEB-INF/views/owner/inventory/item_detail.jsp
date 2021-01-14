@@ -35,13 +35,13 @@
 		var formData = $("#item-form").serialize();
 		if(confirm("수정하시겠습니까")){
 			$.ajax({
-				url: "/owner/inventory/item/update",
+				url: "/client/owner/inventory/item/update",
 				type: "post",
 				data: formData,
 				success: function(responseData){
 					if(responseData.resultCode==1){
 						alert(responseData.msg);
-						location.href="/owner/inventory/item/detail?item_id="+<%=item.getItem_id()%>;
+						location.href="/client/owner/inventory/item/detail?item_id="+<%=item.getItem_id()%>;
 					}else{
 						alert(responseData.msg);					
 					}
@@ -54,7 +54,7 @@
 	function del() {
 		if(confirm("삭제하시겠습니까?")){
 			$("form").attr({
-				action:"/owner/inventory/item/del",
+				action:"/client/owner/inventory/item/del",
 				enctype:"multipart/form-data",
 				method:"post"
 			});
@@ -68,7 +68,7 @@
 		
 		if(item_name.length > 0) {
 			$.ajax({
-				url:"/owner/inventory/item/nameCheck",
+				url:"/client/owner/inventory/item/nameCheck",
 				type: "POST",
 				data: {
 					item_name: item_name,

@@ -1,5 +1,6 @@
-package com.tsycsm.agileoffice.controller.customer;
+package com.tsycsm.agileoffice.client.controller.customer;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -11,9 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.tsycsm.agileoffice.common.MessageData;
 import com.tsycsm.agileoffice.exception.CustomerException;
 import com.tsycsm.agileoffice.exception.CustomerNotFoundException;
+import com.tsycsm.agileoffice.model.common.MessageData;
 import com.tsycsm.agileoffice.model.customer.service.CustomerService;
 import com.tsycsm.agileoffice.model.domain.Customer;
 
@@ -33,14 +34,12 @@ public class CustomerController {
 	//customer등록
 	@PostMapping("/main/customerRegist")
 	@ResponseBody
-	public MessageData customerRegist(Customer customer) {
+	public MessageData customerRegist(HttpServletRequest request, Customer customer) {
 		logger.debug("customer의 id "+customer.getCustomer_id());
 		logger.debug("customer의 owner_id "+customer.getCustomer_id());
 		logger.debug("customer의 name"+customer.getCustomer_name());
 		logger.debug("customer의 point"+customer.getPoint());
-		
-		customer.setOwner_id(42);
-		
+	
 		customerService.regist(customer);
 		
 		MessageData messageData = new MessageData();
@@ -51,13 +50,13 @@ public class CustomerController {
 	}
 	
 	@PostMapping("/main/customerLogin")
-	public String customerLogin(HttpSession session, Customer customer) {
+	public String customerLogin(HttpServletRequest request, Customer customer) {
 		Customer obj = customerService.select(customer);
+		HttpSession session = request.getSession();
+		
 		session.setAttribute("customer", obj);
 		
-		return "redirect:/order/main";
-		
-		
+		return "redirect:/client/order/main";
 	}
 	
 	// 예외 핸들러 2가지 처리

@@ -33,7 +33,7 @@ $(function(){
 
 function del(){
 	if(confirm("삭제하시겠습니까")){
-		location.href = "/owner/inventory/category/delete?category_id=" + <%=category.getCategory_id()%>;
+		location.href = "/client/owner/inventory/category/delete?category_id=" + <%=category.getCategory_id()%>;
 	}	
 }
 
@@ -42,13 +42,13 @@ function update(){
 	var formData = $("#category_form").serialize();
 	if(confirm("수정하시겠습니까")){
 		$.ajax({
-			url: "/owner/inventory/category/update",
+			url: "/client/owner/inventory/category/update",
 			type: "post",
 			data: formData,
 			success: function(responseData){
 				if(responseData.resultCode==1){
 					alert(responseData.msg);
-					location.href="/owner/inventory/category/detail?category_id="+<%=category.getCategory_id()%>;
+					location.href="/client/owner/inventory/category/detail?category_id="+<%=category.getCategory_id()%>;
 				}else{
 					alert(responseData.msg);					
 				}
@@ -82,7 +82,7 @@ function update(){
 					</div>					
 					<div>
 						<div class="buttonbox">
-							<input type="button" onClick="location.href='/owner/inventory/category/list'" value="목록으로">
+							<input type="button" onClick="location.href='/client/owner/inventory/category/list'" value="목록으로">
 							<input type="button" class= "update_btn" value="수정">
 							<input type="button" class="delete_btn" value="삭제">
 						</div>

@@ -6,12 +6,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tsycsm.agileoffice.common.MailSender;
-import com.tsycsm.agileoffice.common.SecureManager;
 import com.tsycsm.agileoffice.exception.MailSendException;
 import com.tsycsm.agileoffice.exception.OwnerException;
 import com.tsycsm.agileoffice.exception.OwnerNotFoundException;
 import com.tsycsm.agileoffice.exception.OwnerPasswordFailException;
+import com.tsycsm.agileoffice.model.common.MailSender;
+import com.tsycsm.agileoffice.model.common.SecureManager;
 import com.tsycsm.agileoffice.model.domain.Owner;
 import com.tsycsm.agileoffice.model.owner.repository.OwnerDAO;
 

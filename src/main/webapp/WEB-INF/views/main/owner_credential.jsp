@@ -197,7 +197,7 @@ $(function(){
 
 function login(){
 	$(".login_form").attr({
-		action: "/main/ownerLogin",
+		action: "/client/main/ownerLogin",
 		method: "POST"
 	});
 	
@@ -212,7 +212,7 @@ function regist(){
 		$("body").show().css({"opacity":"0.5"});
 		var formData = $(".signup_form").serialize();
 		$.ajax({
-			url: "/main/ownerRegist",
+			url: "/client/main/ownerRegist",
 			type: "POST",
 			data: formData,
 			success: function(responseData){
@@ -242,7 +242,7 @@ function checkId(){
 		alert("아이디는 6자 이상 입력하세요");
 	}else{
 		$.ajax({
-			url:"/main/checkid",
+			url:"/client/main/checkid",
 			type: "POST",
 			data: {
 				user_id: id

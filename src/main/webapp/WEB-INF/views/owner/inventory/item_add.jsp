@@ -28,7 +28,7 @@
 	function regist() {
 		if(nameCheckFlag == true) {
 			$("form").attr({
-				action:"/owner/inventory/item/regist",
+				action:"/client/owner/inventory/item/regist",
 				enctype:"multipart/form-data",
 				method:"post"
 			});
@@ -44,7 +44,7 @@
 		
 		if(item_name.length > 0) {
 			$.ajax({
-				url:"/owner/inventory/item/nameCheck",
+				url:"/client/owner/inventory/item/nameCheck",
 				type: "POST",
 				data: {
 					item_name: item_name,

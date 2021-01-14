@@ -1,6 +1,8 @@
-package com.tsycsm.agileoffice.controller.review;
+package com.tsycsm.agileoffice.client.controller.review;
 
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,8 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.tsycsm.agileoffice.common.MessageData;
 import com.tsycsm.agileoffice.exception.AsyncDMLException;
+import com.tsycsm.agileoffice.model.common.MessageData;
 import com.tsycsm.agileoffice.model.domain.Review;
 import com.tsycsm.agileoffice.model.review.service.ReviewService;
 
@@ -28,7 +30,7 @@ public class ReviewController {
 	
 	@PostMapping("/review/regist")
 	@ResponseBody
-	public MessageData reviewRegist(Review review) {
+	public MessageData reviewRegist(HttpServletRequest request, Review review) {
 		reviewService.regist(review);
 		MessageData messageData = new MessageData();
 		messageData.setMsg("리뷰 등록 성공");
@@ -39,7 +41,7 @@ public class ReviewController {
 
 	@PostMapping("/review/update")
 	@ResponseBody
-	public MessageData updateReview(Review review) {
+	public MessageData updateReview(HttpServletRequest request, Review review) {
 		reviewService.update(review);
 
 		MessageData messageData = new MessageData();
@@ -51,7 +53,7 @@ public class ReviewController {
 	
 	@GetMapping("/review/delete")
 	@ResponseBody
-	public MessageData deleteReview(int review_id) {
+	public MessageData deleteReview(HttpServletRequest request, int review_id) {
 		reviewService.delete(review_id);
 		MessageData messageData = new MessageData();
 		messageData.setMsg("리뷰 삭제 성공");
@@ -62,7 +64,7 @@ public class ReviewController {
 	
 	@PostMapping("/review/asyncList")
 	@ResponseBody
-	public List<Review> asyncReviewList(int owner_id) {
+	public List<Review> asyncReviewList(HttpServletRequest request, int owner_id) {
 		List reviewList = reviewService.selectAllOwner(owner_id);
 		
 		return reviewList;

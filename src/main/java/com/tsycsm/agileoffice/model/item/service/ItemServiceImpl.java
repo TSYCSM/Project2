@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.tsycsm.agileoffice.common.FileManager;
 import com.tsycsm.agileoffice.exception.AsyncDMLException;
 import com.tsycsm.agileoffice.exception.DMLException;
 import com.tsycsm.agileoffice.exception.NameDuplicatedException;
+import com.tsycsm.agileoffice.model.common.FileManager;
 import com.tsycsm.agileoffice.model.domain.Category;
 import com.tsycsm.agileoffice.model.domain.Item;
 import com.tsycsm.agileoffice.model.item.repository.ItemDAO;

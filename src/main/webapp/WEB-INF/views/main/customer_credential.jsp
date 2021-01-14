@@ -114,13 +114,12 @@ function regist(){
 	if($(".signup_form")[0].checkValidity()){
 		var formData = $(".signup_form").serialize();
 		$.ajax({
-			url: "/main/customerRegist",
+			url: "/client/main/customerRegist",
 			type: "POST",
 			data: formData,
 			success: function(responseData){
 				alert(responseData.msg);
 			}
-			
 		});
 	}else{
 		alert("잘못된 표기입니다.");
@@ -129,7 +128,7 @@ function regist(){
 
 function login(){
 	$(".login_form").attr({
-		action: "/main/customerLogin",
+		action: "/client/main/customerLogin",
 		method: "post"
 		
 	})
@@ -157,7 +156,7 @@ function login(){
 				</table>
 				<button type="button" onClick="login()">로그인</button>
 				<br>
-				<button type="button" onClick="location.href='/order/main'">로그인하지 않고 상품 보러가기</button>
+				<button type="button" onClick="location.href='/client/order/main'">로그인하지 않고 상품 보러가기</button>
 			</form>
 		</div>
 		

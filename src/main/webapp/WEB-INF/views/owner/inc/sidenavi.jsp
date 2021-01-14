@@ -5,7 +5,7 @@
     <i class="fa fa-caret-down"></i>
   </button>
   <div class="dropdown-container">
-    <a href="/owner/account/mypage">내 계정</a>
+    <a href="/client/owner/account/mypage">내 계정</a>
     <a href="javascript:logout()">로그아웃</a>
   </div>
   
@@ -13,9 +13,9 @@
     <i class="fa fa-caret-down"></i>
   </button>
   <div class="dropdown-container">
-    <a href="/owner/reports/salesSummary">매출 요약</a>
-    <a href="/owner/reports/receipts">영수증 보관함</a>
-    <a href="/owner/reports/customerList">고객 관리</a>
+    <a href="/client/owner/reports/salesSummary">매출 요약</a>
+    <a href="/client/owner/reports/receipts">영수증 보관함</a>
+    <a href="/client/owner/reports/customerList">고객 관리</a>
     <a href="#">할인</a>
   </div>
   
@@ -23,8 +23,8 @@
     <i class="fa fa-caret-down"></i>
   </button>
   <div class="dropdown-container">
-    <a href="/owner/inventory/item/list">상품</a>
-    <a href="/owner/inventory/category/list">카테고리</a>
+    <a href="/client/owner/inventory/item/list">상품</a>
+    <a href="/client/owner/inventory/category/list">카테고리</a>
     <a href="#">할인</a>
   </div>
   

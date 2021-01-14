@@ -1,8 +1,9 @@
-package com.tsycsm.agileoffice.controller.inventory;
+package com.tsycsm.agileoffice.client.controller.inventory;
 
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -16,12 +17,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.tsycsm.agileoffice.common.FileManager;
-import com.tsycsm.agileoffice.common.MessageData;
 import com.tsycsm.agileoffice.exception.AsyncDMLException;
 import com.tsycsm.agileoffice.exception.DMLException;
 import com.tsycsm.agileoffice.exception.NameDuplicatedException;
 import com.tsycsm.agileoffice.model.category.service.CategoryService;
+import com.tsycsm.agileoffice.model.common.FileManager;
+import com.tsycsm.agileoffice.model.common.MessageData;
 import com.tsycsm.agileoffice.model.domain.Category;
 import com.tsycsm.agileoffice.model.domain.Item;
 import com.tsycsm.agileoffice.model.domain.Owner;
@@ -59,10 +60,12 @@ public class InventoryController implements ServletContextAware {
 	  category CRUD
 	 --------------------------------------------------------------------- */
 	@RequestMapping(value = "/owner/inventory/category/list", method = RequestMethod.GET)
-	public ModelAndView getCategoryList(HttpSession session) {
+	public ModelAndView getCategoryList(HttpServletRequest request) {
 	
 		ModelAndView mav = new ModelAndView();
 
+		HttpSession session = request.getSession();
+		
 		Owner owner = (Owner)session.getAttribute("owner");
 		int owner_id = owner.getOwner_id();
 
@@ -73,21 +76,21 @@ public class InventoryController implements ServletContextAware {
 	}
 
 	@RequestMapping(value = "/owner/inventory/category/registform", method = RequestMethod.GET)
-	public String getCategoryAdd(Category category) {
+	public String getCategoryAdd(HttpServletRequest request, Category category) {
 
 		return "owner/inventory/category_add";
 
 	}
 
 	@RequestMapping(value = "/owner/inventory/category/regist", method = RequestMethod.POST)
-	public String registCategory(Category category) {
+	public String registCategory(HttpServletRequest request, Category category) {
 		categoryService.insert(category);
 
-		return "redirect:/owner/inventory/category/list";
+		return "redirect:/client/owner/inventory/category/list";
 	}
 
 	@RequestMapping(value = "/owner/inventory/category/detail", method = RequestMethod.GET)
-	public ModelAndView detailCategory(int category_id) {
+	public ModelAndView detailCategory(HttpServletRequest request, int category_id) {
 		ModelAndView mav = new ModelAndView();
 		Category category = categoryService.select(category_id);
 
@@ -98,16 +101,15 @@ public class InventoryController implements ServletContextAware {
 	}
 
 	@RequestMapping(value = "/owner/inventory/category/delete", method = RequestMethod.GET)
-	@ResponseBody
-	public String deleteCategory(int category_id) {
+	public String deleteCategory(HttpServletRequest request, int category_id) {
 		categoryService.delete(category_id);
 
-		return "redirect:/owner/inventory/category/list";
+		return "redirect:/client/owner/inventory/category/list";
 	}
 
 	@RequestMapping(value = "/owner/inventory/category/update", method = RequestMethod.POST)
 	@ResponseBody
-	public MessageData updateCategory(Category category) {
+	public MessageData updateCategory(HttpServletRequest request, Category category) {
 		categoryService.update(category);
 
 		MessageData messageData = new MessageData();
@@ -127,8 +129,8 @@ public class InventoryController implements ServletContextAware {
 	 --------------------------------------------------------------------- */
 	
 	@RequestMapping(value = "/owner/inventory/item/list", method = RequestMethod.GET)
-	public ModelAndView getItemList(HttpSession session) {
-
+	public ModelAndView getItemList(HttpServletRequest request) {
+		HttpSession session = request.getSession();
 		Owner owner = (Owner)session.getAttribute("owner");
 		int owner_id = owner.getOwner_id();
 
@@ -145,7 +147,7 @@ public class InventoryController implements ServletContextAware {
 	
 	@RequestMapping(value = "/owner/inventory/item/list/filtered", method = RequestMethod.GET)
 	@ResponseBody
-	public List<Item> getFilteredItemList(int category_id, int owner_id) {
+	public List<Item> getFilteredItemList(HttpServletRequest request, int category_id, int owner_id) {
 		Item item = new Item();
 		item.setOwner_id(owner_id);
 		item.setCategory_id(category_id);
@@ -156,8 +158,10 @@ public class InventoryController implements ServletContextAware {
 	
 
 	@RequestMapping(value = "/owner/inventory/item/registform", method = RequestMethod.GET)
-	public ModelAndView getItemRegistForm(HttpSession session) {
+	public ModelAndView getItemRegistForm(HttpServletRequest request) {
 	
+		HttpSession session = request.getSession();
+		
 		Owner owner = (Owner)session.getAttribute("owner");
 		int owner_id = owner.getOwner_id();
 	
@@ -171,16 +175,16 @@ public class InventoryController implements ServletContextAware {
 	}
 
 	@RequestMapping(value = "/owner/inventory/item/regist", method = RequestMethod.POST)
-	public String registItem(Item item) {
+	public String registItem(HttpServletRequest request, Item item) {
 		itemService.regist(item, fileManager);
-		return "redirect:/owner/inventory/item/list";
+		return "redirect:/client/owner/inventory/item/list";
 	}
 	
 	
 	
 	@RequestMapping(value = "/owner/inventory/item/nameCheck", method = RequestMethod.POST)
 	@ResponseBody
-	public MessageData checkItemName(Item item) {
+	public MessageData checkItemName(HttpServletRequest request, Item item) {
 		System.out.println("simin owner_id : " + item.getOwner_id());
 		System.out.println("simin item_name : " + item.getItem_name());
 	
@@ -194,8 +198,10 @@ public class InventoryController implements ServletContextAware {
 	}
 	
 	@RequestMapping(value = "/owner/inventory/item/detail", method = RequestMethod.GET)
-	public ModelAndView getItemDetail(int item_id, HttpSession session) {
+	public ModelAndView getItemDetail(HttpServletRequest request, int item_id) {
 	
+		HttpSession session = request.getSession();
+		
 		Owner owner = (Owner)session.getAttribute("owner");
 		int owner_id = owner.getOwner_id();
 		
@@ -213,7 +219,7 @@ public class InventoryController implements ServletContextAware {
 	
 	@RequestMapping(value="/owner/inventory/item/update", method=RequestMethod.POST)
 	@ResponseBody
-	public MessageData updateItem(Item item) {
+	public MessageData updateItem(HttpServletRequest request, Item item) {
 		itemService.update(item, fileManager);
 
 		MessageData messageData = new MessageData();
@@ -224,9 +230,9 @@ public class InventoryController implements ServletContextAware {
 	}
 	
 	@RequestMapping(value="/owner/inventory/item/del", method=RequestMethod.POST)
-	public String deleteItem(Item item) {
+	public String deleteItem(HttpServletRequest request, Item item) {
 		itemService.delete(item, fileManager);
-		return "redirect:/owner/inventory/item/list";
+		return "redirect:/client/owner/inventory/item/list";
 	}
 	
 

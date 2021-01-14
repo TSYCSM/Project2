@@ -1,4 +1,4 @@
-package com.tsycsm.agileoffice.controller.admin;
+package com.tsycsm.agileoffice.admin.controller;
 
 import java.util.List;
 
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.tsycsm.agileoffice.common.Pager;
 import com.tsycsm.agileoffice.model.category.service.CategoryService;
+import com.tsycsm.agileoffice.model.common.Pager;
 import com.tsycsm.agileoffice.model.customer.service.CustomerService;
 import com.tsycsm.agileoffice.model.domain.Category;
 import com.tsycsm.agileoffice.model.domain.Customer;

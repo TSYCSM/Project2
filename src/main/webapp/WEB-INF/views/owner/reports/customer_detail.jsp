@@ -1,6 +1,6 @@
-<%@page import="com.tsycsm.agileoffice.common.Formatter"%>
+<%@page import="com.tsycsm.agileoffice.model.common.Formatter"%>
 <%@page import="com.tsycsm.agileoffice.model.domain.OrderSummary"%>
-<%@page import="com.tsycsm.agileoffice.common.Pager"%>
+<%@page import="com.tsycsm.agileoffice.model.common.Pager"%>
 <%@page import="com.tsycsm.agileoffice.model.domain.Customer"%>
 <%@page import="java.util.List"%>
 <%@ page contentType="text/html;charset=utf-8"%>

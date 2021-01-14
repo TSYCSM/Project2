@@ -1,7 +1,8 @@
-package com.tsycsm.agileoffice.controller.order;
+package com.tsycsm.agileoffice.client.controller.order;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -15,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.tsycsm.agileoffice.common.MessageData;
 import com.tsycsm.agileoffice.exception.OrderException;
 import com.tsycsm.agileoffice.model.category.service.CategoryService;
+import com.tsycsm.agileoffice.model.common.MessageData;
 import com.tsycsm.agileoffice.model.domain.Category;
 import com.tsycsm.agileoffice.model.domain.Customer;
 import com.tsycsm.agileoffice.model.domain.Item;
@@ -50,8 +51,10 @@ public class OrderController {
 	 *******************************************/
 	
 	@GetMapping(value="/order/main")
-	public ModelAndView viewOrderMain(HttpSession session) {
+	public ModelAndView viewOrderMain(HttpServletRequest request) {
 
+		HttpSession session = request.getSession();
+		
 		Owner owner = (Owner)session.getAttribute("owner");
 		int owner_id = owner.getOwner_id();
 
@@ -75,11 +78,13 @@ public class OrderController {
 	
 	@PostMapping(value="/order/orderRegist")
 	@ResponseBody
-	public MessageData orderRegist(HttpSession session, OrderSummary orderSummary, 
+	public MessageData orderRegist(HttpServletRequest request, OrderSummary orderSummary, 
 			@RequestParam("item_id") int[] item_id_arr
 			,@RequestParam("quantity") int[] quantity_arr
 			,@RequestParam("price") int[] price_arr) {
 		//owner_id, customer_id 전해주시
+		
+		HttpSession session = request.getSession();
 		Owner owner = (Owner)session.getAttribute("owner");
 		Customer customer = (Customer)session.getAttribute("customer");
 
@@ -113,7 +118,7 @@ public class OrderController {
 		MessageData messageData = new MessageData();
 		messageData.setResultCode(1);
 		messageData.setMsg("주문이 완료되었습니다.");
-		messageData.setUrl("/main/customerCredential");
+		messageData.setUrl("/client/main/customerCredential");
 		
 		return messageData;
 	}

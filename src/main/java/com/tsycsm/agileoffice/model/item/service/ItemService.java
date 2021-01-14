@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.tsycsm.agileoffice.common.FileManager;
+import com.tsycsm.agileoffice.model.common.FileManager;
 import com.tsycsm.agileoffice.model.domain.Item;
 
 @Service

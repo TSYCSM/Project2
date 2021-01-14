@@ -1,6 +1,6 @@
 <%@page import="com.tsycsm.agileoffice.model.domain.Review"%>
 <%@page import="com.tsycsm.agileoffice.model.domain.Item"%>
-<%@page import="com.tsycsm.agileoffice.common.Pager"%>
+<%@page import="com.tsycsm.agileoffice.model.common.Pager"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
 
 <div id="reviews" class="tabcontent">
