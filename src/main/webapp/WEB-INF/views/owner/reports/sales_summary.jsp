@@ -22,7 +22,7 @@
 	<title>owner page</title>
 
 	<%@ include file="../inc/header.jsp" %>
-<script type="text/javascript" src="/resources/js/client/owner/reports/charts.js"></script>
+<script type="text/javascript" src="/resources/js/client/client/owner/reports/charts.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script>
 //google.charts.load('current', {'packages':['corechart']});
@@ -48,7 +48,7 @@
 						
 						<td>
 							<input type="hidden" value="<%=num--%>">
-							<a href="/owner/reports/salesDetail?orderdate=<%=orderSummary.getOrderdate().substring(0, 10) %>&currentPage=1"><%=orderSummary.getOrderdate().substring(0, 10) %></a>
+							<a href="/client/owner/reports/salesDetail?orderdate=<%=orderSummary.getOrderdate().substring(0, 10) %>&currentPage=1"><%=orderSummary.getOrderdate().substring(0, 10) %></a>
 						</td>
 						<td><%=orderSummary.getTotal_price() %></td>
 					</tr>
@@ -56,16 +56,16 @@
 				<tr>
 					<td colspan="2" style="text-align:center">
 						<%if(pager.getFirstPage() >1){ %>
-							<a href="/owner/reports/salesSummary?currentPage=<%=pager.getFirstPage()-1%>">◀</a>					
+							<a href="/client/owner/reports/salesSummary?currentPage=<%=pager.getFirstPage()-1%>">◀</a>					
 						<%}else{ %>
 							<a href = "javascript:alert('처음 페이지 입니다')">◀</a>
 						<%} %>
 						<%for(int i=pager.getFirstPage(); i<=pager.getLastPage(); i++){ %>
 						<%if(i > pager.getTotalPage()) break; %>
-						<a href="/owner/reports/salesSummary?currentPage=<%=i%>">[<%=i %>]</a>
+						<a href="/client/owner/reports/salesSummary?currentPage=<%=i%>">[<%=i %>]</a>
 						<%} %>
 						<%if(pager.getLastPage() < pager.getTotalPage()) {%>
-							<a href="/owner/reports/salesSummary?currentPage=<%=pager.getLastPage()+1%>">▶</a>
+							<a href="/client/owner/reports/salesSummary?currentPage=<%=pager.getLastPage()+1%>">▶</a>
 						<%}else{ %>
 							<a href = "javascript:alert('마지막 페이지입니다.')">▶</a>
 						<%} %>

@@ -269,7 +269,7 @@ function checkId(){
 <div id="loader" style="margin:auto"></div>
 	<h2>Agile Office</h2>
 	<%if(owner !=null){ %>
-		<button class="welcome_back_btn" onclick="location.href='/main/ownerMain'" style="width:auto;">Welcome Back!</button>	
+		<button class="welcome_back_btn" onclick="location.href='/client/main/ownerMain'" style="width:auto;">Welcome Back!</button>	
 		<div class="welcome_box"><%=owner.getUser_id() %>님, 로그인 중입니다.</div>
 	<%}else{ %>
 		<button class="open_login_btn" onclick="document.getElementById('id02').style.display='block'" style="width:auto;">Login</button>

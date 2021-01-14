@@ -23,7 +23,7 @@ const formatter = new Intl.NumberFormat('ko-KR', {
 function showReceipt(summary_id){
 	var tag="";
 	$.ajax({
-		url:"/owner/reports/receiptsInfo",
+		url:"/client/owner/reports/receiptsInfo",
 		type:"post",
 		data:{
 			order_summary_id:summary_id
@@ -101,16 +101,16 @@ function hideReceipt(){
 				<tr>
 					<td colspan="4" style="text-align:center">
 						<%if(pager.getFirstPage() >1){ %>
-							<a href="/owner/reports/receipts?currentPage=<%=pager.getFirstPage()-1%>">◀</a>					
+							<a href="/client/owner/reports/receipts?currentPage=<%=pager.getFirstPage()-1%>">◀</a>					
 						<%}else{ %>
 							<a href = "javascript:alert('처음 페이지 입니다')">◀</a>
 						<%} %>
 						<%for(int i=pager.getFirstPage(); i<=pager.getLastPage(); i++){ %>
 						<%if(i > pager.getTotalPage()) break; %>
-						<a href="/owner/reports/receipts?currentPage=<%=i%>">[<%=i %>]</a>
+						<a href="/client/owner/reports/receipts?currentPage=<%=i%>">[<%=i %>]</a>
 						<%} %>
 						<%if(pager.getLastPage() < pager.getTotalPage()) {%>
-							<a href="/owner/reports/receipts?currentPage=<%=pager.getLastPage()+1%>">▶</a>
+							<a href="/client/owner/reports/receipts?currentPage=<%=pager.getLastPage()+1%>">▶</a>
 						<%}else{ %>
 							<a href = "javascript:alert('마지막 페이지입니다.')">▶</a>
 						<%} %>

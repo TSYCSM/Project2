@@ -127,7 +127,7 @@ h1, h3{
 	
 	function updateReview(review_id, comments) {
 		$.ajax({
-			url: "/review/update",
+			url: "/client/review/update",
 			data: {
 				review_id: review_id,
 				comments: comments
@@ -149,7 +149,7 @@ h1, h3{
 		var review_id = param.getElementsByTagName("input")[0].value;
 		
 		$.ajax({
-			url: "/review/delete",
+			url: "/client/review/delete",
 			data: {review_id: review_id},
 			type: "GET",
 			success: function(messageData) {
@@ -166,7 +166,7 @@ h1, h3{
 	function getAsyncList(cPage){
 		
 		$.ajax({
-			url:"/review/asyncList",
+			url:"/client/review/asyncList",
 			type:"post",
 			data:{
 				owner_id: <%=owner.getOwner_id()%>
@@ -218,7 +218,7 @@ h1, h3{
 	function getPager(cPage, size){
 		var result;
 		$.ajax({
-			url: "/getPager",
+			url: "/client/getPager",
 			dataType: "json",
 			async: false,
 			type: "post",
@@ -242,7 +242,7 @@ h1, h3{
 			
 			var formData = $(".order-form").serialize()
 			$.ajax({
-				url: "/order/orderRegist",
+				url: "/client/order/orderRegist",
 				method: "post",
 				data: formData,
 				success : function(responseData){
@@ -268,7 +268,7 @@ h1, h3{
 		var formData = $(".review-form").serialize();
 		if($("select[name='item.item_id']").val() !=0){
 			$.ajax({
-				url:"/review/regist",
+				url:"/client/review/regist",
 				type:"post",
 				data:formData,
 				success:function(responseData){

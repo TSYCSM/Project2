@@ -29,24 +29,28 @@ function showCheckBox() {
 }
 
 function hideCheckBox(){
+	$(".check-box:input[type='password']").html("");
 	$(".check-box").hide();
 }
 
 function hideNewBox(){
 	$(".new-box").hide();
+	$(".new-box:input[type='password']").html("");
 }
 
 function checkPassword(){
 	var formData = $("#check-box-form").serialize();
 	$.ajax({
-		url: "/main/checkPassword",
+		url: "/client/main/checkPassword",
 		type: "post",
 		data: formData,
 		success:function(responseData){
 			alert(responseData.msg)
-			$(".check-box").html("");
+			$(".check-box:input[type='password']").html("");
 			$(".check-box").hide();
-			$(".new-box").show();
+			if(responseData.resultCode==1){
+				$(".new-box").show();				
+			}
 		}
 	});
 }
@@ -54,13 +58,13 @@ function checkPassword(){
 function changePassword(){
 	var formData = $("#new-box-form").serialize();
 	$.ajax({
-		url: "/main/ownerPasswordUpdate",
+		url: "/client/main/ownerPasswordUpdate",
 		type: "post",
 		data: formData,
 		success:function(responseData){
 			alert(responseData.msg)
 			$(".new-box").hide();
-			$(".new-box").html("");
+			$(".new-box:input[type='password']").html("");
 		}
 	});
 }
@@ -69,7 +73,7 @@ function deleteAccount(){
 	if(confirm("회원탈퇴 하시겠습니까?")){
 		var formData = $("#mypage-form").serialize();
 		$.ajax({
-			url:"/main/ownerQuit",
+			url:"/client/main/ownerQuit",
 			type:"post",
 			data:formData,
 			success:function(responseData){
@@ -84,7 +88,7 @@ function deleteAccount(){
 function updateInfo(){
 	var formData = $("#mypage-form").serialize();
 	$.ajax({
-		url:"/main/ownerUpdate",
+		url:"/client/main/ownerUpdate",
 		type:"post",
 		data:formData,
 		success:function(responseData){

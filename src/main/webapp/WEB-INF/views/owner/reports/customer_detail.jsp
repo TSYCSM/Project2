@@ -45,18 +45,18 @@
 				<tr>
 					<td colspan="3" style="text-align:center">
 						<%if(pager.getFirstPage() >1){ %>
-							<a href="/owner/reports/customerDetail?currentPage=<%=pager.getFirstPage()-1%>
+							<a href="/client/owner/reports/customerDetail?currentPage=<%=pager.getFirstPage()-1%>
 								&customer_id=<%=customer.getCustomer_id()%>">◀</a>					
 						<%}else{ %>
 							<a href = "javascript:alert('처음 페이지 입니다')">◀</a>
 						<%} %>
 						<%for(int i=pager.getFirstPage(); i<=pager.getLastPage(); i++){ %>
 						<%if(i > pager.getTotalPage()) break; %>
-						<a href="/owner/reports/customerDetail?currentPage=<%=i%>
+						<a href="/client/owner/reports/customerDetail?currentPage=<%=i%>
 							&customer_id=<%=customer.getCustomer_id()%>">[<%=i %>]</a>
 						<%} %>
 						<%if(pager.getLastPage() < pager.getTotalPage()) {%>
-							<a href="/owner/reports/customerDetail?currentPage=<%=pager.getLastPage()+1%>
+							<a href="/client/owner/reports/customerDetail?currentPage=<%=pager.getLastPage()+1%>
 								&customer_id=<%=customer.getCustomer_id()%>">▶</a>
 						<%}else{ %>
 							<a href = "javascript:alert('마지막 페이지입니다.')">▶</a>

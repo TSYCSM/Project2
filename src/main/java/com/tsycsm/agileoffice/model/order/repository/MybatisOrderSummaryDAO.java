@@ -32,9 +32,9 @@ public class MybatisOrderSummaryDAO implements OrderSummaryDAO{
 
 	@Override
 	public void insert(OrderSummary orderSummary) throws OrderException{
-		int customer_id = orderSummary.getCustomer().getCustomer_id();
+		
 		int result = 0;
-		if(customer_id !=0) {
+		if(orderSummary.getCustomer() !=null) {
 			result = sqlSessionTemplate.insert("OrderSummary.insert", orderSummary);			
 		}else {
 			result = sqlSessionTemplate.insert("OrderSummary.insertWithoutCustomerId", orderSummary);						
