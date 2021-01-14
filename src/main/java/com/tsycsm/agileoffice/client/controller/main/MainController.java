@@ -48,9 +48,7 @@ public class MainController {
 		return pager;
 	}
 	
-	
-	
-	
+
 	// ---------------------------------
 	// Owner : Credential Box
 	// ---------------------------------
@@ -89,8 +87,7 @@ public class MainController {
 	
 	//·Î±×ÀÎ
 	@RequestMapping(value="/main/ownerLogin", method=RequestMethod.POST)
-	public String ownerLogin(Owner owner, HttpSession session) {
-		
+	public String ownerLogin(HttpSession session, Owner owner) {
 		Owner obj = ownerService.select(owner);
 		session.setAttribute("owner", obj);
 		
