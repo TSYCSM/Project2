@@ -17,6 +17,10 @@
 	<select id="selectByCategoryId" parameterType="int" resultType="Item">
 		select * from item where category_id=#{category_id} order by item_id desc
 	</select>
+	
+	<select id="selectByOwnerIdCategoryId" parameterType="Item" resultType="Item">
+		select * from item where category_id=#{category_id} and owner_id=#{owner_id} order by item_id desc
+	</select>
 
 	<select id="selectByCategoryIdNull" parameterType="int" resultType="Item">
 		select * from item where category_id is null and owner_id=#{owner_id} order by item_id desc

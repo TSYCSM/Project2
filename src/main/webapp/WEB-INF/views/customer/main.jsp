@@ -88,7 +88,6 @@ h1, h3{
 	var review_len = <%=reviewList.size()%>;
 	$(function(){
 		getAsyncList(1);
-		
 	});
 
 

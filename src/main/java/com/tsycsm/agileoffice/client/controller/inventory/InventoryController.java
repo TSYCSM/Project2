@@ -52,7 +52,6 @@ public class InventoryController implements ServletContextAware {
 		fileManager.setSaveDir(servletContext.getRealPath(fileManager.getSaveDir()));
 		
 		logger.info(fileManager.getSaveDir());
-		System.out.println(fileManager.getSaveDir());
 	}
 
 
@@ -139,13 +138,16 @@ public class InventoryController implements ServletContextAware {
 	
 	@RequestMapping(value = "/owner/inventory/item/list/filtered", method = RequestMethod.GET)
 	@ResponseBody
-	public List<Item> getFilteredItemList(int category_id, int owner_id) {
+	public List<Item> getFilteredItemList(String[] categoryArray, int owner_id) {
 		Item item = new Item();
-		item.setOwner_id(owner_id);
-		item.setCategory_id(category_id);
-		System.out.println("controller owner_id" + owner_id);
-		System.out.println("controller category_id" + category_id);
-		return itemService.selectByCategoryId(item);
+		
+		int[] category_ids = new int[categoryArray.length];
+		
+		for(int i=0; i<categoryArray.length; i++) {
+			category_ids[i] = Integer.parseInt(categoryArray[i]);
+		}
+		
+		return itemService.selectByMultiCategoryId(category_ids, owner_id);
 	}
 	
 
@@ -173,9 +175,6 @@ public class InventoryController implements ServletContextAware {
 	@RequestMapping(value = "/owner/inventory/item/nameCheck", method = RequestMethod.POST)
 	@ResponseBody
 	public MessageData checkItemName(Item item) {
-		System.out.println("simin owner_id : " + item.getOwner_id());
-		System.out.println("simin item_name : " + item.getItem_name());
-	
 		itemService.duplicationCheck(item);
 	
 		MessageData messageData = new MessageData();

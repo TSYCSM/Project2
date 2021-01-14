@@ -15,6 +15,7 @@ public interface ItemService {
 	public List<Item> selectAllJoinCategory(int owner_id);
 	public List<Item> selectByOwnerId(int owner_id);
 	public List<Item> selectByCategoryId(Item item);
+	public List<Item> selectByMultiCategoryId(int[] category_ids, int owner_id);
 	public void regist(Item item, FileManager fileManager);
 	public void update(Item item, FileManager fileManager);
 	public void delete(Item item, FileManager fileManager);

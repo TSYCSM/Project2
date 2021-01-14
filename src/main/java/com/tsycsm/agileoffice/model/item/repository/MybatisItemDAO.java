@@ -25,21 +25,29 @@ public class MybatisItemDAO implements ItemDAO{
 	public List<Item> selectByCategoryId(Item item) {
 		List<Item> itemList = null;
 		
-		System.out.println("DAO category_id" + item.getCategory_id());
-		System.out.println("DAO owner_id" + item.getOwner_id());
-
 		if(item.getCategory_id() != 0) {
 			itemList = sqlSessionTemplate.selectList("Item.selectByCategoryId", item.getCategory_id());
-			System.out.println(itemList);
 		} else {
 			itemList = sqlSessionTemplate.selectList("Item.selectByCategoryIdNull", item.getOwner_id());
-			System.out.println(itemList);
 		}
 		
-	
 		return itemList;
 	}
 
+	@Override
+	public List<Item> selectByOwnerIdCategoryId(Item item) {
+		List<Item> itemList = null;
+		
+		if(item.getCategory_id() != 0) {
+			itemList = sqlSessionTemplate.selectList("Item.selectByOwnerIdCategoryId", item);
+		} else {
+			itemList = sqlSessionTemplate.selectList("Item.selectByCategoryIdNull", item.getOwner_id());
+		}
+		
+		return itemList;
+	}
+	
+	
 	@Override
 	public void insert(Item item) throws DMLException {
 		int result = 0;
@@ -84,11 +92,11 @@ public class MybatisItemDAO implements ItemDAO{
 			throw new AsyncDMLException("상품 정보 수정에 실패하였습니다.");
 		}
 	}
+
 	@Override
 	public void updateStock(Item item) throws DMLException{
 		int result = sqlSessionTemplate.update("Item.updateStock", item);			
 
-		
 		if(result==0) {
 			throw new DMLException("상품 수량이 부족합니다.");
 		}
@@ -107,7 +115,6 @@ public class MybatisItemDAO implements ItemDAO{
 	@Override
 	public Item selectByNameInOwner(Item item) {
 		Item item_result = sqlSessionTemplate.selectOne("Item.selectByNameInOwner", item);
-		System.out.println("simin test" + item_result);
 		return item_result;
 	}
 

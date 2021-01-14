@@ -4,10 +4,7 @@
 <%@page import="java.util.List"%>
 <%@ page contentType="text/html;charset=utf-8"%>
 <%
-	List<Item> itemList = (List<Item>)request.getAttribute("itemList");
 	List<Category> categoryList = (List<Category>)request.getAttribute("categoryList");
-	Pager pager = new Pager();
-	pager.init(request, itemList.size());
  %>
 <!DOCTYPE html>
 <html>
@@ -26,9 +23,11 @@
 <button class="add_btn" type="button" onclick="location.href='/client/owner/inventory/item/registform'">상품추가</button>
 <br>
 <br>
-<input name="categoryIdList" onChange="filtering()" type="checkbox" value="0" checked/>카테고리 없음  |  
-<%for(Category category : categoryList) { %>
-<input name="categoryIdList" onChange="filtering()" type="checkbox" value="<%=category.getCategory_id() %>" checked/><%=category.getCategory_name() %>  |  
+<input name="categoryIdList" onChange="filtering(1)" type="checkbox" value="0" checked/>카테고리 없음  |  
+<%for(int i=0; i<categoryList.size(); i++) { %>
+<%Category category = categoryList.get(i); %>
+<input name="categoryIdList" onChange="filtering(1)" type="checkbox" value="<%=category.getCategory_id() %>" checked/><%=category.getCategory_name() %>
+<%if(i != categoryList.size()-1){ %>  |  <%} %>
 <%} %>
 <br>
 <br>
@@ -40,76 +39,102 @@
 		<th>재고</th>
 		<th>등록일</th>
 	</tr>
-	<tbody id="list-contents">
-		<%
-		int num = pager.getNum();
-		int curPos = pager.getCurPos();
-		%>
-		<%for(int i=0; i<pager.getPageSize(); i++){ %>
-		<%if(num < 1) break; %>
-		<%Item item = itemList.get(curPos++); %>
-		<tr>
-			<td><%=num-- %></td>
-			<td><a href="/client/owner/inventory/item/detail?item_id=<%=item.getItem_id()%>"><%=item.getItem_name() %></a></td>
-			<td><%=item.getPrice() %></td>
-			<td><%=item.getStock() %></td>
-			<td><%=item.getRegdate() %></td>
-		</tr>
-		<%} %>
-	</tbody>
-	<tr>
-		<td colspan="6" style="text-align:center">
-			<%if(pager.getFirstPage() >1){ %>
-				<a href="/client/owner/inventory/item/list?currentPage=<%=pager.getFirstPage()-1%>">◀</a>					
-			<%}else{ %>
-				<a href = "javascript:alert('처음 페이지 입니다')">◀</a>
-			<%} %>
-			<%for(int i=pager.getFirstPage(); i<=pager.getLastPage(); i++){ %>
-			<%if(i > pager.getTotalPage()) break; %>
-			<a href="/client/owner/inventory/item/list?currentPage=<%=i %>">[<%=i %>]</a>
-			<%} %>
-			<%if(pager.getLastPage() < pager.getTotalPage()) {%>
-				<a href="/client/owner/inventory/item/list?currentPage=<%=pager.getLastPage()+1%>">▶</a>
-			<%}else{ %>
-				<a href = "javascript:alert('마지막 페이지입니다.')">▶</a>
-			<%} %>
-		</td>
-	</tr>
+	<tbody id="list-contents"></tbody>
+	<tbody id="page-box" style="text-align:center"></tbody>
 </table>
 <%@ include file="../inc/footer.jsp" %>
 
 <script>
+
+	const formatter = new Intl.NumberFormat('ko-KR', {
+	  style: 'currency',
+	  currency: 'KRW'
+	})
+
+	var categoryArray = [];
 	
 	$(function() {
-		filtering();
+		categoryArray = getCheckedCategory();
+		filtering(1);
 	});
-
-	function filtering() {
-		$("#list-contents").html("");
+	
+	function getCheckedCategory() {
+		categoryArray = [];
 
 		for(var i=0; i<$("input[name='categoryIdList']").length; i++) {
 			if($($("input[name='categoryIdList']")[i]).is(":checked") == true) {
-				$.ajax({
-					url: "/client/owner/inventory/item/list/filtered?category_id=" + $($("input[name='categoryIdList']"))[i].value
-						+ "&owner_id=" + <%=owner.getOwner_id() %>,
-					success: function(data) {
-						for(var i=0; i<data.length; i++) {
-							var tag = "";
-							tag += "<tr>";
-							tag += "<td>1</td>";
-							tag += "<td><a href='/client/owner/inventory/item/detail?item_id=" + data[i].item_id + "'>" + data[i].item_name + "</a></td>";
-							tag += "<td>" + data[i].price + "</td>";
-							tag += "<td>" + data[i].stock + "</td>";
-							tag += "<td>" + data[i].regdate + "</td>";
-							tag += "</tr>";
-							
-							$("#list-contents").append(tag);
-						}
-					}
-				});
+				categoryArray.push($($("input[name='categoryIdList']"))[i].value);
 			} 
 		}
+		
+		return categoryArray;
 	}
+
+	function filtering(curPage) {
+		$("#list-contents").html("");
+
+		$.ajax({
+			method: "POST",
+			url: "/client/owner/inventory/item/list/filtered",
+			traditional: "true",
+			data: {
+				categoryArray : getCheckedCategory(),
+				owner_id : <%=owner.getOwner_id() %>
+			},
+			success: function(responseData) {
+				var itemList_length = responseData.length;
+				var pager = getPager(curPage, itemList_length);
+				var tag = "";
+				for(var i=0; i<pager.pageSize; i++) {
+					if(pager.num < 1) break;
+					var item = responseData[pager.curPos++];
+					tag += "<tr>";
+					tag += "<td>" + (pager.num--) + "</td>";
+					tag += "<td><a href='/client/owner/inventory/item/detail?item_id=" + item.item_id + "'>" + item.item_name + "</a></td>";
+					tag += "<td>" + formatter.format(item.price) + "</td>";
+					tag += "<td>" + item.stock + "</td>";
+					tag += "<td>" + item.regdate + "</td>";
+					tag += "</tr>";
+				}
+				$("#list-contents").append(tag);
+				
+				tag = "";
+				tag += "<tr>";
+				tag += "<td colspan=\"5\" style=\"text-align:center\">";
+				tag += "<a href=\"#\">◀</a>";
+				for(var i=pager.firstPage; i<=pager.lastPage;i++){
+					if(i>pager.totalPage) break;
+					tag += "<a href=\"javascript:filtering("+i+")\"> ["+i+"] </a>"
+				}
+				tag += "<a href=\"#\">▶</a>";
+				tag += "</td>";
+				tag += "</tr>";
+				
+				$("#page-box").html(tag);
+			}
+		});
+	}
+	
+	
+	function getPager(cPage, size){
+		var result;
+		$.ajax({
+			url: "/client/getPager",
+			dataType: "json",
+			async: false,
+			type: "post",
+			data:{
+				curPage: cPage,
+				listSize: size
+			},
+			success:function(pager){
+				result = pager;
+			}
+			
+		})
+		return result;
+	}
+
 </script>
 
 
