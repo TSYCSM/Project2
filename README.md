@@ -54,9 +54,8 @@ POS Management Web Application in Spring MVC
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-the-project">About The Project</a>
+      <a href="#Agile Office">Agile Office</a>
       <ul>
-        <li><a href="#Agile Office">Agile Office</a></li>
         <li><a href="#구현언어">구현언어</a></li>       
       </ul>
     </li>
@@ -67,12 +66,9 @@ POS Management Web Application in Spring MVC
 </details>
 
 
-<!-- ABOUT THE PROJECT -->
-## About The Project
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+<!-- Agile Office -->
 
-
-### Agile Office
+## Agile Office
 
 
 
