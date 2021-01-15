@@ -87,15 +87,15 @@ Agile Office는 사업자들의 자유도를 고려한 만큼 취급 상품에 �
 ### 구현언어
 
 * programing language
-** [JAVA](https://getbootstrap.com)
-** [HTML/CSS](https://jquery.com)
-** [JavaScript/Jquery](https://laravel.com)
+[JAVA](https://getbootstrap.com)<br>
+[HTML/CSS](https://jquery.com)<br>
+[JavaScript/Jquery](https://laravel.com)<br>
 
 * Server FrameWork
-** Spring MVC
+Spring MVC
 
 * DataBase
-** Oracle
+Oracle
 
 
 <!-- USAGE EXAMPLES -->
