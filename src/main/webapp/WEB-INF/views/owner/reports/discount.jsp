@@ -8,16 +8,15 @@
 </head>
 <%@ include file="../inc/common.jsp"%>
 
-			discount list <br><br>
-			<table>
-				<tr>
-					<th>할인 종류</th>
-					<th>할인 금액</th>
-					
-				</tr>
-				<tr>
-					<td>box discount</td>
-					<td>150</td>
-				</tr>
-			</table>
+<table>
+	<tr>
+		<th>할인 종류</th>
+		<th>할인 금액</th>
+		
+	</tr>
+	<tr>
+		<td>box discount</td>
+		<td>150</td>
+	</tr>
+</table>
 <%@ include file="../inc/footer.jsp" %>

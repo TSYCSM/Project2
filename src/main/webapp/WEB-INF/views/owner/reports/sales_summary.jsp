@@ -32,62 +32,56 @@
 </script>
 </head>
 <%@ include file="../inc/common.jsp"%>
-			  	 <!-- <div id="chart_div" style="width: 100%; height: 500px;"></div> --> 
-			  	totalRecord: <%=pager.getTotalRecord() %><br>
-			  	pagesize: <%=pager.getPageSize() %><br>
-			  	totalPage: <%=pager.getTotalPage() %><br>
-			  	
-			  	<br><br>
-				<table>
-				<tr>
-					<th>날짜</th>
-					<th>총 매출액</th>
-				</tr>
-				<%
-					int num = pager.getNum();
-					int curPos = pager.getCurPos();
-				%>
-				<%for(int i=0; i<pager.getPageSize(); i++){ %>
-					<%if(num < 1) break; %>
-					<%OrderSummary orderSummary = orderSummaryList.get(curPos); %>
-					
-					<tr>
-						<%if(String.valueOf(date).equals(orderSummary.getOrderdate().substring(0, 10))){ %>
-							<%curPos++; num--; %>
-							<td>
-								<a href="/client/owner/reports/salesDetail?orderdate=<%=orderSummary.getOrderdate().substring(0, 10) %>&currentPage=1"><%=orderSummary.getOrderdate().substring(0, 10) %></a>
-							</td>
-							<td><%=Formatter.getCurrency(orderSummary.getTotal_price() ) %></td>
-							<%}else{ %>
-								<td><%=String.valueOf(date) %></td>
-								<td>0</td>
-							<%} %>				
-					</tr>
-					
-					<%
-						date = date.minusDays(1);
-					%>
-					
-				<%} %>
-				<tr>
-					<td colspan="2" style="text-align:center">
-						<%if(pager.getFirstPage() >1){ %>
-							<a href="/client/owner/reports/salesSummary?currentPage=<%=pager.getFirstPage()-1%>">◀</a>					
-						<%}else{ %>
-							<a href = "javascript:alert('처음 페이지 입니다')">◀</a>
-						<%} %>
-						<%for(int i=pager.getFirstPage(); i<=pager.getLastPage(); i++){ %>
-						<%if(i > pager.getTotalPage()) break; %>
-						<a href="/client/owner/reports/salesSummary?currentPage=<%=i%>">[<%=i %>]</a>
-						<%} %>
-						<%if(pager.getLastPage() < pager.getTotalPage()) {%>
-							<a href="/client/owner/reports/salesSummary?currentPage=<%=pager.getLastPage()+1%>">▶</a>
-						<%}else{ %>
-							<a href = "javascript:alert('마지막 페이지입니다.')">▶</a>
-						<%} %>
-					</td>
-				</tr>
-			</table>
+	<table>
+	<tr>
+		<th>날짜</th>
+		<th>총 매출액</th>
+	</tr>
+	<%
+		int num = pager.getNum();
+		int curPos = pager.getCurPos();
+	%>
+	<%for(int i=0; i<pager.getPageSize(); i++){ %>
+		<%if(num < 1) break; %>
+		<%OrderSummary orderSummary = orderSummaryList.get(curPos); %>
+		
+		<tr>
+			<%if(String.valueOf(date).equals(orderSummary.getOrderdate().substring(0, 10))){ %>
+				<%curPos++; num--; %>
+				<td>
+					<a href="/client/owner/reports/salesDetail?orderdate=<%=orderSummary.getOrderdate().substring(0, 10) %>&currentPage=1"><%=orderSummary.getOrderdate().substring(0, 10) %></a>
+				</td>
+				<td><%=Formatter.getCurrency(orderSummary.getTotal_price() ) %></td>
+				<%}else{ %>
+					<td><%=String.valueOf(date) %></td>
+					<td>0</td>
+				<%} %>				
+		</tr>
+		
+		<%
+			date = date.minusDays(1);
+		%>
+		
+	<%} %>
+	<tr>
+		<td colspan="2" style="text-align:center">
+			<%if(pager.getFirstPage() >1){ %>
+				<a href="/client/owner/reports/salesSummary?currentPage=<%=pager.getFirstPage()-1%>">◀</a>					
+			<%}else{ %>
+				<a href = "javascript:alert('처음 페이지 입니다')">◀</a>
+			<%} %>
+			<%for(int i=pager.getFirstPage(); i<=pager.getLastPage(); i++){ %>
+			<%if(i > pager.getTotalPage()) break; %>
+			<a href="/client/owner/reports/salesSummary?currentPage=<%=i%>">[<%=i %>]</a>
+			<%} %>
+			<%if(pager.getLastPage() < pager.getTotalPage()) {%>
+				<a href="/client/owner/reports/salesSummary?currentPage=<%=pager.getLastPage()+1%>">▶</a>
+			<%}else{ %>
+				<a href = "javascript:alert('마지막 페이지입니다.')">▶</a>
+			<%} %>
+		</td>
+	</tr>
+</table>
 <%@ include file="../inc/footer.jsp" %>
 
 

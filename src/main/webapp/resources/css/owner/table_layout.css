@@ -2,11 +2,13 @@
 
 table {
 	position: absolute;
-	left: 200px;
+	top: 50px;
+	left: 150px;
 	border-collapse: collapse;
 	border-spacing: 0;
-	width: 80%;
+	width: 70%;
 	border: 1px solid #ddd;
+	background-color: white;
 }
 
 th, td {
@@ -14,6 +16,10 @@ th, td {
 	padding: 16px;
 }
 
-tr:nth-child(even) {
-	background-color: #f2f2f2;
+table a {
+	color: #3d4c9c;
+}
+
+tr {
+	border-top: 1px solid #ddd;
 }

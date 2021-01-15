@@ -13,16 +13,7 @@
 <title>owner page</title>
 <%@ include file="../inc/header.jsp"%>
 <style>
-#dragArea {
-	width: 200px;
-	height: 200px;
-	overflow: scroll;
-	border: 1px solid #ccc
-}
 
-.dragBorder {
-	background: #ffffff;
-}
 </style>
 <script>
 	$(function(){
@@ -122,13 +113,13 @@
 		<div class="outerbox">
 			<label for="lname">상품가격</label>
 			<div class="box">
-				<input type="text" name="price" value="<%=item.getPrice()%>" required />
+				<input type="number" min="0" name="price" value="<%=item.getPrice()%>" required />
 			</div>
 		</div>
 		<div class="outerbox">
 			<label for="lname">상품 수량</label><br>
 			<div class="box">
-				<input type="number" name="stock" value="<%=item.getStock()%>" required />
+				<input type="number" min="0" name="stock" value="<%=item.getStock()%>" required />
 			</div>
 		</div>
 

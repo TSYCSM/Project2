@@ -13,25 +13,37 @@
 <title>owner page</title>
 <%@ include file="../inc/header.jsp" %>
 <style>
-.add_btn{
-	position: absolute;
-	left: 300px;
+.add_btn {
+	border: none;
+	border-radius: 4px;
+	background-color: #3d4c9c;
+	color: white;
+	font-size: 15px;
+	padding: 10px 15px;
+}
+.add_btn:hover {
+	transition: 0.3s;
+	opacity: 0.7;
+}
+#category-checkbox {
+	width: 100%;
+	text-align: center;
 }
 </style>
 </head>
 <%@ include file="../inc/common.jsp"%>
-<button class="add_btn" type="button" onclick="location.href='/client/owner/inventory/item/registform'">상품추가</button>
-<br>
-<br>
-<input name="categoryIdList" onChange="filtering(1)" type="checkbox" value="0" checked/>카테고리 없음  |  
-<%for(int i=0; i<categoryList.size(); i++) { %>
-<%Category category = categoryList.get(i); %>
-<input name="categoryIdList" onChange="filtering(1)" type="checkbox" value="<%=category.getCategory_id() %>" checked/><%=category.getCategory_name() %>
-<%if(i != categoryList.size()-1){ %>  |  <%} %>
-<%} %>
-<br>
-<br>
 <table id="item-list">
+	<tr>
+		<td colspan="5">
+			<div id="category-checkbox">
+			<input name="categoryIdList" onChange="filtering(1)" type="checkbox" value="0" checked/>카테고리 없음
+			<%for(int i=0; i<categoryList.size(); i++) { %>
+				<%Category category = categoryList.get(i); %>
+				<input name="categoryIdList" onChange="filtering(1)" type="checkbox" value="<%=category.getCategory_id() %>" checked/><%=category.getCategory_name() %>
+			<%} %>
+			</div>
+		</td>
+	</tr>
 	<tr id="list-title">
 		<th>No</th>
 		<th>품명</th>
@@ -41,7 +53,19 @@
 	</tr>
 	<tbody id="list-contents"></tbody>
 	<tbody id="page-box" style="text-align:center"></tbody>
+	<tbody style="background-color:#f0f0f0;">
+		<tr style=" border:none;">
+			<td colspan="5">
+				<button class="add_btn" type="button" onclick="location.href='/client/owner/inventory/item/registform'">상품추가</button>
+			</td>
+		</tr>
+	</tbody>
 </table>
+
+
+
+
+
 <%@ include file="../inc/footer.jsp" %>
 
 <script>
@@ -96,7 +120,7 @@
 					tag += "<td><a href='/client/owner/inventory/item/detail?item_id=" + item.item_id + "'>" + item.item_name + "</a></td>";
 					tag += "<td>" + formatter.format(item.price) + "</td>";
 					tag += "<td>" + item.stock + "</td>";
-					tag += "<td>" + item.regdate + "</td>";
+					tag += "<td>" + item.regdate.substring(0,10) + "</td>";
 					tag += "</tr>";
 				}
 				$("#list-contents").append(tag);

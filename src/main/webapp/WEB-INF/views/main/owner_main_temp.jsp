@@ -31,6 +31,8 @@ body {
 	height: 300px;
 	width: 300px;
 	font-size: 30px;
+	font-weight: bold;
+	color: white;
 }
 #wrapper button:hover {
 	transition: 0.3s;
@@ -38,17 +40,13 @@ body {
 }
 
 #wrapper button:nth-child(1) {
-	background-color: #ff8812;
-	color: white;
-	font-weight: bold;
+	background-color: #e67200;
 	border-radius: 5px;
 }
 
 #wrapper button:nth-child(2) {
 	margin-left: 50px;
-	background-color: #1d7ef5;
-	color: white;
-	font-weight: bold;
+	background-color: #0063d9;
 	border-radius: 5px;
 }
 

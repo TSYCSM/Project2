@@ -11,16 +11,7 @@
 <title>owner page</title>
 <%@ include file="../inc/header.jsp"%>
 <style>
-#dragArea {
-	width: 200px;
-	height: 200px;
-	overflow: scroll;
-	border: 1px solid #ccc
-}
 
-.dragBorder {
-	background: #ffffff;
-}
 </style>
 <script>
 	var nameCheckFlag = false;
@@ -97,18 +88,18 @@
 		<div class="outerbox">
 			<label for="lname">상품가격</label>
 			<div class="box">
-				<input type="text" name="price" placeholder="상품가격을 등록하세요" required />
+				<input type="number" min="0" name="price" placeholder="상품가격을 등록하세요" required />
 			</div>
 		</div>
 		<div class="outerbox">
 			<label for="lname">상품 수량</label><br>
 			<div class="box">
-				<input type="number" name="stock" placeholder="상품 수량을 등록하세요" required />
+				<input type="number" min="0" name="stock" placeholder="상품 수량을 등록하세요" required />
 			</div>
 		</div>
 
 		<div class="outerbox">
-			<label for="lname">이미지</label><br>
+			<label for="lname">상품 이미지</label><br>
 			<div class="box">
 				<input type="file" name="photo" required />
 			</div>

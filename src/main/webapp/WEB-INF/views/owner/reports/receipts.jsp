@@ -68,56 +68,55 @@ function hideReceipt(){
 </head>
 <%@ include file="../inc/common.jsp"%>
 <%@ include file="./reports_inc/receiptbar.jsp"%>
-			receipts <br><br>
-			<table>
-				<tr>
-					<th>No</th>
-					<th>날짜</th>
-					<th>고객</th>
-					<th>합계</th>
-					
-				</tr>
-				<%
-					int num = pager.getNum();
-					int curPos = pager.getCurPos();
-				%>
-				<%for(int i=0; i<pager.getPageSize(); i++){ %>
-					<%if(num < 1) break; %>
-					<%OrderSummary orderSummary = orderSummaryList.get(curPos++); %>
-					<tr onClick="showReceipt('<%=orderSummary.getOrder_summary_id() %>')" onmouseover="this.style.color='#fc9003'"
-						onmouseout="this.style.color='black'">
-						<td><%=num-- %></td>
-						<td><%=orderSummary.getOrderdate().substring(0, 10) %></td>
-						<td>
-							<%if(orderSummary.getCustomer() !=null ){ %>
-								<%=orderSummary.getCustomer().getCustomer_name() %>
-							<%}else{ %>
-								맴버십 고객이 아닙니다.
-							<%} %>
-						</td>
-						<td><%=Formatter.getCurrency(orderSummary.getTotal_price() ) %></td>
-					</tr>
+<table>
+	<tr>
+		<th>No</th>
+		<th>날짜</th>
+		<th>고객</th>
+		<th>합계</th>
+		
+	</tr>
+	<%
+		int num = pager.getNum();
+		int curPos = pager.getCurPos();
+	%>
+	<%for(int i=0; i<pager.getPageSize(); i++){ %>
+		<%if(num < 1) break; %>
+		<%OrderSummary orderSummary = orderSummaryList.get(curPos++); %>
+		<tr onClick="showReceipt('<%=orderSummary.getOrder_summary_id() %>')" onmouseover="this.style.color='#fc9003'"
+			onmouseout="this.style.color='black'">
+			<td><%=num-- %></td>
+			<td><%=orderSummary.getOrderdate().substring(0, 10) %></td>
+			<td>
+				<%if(orderSummary.getCustomer() !=null ){ %>
+					<%=orderSummary.getCustomer().getCustomer_name() %>
+				<%}else{ %>
+					맴버십 고객이 아닙니다.
 				<%} %>
-				
-				<tr>
-					<td colspan="4" style="text-align:center">
-						<%if(pager.getFirstPage() >1){ %>
-							<a href="/client/owner/reports/receipts?currentPage=<%=pager.getFirstPage()-1%>">◀</a>					
-						<%}else{ %>
-							<a href = "javascript:alert('처음 페이지 입니다')">◀</a>
-						<%} %>
-						<%for(int i=pager.getFirstPage(); i<=pager.getLastPage(); i++){ %>
-						<%if(i > pager.getTotalPage()) break; %>
-						<a href="/client/owner/reports/receipts?currentPage=<%=i%>">[<%=i %>]</a>
-						<%} %>
-						<%if(pager.getLastPage() < pager.getTotalPage()) {%>
-							<a href="/client/owner/reports/receipts?currentPage=<%=pager.getLastPage()+1%>">▶</a>
-						<%}else{ %>
-							<a href = "javascript:alert('마지막 페이지입니다.')">▶</a>
-						<%} %>
-					</td>
-				</tr>
-			</table>
+			</td>
+			<td><%=Formatter.getCurrency(orderSummary.getTotal_price() ) %></td>
+		</tr>
+	<%} %>
+	
+	<tr>
+		<td colspan="4" style="text-align:center">
+			<%if(pager.getFirstPage() >1){ %>
+				<a href="/client/owner/reports/receipts?currentPage=<%=pager.getFirstPage()-1%>">◀</a>					
+			<%}else{ %>
+				<a href = "javascript:alert('처음 페이지 입니다')">◀</a>
+			<%} %>
+			<%for(int i=pager.getFirstPage(); i<=pager.getLastPage(); i++){ %>
+			<%if(i > pager.getTotalPage()) break; %>
+			<a href="/client/owner/reports/receipts?currentPage=<%=i%>">[<%=i %>]</a>
+			<%} %>
+			<%if(pager.getLastPage() < pager.getTotalPage()) {%>
+				<a href="/client/owner/reports/receipts?currentPage=<%=pager.getLastPage()+1%>">▶</a>
+			<%}else{ %>
+				<a href = "javascript:alert('마지막 페이지입니다.')">▶</a>
+			<%} %>
+		</td>
+	</tr>
+</table>
 <%@ include file="../inc/footer.jsp" %>
 
 

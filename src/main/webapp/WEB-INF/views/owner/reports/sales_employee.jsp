@@ -7,15 +7,14 @@
 <%@ include file="../inc/header.jsp" %>
 </head>
 <%@ include file="../inc/common.jsp"%>
-			employee list <br><br>
-			<table>
-				<tr>
-					<th>이름</th>
-					<th>매출액</th>
-				</tr>
-				<tr>
-					<td>james</td>
-					<td>350</td>
-				</tr>
-			</table>
+<table>
+	<tr>
+		<th>이름</th>
+		<th>매출액</th>
+	</tr>
+	<tr>
+		<td>james</td>
+		<td>350</td>
+	</tr>
+</table>
 <%@ include file="../inc/footer.jsp" %>

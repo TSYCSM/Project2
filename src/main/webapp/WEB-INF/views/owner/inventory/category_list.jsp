@@ -13,7 +13,8 @@
 <style>
 .add_btn{
 	position: absolute;
-	left: 300px;
+	top: 380px;
+	left: 550px;
 }
 .colorBox{
 	width: 50px;
@@ -25,8 +26,6 @@
 
 </head>
 <%@ include file="../inc/common.jsp"%>
-<button class="add_btn" type="button" onclick="location.href='/client/owner/inventory/category/registform'">카테고리 추가</button>
-		category list <br><br>
 <table style="width: 50%;">
 	<tr>
 		<th>모양</th>
@@ -40,6 +39,7 @@
 		</tr>
 	<%} %>
 </table>
+<button class="add_btn" type="button" onclick="location.href='/client/owner/inventory/category/registform'">카테고리 추가</button>
 <%@ include file="../inc/footer.jsp" %>
 
 

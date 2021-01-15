@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>customer credential</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
 @font-face {
@@ -25,17 +25,20 @@
 	font-size: 1rem;
 	padding: 0;
 	margin: 0;
-	margin: 0;
 }
 
 body {
+	background-color: #f0f0f0;
 	text-align: center;
+	padding: 50px;
 }
 
 input[type=text], input[type=tel] {
 	font-size: 16px;
 	border-radius: 5px;
 	padding: 10px;
+	background-color: wthie;
+	border: 1px solid #373636;
 }
 
 button {
@@ -59,32 +62,22 @@ table td {
 	padding: 10px 20px;
 }
 
-#customer {
-	z-index: 1;
-	position: fixed;
-	left: 25%;
-	width: 50%;
-	height: 100%;
-	background-color: #F2F2F2;
-	color: #2E2E2E;
+div.loginArea, div.registArea {
+	background-color: white;
+	width: 45%;
+	height: 500px;
+	padding-top: 40px;
+	border-radius: 5px;
+	border: 2px solid gray;
+	overflow: auto;
 }
 
-
-
 div.loginArea {
-	margin: auto;
-	margin-top: 5%;
-	height: 30%;
-	width: 80%;
-	border-radius: 10px;
+	float: left;
 }
 
 div.registArea {
-	margin: auto;
-	margin-top: 5%;
-	height: 55%;
-	width: 80%;
-	border-radius: 10px;
+	float: right;
 }
 
 div.loginArea>h2, div.registArea>h2 {
@@ -92,20 +85,12 @@ div.loginArea>h2, div.registArea>h2 {
 	font-size: 24px;
 }
 
-#customer>div.loginArea, #customer>div.registArea {
-	background-color: #E6E6E6;
-}
 
 #customer button {
 	background-color: #373636;
 	color: #E6E6E6;
 }
 
-
-#customer input[type=text] {
-	background-color: wthie;
-	border: 1px solid #373636;
-}
 
 
 </style>
@@ -149,12 +134,14 @@ function login(){
 					<tr>
 						<td>전화번호</td>
 						<td>
-							<input type="text" name="phone" placeholder="ex) 010-1234-5678">
+							<input type="tel" name="phone" placeholder="ex) 010-1234-5678">
 							<input type="hidden" name="owner_id" value="<%=owner.getOwner_id()%>">
+						</td>
+						<td>
+							<button type="button" onClick="login()">로그인</button>
 						</td>
 					</tr>
 				</table>
-				<button type="button" onClick="login()">로그인</button>
 				<br>
 				<button type="button" onClick="location.href='/client/order/main'">로그인하지 않고 상품 보러가기</button>
 			</form>
@@ -185,12 +172,12 @@ function login(){
 					</tr>
 				</table>
 				<hr style="margin: 5% 10%;">
-				<p style="font-size: 22px; line-height: 24px;">
+				<p style="font-size: 18px; line-height: 24px;">
 					<가입 혜택>
 					<br>
 					<br>
 					- 물건 구매시 적립<br>
-					- 리뷰 작성 가능
+					- 리뷰 작성 기능 사용
 				</p>
 			</form>
 		</div>

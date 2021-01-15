@@ -14,50 +14,49 @@
 <%@ include file="../inc/header.jsp" %>
 </head>
 <%@ include file="../inc/common.jsp"%>
-			customer list <br><br>
-			<table>
-				<tr>
-					<th>No</th>
-					<th>이름</th>
-					<th>point</th>
-					<th>전화번호</th>
-					<th>등록일자</th>
-				</tr>
-				
-				<%
-					int num = pager.getNum();
-					int curPos = pager.getCurPos();
-				%>
-				<%for(int i=0; i<pager.getPageSize(); i++){ %>
-					<%if(num < 1) break; %>
-					<%Customer customer= customerList.get(curPos++); %>
-					<tr>
-						<td><%=num-- %></td>
-						<td><a href="/client/owner/reports/customerDetail?customer_id=<%=customer.getCustomer_id()%>"><%=customer.getCustomer_name() %></a></td>
-						<td><%=customer.getPoint() %></td>
-						<td><%=customer.getPhone() %></td>
-						<td><%=customer.getRegdate().substring(0, 10) %></td>
-					</tr>
-				<%} %>
-				<tr>
-					<td colspan="5" style="text-align:center">
-						<%if(pager.getFirstPage() >1){ %>
-							<a href="/client/owner/reports/customerList?currentPage=<%=pager.getFirstPage()-1%>">◀</a>					
-						<%}else{ %>
-							<a href = "javascript:alert('처음 페이지 입니다')">◀</a>
-						<%} %>
-						<%for(int i=pager.getFirstPage(); i<=pager.getLastPage(); i++){ %>
-						<%if(i > pager.getTotalPage()) break; %>
-						<a href="/client/owner/reports/customerList?currentPage=<%=i%>">[<%=i %>]</a>
-						<%} %>
-						<%if(pager.getLastPage() < pager.getTotalPage()) {%>
-							<a href="/client/owner/reports/customerList?currentPage=<%=pager.getLastPage()+1%>">▶</a>
-						<%}else{ %>
-							<a href = "javascript:alert('마지막 페이지입니다.')">▶</a>
-						<%} %>
-					</td>
-				</tr>
-			</table>
+<table>
+	<tr>
+		<th>No</th>
+		<th>이름</th>
+		<th>point</th>
+		<th>전화번호</th>
+		<th>등록일자</th>
+	</tr>
+	
+	<%
+		int num = pager.getNum();
+		int curPos = pager.getCurPos();
+	%>
+	<%for(int i=0; i<pager.getPageSize(); i++){ %>
+		<%if(num < 1) break; %>
+		<%Customer customer= customerList.get(curPos++); %>
+		<tr>
+			<td><%=num-- %></td>
+			<td><a href="/client/owner/reports/customerDetail?customer_id=<%=customer.getCustomer_id()%>"><%=customer.getCustomer_name() %></a></td>
+			<td><%=customer.getPoint() %></td>
+			<td><%=customer.getPhone() %></td>
+			<td><%=customer.getRegdate().substring(0, 10) %></td>
+		</tr>
+	<%} %>
+	<tr>
+		<td colspan="5" style="text-align:center">
+			<%if(pager.getFirstPage() >1){ %>
+				<a href="/client/owner/reports/customerList?currentPage=<%=pager.getFirstPage()-1%>">◀</a>					
+			<%}else{ %>
+				<a href = "javascript:alert('처음 페이지 입니다')">◀</a>
+			<%} %>
+			<%for(int i=pager.getFirstPage(); i<=pager.getLastPage(); i++){ %>
+			<%if(i > pager.getTotalPage()) break; %>
+			<a href="/client/owner/reports/customerList?currentPage=<%=i%>">[<%=i %>]</a>
+			<%} %>
+			<%if(pager.getLastPage() < pager.getTotalPage()) {%>
+				<a href="/client/owner/reports/customerList?currentPage=<%=pager.getLastPage()+1%>">▶</a>
+			<%}else{ %>
+				<a href = "javascript:alert('마지막 페이지입니다.')">▶</a>
+			<%} %>
+		</td>
+	</tr>
+</table>
 <%@ include file="../inc/footer.jsp" %>
 
 

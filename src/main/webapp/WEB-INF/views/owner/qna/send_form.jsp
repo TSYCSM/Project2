@@ -3,16 +3,9 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Email Send</title>
+<title>owner page</title>
 <%@ include file="../inc/header.jsp" %>
 <style>
-body {
-	font-family: Arial, Helvetica, sans-serif;
-}
-
-* {
-	box-sizing: border-box;
-}
 
 input[type=text], select, textarea {
 	width: 100%;
@@ -25,22 +18,9 @@ input[type=text], select, textarea {
 	resize: vertical;
 }
 
-input[type=button] {
-	background-color: #4CAF50;
-	color: white;
-	padding: 12px 20px;
-	border: none;
-	border-radius: 4px;
-	cursor: pointer;
-}
-
-input[type=button]:hover {
-	background-color: #45a049;
-}
 
 .container {
 	border-radius: 5px;
-	background-color: #f2f2f2;
 	padding: 20px;
 }
 </style>
@@ -70,8 +50,7 @@ input[type=button]:hover {
 			<input type="hidden" name="email_address" value="<%=owner.getEmail_id()%>@<%=owner.getEmail_server()%>">
 			<input type="hidden" name="name" value="<%=owner.getUser_name()%>">
 			<textarea id="content" name="content" placeholder="Write something.." style="height: 200px"></textarea>
-			<input type="button" value="메일 보내기" onClick="send()">
-			<input type="button" value="Home" onClick="location.href='/owner/inventory/item/list'">
+			<input style="float: right" type="button" value="메일 보내기" onClick="send()">
 		</form>
 	</div>
 <%@ include file="../inc/footer.jsp" %>
