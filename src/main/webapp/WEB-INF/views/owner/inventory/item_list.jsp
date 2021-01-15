@@ -54,8 +54,10 @@
 	var categoryArray = [];
 	
 	$(function() {
-		categoryArray = getCheckedCategory();
-		filtering(1);
+		setTimeout(function() {
+			categoryArray = getCheckedCategory();
+			filtering(1);
+		}, 100);
 	});
 	
 	function getCheckedCategory() {
@@ -72,13 +74,14 @@
 
 	function filtering(curPage) {
 		$("#list-contents").html("");
+		categoryArray = getCheckedCategory();
 
 		$.ajax({
 			method: "POST",
 			url: "/client/owner/inventory/item/list/filtered",
 			traditional: "true",
 			data: {
-				categoryArray : getCheckedCategory(),
+				categoryArray : categoryArray,
 				owner_id : <%=owner.getOwner_id() %>
 			},
 			success: function(responseData) {
