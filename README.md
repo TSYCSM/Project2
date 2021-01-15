@@ -56,53 +56,33 @@ POS Management Web Application in Spring MVC
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#"></a></li>
-        <li><a href="#"></a></li>
+        <li><a href="#Agile Office">Agile Office</a></li>
+        <li><a href="#구현언어">구현언어</a></li>       
       </ul>
     </li>
     <li><a href="#">Usage</a></li>
-    <li><a href="#"></a></li>
-    <li><a href="#"></a></li>
-    <li><a href="#"></a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
 </details>
 
 
-
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
 
+### Agile Office
 
-### Built With
+
+
+
+### 구현언어
 
 This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-* [Bootstrap](https://getbootstrap.com)
+* [Java](https://getbootstrap.com)
 * [JQuery](https://jquery.com)
 * [Laravel](https://laravel.com)
-
-
-
-<!-- GETTING STARTED -->
-## Getting Started
-
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
-### 
-
-
-### 
 
 
 
