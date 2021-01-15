@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Insert title here</title>
+<title>choice page</title>
 <style>
 @font-face {
 	font-family: 'Jal_Onuel';

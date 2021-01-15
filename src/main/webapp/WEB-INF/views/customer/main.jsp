@@ -193,7 +193,7 @@ h1, h3{
 					tag += "<td>"+(pager.num--)+"</td>";
 					tag += "<td>"+item.item_name+"</td>";
 					tag += "<td><p>"+review.comments+"</p></td>";
-					tag += "<td>"+review.regdate+"</td>";
+					tag += "<td>"+review.regdate.substring(5,16)+"</td>";
 					tag += "<td>";
 					
 					if(current_customer_id == review.customer_id){

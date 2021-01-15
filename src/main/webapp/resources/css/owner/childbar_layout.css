@@ -1,39 +1,35 @@
 @charset "UTF-8";
 
-#main .mypagebar, .reportsbar, .itembar{
+#main .mypagebar, .reportsbar, .itembar {
 	display: none;
 	position: fixed;
 	z-index: 2;
 	text-align: center;
-	left: 80px;
+ 	left: 90px;
 	width:150px;
-	background-color:#e8e8e8;
-	border-style: groove;
+	background-color: #f0f0f0;	
+	border: 1px solid #3d4c9c;
 }
 
-.childbar a{
-	color: black;
-}
-.test{
+.bar-item {
+	display: block;
 	width: 100%;
+	padding: 10px 0;
+	color: #3d4c9c;
+	font-size: 16px;
+	font-weight: bold;
 }
-
-.test:hover{
-	background-color: #d6d6d6;	
-}
-
-.mypagebar{
-	top:47px;
-	height:80px;
 	
-}
-.reportsbar{
-	top:126px;
-	height:160px;
+.bar-item:hover {
+	color: white;
+	background-color: #3d4c9c;
+	transition: 0.3s;
 }
 
-.itembar{
-	top:198px;
-	height:120px;
-	
+.reportsbar {
+	top:150px;
+}
+
+.itembar {
+	top:225px;
 }

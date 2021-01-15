@@ -39,12 +39,12 @@ public class AdminController {
 	@Autowired
 	private Pager pager;
 
-	@RequestMapping(value="/admin", method=RequestMethod.GET)
+	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String viewAdmin() {
 		return "admin/index";
 	}
 
-	@RequestMapping(value="/admin/owner/list", method=RequestMethod.GET)
+	@RequestMapping(value="/owner/list", method=RequestMethod.GET)
 	public ModelAndView viewOwnerList(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		List<Owner> ownerList = ownerService.selectAll();
@@ -57,7 +57,7 @@ public class AdminController {
 		return mav;
 	}
 
-	@RequestMapping(value="/admin/owner/detail", method=RequestMethod.GET)
+	@RequestMapping(value="/owner/detail", method=RequestMethod.GET)
 	public ModelAndView viewOwnerDetail(int owner_id) {
 		List<Item> itemList = itemService.selectAllJoinCategory(owner_id);
 		List<Category> categoryList = categoryService.selectByOwner(owner_id);
@@ -73,7 +73,7 @@ public class AdminController {
 	}
 	
 	
-	@RequestMapping(value="/admin/owner/detail/item/detail", method=RequestMethod.GET, produces="application/text;charset=utf-8")
+	@RequestMapping(value="/owner/detail/item/detail", method=RequestMethod.GET, produces="application/text;charset=utf-8")
 	@ResponseBody
 	public String viewItemDetail(int item_id) {
 		Item item = itemService.selectJoinCategory(item_id);
@@ -91,7 +91,7 @@ public class AdminController {
 		return sb.toString();
 	}
 	
-	@RequestMapping(value="/admin/owner/detail/item/asyncList", method=RequestMethod.GET)
+	@RequestMapping(value="/owner/detail/item/asyncList", method=RequestMethod.GET)
 	@ResponseBody
 	public List<Item> getAsyncItemList(int owner_id) {
 		List<Item> itemList = itemService.selectAllJoinCategory(owner_id);

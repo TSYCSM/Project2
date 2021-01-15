@@ -40,7 +40,7 @@ input[type=text]:focus, input[type=password]:focus, select:focus{
 
 /* Set a style for all buttons */
 button {
-  background-color: #4CAF50;
+  background-color: #081f99;
   color: white;
   padding: 14px 20px;
   border: none;
@@ -90,7 +90,7 @@ button:hover {
 
 /* Float cancel and signup buttons and add an equal width */
 .cancelbtn, .signupbtn, .loginbtn {
-  float: left;
+  float: right;
   width: 100px;
 }
 
@@ -272,8 +272,8 @@ function checkId(){
 		<button class="welcome_back_btn" onclick="location.href='/client/main/ownerMain'" style="width:auto;">Welcome Back!</button>	
 		<div class="welcome_box"><%=owner.getUser_id() %>님, 로그인 중입니다.</div>
 	<%}else{ %>
-		<button class="open_login_btn" onclick="document.getElementById('id02').style.display='block'" style="width:auto;">Login</button>
-		<button class="open_signup_btn" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Sign Up</button>
+		<button class="open_login_btn" onclick="document.getElementById('id02').style.display='block'" style="width:auto;">로그인</button>
+		<button class="open_signup_btn" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">가입</button>
 	
 	<%} %>
 </div>
@@ -283,43 +283,36 @@ function checkId(){
   <form class="signup_form">
     <div class="container">
  
-      <h1>Sign Up</h1>
-      <p>Please fill in this form to create an account.</p>
+      <h1>가입</h1>
       <hr>
       
-      <label for="ID"><b>ID<span style="margin:20px; font-size: 12px; display:lnline-block"> (6~15자 사이로 입력하세요)</span></b></label>
-      <button type="button" onclick="checkId()">중복체크</button>
-      <input type="text" placeholder="Enter ID" name="user_id" minlength="6" maxlength="15" required>
+      <label for="ID"><b>아이디<span style="margin:20px; font-size: 12px; display:lnline-block"> (6~15자 사이로 입력하세요)</span></b></label>
+      <button type="button" style="background-color:gray;" onclick="checkId()">중복체크</button>
+      <input type="text" placeholder="아이디를 입력하세요" name="user_id" minlength="6" maxlength="15" required>
 
-      <label for="id"><b>Name</b></label>
-      <input type="text" name = "user_name" placeholder="Enter your name...." required>
+      <label for="id"><b>이름</b></label>
+      <input type="text" name = "user_name" placeholder="이름을 입력하세요" required>
       
-      <label for="id"><b>Shop Name</b></label>
-      <input type="text" name = "shopname" placeholder="Enter shopname...." required>
+      <label for="id"><b>상호명</b></label>
+      <input type="text" name = "shopname" placeholder="상호명을 입력하세요" required>
 
-      <label for="psw"><b>Password <span style="margin:20px; font-size: 12px; display:lnline-block">(6~15자 사이로 입력하세요)</span></b></label>
-      <input type="password" placeholder="Enter Password" name="password" minlength="6" maxlength="15" required>
+      <label for="psw"><b>비밀번호 <span style="margin:20px; font-size: 12px; display:lnline-block">(6~15자 사이로 입력하세요)</span></b></label>
+      <input type="password" placeholder="비밀번호를 입력하세요" name="password" minlength="6" maxlength="15" required>
 
-      <!-- <label for="psw-repeat"><b>Repeat Password</b></label>
-      <input type="password" placeholder="Repeat Password" name="repassword" required>
-       -->
-      <label for="email"><b>Email</b></label><br>
-      <input type="text" placeholder="Enter Email_ID" name="email_id" style="width: 20%" required>
-      <select name="email_server" style="width: 30%">
+      <label for="repsw"><b>비밀번호 재입력 <span style="margin:20px; font-size: 12px; display:lnline-block">(비밀번호를 다시 입력하세요)</span></b></label>
+      <input type="password" placeholder="비밀번호를 한번 더 입력하세요" name="repassword" minlength="6" maxlength="15" required>
+
+      <label for="email"><b>이메일</b></label><br>
+      <input type="text" placeholder="이메일 주소 입력" name="email_id" style="width: 35%" required>
+      <select name="email_server" style="width: 35%">
       		<option value="gmail.com">gmail.com</option>
       		<option value="naver.com">naver.com</option>
       		<option value="daum.net">daum.net</option>
       </select><br>
       
-      <!-- <label>
-        <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
-      </label> -->
-
-      <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
-
       <div class="clearfix">
-        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-        <button type="button" class="signupbtn">Sign Up</button>
+        <button type="button" class="signupbtn">가입</button>
+        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">취소</button>
       </div>
     </div>
   </form>
@@ -329,24 +322,18 @@ function checkId(){
   <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
   <form class="login_form">
     <div class="container">
-      <h1>Login</h1>
-      <p>Please fill in this form to create an account.</p>
+      <h1>로그인</h1>
       <hr>
-      <label for="id"><b>ID</b></label>
-      <input type="text" name = "user_id" placeholder="Enter ID....">
+      <label for="id"><b>아이디</b></label>
+      <input type="text" name = "user_id" placeholder="아이디를 입력해주세요">
       
 
-      <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="password" required>
-
- 
-      <label>
-        <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
-      </label>
+      <label for="psw"><b>비밀번호</b></label>
+      <input type="password" placeholder="비밀번호를 입력해주세요" name="password" required>
 
       <div class="clearfix">
-        <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
-        <button type="button" class="loginbtn" onClick="login()">Login</button>
+        <button type="button" class="loginbtn" onClick="login()">로그인</button>
+        <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">취소</button>
       </div>
     </div>
   </form>
