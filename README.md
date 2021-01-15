@@ -73,7 +73,7 @@ POS Management Web Application in Spring MVC
 
 
 ### 프로젝트 개요
-
+<p>
 'Agile'은 사전적으로 '민첩한'이라는 뜻입니다. 소프트웨어 생명주기적으로는 고객의 요구사항 변화에 유연하게 대응할 수 있도록
 일정한 주기를 반복하는 개발과정을 뜻합니다.
 이 개념에 착안하여 유연하게 사용자 요구사항에 대응하는 웹사이트를 만드는 것을 목표로 하였습니다.
@@ -81,7 +81,7 @@ POS Management Web Application in Spring MVC
 또한 해당 상품이 결재될 때 주문정보를 같이 연동하여 영수증, 매출정보를 제공하였습니다. 
 Agile Office는 사업자들의 자유도를 고려한 만큼 취급 상품에 제한을 두지 않았습니다.
 다양한 상품을 취급하는 것과 동시에 사용자들이 원하는 카테고리까지 추가할 수 있도록 설계하였습니다.
-
+</p>
 ### 구현언어
 
 This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
