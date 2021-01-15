@@ -86,12 +86,16 @@ Agile Office는 사업자들의 자유도를 고려한 만큼 취급 상품에 �
 
 ### 구현언어
 
-This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-* [Java](https://getbootstrap.com)
-* [JQuery](https://jquery.com)
-* [Laravel](https://laravel.com)
+* programing language
+** [JAVA](https://getbootstrap.com)
+** [HTML/CSS](https://jquery.com)
+** [JavaScript/Jquery](https://laravel.com)
 
+* Server FrameWork
+** Spring MVC
 
+* DataBase
+** Oracle
 
 
 <!-- USAGE EXAMPLES -->
