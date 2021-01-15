@@ -56,16 +56,16 @@ POS Management Web Application in Spring MVC
     <li>
       <a href="#Agile Office">Agile Office</a>
       <ul>
-        <li><a href="#프로젝트 개요">프로젝트 개요</a></li>
+        <li><a href="#개요">개요</a></li>
         <li><a href="#구현언어">구현언어</a></li>
       </ul>
     </li>
     <li>
-      <a href="#Agile Office">설계</a>
+      <a href="#설계">설계</a>
       <ul>
-        <li><a href="#Draw.io 설계">Draw.io 설계</a></li>
-        <li><a href="#DB 설계">DB 설계</a></li>
-        <li><a href="#디자인 패턴">디자인 패턴</a></li>
+        <li><a href="#Draw.io">Draw.io 설계</a></li>
+        <li><a href="#DB">DB 설계</a></li>
+        <li><a href="#디자인패턴">디자인 패턴</a></li>
       </ul>
     </li>
     <li><a href="#">Usage</a></li>
@@ -119,11 +119,11 @@ admin 부분도 따로 나누어 사용자(owner)들을 관리하는 기능을 �
 admin은 Agile Office 사용자(owner)를 관리하고 사용자는 자신의 고객(customer)을 관리하는 구조로 설계하였습니다.
 
 
-### Draw.io 설계
+### Draw.io
 처음 설계할 때 도식화를 하기위해 Draw.io라는 툴을 사용하였습니다.
 마인드 매핑으로 설계를 하였기 때문에 구현가능성보다는 Agile Office의 컨셉, 핵심기능을 정하는데 많이 도움이 되었습니다.
 
-### DB 설계
+### DB
 
 상품, 고객관리를 owner가 직접하기 때문에 owner 한 명당 다수의 customer, item을 가지는 테이블이 필요했습니다.
 owner라는 부모 테이블을 두고 이를 참조하는 형태가 가장 이상적이었습니다.
