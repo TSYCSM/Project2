@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tsycsm.agileoffice.exception.AsyncDMLException;
+import com.tsycsm.agileoffice.exception.LoginRequiredException;
 import com.tsycsm.agileoffice.model.common.MessageData;
 import com.tsycsm.agileoffice.model.common.Pager;
 import com.tsycsm.agileoffice.model.domain.Review;
@@ -102,6 +103,16 @@ public class ReviewController {
 		messageData.setMsg(e.getMessage());
 		messageData.setResultCode(0);
 	
+		return messageData;
+	}
+	
+	@ExceptionHandler(LoginRequiredException.class)
+	@ResponseBody
+	public MessageData handleException(LoginRequiredException e) {
+		MessageData messageData = new MessageData();
+		messageData.setResultCode(0);
+		messageData.setMsg(e.getMessage());
+		
 		return messageData;
 	}
 

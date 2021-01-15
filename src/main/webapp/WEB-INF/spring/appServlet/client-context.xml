@@ -29,7 +29,7 @@
 	</aop:config>	
 	
 	<!-- globalExceptionHandler 추가-->
-	<beans:bean id="globalExceptionHandler" class="com.tsycsm.agileoffice.client.aop.GlobalExceptionHandler"/>
+	<!-- <beans:bean id="globalExceptionHandler" class="com.tsycsm.agileoffice.client.aop.GlobalExceptionHandler"/> --> 
 	
 	
 </beans:beans>
