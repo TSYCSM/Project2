@@ -33,7 +33,11 @@
 </head>
 <%@ include file="../inc/common.jsp"%>
 			  	 <!-- <div id="chart_div" style="width: 100%; height: 500px;"></div> --> 
-			  	전체 리스트<br><br>
+			  	totalRecord: <%=pager.getTotalRecord() %><br>
+			  	pagesize: <%=pager.getPageSize() %><br>
+			  	totalPage: <%=pager.getTotalPage() %><br>
+			  	
+			  	<br><br>
 				<table>
 				<tr>
 					<th>날짜</th>
