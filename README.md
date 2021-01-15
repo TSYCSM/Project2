@@ -60,6 +60,14 @@ POS Management Web Application in Spring MVC
         <li><a href="#구현언어">구현언어</a></li>
       </ul>
     </li>
+    <li>
+      <a href="#Agile Office">설계</a>
+      <ul>
+        <li><a href="#Draw.io 설계">Draw.io 설계</a></li>
+        <li><a href="#DB 설계">DB 설계</a></li>
+        <li><a href="#디자인 패턴">디자인 패턴</a></li>
+      </ul>
+    </li>
     <li><a href="#">Usage</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgements">Acknowledgements</a></li>
@@ -97,18 +105,22 @@ Spring MVC<br>
 * DataBase<br>
 Oracle<br>
 
-
-<!-- USAGE EXAMPLES -->
-## 
-
-<!-- ROADMAP -->
-## 
-
-
-<!-- CONTRIBUTING -->
-## 
+<!-- 설계 -->
+## 설계
+크게 상품을 관리하는 owner와 상품을 주문하는 customer로 나누어서 설계하였습니다.
+owner부분은 사용자가 상품, 카테고리를 추가, 삭제, 수정하고 매출을 확인하는 백오피스(Back Office)입니다.
+크게 상품, 매출 보고서, 고객관리, 직원관리로 구분하였습니다.
+customer부분은 해당 상품을 주문하고 상품에 대한 리뷰를 남길 수 있도록 설계하였습니다.
+admin 부분도 따로 나누어 사용자(owner)들을 관리하는 기능을 두었습니다.
+admin은 Agile Office 사용자(owner)를 관리하고 사용자는 자신의 고객(customer)을 관리하는 구조로 설계하였습니다.
 
 
+### Draw.io 설계
+
+
+### DB 설계
+
+### 디자인패턴
 
 
 <!-- LICENSE -->
