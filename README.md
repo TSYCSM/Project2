@@ -80,7 +80,7 @@ POS Management Web Application in Spring MVC
 ## Agile Office
 
 
-### 프로젝트 개요
+### 개요
 <pre>
 'Agile'은 사전적으로 '민첩한'이라는 뜻입니다. 소프트웨어 생명주기적으로는 고객의 요구사항 변화에 
 유연하게 대응할 수 있도록 일정한 주기를 반복하는 개발과정을 뜻합니다.
