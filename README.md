@@ -132,35 +132,39 @@ admin은 Agile Office 사용자(owner)를 관리하고 사용자는 자신의 �
 처음 설계할 때 도식화를 하기위해 Draw.io 툴을 사용하였습니다.
 마인드 매핑으로 설계를 하였기 때문에 구현가능성보다는 Agile Office의 컨셉, 핵심기능을 정하는데 많이 도움이 되었습니다.
 
-### DB
-db 설계는 테이블 구조를 쉽게 확인할 수 있는 excel에서 먼저 했습니다. <br>
+### DB 
+DB 설계사용 툴: Excel, Dataedo<br>
+
+Excel<br><br>
+db 설계는 테이블 구조를 쉽게 확인할 수 있는 excel에서 먼저 했습니다. 상품, 고객관리를 owner가 직접하기 때문에 owner 한 명당 다수의 customer, item을 가지는 테이블이 필요했습니다.
+owner라는 부모 테이블을 두고 이를 참조하는 형태가 가장 이상적이었습니다.
 [db_excel 자료](/static/image/db_excel.xlsx) <br>
 
-상품, 고객관리를 owner가 직접하기 때문에 owner 한 명당 다수의 customer, item을 가지는 테이블이 필요했습니다.
-주요 db 관계
-item -> category <br>
+Dataedo<br><br>
+테이블을 DB에 만들기전에 ERD로 참조관계를 먼저 확인 했습니다.<br>
+전체 ERD<br>
+모든 테이블이 owner테이블을 참조하게하였습니다. 이는 owner에 따라서 매출액정보나 상품관리를 해야하기 때문에 join하기 수월하기 위함이었습니다. 매출 전체 부분은 날짜별로 그룹화 하여 매출총액을 보여 주었습니다. 각 날짜의 매출을 아이템별로 알고 싶을 경우 해당 날짜의 order_detail 테이블과 item 테이블을 조인하여 출력하였습니다. 고객별로 매출을 알고 싶을 경우 order_summary, customer 테이블을 조인하여 출력하였습니다. 주문 한 건당 상세정보를 알고 싶을 경우는 영수증을 보여주었습니다. 이를 구현하기 위해 order_detail과 item을 먼저 조인 테이블을 select 하고 이를 order_summary에서 한 번 더 조인 하였습니다. 상세 정보를 따로 나누니 영수증(주문정보, 상세정보, item이름)을 구현할 때 도움이 되었습니다.<br>
+<br>
+![alt text](/static/image/erd/entire_relation.png)
+<br>
 
-owner_detail -> owner_summary -> review<br>
-owner_detail -> review<br>
+상품 등록 ERD<br>
+item테이블은 category테이블을 참조하게 하였습니다. 단 item테이블의 category 외래키가 null이 될 수 도 있게 하였습니다. 이는 item이 category없이 분류 될 수 도 있음을 고려한 것입니다<br>
+<br>
+![alt text](/static/image/erd/item_relation.png)
+<br>
 
+주문 등록 ERD<br>
+order_detail테이블은 order_summary 한 건을 참조합니다. 이때 order_detail에는 상품별 수량, 가격정보를 담기 때문에 item테이블에 대한 참조관계도 두었습니다. order_summary는 customer를 참조합니다.<br>
+<br>
+![alt text](/static/image/erd/order_relation.png)
+<br>
 
-
-owner라는 부모 테이블을 두고 이를 참조하는 형태가 가장 이상적이었습니다.
-한편, item은 품목 카테고리를 참조하는 관계를 구현하였습니다. 
-또한, customer 한 건당 다수의 리뷰, 주문정보를 가지는데, 이는 customer가 부모 테이블이 되는 구조로 구현하였습니다.
-주문정보는 주문 한 건당 item별 상세 정보를 여러 건 가질 수 있습니다. 
-이 또한 정규화가 필요한 과정이라 상세 정보가 주문정보와 item을 참조하는 관계도 만들었습니다.
-
-매출을 출력하는 부분은 테이블들을 조인하여 구현하였습니다.
-매출 전체 부분은 테이블 하나로 보여줄수 있지만 사용자가 customer별, item별로 
-매출액을 확인을 원할 수 있음을 고려하였습니다. 미리 db 설계 시 정규화, 참조관계를 구축하니 매출상황을 다양하게 보여줄 수 있게 되었습니다.
-매출 전체 부분은 날짜별로 그룹화 하여 매출총액을 보여 주었습니다.
-각 날짜의 매출을 아이템별로 알고 싶을 경우 해당 날짜의 order_detail 테이블과 item 테이블을 조인하여 출력하였습니다.
-고객별로 매출을 알고 싶을 경우 order_summary, customer 테이블을 조인하여 출력하였습니다.
-주문 한 건당 상세정보를 알고 싶을 경우는 영수증을 보여주었습니다. 이를 구현하기 위해 order_detail과 item을 먼저 조인 테이블을 select 하고
-이를 order_summary에서 한번 더 조인 하였습니다.
-상세 정보를 따로 나누니 영수증(주문정보, 상세정보, item이름)을 구현할 때 도움이 되었습니다.
-
+리뷰 등록 ERD<br>
+Review테이블은 customer테이블을 참조합니다. 이는 맴버십으로 등록된 고객만 리뷰를 등록할 수 있도록 고려한 것입니다. 한편, review 테이블은 상품별로 구분하여야 하기때문에 item테이블과도 참조관계를 갖습니다.
+<br>
+![alt text](/static/image/erd/review_relation.png)
+<br>
 
 
 ### 디자인패턴
@@ -168,16 +172,17 @@ MVC 모델(Model2)을 사용하여 유지보수를 꽤하였습니다. model vie
 model은 service, dao의 기능을 담당하고 view는 jsp로 클라이언트 영역에 보여주는 역할을 하게하였습니다.
 또한 controller를 따로 두어 각 view의 요청사항들을 효율적으로 전담케 하였습니다.<br>
 model
-![alt text](/static/image/tree_model.png)
-
-view
-![alt text](/static/image/tree_view.png)
-
-controller
-![alt text](/static/image/tree_controller.png)
-
-mybatis
-![alt text](/static/image/tree_mybatis.png)
+<br>
+![alt text](/static/image/mvc/tree_model.png)
+<br>
+view<br>
+![alt text](/static/image/mvc/tree_view.png)
+<br>
+controller<br>
+![alt text](/static/image/mvc/tree_controller.png)
+<br>
+mybatis<br>
+![alt text](/static/image/mvc/tree_mybatis.png)
 
 ## 개발
 
@@ -186,29 +191,39 @@ mybatis
 또는 static을 지정하여 new하지 않고도 메소드를 사용할 수 있게끔 하였습니다.
 
 
-* FileManager [FileManager.java](/src/main/java/com/tsycsm/agileoffice/model/common/FileManager.java)
+* FileManager<br>
+[FileManager.java](/src/main/java/com/tsycsm/agileoffice/model/common/FileManager.java)<br>
+파라미터로 넘겨준 파일의 이름을 확장자만 남게 수정합니다. 지정할 경로와 파일정보가 담긴 Multipartfile 인스턴스를 인자로 받아 파일을 저장합니다.<br>
+파일을 삭제시켜줍니다.<br>
 
-* Formatter [Formatter.java](/src/main/java/com/tsycsm/agileoffice/model/common/Formatter.java)<br>
+* Formatter<br>
+[Formatter.java](/src/main/java/com/tsycsm/agileoffice/model/common/Formatter.java)<br>
 숫자를 기입하면 통화형식으로 반환해줍니다.<br>
 
-* MessageData [MessageData.java](/src/main/java/com/tsycsm/agileoffice/model/common/MessageData.java)<br>
+* MessageData<br>
+[MessageData.java](/src/main/java/com/tsycsm/agileoffice/model/common/MessageData.java)<br>
 비동기로 응답할 때 반환되는 msg, url 등을 json형태로 담아두었습니다.<br>
 
-* MailSender [MailSender.java](/src/main/java/com/tsycsm/agileoffice/model/common/MailSender.java)<br>
+* MailSender<br>
+[MailSender.java](/src/main/java/com/tsycsm/agileoffice/model/common/MailSender.java)<br>
 구글 SMTP를 이용하여 발신자와 수신자를 등록할 수 있게끔 합니다.<br>
 
-* Pager [Pager.java](/src/main/java/com/tsycsm/agileoffice/model/common/Pager.java)<br>
+* Pager<br>
+[Pager.java](/src/main/java/com/tsycsm/agileoffice/model/common/Pager.java)<br>
 Pager객체는 각 페이지에 대한 정보(현재페이지, List<>, blockSize, pageSize, firstPage/lastPage 등)를 담고 있습니다.<br>
 각각의 페이지 정보들은 현재 페이지, List에 따라 달라져야 하므로 init메소드로 그 연산을 처리하였습니다.<br>
 Pager는 bean에 의해 등록되어 new를 계속 할 수 없으므로 생성자가 아닌 init메소드를 호출하는 방식을 사용하였습니다.<br>
 pager 객체는 페이지에 대한 정보들이 담아져있으며, 현재페이지와 List<>를 인수로 받습니다.<br>
 
-* SecureManager [SecureManager.java](/src/main/java/com/tsycsm/agileoffice/model/common/SecureManager.java)<br>
+* SecureManager<br>
+[SecureManager.java](/src/main/java/com/tsycsm/agileoffice/model/common/SecureManager.java)<br>
 비밀번호가 그대로 DB에 저장되면 노출 위험이 있기 때문에 SHA-256 해시를 이용하여 암호화 해주었습니다.<br>
 
-* ExcelManager [ExcelManager.java](/src/main/java/com/tsycsm/agileoffice/model/common/)<br>
+* ExcelManager<br>
+[ExcelManager.java](/src/main/java/com/tsycsm/agileoffice/model/common/)<br>
 
-* CustomerSessionCheckAspect [OwnerSessionCheckAspect.java](/src/main/java/com/tsycsm/agileoffice/client/aop/OwnerSessionCheckAspect.java)<br>
+* CustomerSessionCheckAspect<br>
+[OwnerSessionCheckAspect.java](/src/main/java/com/tsycsm/agileoffice/client/aop/OwnerSessionCheckAspect.java)<br>
 controller에서 조건문을 통한 세션검사를 하면 코드의 일관성이 떨어질 수 있습니다.<br>
 따라서 클래스로 조건문 로직을 따로 만듭니다. 이 클래스는 필요할때마다 new하지 않고 한 번만 메모리에 올려놓아야하므로 bean에 등록합니다.<br>
 bean에 등록하고 인스턴스를 호출할 시점을 aop를 통하여 정합니다.<br>
@@ -221,6 +236,18 @@ around로 설정합니다.<br>
 
 * 회원가입<br>
 회원가입을 할 때 비동기방식으로 요청을 하여 페이지 전환없이 id중복체크, 회원 등록을 하게끔 하였습니다.<br>
+```
+  success: function(responseData){
+				console.log(responseData);
+
+				if(responseData.resultCode ==1){
+					alert(responseData.msg);
+				}else{
+					alert(responseData.msg);				
+				}
+			}
+```
+
 성공/실패 여부를 MessageData 객체에 담아 응답을 받았습니다.<br>
 가입성공 여부를 알리기 위해 메일을 보냅니다.<br>
 
@@ -236,6 +263,20 @@ around로 설정합니다.<br>
 등록된 상품을 주문할 때 주문상세(주문자, 결제 총액), 주문요약(상품id, 상품별 수량/가격)을 db에 insert하였습니다.<br>
 또한 owner가 등록한 상품의 재고의 수가 0보다 아래가 되면 결제 처리를 못하도록 하였습니다.<br>
 aop로 commit되는 시점을 정하여 위의 트랜잭션 처리가 하나라도 실패되면 rollback하도록 TransactionManager를 사용하였습니다.<br>
+```
+  	<tx:advice id="txAdvice" transaction-manager="dataSourceTransactionManager">
+		<tx:attributes>
+			<!-- <tx:method name="send" propagation="REQUIRED" rollback-for="Exception"/> -->
+			<tx:method name="regist" propagation="REQUIRED" rollback-for="Exception"/>
+		</tx:attributes>
+	</tx:advice>
+	
+	<!-- 트랜잭션을 적용할 대상인 서비스 등록 -->
+	<aop:config>
+		<aop:pointcut expression="execution(public * com.tsycsm.agileoffice.model.order.service..*(..))" id="txPointcut"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>				
+	</aop:config>	
+```
 
 
 * 리뷰<br>
@@ -245,12 +286,48 @@ aop로 commit되는 시점을 정하여 위의 트랜잭션 처리가 하나라�
 리뷰의 등록, 삭제, 수정은 앞선 방식으로 비동기 요청을 하였습니다.
 비동기 페이징 Pager객체를 반환하였습니다.
 비동기 방식으로 pager를 반환 받아 리스트의 정보를 클라이언트 영역에 출력합니다.
+```
+  function getAsyncList(cPage){
+		
+		$.ajax({
+			url:"/client/review/asyncList",
+			type:"post",
+			data:{
+				owner_id: <%=owner.getOwner_id()%>,
+				currentPage:cPage
+			},
+			success:function(pager){
+				var tag="";
+				var current_customer_id= 0;
+			}
+			
+```
 
 ### Back_Office<br>
 * 상품/카테고리 관리<br>
---상품추가시 해당 상품의 이미지도 같이 upload(multipart-formdata(?))라이브러리 사용<br>
---상품을 일괄 추가할 수 있게끔 엑셀에서 미리 저장된 정보를 일괄적으로 등록시킴<br>
---이미지는 filemaner라는 클래스를 따로 만들어서 절대경로로 저장되게 함<br>
+상품 등록 시 이미지도 파일업로드를 합니다. 이미지를 수정하면 원래 있던 이미지는 지워지고 새로운 이미지 파일로 대체시킵니다. 상품삭제를 하면 파일업로드된 이미지도 지워집니다.<br>
+```
+  	@Override
+	public void update(Item item, FileManager fileManager) throws AsyncDMLException {
+		MultipartFile photo = item.getPhoto();
+
+		if(photo == null) {
+			itemDAO.update(item);
+		} else if(photo.getOriginalFilename() == "") {
+			itemDAO.update(item);
+		} else {
+			String ext = fileManager.getExtend(photo.getOriginalFilename());
+			fileManager.deleteFile(fileManager.getSaveDir() + File.separator + item.getItem_id() + "." + item.getFilename());
+			item.setFilename(ext);
+			itemDAO.update(item);
+			String newFilename = item.getItem_id() + "." + ext;
+			fileManager.saveFile(fileManager.getSaveDir() + File.separator + newFilename, photo);
+		}
+		
+	}
+```
+상품을 일괄 추가할 수 있게끔 엑셀에서 미리 저장된 정보를 DB에 저장시킵니다.<br>
+
 owner의 자유도를 고려한 만큼 owner가 직접 카테고리를 만들도록 하였습니다. 또한 카테고리가 없어도 상품을 등록할 수 있게끔하였습니다.<br>
 category는 이미지 파일이 아닌 color picker를 사용하여 사용자가 직접 색을 정하여 구분하게끔 하였습니다.<br>
 기볹거으로 상품의 목록은 비동기 페이징 방식을 사용하고, 카테고리 별로도 상품의 목록을 보게끔 비동기 sorting을 하였습니다.<br>
