@@ -56,7 +56,8 @@
 	<tbody style="background-color:#f0f0f0;">
 		<tr style=" border:none;">
 			<td colspan="5">
-				<button class="add_btn" type="button" onclick="location.href='/client/owner/inventory/item/registform'">상품추가</button>
+				<button class="add_btn" type="button" onclick="location.href='/client/owner/inventory/item/dump/registform'">상품 엑셀로 추가</button>
+				<button class="add_btn" type="button" onclick="location.href='/client/owner/inventory/item/registform'">상품 추가</button>
 			</td>
 		</tr>
 	</tbody>

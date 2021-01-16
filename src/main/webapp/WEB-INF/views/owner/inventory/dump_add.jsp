@@ -14,13 +14,18 @@
 function regist() {
 	var formData = new FormData($("form")[0]);
 	$.ajax({
-		url : "/admin/product/excel/regist",
+		url : "/client/owner/inventory/item/dump/regist",
 		data : formData,
 		contentType : false,
 		processData : false,
 		type : "post",
 		success : function(responseData) {
-			alert(responseData);
+			if(responseData.resultCode == 1) {
+				alert(responseData.msg);
+				location.href = responseData.url;
+			} else {
+				alert(responseData.msg);
+			}
 		}
 	});
 }	
@@ -31,10 +36,9 @@ function regist() {
 <div class="container">
 	<form>
 		<p>
-			엑셀 파일 선택 : <input type="file"/>
+			엑셀 파일 선택 : <input type="file" name="dump"/>
 		</p>
 		<input type="button" value="데이터 등록" onclick="regist()"> 
-		<input type="button" value="목록보기" onClick="location.href='/client/notice/list'">
 	</form>
 </div>
 <%@ include file="../inc/footer.jsp"%>

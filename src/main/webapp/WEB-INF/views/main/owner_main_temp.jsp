@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <meta charset="utf-8">
 <title>choice page</title>
 <style>
@@ -56,8 +57,11 @@ body {
 	<h1><%=owner.getUser_id() %>님 환영합니다.</h1>
 
 	<div id="wrapper">
-		<button type="button" onClick="location.href='/client/main/customerCredential'">주문하기</button>
-		<button type="button" onClick="location.href='/client/owner/inventory/item/list'">백오피스</button>
+		<a href="/client/main/customerCredential"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a><br>
+	<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+		Front Office
+		<a href="/client/owner/inventory/item/list"><i class="fa fa-file-text" aria-hidden="true"></i></a><br>
+		Back Office
 	</div>
 
 </body>

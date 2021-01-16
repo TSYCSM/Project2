@@ -143,6 +143,17 @@ alter table item
 add constraint chkStock check (stock >=0);
 
 
+create table admin(
+	admin_id number primary key
+	, id varchar(20)
+	, password varchar(20)
+	, regdate date default sysdate
+);
+
+create sequence seq_admin
+increment by 1
+start with 1;
+
 
 
 
