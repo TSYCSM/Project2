@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.tsycsm.agileoffice.exception.OwnerException;
 import com.tsycsm.agileoffice.exception.OwnerNotFoundException;
 import com.tsycsm.agileoffice.model.common.MessageData;
 import com.tsycsm.agileoffice.model.common.Pager;
@@ -113,6 +114,14 @@ public class MainController {
 		return mav;
 	}
 	
+	@ExceptionHandler(OwnerException.class)
+	@ResponseBody
+	public MessageData handleException(OwnerException e) {
+		MessageData messageData = new MessageData();
+		messageData.setResultCode(0);
+		messageData.setMsg(e.getMessage());
+		return messageData;
+	}
 	
 	
 }
