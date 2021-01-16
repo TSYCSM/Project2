@@ -44,6 +44,7 @@ button {
   color: white;
   padding: 14px 20px;
   border: none;
+  border-radius: 5px;
   cursor: pointer;
   opacity: 0.9;
 }
@@ -190,7 +191,14 @@ $(function(){
 	$(".open_login_btn").removeAttr("style");	
 	$(".open_signup_btn").removeAttr("style");
 	$(".signupbtn").click(function(){
-		regist();
+		var password = $("input[name='password']").val();
+		var repassword = $("#repassword").val();
+		
+		if(password == repassword) {
+			regist();
+		} else {
+			alert("비밀번호가 다릅니다");
+		}
 	});
 	
 })
@@ -300,7 +308,7 @@ function checkId(){
       <input type="password" placeholder="비밀번호를 입력하세요" name="password" minlength="6" maxlength="15" required>
 
       <label for="repsw"><b>비밀번호 재입력 <span style="margin:20px; font-size: 12px; display:lnline-block">(비밀번호를 다시 입력하세요)</span></b></label>
-      <input type="password" placeholder="비밀번호를 한번 더 입력하세요" name="repassword" minlength="6" maxlength="15" required>
+      <input type="password" placeholder="비밀번호를 한번 더 입력하세요" id="repassword" minlength="6" maxlength="15" required>
 
       <label for="email"><b>이메일</b></label><br>
       <input type="text" placeholder="이메일 주소 입력" name="email_id" style="width: 35%" required>

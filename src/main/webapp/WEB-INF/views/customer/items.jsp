@@ -29,7 +29,7 @@
 		<form class="order-form">
 			<h1>장바구니</h1>
 			<table id="itemTable"></table>
-			<textArea placeholder="세부 요구 사항 입력"></textArea>
+			<!-- <textArea placeholder="세부 요구 사항 입력"></textArea> -->
 			<p>
 				합계 : <span>0</span>원
 				<input type="hidden" name="total_price">

@@ -164,6 +164,12 @@ public class InventoryController implements ServletContextAware {
 
 		return mav;
 	}
+	
+	@RequestMapping(value="/owner/inventory/item/regist", method=RequestMethod.POST)
+	public String getDumpItemRegistForm() { 
+		
+		return "";
+	}
 
 	@RequestMapping(value = "/owner/inventory/item/regist", method = RequestMethod.POST)
 	public String registItem(Item item) {

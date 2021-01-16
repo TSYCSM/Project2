@@ -42,7 +42,6 @@ public class ReportController {
 		List orderSummaryList = orderService.selectAllByOwnerWithDate(owner.getOwner_id());
 		
 		ModelAndView mav =new ModelAndView("owner/reports/sales_summary");
-		pager.setPageSize(3);
 		pager.init(request, orderSummaryList);
 		mav.addObject("pager", pager);
 		

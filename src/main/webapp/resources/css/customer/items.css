@@ -20,6 +20,11 @@
 	float: right;
 	width: 30%;
 	text-align: center;
+	overflow: auto;
+}
+
+#cartlist::-webkit-scrollbar {
+	display: none;
 }
 
 
@@ -55,6 +60,7 @@
 	background-color: white;
 	border: 2px solid #E6E6E6;
 	margin: 30px;
+	overflow: auto;
 }
 
 .item:hover {
