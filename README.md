@@ -186,29 +186,29 @@ mybatis
 또는 static을 지정하여 new하지 않고도 메소드를 사용할 수 있게끔 하였습니다.
 
 
-* FileManager
+* FileManager [FileManager.java](/src/main/java/com/tsycsm/agileoffice/model/common/FileManager.java)
 
-* Formatter<br>
+* Formatter [Formatter.java](/src/main/java/com/tsycsm/agileoffice/model/common/Formatter.java)<br>
 숫자를 기입하면 통화형식으로 반환해줍니다.<br>
 
-* MessageData<br>
+* MessageData [MessageData.java](/src/main/java/com/tsycsm/agileoffice/model/common/MessageData.java)<br>
 비동기로 응답할 때 반환되는 msg, url 등을 json형태로 담아두었습니다.<br>
 
-* MailSender<br>
+* MailSender [MailSender.java](/src/main/java/com/tsycsm/agileoffice/model/common/MailSender.java)<br>
 구글 SMTP를 이용하여 발신자와 수신자를 등록할 수 있게끔 합니다.<br>
 
-* Pager<br>
+* Pager [Pager.java](/src/main/java/com/tsycsm/agileoffice/model/common/Pager.java)<br>
 Pager객체는 각 페이지에 대한 정보(현재페이지, List<>, blockSize, pageSize, firstPage/lastPage 등)를 담고 있습니다.<br>
 각각의 페이지 정보들은 현재 페이지, List에 따라 달라져야 하므로 init메소드로 그 연산을 처리하였습니다.<br>
 Pager는 bean에 의해 등록되어 new를 계속 할 수 없으므로 생성자가 아닌 init메소드를 호출하는 방식을 사용하였습니다.<br>
 pager 객체는 페이지에 대한 정보들이 담아져있으며, 현재페이지와 List<>를 인수로 받습니다.<br>
 
-* SecureManager<br>
+* SecureManager [SecureManager.java](/src/main/java/com/tsycsm/agileoffice/model/common/SecureManager.java)<br>
 비밀번호가 그대로 DB에 저장되면 노출 위험이 있기 때문에 SHA-256 해시를 이용하여 암호화 해주었습니다.<br>
 
-* ExcelManager<br>
+* ExcelManager [ExcelManager.java](/src/main/java/com/tsycsm/agileoffice/model/common/)<br>
 
-* CustomerSessionCheckAspect<br>
+* CustomerSessionCheckAspect [OwnerSessionCheckAspect.java](/src/main/java/com/tsycsm/agileoffice/client/aop/OwnerSessionCheckAspect.java)<br>
 controller에서 조건문을 통한 세션검사를 하면 코드의 일관성이 떨어질 수 있습니다.<br>
 따라서 클래스로 조건문 로직을 따로 만듭니다. 이 클래스는 필요할때마다 new하지 않고 한 번만 메모리에 올려놓아야하므로 bean에 등록합니다.<br>
 bean에 등록하고 인스턴스를 호출할 시점을 aop를 통하여 정합니다.<br>
