@@ -1,3 +1,4 @@
+<%@page import="java.time.Duration"%>
 <%@page import="java.time.LocalDate"%>
 <%@page import="com.tsycsm.agileoffice.model.common.Formatter"%>
 <%@page import="com.tsycsm.agileoffice.model.common.Pager"%>
@@ -12,10 +13,24 @@
 	DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	String day = dateFormat.format(cal.getTime());
 	
-	LocalDate date = LocalDate.parse(day);
-	
 	Pager pager = (Pager)request.getAttribute("pager");
 	List<OrderSummary> orderSummaryList = pager.getList();
+
+	String orderdate = orderSummaryList.get(orderSummaryList.size()-1).getOrderdate().substring(0, 10);
+	
+	//out.print("date : " + orderSummaryList.get(orderSummaryList.size()-1).getOrderdate());
+	//out.print("size : " + orderSummaryList.size());
+	
+	LocalDate date = LocalDate.parse(day);
+	LocalDate first_date = LocalDate.parse(orderdate);
+	Duration diff = Duration.between(first_date.atStartOfDay(), date.atStartOfDay());
+	
+	long diff_days = (diff.toDays()+1);
+	
+	pager.init(pager.getCurrentPage(), (int)diff_days);
+	
+	//out.print("diff : " + diff_days);
+
 %>
 <!DOCTYPE html>
 <html>
@@ -41,7 +56,7 @@
 		int num = pager.getNum();
 		int curPos = pager.getCurPos();
 	%>
-	<%for(int i=0; i<pager.getPageSize(); i++){ %>
+	<%for(int i=0; i<pager.getTotalRecord(); i++){ %>
 		<%if(num < 1) break; %>
 		<%OrderSummary orderSummary = orderSummaryList.get(curPos); %>
 		
@@ -52,10 +67,10 @@
 					<a href="/client/owner/reports/salesDetail?orderdate=<%=orderSummary.getOrderdate().substring(0, 10) %>&currentPage=1"><%=orderSummary.getOrderdate().substring(0, 10) %></a>
 				</td>
 				<td><%=Formatter.getCurrency(orderSummary.getTotal_price() ) %></td>
-				<%}else{ %>
-					<td><%=String.valueOf(date) %></td>
-					<td>0</td>
-				<%} %>				
+			<%}else{ %>
+				<td><%=String.valueOf(date) %></td>
+				<td>0</td>
+			<%} %>				
 		</tr>
 		
 		<%
@@ -63,7 +78,7 @@
 		%>
 		
 	<%} %>
-	<tr>
+	<%-- <tr>
 		<td colspan="2" style="text-align:center">
 			<%if(pager.getFirstPage() >1){ %>
 				<a href="/client/owner/reports/salesSummary?currentPage=<%=pager.getFirstPage()-1%>">◀</a>					
@@ -80,7 +95,7 @@
 				<a href = "javascript:alert('마지막 페이지입니다.')">▶</a>
 			<%} %>
 		</td>
-	</tr>
+	</tr> --%>
 </table>
 <%@ include file="../inc/footer.jsp" %>
 

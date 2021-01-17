@@ -78,7 +78,8 @@ public class OrderController {
 	public MessageData orderRegist(HttpSession session, OrderSummary orderSummary, 
 			@RequestParam("item_id") int[] item_id_arr
 			,@RequestParam("quantity") int[] quantity_arr
-			,@RequestParam("price") int[] price_arr) {
+			,@RequestParam("price") int[] price_arr
+			,@RequestParam("stock") int[] stock_arr) {
 		//owner_id, customer_id 전해주시
 		Owner owner = (Owner)session.getAttribute("owner");
 		Customer customer = (Customer)session.getAttribute("customer");
@@ -98,6 +99,9 @@ public class OrderController {
 			Item item = new Item();
 			item.setItem_id(item_id_arr[i]);
 			item.setQuantity(quantity_arr[i]);
+			item.setStock(stock_arr[i]);
+		
+			logger.debug(i+"번째 stock: "+item.getStock());
 			
 			itemArr[i] = item;
 			
@@ -105,15 +109,28 @@ public class OrderController {
 			orderDetailArr[i].setItem(item);
 			orderDetailArr[i].setQuantity(quantity_arr[i]);
 			orderDetailArr[i].setPrice(price_arr[i]);
+		
 		}
 		
+		int cnt = 0;
 		
-		orderService.regist(itemArr, orderSummary, orderDetailArr);
+		for(Item item : itemArr) {
+			if(item.getStock()-item.getQuantity()>=0) {
+				cnt++;
+			}
+		}
 		
 		MessageData messageData = new MessageData();
-		messageData.setResultCode(1);
-		messageData.setMsg("주문이 완료되었습니다.");
-		messageData.setUrl("/client/main/customerCredential");
+		
+		if(cnt==itemArr.length) {
+			orderService.regist(itemArr, orderSummary, orderDetailArr);			
+			messageData.setResultCode(1);
+			messageData.setMsg("주문이 완료되었습니다.");
+			messageData.setUrl("/client/main/customerCredential");
+		}else {
+			messageData.setResultCode(0);
+			messageData.setMsg("상품 수량이 부족합니다.");
+		}
 		
 		return messageData;
 	}

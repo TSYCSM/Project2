@@ -146,7 +146,7 @@ input[name='email_server'] {
 		<div class="check-box" style="display: none;">
 			<input type="password" name="password" placeholder="비밀번호를 입력하세요">
 			<input type="hidden" name="user_id" value="<%=owner.getUser_id()%>">
-			<input type="button" onClick="checkPassword()" value="확인">
+			<input type="button" class="check_btn" onClick="checkPassword()" value="확인">
 			<input type="button" onClick="hideCheckBox()" value="취소">
 		</div>
 	</form>
@@ -154,7 +154,7 @@ input[name='email_server'] {
 		<div class="new-box" style="display: none;">
 			<input type="password" name="password" placeholder="새로운 비밀번호를 입력하세요">
 			<input type="hidden" name="owner_id" value="<%=owner.getOwner_id()%>">
-			<input type="button" onClick="changePassword()" value="확인"> 
+			<input type="button" class="check_btn" onClick="changePassword()" value="확인"> 
 			<input type="button" onClick="hideNewBox()" value="취소">
 		</div>
 	</form>

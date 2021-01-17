@@ -26,6 +26,7 @@
 		from order_summary
 		where owner_id = #{owner_id}
 		group by to_char(orderdate,'yyyy-mm-dd')
+		order by orderdate desc
 	</select>
 	
 	<!-- 모든 영수증 mapping -->
