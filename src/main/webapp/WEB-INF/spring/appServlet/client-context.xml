@@ -18,10 +18,10 @@
 	<context:component-scan base-package="com.tsycsm.agileoffice.client.controller"/>
 	
 
-	<beans:bean class="com.tsycsm.agileoffice.client.aop.OwnerSessionCheckAspect" id="ownerSessionCheckAspect"/> 
+	<beans:bean class="com.tsycsm.agileoffice.client.aop.CustomerSessionCheckAspect" id="customerSessionCheckAspect"/> 
 	
 	<aop:config>
-		<aop:aspect id="sessionCheckAspect" ref="ownerSessionCheckAspect">
+		<aop:aspect id="sessionCheckAspect" ref="customerSessionCheckAspect">
 			<aop:pointcut expression="execution(public * com.tsycsm.agileoffice.client.controller.review.ReviewController.identifyCustomer(..))" 
 				id="sessionPointcut"/>
 			<aop:around method="sessionCheck" pointcut-ref="sessionPointcut"/>

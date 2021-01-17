@@ -21,34 +21,46 @@
 }
 
 body {
-	text-align: center;
 	background-color: #f0f0f0;
+	text-align: center;
 }
 
+h1 {
+	margin-top: 50px;
+}
 
-#wrapper button {
-	margin-top: 100px;
-	border: none;
-	height: 300px;
-	width: 300px;
+#wrapper {
+	margin: auto;
+	margin-top: 150px;
+	width: 700px;
+}
+
+#front, #back {
+	float: left;
+	width:50%;
 	font-size: 30px;
-	font-weight: bold;
-	color: white;
 }
-#wrapper button:hover {
+
+#front a, #back a {
+	display: inline-block;
+	padding: 20px;
+	text-decoration: none;
+}
+
+#front a:hover, #back a:hover {
 	transition: 0.3s;
 	opacity: 0.7;
 }
 
-#wrapper button:nth-child(1) {
-	background-color: #e67200;
-	border-radius: 5px;
+#front a {
+	color: #bd6800;
+}
+#back a {
+	color: #3d4c9c;
 }
 
-#wrapper button:nth-child(2) {
-	margin-left: 50px;
-	background-color: #0063d9;
-	border-radius: 5px;
+#front i, #back i {
+	font-size: 150px;
 }
 
 </style>
@@ -57,11 +69,13 @@ body {
 	<h1><%=owner.getUser_id() %>님 환영합니다.</h1>
 
 	<div id="wrapper">
-		<a href="/client/main/customerCredential"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a><br>
-	<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-		Front Office
-		<a href="/client/owner/inventory/item/list"><i class="fa fa-file-text" aria-hidden="true"></i></a><br>
-		Back Office
+		<div id="front">
+			<a href="/client/main/customerCredential"><i class="fa fa-shopping-cart" aria-hidden="true"></i><br><br>Front Office</a><br>
+		</div>
+		<div id="back">
+			<a href="/client/owner/inventory/item/list"><i class="fa fa-file-text" aria-hidden="true"></i><br><br>Back Office</a><br>
+		</div>
+		<div style="clear:both"></div>
 	</div>
 
 </body>

@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
-input[type=text], input[type=number], select{
-  width: 70%;
+input[type=text], input[type=number], input[type=password], select{
+	width: 50%;
   padding: 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -11,32 +11,28 @@ input[type=text], input[type=number], select{
   resize: vertical;
 }
 
-input[type=submit], input[type=reset]{
-  /* float: right; */
-  background-color: #99c5ff;
+input[type=submit], input[type=reset], input[type=button], button{
+  float: right;
+  background-color: #3d4c9c;
   color: white;
-  padding: 12px 20px;
+  padding: 12px 18px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   margin-right: 5px;
 }
 
-input[type=number]{
-	width: 200px;
+input[type=submit]:hover, input[type=reset]:hover, input[type=button]:hover, button:hover {
+	transition: 0.3s;
+	opacity: 0.7;
 }
 
-input[type=reset]{
-  background-color: #e8e8e8;
-  color: black;
-}
-
-input[type=submit]:hover{
-  background-color: #45a049;
+label {
+	font-weight: bold;
 }
 
 select{
-	width: 200px;
+	width: 300px;
 	padding: .8em .5em;
 }
 
@@ -44,10 +40,13 @@ select{
   width: 500px;
   text-align: left;
   position: absolute;
+  border: 1px solid #cfcfcf;
   border-radius: 5px;
-  background-color: #f7f7f7;
-  padding: 20px;
-  left: 200px;
+  background-color: white;
+  color: #3d4c9c;
+  padding: 30px;
+  left: 150px;
+  top: 50px;
 }
 
 .container button{
@@ -60,16 +59,29 @@ select{
 }
 .box{
 	margin-top: 7px;
-	
 }
 
 .box *{
 	display: inline-block;
 }
 
-.box button{
-	float:right;
+
+.check-box input[type=button]{
+	background: #d9d9d9;
+	color: #666666;
+	height: 30px;
+	width: 50px;
+	padding: 0px 0px 0px 0px;
+	font-size:15px;
+	font-weight: bold;
+	
 }
+
+.new-box input[type=password]{
+	background: #ffbdbd;
+	width:50%;
+}
+
 .outerbox{
 	padding-bottom: 30px;
 }

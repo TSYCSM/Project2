@@ -9,8 +9,8 @@ import org.slf4j.LoggerFactory;
 
 import com.tsycsm.agileoffice.exception.LoginRequiredException;
 
-public class OwnerSessionCheckAspect {
-	private static final Logger logger=LoggerFactory.getLogger(OwnerSessionCheckAspect.class);	
+public class CustomerSessionCheckAspect {
+	private static final Logger logger=LoggerFactory.getLogger(CustomerSessionCheckAspect.class);	
 	
 	public Object sessionCheck(ProceedingJoinPoint joinPoint) throws Throwable{
 		Object target = joinPoint.getTarget(); //원래 호출하려고 했던 객체

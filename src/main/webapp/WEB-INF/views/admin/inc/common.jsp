@@ -7,5 +7,4 @@
 	<div id ="main" align="center">
 		<%@ include file="sidenavi.jsp" %>
 	  	<%@ include file="fixednavi.jsp" %>
-	  	<%@ include file="childbar.jsp" %>
 	<body onload="loadNav()">

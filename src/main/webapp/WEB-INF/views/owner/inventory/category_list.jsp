@@ -12,9 +12,7 @@
 <%@ include file="../inc/header.jsp" %>
 <style>
 .add_btn{
-	position: absolute;
-	top: 380px;
-	left: 550px;
+	float: right;
 }
 .colorBox{
 	width: 50px;
@@ -28,7 +26,7 @@
 <%@ include file="../inc/common.jsp"%>
 <table style="width: 50%;">
 	<tr>
-		<th>모양</th>
+		<th>색상</th>
 		<th>이름</th>
 	</tr>
 	<%for(int i=0; i<categoryList.size(); i++){ %>
@@ -38,8 +36,12 @@
 			<td><%=category.getCategory_name() %></td>
 		</tr>
 	<%} %>
+	<tr style="background-color: #f0f0f0;">
+		<td colspan="2">
+			<button class="add_btn" type="button" onclick="location.href='/client/owner/inventory/category/registform'">카테고리 추가</button>
+		</td>
+	</tr>
 </table>
-<button class="add_btn" type="button" onclick="location.href='/client/owner/inventory/category/registform'">카테고리 추가</button>
 <%@ include file="../inc/footer.jsp" %>
 
 

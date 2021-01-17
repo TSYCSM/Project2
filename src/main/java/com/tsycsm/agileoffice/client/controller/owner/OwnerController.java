@@ -73,7 +73,7 @@ public class OwnerController {
 	 ************************************************/
 	@RequestMapping(value="/main/ownerMain", method=RequestMethod.GET)
 	public String viewOwnerMain() {
-		return "main/owner_main_temp";
+		return "main/owner_main";
 	}
 	
 	@RequestMapping(value="/main/customerCredential", method=RequestMethod.GET)

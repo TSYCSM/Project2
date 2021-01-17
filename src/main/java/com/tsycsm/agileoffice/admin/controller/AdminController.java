@@ -6,16 +6,20 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.tsycsm.agileoffice.exception.AdminNotFoundException;
+import com.tsycsm.agileoffice.model.admin.service.AdminService;
 import com.tsycsm.agileoffice.model.category.service.CategoryService;
+import com.tsycsm.agileoffice.model.common.MessageData;
 import com.tsycsm.agileoffice.model.common.Pager;
 import com.tsycsm.agileoffice.model.customer.service.CustomerService;
+import com.tsycsm.agileoffice.model.domain.Admin;
 import com.tsycsm.agileoffice.model.domain.Category;
-import com.tsycsm.agileoffice.model.domain.Customer;
 import com.tsycsm.agileoffice.model.domain.Item;
 import com.tsycsm.agileoffice.model.domain.Owner;
 import com.tsycsm.agileoffice.model.item.service.ItemService;
@@ -23,6 +27,9 @@ import com.tsycsm.agileoffice.model.owner.service.OwnerService;
 
 @Controller
 public class AdminController {
+	
+	@Autowired
+	private AdminService adminService;
 
 	@Autowired
 	private OwnerService ownerService;
@@ -42,6 +49,17 @@ public class AdminController {
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String viewAdmin() {
 		return "admin/index";
+	}
+	
+	@RequestMapping(value="/loginform", method=RequestMethod.GET)
+	public String viewAdminLogin() {
+		return "admin/login/login_form";
+	}
+	
+	@RequestMapping(value="/login", method=RequestMethod.POST)
+	public String adminLogin(Admin admin) {
+		adminService.loginCheck(admin);
+		return "redirect:/admin/owner/list";
 	}
 
 	@RequestMapping(value="/owner/list", method=RequestMethod.GET)
@@ -98,5 +116,18 @@ public class AdminController {
 	
 		return itemList;
 	}
+	
+	@ExceptionHandler(AdminNotFoundException.class)
+	public ModelAndView handleException(AdminNotFoundException e) {
+		ModelAndView mav = new ModelAndView();
+		MessageData messageData = new MessageData();
+		messageData.setMsg(e.getMessage());
+		
+		mav.addObject(messageData);
+		mav.setViewName("error/result");
+		
+		return mav;
+	}
+
 	
 }
