@@ -18,5 +18,15 @@
 
 	<context:component-scan base-package="com.tsycsm.agileoffice.admin.controller"/>
 	
+	<beans:bean class="com.tsycsm.agileoffice.admin.aop.AdminSessionCheckAspect" id="adminSessionCheckAspect"/> 
 	
+	<aop:config>
+		<aop:aspect id="sessionCheckAspect" ref="adminSessionCheckAspect">
+			<aop:pointcut expression="execution(public * com.tsycsm.agileoffice.admin.controller.AdminController.viewOwnerList(..))
+				|| execution(public * com.tsycsm.agileoffice.admin.controller.AdminController.viewOwnerDetail(..))" 
+				id="sessionPointcut"/>
+			<aop:around method="sessionCheck" pointcut-ref="sessionPointcut"/>
+		</aop:aspect>
+	</aop:config>	
+		
 </beans:beans>

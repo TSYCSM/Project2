@@ -3,6 +3,7 @@ package com.tsycsm.agileoffice.admin.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tsycsm.agileoffice.exception.AdminNotFoundException;
+import com.tsycsm.agileoffice.exception.LoginRequiredException;
 import com.tsycsm.agileoffice.model.admin.service.AdminService;
 import com.tsycsm.agileoffice.model.category.service.CategoryService;
 import com.tsycsm.agileoffice.model.common.MessageData;
@@ -46,10 +48,6 @@ public class AdminController {
 	@Autowired
 	private Pager pager;
 
-	@RequestMapping(value="/", method=RequestMethod.GET)
-	public String viewAdmin() {
-		return "admin/index";
-	}
 	
 	@RequestMapping(value="/loginform", method=RequestMethod.GET)
 	public String viewAdminLogin() {
@@ -57,8 +55,12 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String adminLogin(Admin admin) {
+	public String adminLogin(HttpServletRequest request, Admin admin) {
 		adminService.loginCheck(admin);
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("admin", admin);
+		
 		return "redirect:/admin/owner/list";
 	}
 
@@ -74,9 +76,17 @@ public class AdminController {
 
 		return mav;
 	}
+	
+	@RequestMapping(value="/owner/detail/item/asyncList", method=RequestMethod.GET)
+	@ResponseBody
+	public List<Item> getAsyncItemList(int owner_id) {
+		List<Item> itemList = itemService.selectAllJoinCategory(owner_id);
+	
+		return itemList;
+	}
 
 	@RequestMapping(value="/owner/detail", method=RequestMethod.GET)
-	public ModelAndView viewOwnerDetail(int owner_id) {
+	public ModelAndView viewOwnerDetail(HttpServletRequest request, int owner_id) {
 		List<Item> itemList = itemService.selectAllJoinCategory(owner_id);
 		List<Category> categoryList = categoryService.selectByOwner(owner_id);
 		int customer_amount = customerService.getTotalNumberOfCutomer(owner_id);
@@ -108,13 +118,17 @@ public class AdminController {
 	
 		return sb.toString();
 	}
-	
-	@RequestMapping(value="/owner/detail/item/asyncList", method=RequestMethod.GET)
-	@ResponseBody
-	public List<Item> getAsyncItemList(int owner_id) {
-		List<Item> itemList = itemService.selectAllJoinCategory(owner_id);
-	
-		return itemList;
+
+	@ExceptionHandler(LoginRequiredException.class)
+	public ModelAndView handleException(LoginRequiredException e) {
+		ModelAndView mav = new ModelAndView();
+		MessageData messageData = new MessageData();
+		messageData.setMsg(e.getMessage());
+		
+		mav.addObject(messageData);
+		mav.setViewName("error/result");
+		
+		return mav;
 	}
 	
 	@ExceptionHandler(AdminNotFoundException.class)

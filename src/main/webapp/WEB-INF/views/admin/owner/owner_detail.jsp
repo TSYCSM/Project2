@@ -1,14 +1,11 @@
-<%@page import="com.tsycsm.agileoffice.model.domain.Owner"%>
 <%@page import="com.tsycsm.agileoffice.model.domain.Category"%>
 <%@page import="com.tsycsm.agileoffice.model.domain.Item"%>
 <%@page import="java.util.List"%>
-<%@page import="com.tsycsm.agileoffice.model.common.Pager"%>
 <%@ page contentType="text/html;charset=utf-8"%>
 <%
 List<Item> itemList = (List) request.getAttribute("itemList");
 List<Category> categoryList = (List)request.getAttribute("categoryList");
 int customer_amount = (Integer)request.getAttribute("customer_amount");
-
 %>
 
 <!DOCTYPE html>
@@ -17,6 +14,11 @@ int customer_amount = (Integer)request.getAttribute("customer_amount");
 <meta charset="utf-8">
 <title>ownerDetail</title>
 <%@ include file="../inc/header.jsp"%>
+<style type="text/css">
+tr {
+	border-top: 1px solid #ddd;
+}
+</style>
 <script>
 	var item_len = <%=itemList.size()%>;
 	$(function(){
@@ -92,7 +94,7 @@ int customer_amount = (Integer)request.getAttribute("customer_amount");
 				tag += "<th>등록일</th>";
 				tag += "</tr>"
 
-				for(var i=0; i<pager.pageSize;i++){
+				for(var i=0; i<pager.pageSize; i++){
 					if(pager.num < 1) break;
 					var item = itemArray[pager.curPos++];
 					tag += "<tr>";
@@ -121,7 +123,7 @@ int customer_amount = (Integer)request.getAttribute("customer_amount");
 	function getPager(cPage, size){
 		var result;
 		$.ajax({
-			url: "/getPager",
+			url: "/client/getPager",
 			dataType: "json",
 			async: false,
 			type: "post",
@@ -158,11 +160,9 @@ int customer_amount = (Integer)request.getAttribute("customer_amount");
 		</div>
 	</div>
 
-	<div id="item-list" class="container" style="background: transparent; left: 800px;">
-		<table>
-				
-		</table>
-	</div>
+	<table id="item-list" class="container" style="background: white; left: 800px;">
+			
+	</table>
 </div>
 
 <%@ include file="../inc/footer.jsp"%>

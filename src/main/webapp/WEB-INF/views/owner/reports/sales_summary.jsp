@@ -84,12 +84,3 @@
 </table>
 <%@ include file="../inc/footer.jsp" %>
 
-
-
-
-
-
-
-
-
-
