@@ -33,7 +33,7 @@ input[type=text], select, textarea {
 	function send(){
 		$("form").attr({
 			method: "post",
-			action: "/owner/qna/send"
+			action: "/client/owner/qna/send"
 		});
 		$("form").submit();
 	}
