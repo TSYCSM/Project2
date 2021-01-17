@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <div id="mySidenav" class="sidenav">
 	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&#9776;</a>
+	<img alt="agile office" src="/resources/image/logo/logo.png" width="120px;">
 	<button onClick="location.href='/client/owner/account/mypage'" class="dropdown-btn">
 		내 정보
 	</button>

@@ -17,12 +17,13 @@
 <%@ include file="../inc/header.jsp" %>
 </head>
 <%@ include file="../inc/common.jsp"%>
-<div style="width: 80%">
-	<div><%=customer.getCustomer_name() %>님 정보</div>
-	<div style="float: right; margin-right: 30px">연락처: <%=customer.getPhone() %></div>
-</div>
-<br>
 <table>
+	<tr>
+		<td style="background-color: #F0F0F1; color: black;" colspan="3">
+			<span><%=customer.getCustomer_name() %>님 정보</span>
+			<span style="float: right;">연락처: <%=customer.getPhone() %></span>
+		</td>
+	</tr>
 	<tr>
 		<th>No</th>
 		<th>합계</th>
