@@ -22,6 +22,6 @@ public class QnaServiceImpl implements QnaService {
 		
 		String content = sb.toString();
 
-		mailSender.send("chltlals96@naver.com", email.getTitle(), content);
+		mailSender.send("fge503@naver.com", email.getTitle(), content);
 	}
 }
