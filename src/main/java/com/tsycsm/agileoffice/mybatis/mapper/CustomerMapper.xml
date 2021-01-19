@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Customer">
+	<insert id="insert" parameterType="Customer">
+		insert into customer(owner_id, customer_name, phone)
+		values(#{owner_id}, #{customer_name}, #{phone})
+	</insert>
+	
+	<select id="select" parameterType="Customer" resultType="Customer">
+		select * from customer where phone=#{phone} and owner_id=#{owner_id}
+	</select>
+	
+	<select id="selectById" parameterType="int" resultType="Customer">
+		select * from customer where customer_id=#{customer_id}
+	</select>
+	
+	<select id="selectAllByOwnerId" parameterType="int" resultType="Customer">
+		select * from customer where owner_id=#{owner_id} order by customer_id desc 
+	</select>
+	
+	<!-- customer 한 명당 주문 건수 조회 -->
+	<resultMap type="Customer" id="customerJoinOrderSummary">
+		<id column="customer_id" property="customer_id"/>
+		<result column="owner_id" property="owner_id"/>
+		<result column="customer_name" property="customer_name"/>
+		<result column="phone" property="phone"/>
+		<result column="point" property="point"/>
+		<result column="regdate" property="regdate"/>
+		<collection
+			column="customer_id"
+			property="orderSummaryList"
+			javaType="java.util.List"
+			ofType="OrderSummary"
+			select="OrderSummary.selectByCustomerId"
+			/>
+			
+	</resultMap>
+	
+	
+	<select id="selectJoinOrderSummary" parameterType="int" resultMap="customerJoinOrderSummary">
+		select * from customer where customer_id=#{customer_id}
+	</select>
+	
+	
+</mapper>
+
+
+
+
+
+
+
+

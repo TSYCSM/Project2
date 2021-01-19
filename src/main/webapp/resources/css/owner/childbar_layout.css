@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+#main .mypagebar, .reportsbar, .itembar {
+	display: none;
+	position: fixed;
+	z-index: 2;
+	text-align: center;
+ 	left: 90px;
+	width:150px;
+	background-color: #f0f0f0;	
+	border: 1px solid #3d4c9c;
+}
+
+.bar-item {
+	display: block;
+	width: 100%;
+	padding: 10px 0;
+	color: #3d4c9c;
+	font-size: 16px;
+	font-weight: bold;
+}
+	
+.bar-item:hover {
+	color: white;
+	background-color: #3d4c9c;
+	transition: 0.3s;
+}
+
+.reportsbar {
+	top:150px;
+}
+
+.itembar {
+	top:225px;
+}
