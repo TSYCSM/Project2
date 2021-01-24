@@ -34,16 +34,12 @@ function update(){
 	var formData = $("#category_form").serialize();
 	if(confirm("수정하시겠습니까")){
 		$.ajax({
-			url: "/client/owner/inventory/category/update",
+			url: "/rest/owner/inventory/category/update",
 			type: "post",
 			data: formData,
 			success: function(responseData){
-				if(responseData.resultCode==1){
-					alert(responseData.msg);
-					location.href="/client/owner/inventory/category/detail?category_id="+<%=category.getCategory_id()%>;
-				}else{
-					alert(responseData.msg);					
-				}
+				alert(responseData.msg);
+				location.href="/client/owner/inventory/category/detail?category_id="+<%=category.getCategory_id()%>;
 			}
 		});
 	}	

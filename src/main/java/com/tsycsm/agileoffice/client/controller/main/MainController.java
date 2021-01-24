@@ -43,51 +43,11 @@ public class MainController {
 		return "error/result";
 	}
 	
-	@PostMapping("/getPager")
-	@ResponseBody
-	public Pager getPager(int curPage, int listSize) {
-		Pager pager = new Pager();
-		pager.init(curPage, listSize);
-	
-		return pager;
-	}
-	
 
 	// ---------------------------------
 	// Owner : Credential Box
 	// ---------------------------------
 	
-	//owner-member 등록
-	@RequestMapping(value="/main/ownerRegist", method=RequestMethod.POST)
-	@ResponseBody
-	public MessageData ownerMemberRegist(Owner owner) {
-		logger.debug("owner의 user_id "+owner.getUser_id());
-		logger.debug("owner의 password "+owner.getPassword());
-		logger.debug("owner의 shopname "+owner.getShopname());
-		logger.debug("owner의 email_id "+owner.getEmail_id());
-		logger.debug("owner의 email_server "+owner.getEmail_server());
-		ownerService.duplicateCheck(owner.getUser_id());
-		ownerService.regist(owner);
-		
-		MessageData messageData = new MessageData();
-		messageData.setResultCode(1);
-		messageData.setMsg("회원이 등록 되었습니다.");
-		return messageData;
-	}	
-	
-	//owner id 중복체크
-	@RequestMapping(value="/main/checkid", method=RequestMethod.POST)
-	@ResponseBody
-	public MessageData checkId(String user_id) {
-		
-		ownerService.duplicateCheck(user_id);
-
-		MessageData messageData = new MessageData();
-		messageData.setResultCode(1);
-		messageData.setMsg("사용가능한 아이디 입니다.");
-		
-		return messageData;
-	}
 	
 	//로그인
 	@RequestMapping(value="/main/ownerLogin", method=RequestMethod.POST)
