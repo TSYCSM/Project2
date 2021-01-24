@@ -69,7 +69,7 @@
 		insert into item(owner_id, item_name, price, filename, stock)
 		values(#{owner_id}, #{item_name}, #{price}, #{filename}, #{stock})
 		<selectKey keyProperty="item_id" resultType="int" order="AFTER">
-			select seq_item.currval from dual
+			select last_insert_id() from dual
 		</selectKey>
 	</insert>
 	

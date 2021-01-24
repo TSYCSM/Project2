@@ -28,22 +28,6 @@ public class CustomerController {
 	  customer CRUD
 	 ***************************************/
 	//customer등록
-	@PostMapping("/main/customerRegist")
-	@ResponseBody
-	public MessageData customerRegist(Customer customer) {
-		logger.debug("customer의 id "+customer.getCustomer_id());
-		logger.debug("customer의 owner_id "+customer.getCustomer_id());
-		logger.debug("customer의 name"+customer.getCustomer_name());
-		logger.debug("customer의 point"+customer.getPoint());
-	
-		customerService.regist(customer);
-		
-		MessageData messageData = new MessageData();
-		messageData.setResultCode(1);
-		messageData.setMsg("고객등록 성공");
-		
-		return messageData;
-	}
 	
 	@PostMapping("/main/customerLogin")
 	public String customerLogin(HttpSession session, Customer customer) {
