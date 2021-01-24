@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.tsycsm.agileoffice.exception.OrderException;
+import com.tsycsm.agileoffice.exception.AsyncOrderDMLException;
 import com.tsycsm.agileoffice.model.category.service.CategoryService;
 import com.tsycsm.agileoffice.model.common.MessageData;
 import com.tsycsm.agileoffice.model.domain.Category;
@@ -63,14 +63,7 @@ public class OrderController {
 	/*******************************************
 		order exception handler
 	 *******************************************/
-	@ExceptionHandler(OrderException.class)
-	@ResponseBody
-	public MessageData handleException(OrderException e) {
-		MessageData messageData = new MessageData();
-		messageData.setResultCode(0);
-		messageData.setMsg(e.getMessage());
-		return messageData;
-	}
+	
 	
 }
 

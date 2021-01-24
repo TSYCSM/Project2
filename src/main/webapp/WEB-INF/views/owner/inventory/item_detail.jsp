@@ -33,9 +33,13 @@
 					if(responseData.resultCode==1){
 						alert(responseData.msg);
 						location.href="/client/owner/inventory/item/detail?item_id="+<%=item.getItem_id()%>;
-					}else{
-						alert(responseData.msg);					
 					}
+				},
+				error:function(xhr, status, error){
+					console.log("에러 응답데이터 받음: xhr = ",xhr);
+					
+					var json = JSON.parse(xhr.responseText);
+					alert(json.msg);
 				}
 			});
 		}	
@@ -68,9 +72,12 @@
 				success: function(responseData) {
 					if(responseData.resultCode == 1) {
 						alert(responseData.msg);
-					} else {
-						alert(responseData.msg);				
 					}
+				},
+				error:function(xhr, status, error){
+					console.log("에러 응답데이터 받음: xhr = ",xhr);
+					var json = JSON.parse(xhr.responseText);
+					alert(json.msg);
 				}
 			});
 			nameCheckFlag = true;

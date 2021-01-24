@@ -6,8 +6,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.tsycsm.agileoffice.exception.DMLException;
-import com.tsycsm.agileoffice.exception.OrderException;
+import com.tsycsm.agileoffice.exception.InventoryDMLException;
+import com.tsycsm.agileoffice.exception.AsyncOrderDMLException;
 import com.tsycsm.agileoffice.model.domain.OrderDetail;
 
 @Repository
@@ -40,10 +40,10 @@ public class MybatisOrderDetailDAO implements OrderDetailDAO{
 	}
 
 	@Override
-	public void insert(OrderDetail orderDetail) throws OrderException{
+	public void insert(OrderDetail orderDetail) throws AsyncOrderDMLException{
 		int result = sqlSessionTemplate.insert("OrderDetail.insert", orderDetail);
 		if(result==0) {
-			throw new OrderException("주문 상세 등록 실패");
+			throw new AsyncOrderDMLException("주문 상세 등록 실패");
 		}
 	}
 

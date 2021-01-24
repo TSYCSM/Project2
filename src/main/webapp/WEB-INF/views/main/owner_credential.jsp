@@ -263,6 +263,12 @@ function checkId(){
 					alert(responseData.msg);				
 	
 				}
+			},
+			
+			error: function(xhr, status,error){
+				console.log(xhr);
+				alert(xhr.responseJSON.msg);
+				
 			}
 		});
 		

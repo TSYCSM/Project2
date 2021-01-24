@@ -6,7 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.tsycsm.agileoffice.exception.CustomerException;
+import com.tsycsm.agileoffice.exception.AsyncCustomerDMLException;
 import com.tsycsm.agileoffice.exception.CustomerNotFoundException;
 import com.tsycsm.agileoffice.model.domain.Customer;
 
@@ -44,32 +44,32 @@ public class MybatisCustomerDAO implements CustomerDAO{
 	}
 
 	@Override
-	public void insert(Customer customer) throws CustomerException{
+	public void insert(Customer customer) throws AsyncCustomerDMLException{
 		int result = sqlSessionTemplate.insert("Customer.insert", customer);
 		
 		if(result==0) {
-			throw new CustomerException("고객 등록 실패");
+			throw new AsyncCustomerDMLException("고객 등록 실패");
 		}
 	}
 
 	@Override
-	public void update(Customer customer) throws CustomerException{
+	public void update(Customer customer) throws AsyncCustomerDMLException{
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void delete(Customer customer) throws CustomerException{
+	public void delete(Customer customer) throws AsyncCustomerDMLException{
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void duplicateCheck(Customer customer) throws CustomerException{
+	public void duplicateCheck(Customer customer) throws AsyncCustomerDMLException{
 		List list = sqlSessionTemplate.selectList("Customer.select", customer);
 		
 		if(list.size() > 0) {
-			throw new CustomerException("이미 등록된 전화번호 입니다.");
+			throw new AsyncCustomerDMLException("이미 등록된 전화번호 입니다.");
 		}
 	}
 	

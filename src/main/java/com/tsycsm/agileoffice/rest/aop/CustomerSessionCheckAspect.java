@@ -1,4 +1,4 @@
-package com.tsycsm.agileoffice.admin.aop;
+package com.tsycsm.agileoffice.rest.aop;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -9,8 +9,8 @@ import org.slf4j.LoggerFactory;
 
 import com.tsycsm.agileoffice.exception.AsyncLoginRequiredException;
 
-public class AdminSessionCheckAspect {
-	private static final Logger logger=LoggerFactory.getLogger(AdminSessionCheckAspect.class);	
+public class CustomerSessionCheckAspect {
+	private static final Logger logger=LoggerFactory.getLogger(CustomerSessionCheckAspect.class);	
 	
 	public Object sessionCheck(ProceedingJoinPoint joinPoint) throws Throwable{
 		Object target = joinPoint.getTarget(); //원래 호출하려고 했던 객체
@@ -38,7 +38,7 @@ public class AdminSessionCheckAspect {
 		session=request.getSession();
 		Object result=null;
 		
-		if(session.getAttribute("admin")==null) {
+		if(session.getAttribute("customer")==null) {
 			throw new AsyncLoginRequiredException("로그인이 필요한 서비스입니다");
 		}else {
 			//원래 요청의 흐름을 그대로 진행..

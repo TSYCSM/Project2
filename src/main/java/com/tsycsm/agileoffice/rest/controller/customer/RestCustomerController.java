@@ -22,7 +22,6 @@ public class RestCustomerController {
 	
 	//customer등록
 	@PostMapping("/main/customerRegist")
-	@ResponseBody
 	public ResponseEntity<MessageData> customerRegist(Customer customer) {
 		logger.debug("customer의 id "+customer.getCustomer_id());
 		logger.debug("customer의 owner_id "+customer.getCustomer_id());

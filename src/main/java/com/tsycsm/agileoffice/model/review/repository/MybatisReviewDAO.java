@@ -6,7 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.tsycsm.agileoffice.exception.AsyncDMLException;
+import com.tsycsm.agileoffice.exception.AsyncInventoryDMLException;
 import com.tsycsm.agileoffice.model.domain.Review;
 
 @Repository
@@ -27,11 +27,11 @@ public class MybatisReviewDAO implements ReviewDAO{
 	}
 
 	@Override
-	public void insert(Review review) throws AsyncDMLException{
+	public void insert(Review review) throws AsyncInventoryDMLException{
 		int result = sqlSessionTemplate.insert("Review.insert", review);
 		
 		if(result==0) {
-			throw new AsyncDMLException("리뷰 등록 실패");
+			throw new AsyncInventoryDMLException("리뷰 등록 실패");
 		}
 	}
 
@@ -40,7 +40,7 @@ public class MybatisReviewDAO implements ReviewDAO{
 		int result = sqlSessionTemplate.update("Review.update", review);
 
 		if(result==0) {
-			throw new AsyncDMLException("리뷰 수정 실패");
+			throw new AsyncInventoryDMLException("리뷰 수정 실패");
 		}
 	}
 
@@ -49,7 +49,7 @@ public class MybatisReviewDAO implements ReviewDAO{
 		int result = sqlSessionTemplate.delete("Review.delete", review_id);
 		
 		if(result == 0) {
-			throw new AsyncDMLException("리뷰 삭제 실패");
+			throw new AsyncInventoryDMLException("리뷰 삭제 실패");
 		}
 	}
 	

@@ -139,9 +139,11 @@ h1, h3{
 				if(messageData.resultCode == 1) {
 					alert(messageData.msg);
 					getAsyncList(1);
-				} else {
-					alert(messageData.msg);
 				}
+			},
+			error:function(xhr, status, error){
+				console.log("에러 응답데이터 받음: xhr = ",xhr);
+				alert(xhr.responseJSON.msg);
 			}
 			
 		});
@@ -158,9 +160,11 @@ h1, h3{
 				if(messageData.resultCode == 1) {
 					alert(messageData.msg);
 					getAsyncList(1);
-				} else {
-					alert(messageData.msg);
 				}
+			},
+			error:function(xhr, status, error){
+				console.log("에러 응답데이터 받음: xhr = ",xhr);
+				alert(xhr.responseJSON.msg);
 			}
 		});
 	}
@@ -248,6 +252,10 @@ h1, h3{
 					if(responseData.resultCode==1){
 						location.href= responseData.url;					
 					}
+				},
+				error:function(xhr, status, error){
+					console.log("에러 응답데이터 받음: xhr = ",xhr);
+					alert(xhr.responseJSON.msg);
 				}
 			})
 		}
@@ -263,6 +271,10 @@ h1, h3{
 				}else{
 					alert(responseData.msg);
 				}
+			},
+			error:function(xhr, status, error){
+				console.log("에러 응답데이터 받음: xhr = ",xhr);
+				alert(xhr.responseJSON.msg);
 			}
 		
 		});
@@ -290,6 +302,10 @@ h1, h3{
 						getAsyncList(1);
 						hideRegist();
 					}
+				},
+				error:function(xhr, status, error){
+					console.log("에러 응답데이터 받음: xhr = ",xhr);
+					alert(xhr.responseJSON.msg);
 				}
 			})			
 		}else{

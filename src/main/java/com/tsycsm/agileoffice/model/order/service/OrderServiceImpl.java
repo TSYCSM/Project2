@@ -6,8 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tsycsm.agileoffice.exception.DMLException;
-import com.tsycsm.agileoffice.exception.OrderException;
+import com.tsycsm.agileoffice.exception.InventoryDMLException;
+import com.tsycsm.agileoffice.exception.AsyncOrderDMLException;
 import com.tsycsm.agileoffice.model.domain.Item;
 import com.tsycsm.agileoffice.model.domain.OrderDetail;
 import com.tsycsm.agileoffice.model.domain.OrderSummary;
@@ -52,7 +52,7 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public void regist(Item[] itemArr, OrderSummary orderSummary, OrderDetail[] orderDetailArr) throws OrderException, DMLException{
+	public void regist(Item[] itemArr, OrderSummary orderSummary, OrderDetail[] orderDetailArr) throws AsyncOrderDMLException, InventoryDMLException{
 		
 		for(Item item : itemArr) {
 			itemDAO.updateStock(item);

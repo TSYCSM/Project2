@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tsycsm.agileoffice.exception.CustomerException;
+import com.tsycsm.agileoffice.exception.AsyncCustomerDMLException;
 import com.tsycsm.agileoffice.model.customer.repository.CustomerDAO;
 import com.tsycsm.agileoffice.model.domain.Customer;
 
@@ -47,7 +47,7 @@ public class CustomerServiceImpl implements CustomerService{
 	}
 
 	@Override
-	public void regist(Customer customer) throws CustomerException{
+	public void regist(Customer customer) throws AsyncCustomerDMLException{
 		customerDAO.duplicateCheck(customer);
 		customerDAO.insert(customer);
 	}

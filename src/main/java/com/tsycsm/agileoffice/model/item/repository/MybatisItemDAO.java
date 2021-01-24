@@ -6,8 +6,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.tsycsm.agileoffice.exception.AsyncDMLException;
-import com.tsycsm.agileoffice.exception.DMLException;
+import com.tsycsm.agileoffice.exception.AsyncInventoryDMLException;
+import com.tsycsm.agileoffice.exception.InventoryDMLException;
 import com.tsycsm.agileoffice.model.domain.Item;
 
 @Repository
@@ -49,7 +49,7 @@ public class MybatisItemDAO implements ItemDAO{
 	
 	
 	@Override
-	public void insert(Item item) throws DMLException {
+	public void insert(Item item) throws InventoryDMLException {
 		int result = 0;
 		if(item.getCategory_id() != 0) {
 			result = sqlSessionTemplate.insert("Item.insert", item);
@@ -57,7 +57,7 @@ public class MybatisItemDAO implements ItemDAO{
 			result = sqlSessionTemplate.insert("Item.insertWithoutCategoryId", item);
 		}
 		if(result == 0) {
-			throw new DMLException("상품 등록에 실패하였습니다.");
+			throw new InventoryDMLException("상품 등록에 실패하였습니다.");
 		}
 	}
 
@@ -80,7 +80,7 @@ public class MybatisItemDAO implements ItemDAO{
 
 
 	@Override
-	public void update(Item item) throws AsyncDMLException {
+	public void update(Item item) throws AsyncInventoryDMLException {
 		int result = 0;
 
 		if(item.getCategory_id() != 0) {
@@ -88,26 +88,27 @@ public class MybatisItemDAO implements ItemDAO{
 		} else {
 			result = sqlSessionTemplate.update("Item.updateNullifingCategoryId", item);
 		}
+		
 		if(result == 0) {
-			throw new AsyncDMLException("상품 정보 수정에 실패하였습니다.");
+			throw new AsyncInventoryDMLException("상품 정보 수정에 실패하였습니다.");
 		}
 	}
 
 	@Override
-	public void updateStock(Item item) throws DMLException{
+	public void updateStock(Item item) throws InventoryDMLException{
 		int result = sqlSessionTemplate.update("Item.updateStock", item);			
 
 		if(result==0) {
-			throw new DMLException("상품 수량이 부족합니다.");
+			throw new InventoryDMLException("상품 수량이 부족합니다.");
 		}
 	}
 
 
 	@Override
-	public void delete(int item_id) throws DMLException {
+	public void delete(int item_id) throws InventoryDMLException {
 		int result = sqlSessionTemplate.delete("Item.delete", item_id);
 		if(result == 0) {
-			throw new DMLException("상품 삭제에 실패하였습니다");
+			throw new InventoryDMLException("상품 삭제에 실패하였습니다");
 		}
 	}
 

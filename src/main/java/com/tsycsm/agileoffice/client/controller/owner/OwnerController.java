@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tsycsm.agileoffice.exception.MailSendException;
-import com.tsycsm.agileoffice.exception.OwnerException;
+import com.tsycsm.agileoffice.exception.AsyncOwnerDMLException;
 import com.tsycsm.agileoffice.exception.OwnerNotFoundException;
-import com.tsycsm.agileoffice.exception.OwnerPasswordFailException;
+import com.tsycsm.agileoffice.exception.AsyncOwnerPasswordFailException;
 import com.tsycsm.agileoffice.model.common.MessageData;
 import com.tsycsm.agileoffice.model.domain.Email;
 import com.tsycsm.agileoffice.model.domain.Owner;
@@ -196,44 +196,7 @@ public class OwnerController {
 	  exception handler 메소드
 	 ************************************************/
 	
-	// 예외 핸들러 2가지 처리
-	@ExceptionHandler(OwnerException.class)
-	@ResponseBody
-	public MessageData handleException(OwnerException e) {
-		MessageData messageData = new MessageData();
-		messageData.setResultCode(0);
-		messageData.setMsg(e.getMessage());
-		return messageData;
-	}
 	
-	@ExceptionHandler(OwnerPasswordFailException.class)
-	@ResponseBody
-	public MessageData handleException(OwnerPasswordFailException e) {
-		MessageData messageData = new MessageData();
-		messageData.setResultCode(0);
-		messageData.setMsg(e.getMessage());
-		return messageData;
-	}
-	
-	@ExceptionHandler(OwnerNotFoundException.class)
-	public ModelAndView handleException(OwnerNotFoundException e) {
-		MessageData messageData = new MessageData();
-		messageData.setResultCode(0);
-		messageData.setMsg(e.getMessage());
-		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("error/result");
-		mav.addObject("messageData", messageData);
-		return mav;
-	}
-	
-	@ExceptionHandler(MailSendException.class)
-	public ModelAndView handleException(MailSendException e) {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("error/result");
-		mav.addObject("msg", e.getMessage());
-		return mav;
-	}
 	
 }
 

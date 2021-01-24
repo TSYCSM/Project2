@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.tsycsm.agileoffice.exception.AsyncDMLException;
-import com.tsycsm.agileoffice.exception.DMLException;
-import com.tsycsm.agileoffice.exception.NameDuplicatedException;
+import com.tsycsm.agileoffice.exception.AsyncInventoryDMLException;
+import com.tsycsm.agileoffice.exception.InventoryDMLException;
+import com.tsycsm.agileoffice.exception.AsyncInventoryNameDuplicatedException;
 import com.tsycsm.agileoffice.model.common.FileManager;
 import com.tsycsm.agileoffice.model.domain.Category;
 import com.tsycsm.agileoffice.model.domain.Item;
@@ -28,10 +28,10 @@ public class ItemServiceImpl implements ItemService {
 	}
 	
 	@Override
-	public Item duplicationCheck(Item item) throws NameDuplicatedException {
+	public Item duplicationCheck(Item item) throws AsyncInventoryNameDuplicatedException {
 		Item item_result = itemDAO.selectByNameInOwner(item);
 		if(item_result != null) {
-			throw new NameDuplicatedException("상품명(" + item.getItem_name() + ")이 중복됩니다.");
+			throw new AsyncInventoryNameDuplicatedException("상품명(" + item.getItem_name() + ")이 중복됩니다.");
 		}
 		return item_result;
 	}
@@ -95,7 +95,7 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public void regist(Item item, FileManager fileManager) throws DMLException {
+	public void regist(Item item, FileManager fileManager) throws InventoryDMLException {
 		MultipartFile photo = item.getPhoto();
 		String ext = fileManager.getExtend(photo.getOriginalFilename());
 	
@@ -107,7 +107,7 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public void update(Item item, FileManager fileManager) throws AsyncDMLException {
+	public void update(Item item, FileManager fileManager) throws AsyncInventoryDMLException {
 		MultipartFile photo = item.getPhoto();
 
 		if(photo == null) {
@@ -126,7 +126,7 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public void delete(Item item, FileManager fileManager) throws DMLException {
+	public void delete(Item item, FileManager fileManager) throws InventoryDMLException {
 		itemDAO.delete(item.getItem_id());
 		fileManager.deleteFile(fileManager.getSaveDir() + File.separator + item.getItem_id() + "." + item.getFilename());
 	}

@@ -104,6 +104,10 @@ function regist(){
 			data: formData,
 			success: function(responseData){
 				alert(responseData.msg);
+			},
+			error:function(xhr, status, error){
+				console.log("에러 응답데이터 받음: xhr = ",xhr);
+				alert(xhr.responseJSON.msg);
 			}
 		});
 	}else{

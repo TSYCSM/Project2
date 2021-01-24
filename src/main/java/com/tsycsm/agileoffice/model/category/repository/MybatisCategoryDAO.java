@@ -6,8 +6,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.tsycsm.agileoffice.exception.AsyncDMLException;
-import com.tsycsm.agileoffice.exception.DMLException;
+import com.tsycsm.agileoffice.exception.AsyncInventoryDMLException;
+import com.tsycsm.agileoffice.exception.InventoryDMLException;
 import com.tsycsm.agileoffice.model.domain.Category;
 
 @Repository
@@ -31,27 +31,27 @@ public class MybatisCategoryDAO implements CategoryDAO{
 	}
 
 	@Override
-	public void insert(Category category) throws DMLException{
+	public void insert(Category category) throws InventoryDMLException{
 		int result = sqlSessionTemplate.insert("Category.insert", category);
 		if(result == 0) {
-			throw new DMLException("카테고리 등록 실패");
+			throw new InventoryDMLException("카테고리 등록 실패");
 		}
 	}
 
 
 	@Override
-	public void delete(int category_id) throws DMLException{
+	public void delete(int category_id) throws InventoryDMLException{
 		int result = sqlSessionTemplate.delete("Category.delete", category_id);
 		if(result == 0) {
-			throw new DMLException("카테고리 삭제 실패");
+			throw new InventoryDMLException("카테고리 삭제 실패");
 		}
 	}
 
 	@Override
-	public void update(Category category) throws AsyncDMLException{
+	public void update(Category category) throws AsyncInventoryDMLException{
 		int result = sqlSessionTemplate.update("Category.update", category);
 		if(result == 0) {
-			throw new AsyncDMLException("카테고리 정보 수정 실패");
+			throw new AsyncInventoryDMLException("카테고리 정보 수정 실패");
 		}
 		
 	}

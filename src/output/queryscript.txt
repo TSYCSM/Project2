@@ -91,6 +91,7 @@ create table order_detail(
    foreign key(owner_id) references owner(owner_id)
  , constraint fk_item_order_detail
    foreign key(item_id) references item(item_id)
+   		on delete set null
 ) default charset utf8;
 
 

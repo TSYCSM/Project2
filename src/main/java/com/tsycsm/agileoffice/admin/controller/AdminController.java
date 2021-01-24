@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tsycsm.agileoffice.exception.AdminNotFoundException;
-import com.tsycsm.agileoffice.exception.LoginRequiredException;
+import com.tsycsm.agileoffice.exception.AsyncLoginRequiredException;
 import com.tsycsm.agileoffice.model.admin.service.AdminService;
 import com.tsycsm.agileoffice.model.category.service.CategoryService;
 import com.tsycsm.agileoffice.model.common.MessageData;
@@ -119,8 +119,8 @@ public class AdminController {
 		return sb.toString();
 	}
 
-	@ExceptionHandler(LoginRequiredException.class)
-	public ModelAndView handleException(LoginRequiredException e) {
+	@ExceptionHandler(AsyncLoginRequiredException.class)
+	public ModelAndView handleException(AsyncLoginRequiredException e) {
 		ModelAndView mav = new ModelAndView();
 		MessageData messageData = new MessageData();
 		messageData.setMsg(e.getMessage());

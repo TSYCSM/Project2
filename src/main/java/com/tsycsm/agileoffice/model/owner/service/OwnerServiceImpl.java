@@ -2,14 +2,14 @@ package com.tsycsm.agileoffice.model.owner.service;
 
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.tsycsm.agileoffice.exception.AsyncOwnerDMLException;
+import com.tsycsm.agileoffice.exception.AsyncOwnerNameDuplicatedException;
+import com.tsycsm.agileoffice.exception.AsyncOwnerPasswordFailException;
 import com.tsycsm.agileoffice.exception.MailSendException;
-import com.tsycsm.agileoffice.exception.OwnerException;
 import com.tsycsm.agileoffice.exception.OwnerNotFoundException;
-import com.tsycsm.agileoffice.exception.OwnerPasswordFailException;
 import com.tsycsm.agileoffice.model.common.MailSender;
 import com.tsycsm.agileoffice.model.common.SecureManager;
 import com.tsycsm.agileoffice.model.domain.Owner;
@@ -41,7 +41,7 @@ public class OwnerServiceImpl implements OwnerService{
 	}
 
 	@Override
-	public void regist(Owner owner) throws OwnerException, MailSendException{
+	public void regist(Owner owner) throws AsyncOwnerDMLException, MailSendException{
 		//비밀번호 암호화 하기
 		String secureData = secureManager.getSecureData(owner.getPassword());
 		System.out.println(secureData);
@@ -57,13 +57,13 @@ public class OwnerServiceImpl implements OwnerService{
 	}
 
 	@Override
-	public void delete(Owner owner) throws OwnerException{
+	public void delete(Owner owner) throws AsyncOwnerDMLException{
 		ownerDAO.delete(owner);
 		
 	}
 
 	@Override
-	public void update(Owner owner) throws OwnerException{
+	public void update(Owner owner) throws AsyncOwnerDMLException{
 		if(owner.getPassword()!=null) {
 			SecureManager secureManager = new SecureManager();
 			owner.setPassword(secureManager.getSecureData(owner.getPassword())); 
@@ -72,12 +72,12 @@ public class OwnerServiceImpl implements OwnerService{
 	}
 
 	@Override
-	public void duplicateCheck(String user_id) throws OwnerException{
+	public void duplicateCheck(String user_id) throws AsyncOwnerNameDuplicatedException{
 		ownerDAO.duplicateCheck(user_id);
 	}
 
 	@Override
-	public void passwordCheck(Owner owner) throws OwnerPasswordFailException{
+	public void passwordCheck(Owner owner) throws AsyncOwnerPasswordFailException{
 		SecureManager secureManager = new SecureManager();
 		owner.setPassword(secureManager.getSecureData(owner.getPassword())); 		 
 		ownerDAO.passwordCheck(owner);

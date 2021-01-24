@@ -19,7 +19,7 @@
 	function regist() {
 		if(nameCheckFlag == true) {
 			$("form").attr({
-				action:"/rest/owner/inventory/item/regist",
+				action:"/client/owner/inventory/item/regist",
 				enctype:"multipart/form-data",
 				method:"post"
 			});

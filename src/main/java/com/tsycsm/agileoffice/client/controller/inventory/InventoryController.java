@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.tsycsm.agileoffice.exception.AsyncDMLException;
-import com.tsycsm.agileoffice.exception.DMLException;
-import com.tsycsm.agileoffice.exception.NameDuplicatedException;
+import com.tsycsm.agileoffice.exception.AsyncInventoryDMLException;
+import com.tsycsm.agileoffice.exception.InventoryDMLException;
+import com.tsycsm.agileoffice.exception.AsyncInventoryNameDuplicatedException;
 import com.tsycsm.agileoffice.model.category.service.CategoryService;
 import com.tsycsm.agileoffice.model.common.FileManager;
 import com.tsycsm.agileoffice.model.common.MessageData;
@@ -174,37 +174,8 @@ public class InventoryController implements ServletContextAware {
 	}
 
 	// ----예외 핸들러 처리----
-	@ExceptionHandler(DMLException.class)
-	public ModelAndView handleException(DMLException e) {
-		MessageData messageData = new MessageData();
-		messageData.setMsg(e.getMessage());
-		messageData.setResultCode(0);
+	
 
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("messageData", messageData);
-		mav.setViewName("/error/result");
-
-		return mav;
-	}
-
-	@ExceptionHandler(AsyncDMLException.class)
-	@ResponseBody
-	public MessageData handleException(AsyncDMLException e) {
-		MessageData messageData = new MessageData();
-		messageData.setMsg(e.getMessage());
-		messageData.setResultCode(0);
-
-		return messageData;
-	}
-
-	@ExceptionHandler(NameDuplicatedException.class)
-	@ResponseBody
-	public MessageData handleException(NameDuplicatedException e) {
-		MessageData messageData = new MessageData();
-		messageData.setMsg(e.getMessage());
-		messageData.setResultCode(0);
-
-		return messageData;
-	}
+	
 
 }

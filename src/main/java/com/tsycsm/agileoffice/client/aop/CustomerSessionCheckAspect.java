@@ -7,7 +7,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.tsycsm.agileoffice.exception.LoginRequiredException;
+import com.tsycsm.agileoffice.exception.AsyncLoginRequiredException;
 
 public class CustomerSessionCheckAspect {
 	private static final Logger logger=LoggerFactory.getLogger(CustomerSessionCheckAspect.class);	
@@ -39,7 +39,7 @@ public class CustomerSessionCheckAspect {
 		Object result=null;
 		
 		if(session.getAttribute("customer")==null) {
-			throw new LoginRequiredException("로그인이 필요한 서비스입니다");
+			throw new AsyncLoginRequiredException("로그인이 필요한 서비스입니다");
 		}else {
 			//원래 요청의 흐름을 그대로 진행..
 			//원래 호출하려했던 메서드를 대신 호출

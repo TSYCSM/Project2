@@ -6,7 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.tsycsm.agileoffice.exception.OrderException;
+import com.tsycsm.agileoffice.exception.AsyncOrderDMLException;
 import com.tsycsm.agileoffice.model.domain.OrderSummary;
 
 @Repository
@@ -31,7 +31,7 @@ public class MybatisOrderSummaryDAO implements OrderSummaryDAO{
 	}
 
 	@Override
-	public void insert(OrderSummary orderSummary) throws OrderException{
+	public void insert(OrderSummary orderSummary) throws AsyncOrderDMLException{
 		
 		int result = 0;
 		if(orderSummary.getCustomer() !=null) {
@@ -40,7 +40,7 @@ public class MybatisOrderSummaryDAO implements OrderSummaryDAO{
 			result = sqlSessionTemplate.insert("OrderSummary.insertWithoutCustomerId", orderSummary);						
 		}
 		if(result == 0) {
-			throw new OrderException("주문 등록에 실패하였습니다.\n관리자에게 문의하세요");
+			throw new AsyncOrderDMLException("주문 등록에 실패하였습니다.\n관리자에게 문의하세요");
 		}
 	}
 

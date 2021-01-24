@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tsycsm.agileoffice.exception.AsyncDMLException;
+import com.tsycsm.agileoffice.exception.AsyncInventoryDMLException;
 import com.tsycsm.agileoffice.model.domain.Review;
 import com.tsycsm.agileoffice.model.review.repository.ReviewDAO;
 
@@ -27,17 +27,17 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
-	public void regist(Review review) throws AsyncDMLException{
+	public void regist(Review review) throws AsyncInventoryDMLException{
 		reviewDAO.insert(review);
 	}
 
 	@Override
-	public void update(Review review) throws AsyncDMLException {
+	public void update(Review review) throws AsyncInventoryDMLException {
 		reviewDAO.update(review);
 	}
 
 	@Override
-	public void delete(int review_id) throws AsyncDMLException {
+	public void delete(int review_id) throws AsyncInventoryDMLException {
 		reviewDAO.delete(review_id);
 	}
 
