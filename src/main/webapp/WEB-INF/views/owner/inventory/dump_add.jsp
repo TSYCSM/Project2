@@ -14,7 +14,7 @@
 function regist() {
 	var formData = new FormData($("form")[0]);
 	$.ajax({
-		url : "/client/owner/inventory/item/dump/regist",
+		url : "/rest/owner/inventory/item/dump/regist",
 		data : formData,
 		contentType : false,
 		processData : false,

@@ -2,7 +2,7 @@
 <%@page import="java.util.List"%>
 <%@ page contentType="text/html;charset=utf-8"%>
 <%
-	List<Category> categoryList = (List)request.getAttribute("categoryList");
+	List<Category> categoryList = (List<Category>)request.getAttribute("categoryList");
 %>
 <!DOCTYPE html>
 <html>

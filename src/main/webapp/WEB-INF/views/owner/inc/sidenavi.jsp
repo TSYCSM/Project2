@@ -12,7 +12,7 @@
 	<div class="dropdown-container">
 		<a href="/client/owner/reports/salesSummary">매출 요약</a> 
 		<a href="/client/owner/reports/receipts">영수증 보관함</a> 
-		<a href="/client/owner/reports/customerList">고객 관리</a> 
+		<a href="/rest/owner/reports/customerList">고객 관리</a> 
 		<a href="javascript:alert('서비스 준비중입니다')">할인</a>
 	</div>
 

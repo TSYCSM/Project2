@@ -103,7 +103,7 @@
 
 		$.ajax({
 			method: "POST",
-			url: "/client/owner/inventory/item/list/filtered",
+			url: "/rest/owner/inventory/item/list/filtered",
 			traditional: "true",
 			data: {
 				categoryArray : categoryArray,
@@ -147,7 +147,7 @@
 	function getPager(cPage, size){
 		var result;
 		$.ajax({
-			url: "/client/getPager",
+			url: "/rest/getPager",
 			dataType: "json",
 			async: false,
 			type: "post",

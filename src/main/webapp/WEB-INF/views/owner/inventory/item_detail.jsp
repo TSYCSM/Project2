@@ -26,7 +26,7 @@
 		var formData = $("#item-form").serialize();
 		if(confirm("수정하시겠습니까")){
 			$.ajax({
-				url: "/client/owner/inventory/item/update",
+				url: "/rest/owner/inventory/item/update",
 				type: "post",
 				data: formData,
 				success: function(responseData){
@@ -59,7 +59,7 @@
 		
 		if(item_name.length > 0) {
 			$.ajax({
-				url:"/client/owner/inventory/item/nameCheck",
+				url:"/rest/owner/inventory/item/nameCheck",
 				type: "POST",
 				data: {
 					item_name: item_name,

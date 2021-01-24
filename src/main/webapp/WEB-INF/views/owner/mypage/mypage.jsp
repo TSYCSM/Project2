@@ -40,7 +40,7 @@ input[name='email_server'] {
 	function checkPassword() {
 		var formData = $("#check-box-form").serialize();
 		$.ajax({
-			url : "/client/main/checkPassword",
+			url : "/rest/main/checkPassword",
 			type : "post",
 			data : formData,
 			success : function(responseData) {
@@ -57,7 +57,7 @@ input[name='email_server'] {
 	function changePassword() {
 		var formData = $("#new-box-form").serialize();
 		$.ajax({
-			url : "/client/main/ownerPasswordUpdate",
+			url : "/rest/main/ownerPasswordUpdate",
 			type : "post",
 			data : formData,
 			success : function(responseData) {
@@ -72,7 +72,7 @@ input[name='email_server'] {
 		if (confirm("회원탈퇴 하시겠습니까?")) {
 			var formData = $("#mypage-form").serialize();
 			$.ajax({
-				url : "/client/main/ownerQuit",
+				url : "/rest/main/ownerQuit",
 				type : "post",
 				data : formData,
 				success : function(responseData) {
@@ -81,13 +81,12 @@ input[name='email_server'] {
 				}
 			});
 		}
-
 	}
 
 	function updateInfo() {
 		var formData = $("#mypage-form").serialize();
 		$.ajax({
-			url : "/client/main/ownerUpdate",
+			url : "/rest/main/ownerUpdate",
 			type : "post",
 			data : formData,
 			success : function(responseData) {

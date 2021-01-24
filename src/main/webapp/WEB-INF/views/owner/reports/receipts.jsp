@@ -24,7 +24,7 @@ const formatter = new Intl.NumberFormat('ko-KR', {
 function showReceipt(summary_id){
 	var tag="";
 	$.ajax({
-		url:"/client/owner/reports/receiptsInfo",
+		url:"/rest/owner/reports/receiptsInfo",
 		type:"post",
 		data:{
 			order_summary_id:summary_id
