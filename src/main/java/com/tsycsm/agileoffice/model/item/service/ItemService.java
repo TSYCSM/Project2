@@ -10,7 +10,7 @@ import com.tsycsm.agileoffice.model.domain.Item;
 @Service
 public interface ItemService {
 	public Item select(int item_id);
-	public Item duplicationCheck(Item item);
+	public void duplicationCheck(Item item);
 	public Item selectJoinCategory(int item_id);
 	public List<Item> selectAllJoinCategory(int owner_id);
 	public List<Item> selectByOwnerId(int owner_id);

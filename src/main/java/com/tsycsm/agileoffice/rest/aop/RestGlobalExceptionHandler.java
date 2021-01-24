@@ -109,7 +109,6 @@ public class RestGlobalExceptionHandler {
 		MessageData messageData = new MessageData();
 		messageData.setMsg(e.getMessage());
 		messageData.setResultCode(0);
-		messageData.setUrl("¸ô¶ó");
 
 		ResponseEntity<MessageData> entity = new ResponseEntity<MessageData>(messageData, null, HttpStatus.INTERNAL_SERVER_ERROR);
 		

@@ -19,7 +19,6 @@
 	
 	<beans:bean class="com.tsycsm.agileoffice.rest.aop.CustomerSessionCheckAspect" id="customerSessionCheckAspect"/> 
 	
-	
 	<aop:config>
 		<aop:aspect id="sessionCheckAspect" ref="customerSessionCheckAspect">
 			<aop:pointcut expression="execution(public * com.tsycsm.agileoffice.rest.controller.review.RestReviewController.identifyCustomer(..))" 
@@ -27,6 +26,7 @@
 			<aop:around method="sessionCheck" pointcut-ref="sessionPointcut"/>
 		</aop:aspect>
 	</aop:config>	
+	
 	
 	<!-- globalExceptionHandler 추가-->
 	<beans:bean id="globalExceptionHandler" class="com.tsycsm.agileoffice.rest.aop.RestGlobalExceptionHandler"/> 

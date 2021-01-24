@@ -47,6 +47,11 @@
 					} else {
 						alert(responseData.msg);				
 					}
+				},
+				error:function(xhr, status, error){
+					console.log("에러 응답데이터 받음: xhr = ",xhr);
+					var json = JSON.parse(xhr.responseText);
+					alert(json.msg);
 				}
 			});
 			nameCheckFlag = true;

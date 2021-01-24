@@ -52,7 +52,7 @@ public class RestInventoryController implements ServletContextAware {
 
 		fileManager.setSaveDir(servletContext.getRealPath(fileManager.getSaveDir()));
 
-		logger.info(fileManager.getSaveDir());
+		logger.info("Rest Controller : " + fileManager.getSaveDir());
 	}
 
 

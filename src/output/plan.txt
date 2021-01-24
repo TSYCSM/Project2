@@ -1,4 +1,3 @@
-url 바꾸기
 
 최종적으로 exception 처리
 
@@ -13,19 +12,3 @@ url 바꾸기
 	Global Exception 처리
 		동기
 		비동기
-
-
-
-AdminNotFoundException.java
-AsyncDMLException.java
-CustomerException.java
-CustomerNotFoundException.java
-DMLException.java
-LoginRequiredException.java
-MailSendException.java
-NameDuplicatedException.java
-OrderException.java
-OwnerException.java
-OwnerNotFoundException.java
-OwnerPasswordFailException.java	
-	

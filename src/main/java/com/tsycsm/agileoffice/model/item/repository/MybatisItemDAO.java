@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.tsycsm.agileoffice.exception.AsyncInventoryDMLException;
+import com.tsycsm.agileoffice.exception.AsyncInventoryNameDuplicatedException;
 import com.tsycsm.agileoffice.exception.InventoryDMLException;
 import com.tsycsm.agileoffice.model.domain.Item;
 
@@ -114,9 +115,11 @@ public class MybatisItemDAO implements ItemDAO{
 
 
 	@Override
-	public Item selectByNameInOwner(Item item) {
-		Item item_result = sqlSessionTemplate.selectOne("Item.selectByNameInOwner", item);
-		return item_result;
+	public void selectByNameInOwner(Item item) throws AsyncInventoryNameDuplicatedException {
+		List<Item> item_list = sqlSessionTemplate.selectList("Item.selectByNameInOwner", item);
+		if(item_list.size() > 0) {
+			throw new AsyncInventoryNameDuplicatedException("상품명(" + item.getItem_name() + ")이 중복됩니다.");
+		}
 	}
 
 	

@@ -9,19 +9,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.tsycsm.agileoffice.exception.AsyncInventoryDMLException;
-import com.tsycsm.agileoffice.exception.InventoryDMLException;
-import com.tsycsm.agileoffice.exception.AsyncInventoryNameDuplicatedException;
 import com.tsycsm.agileoffice.model.category.service.CategoryService;
 import com.tsycsm.agileoffice.model.common.FileManager;
-import com.tsycsm.agileoffice.model.common.MessageData;
 import com.tsycsm.agileoffice.model.domain.Category;
 import com.tsycsm.agileoffice.model.domain.Item;
 import com.tsycsm.agileoffice.model.domain.Owner;
@@ -29,7 +23,7 @@ import com.tsycsm.agileoffice.model.item.service.DumpService;
 import com.tsycsm.agileoffice.model.item.service.ItemService;
 
 @Controller
-public class InventoryController implements ServletContextAware {
+public class InventoryController {
 	private static final Logger logger = LoggerFactory.getLogger(InventoryController.class);
 
 	@Autowired
@@ -41,20 +35,6 @@ public class InventoryController implements ServletContextAware {
 	@Autowired
 	private ItemService itemService;
 
-	@Autowired
-	private DumpService dumpService;
-
-	@Autowired
-	private ServletContext servletContext;
-
-	@Override
-	public void setServletContext(ServletContext servletContext) {
-		this.servletContext = servletContext;
-
-		fileManager.setSaveDir(servletContext.getRealPath(fileManager.getSaveDir()));
-
-		logger.info(fileManager.getSaveDir());
-	}
 
 	/*---------------------------------------------------------------------
 	  category CRUD

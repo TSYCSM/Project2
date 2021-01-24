@@ -20,7 +20,6 @@ import com.tsycsm.agileoffice.model.item.repository.ItemDAO;
 public class ItemServiceImpl implements ItemService {
 	@Autowired
 	private ItemDAO itemDAO;
-	
 
 	@Override
 	public Item select(int item_id) {
@@ -28,12 +27,8 @@ public class ItemServiceImpl implements ItemService {
 	}
 	
 	@Override
-	public Item duplicationCheck(Item item) throws AsyncInventoryNameDuplicatedException {
-		Item item_result = itemDAO.selectByNameInOwner(item);
-		if(item_result != null) {
-			throw new AsyncInventoryNameDuplicatedException("상품명(" + item.getItem_name() + ")이 중복됩니다.");
-		}
-		return item_result;
+	public void duplicationCheck(Item item) throws AsyncInventoryNameDuplicatedException {
+		itemDAO.selectByNameInOwner(item);
 	}
 	
 	@Override
@@ -103,6 +98,7 @@ public class ItemServiceImpl implements ItemService {
 		itemDAO.insert(item);
 
 		String newFilename = item.getItem_id() + "." + ext;
+		
 		fileManager.saveFile(fileManager.getSaveDir() + File.separator + newFilename, photo);
 	}
 
@@ -110,17 +106,20 @@ public class ItemServiceImpl implements ItemService {
 	public void update(Item item, FileManager fileManager) throws AsyncInventoryDMLException {
 		MultipartFile photo = item.getPhoto();
 
-		if(photo == null) {
-			itemDAO.update(item);
-		} else if(photo.getOriginalFilename() == "") {
-			itemDAO.update(item);
-		} else {
+		// 해결해야할 문제 : 무조건 null로 들어간다. photo를 선택하여도 null로 들어감
+		
+		
+		if(photo != null) {
 			String ext = fileManager.getExtend(photo.getOriginalFilename());
+			System.out.println(fileManager.getSaveDir());
 			fileManager.deleteFile(fileManager.getSaveDir() + File.separator + item.getItem_id() + "." + item.getFilename());
 			item.setFilename(ext);
 			itemDAO.update(item);
 			String newFilename = item.getItem_id() + "." + ext;
 			fileManager.saveFile(fileManager.getSaveDir() + File.separator + newFilename, photo);
+		} else {
+			itemDAO.update(item);
+			System.out.println("null" + fileManager.getSaveDir());
 		}
 		
 	}

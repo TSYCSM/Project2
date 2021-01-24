@@ -9,7 +9,7 @@ import com.tsycsm.agileoffice.model.domain.Item;
 @Repository
 public interface ItemDAO {
 	public Item select(int item_id);
-	public Item selectByNameInOwner(Item item);
+	public void selectByNameInOwner(Item item);
 	public Item selectJoinCategory(int item_id);
 	public List<Item> selectAllJoinCategory(int owner_id);
 	public List<Item> selectByOwnerId(int owner_id);
