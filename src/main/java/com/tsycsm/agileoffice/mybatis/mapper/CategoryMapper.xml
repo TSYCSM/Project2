@@ -9,16 +9,16 @@
 	<select id="selectByOwner" parameterType="int" resultType="Category">
 		select * from category where owner_id=#{owner_id} order by category_id desc
 	</select>
-	
+
 	<select id="select" parameterType="int" resultType="Category">
 		select * from category where category_id = #{category_id}
 	</select>
 	
 	<insert id="insert" parameterType="Category">
-		insert into category(category_id, owner_id, category_name, color)
-		values(seq_category.nextval, #{owner_id}, #{category_name}, #{color})
+		insert into category(owner_id, category_name, color)
+		values(#{owner_id}, #{category_name}, #{color})
 		<selectKey keyProperty="category_id" resultType="int" order="AFTER">
-			select seq_category.currval from dual
+			select last_insert_id() from dual
 		</selectKey>
 	</insert>
 

@@ -1,104 +1,89 @@
 username: project2
 password: 1234
 
-create tablespace project2 
-datafile 'C:\oraclexe\app\oracle\oradata\XE\project2.dbf'
-size 10m;
 
-create user project2 identified by 1234 default tablespace project2;
-
-grant connect, resource, dba to project2;
-
+create database project2 default character set utf8;
+create user project2@localhost identified by '1234';
+grant all privileges on project2.* to project2@localhost identified by '1234';
 
 
 create table owner(
- owner_id number primary key
+ owner_id int primary key auto_increment
  , user_id varchar(20) not null
  , user_name varchar(20) not null 
  , password varchar(100) not null
  , shopname varchar(30) not null
  , email_id varchar(20) not null
  , email_server varchar(20) not null
- , regdate date default sysdate
-);
+ , regdate datetime not null default current_timestamp
+) default charset utf8;
 
-
-create  sequence seq_owner
-increment by 1
-start with 1;
 
 create table customer(
- customer_id number primary key
- , owner_id number
+ customer_id int primary key auto_increment
+ , owner_id int
  , customer_name varchar(20) not null
  , phone varchar(30) not null
- , point number default 0
- , regdate date default sysdate
+ , point int default 0
+ , regdate datetime not null default current_timestamp
  , constraint fk_owner_customer foreign key(owner_id) references owner(owner_id)
 	on delete cascade
-);
+) default charset utf8;
 
-create  sequence seq_customer
-increment by 1
-start with 1;
 
 create table category(
- category_id number primary key
- , owner_id number
+ category_id int primary key auto_increment
+ , owner_id int
  , category_name varchar(20) not null
- , regdate date default sysdate
+ , regdate datetime not null default current_timestamp
  , color varchar(20) not null
  , constraint fk_owner_category foreign key(owner_id) references owner(owner_id)
 	on delete cascade
-);
+) default charset utf8;
 
-create  sequence seq_category
-increment by 1
-start with 1;
 
 create table item(
- item_id number primary key
- , owner_id number
- , category_id number
+ item_id int primary key auto_increment
+ , owner_id int
+ , category_id int
  , item_name varchar(20) not null
  , price varchar(30) not null
  , filename varchar(200) not null
- , stock number default 0
- , regdate date default sysdate
+ , stock int default 0
+ , regdate datetime not null default current_timestamp
  , constraint fk_owner_item foreign key(owner_id) references owner(owner_id)
 	on delete cascade
  , constraint fk_category_item foreign key(category_id) references category(category_id)
 	on delete set null
-);
+) default charset utf8;
 
-create sequence seq_item
-increment by 1
-start with 1;
+alter table item
+add constraint chkStock check (stock >=0);
 
 
 create table order_summary(
- order_summary_id number primary key
- , owner_id number
- , customer_id number
- , orderdate date default sysdate
- , total_price number
+ order_summary_id int primary key auto_increment
+ , owner_id int
+ , customer_id int
+ , orderdate datetime not null default current_timestamp
+ , total_price int
  , constraint fk_owner_order_summary
    foreign key(owner_id) references owner(owner_id)
    		on delete cascade
  , constraint fk_customer_order_summary 
    foreign key(customer_id) references customer(customer_id)
    on delete set null
-);
+) default charset utf8;
 
 
 create table order_detail(
- order_detail_id number primary key
- , owner_id number
- , order_summary_id number
- , item_id number
- , quantity number
- , price number
- , orderdate date default sysdate
+ order_detail_id int primary key auto_increment
+ , owner_id int
+ , order_summary_id int
+ , item_id int
+ , quantity int
+ , price int
+ , orderdate datetime not null default current_timestamp
  , constraint fk_order_summary_order_detail
    foreign key(order_summary_id) references order_summary(order_summary_id)
    		on delete cascade
@@ -106,24 +91,16 @@ create table order_detail(
    foreign key(owner_id) references owner(owner_id)
  , constraint fk_item_order_detail
    foreign key(item_id) references item(item_id)
-);
+) default charset utf8;
 
-
-create  sequence seq_order_summary
-increment by 1
-start with 1;
-
-create  sequence seq_order_detail
-increment by 1
-start with 1;
 
 create table review(
-	review_id number primary key
-	, owner_id number 
-	, customer_id number 
-	, item_id number
+	review_id int primary key auto_increment
+	, owner_id int 
+	, customer_id int 
+	, item_id int
 	, comments varchar(500)
-	, regdate date default sysdate
+	, regdate datetime not null default current_timestamp
 	, constraint fk_owner_review
 		foreign key(owner_id) references owner(owner_id)
 		on delete cascade
@@ -133,40 +110,16 @@ create table review(
 	, constraint fk_item_review
 		foreign key(item_id) references item(item_id)
 		on delete cascade
-);
+) default charset utf8;
 
-create sequence seq_review
-increment by 1
-start with 1;
-
-alter table item
-add constraint chkStock check (stock >=0);
 
 
 create table admin(
-	admin_id number primary key
+	admin_id int primary key auto_increment
 	, id varchar(20)
 	, password varchar(20)
-	, regdate date default sysdate
-);
-
-create sequence seq_admin
-increment by 1
-start with 1;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	, regdate datetime not null default current_timestamp
+) default charset utf8;
 
 
 

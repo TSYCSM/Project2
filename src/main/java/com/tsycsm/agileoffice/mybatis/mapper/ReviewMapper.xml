@@ -18,8 +18,8 @@
 	</resultMap>
 
 	<insert id="insert" parameterType="Review">
-		insert into review(review_id, owner_id, customer_id, comments, item_id)
-		values(seq_review.nextval, #{owner_id}, #{customer_id}, #{comments}, #{item.item_id})
+		insert into review(owner_id, customer_id, comments, item_id)
+		values(#{owner_id}, #{customer_id}, #{comments}, #{item.item_id})
 	</insert>
 	
 	<select id="selectAllByOwner" parameterType="int" resultMap="reviewJoinItem">

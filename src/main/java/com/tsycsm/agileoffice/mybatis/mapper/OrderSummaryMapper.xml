@@ -2,18 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="OrderSummary">
 	<insert id="insert" parameterType="OrderSummary">
-		insert into order_summary(order_summary_id, owner_id, customer_id, total_price)
-		values(seq_order_summary.nextval, #{owner_id}, #{customer.customer_id}, #{total_price})
+		insert into order_summary(owner_id, customer_id, total_price)
+		values(#{owner_id}, #{customer.customer_id}, #{total_price})
 		<selectKey order="AFTER" resultType="int" keyProperty="order_summary_id">
-			select seq_order_summary.currval from dual
+			select last_insert_id() from dual
 		</selectKey>
 	</insert>
 	
 	<insert id="insertWithoutCustomerId">
-		insert into order_summary(order_summary_id, owner_id, total_price)
-		values(seq_order_summary.nextval, #{owner_id}, #{total_price})
+		insert into order_summary(owner_id, total_price)
+		values(#{owner_id}, #{total_price})
 		<selectKey order="AFTER" resultType="int" keyProperty="order_summary_id">
-			select seq_order_summary.currval from dual
+			select last_insert_id() from dual
 		</selectKey>	
 	</insert>
 	
@@ -22,10 +22,10 @@
 	</select>
 	
 	<select id="selectAllByOwnerWithDate" parameterType="int" resultType="OrderSummary">
-		select to_char(orderdate,'yyyy-mm-dd') as orderdate, sum(total_price) as total_price
+		select date_format(orderdate, '%Y-%m-%d') as orderdate, sum(total_price) as total_price
 		from order_summary
 		where owner_id = #{owner_id}
-		group by to_char(orderdate,'yyyy-mm-dd')
+		group by date_format(orderdate, '%Y-%m-%d')
 		order by orderdate desc
 	</select>
 	

@@ -57,19 +57,17 @@
 	
 	
 	
-	
-	
 	<insert id="insert" parameterType="Item">
-		insert into item(item_id, owner_id, category_id, item_name, price, filename, stock)
-		values(seq_item.nextval, #{owner_id}, #{category_id}, #{item_name}, #{price}, #{filename}, #{stock})
+		insert into item(owner_id, category_id, item_name, price, filename, stock)
+		values(#{owner_id}, #{category_id}, #{item_name}, #{price}, #{filename}, #{stock})
 		<selectKey keyProperty="item_id" resultType="int" order="AFTER">
-			select seq_item.currval from dual
+			select last_insert_id() from dual
 		</selectKey>
 	</insert>
 	
 	<insert id="insertWithoutCategoryId">
-		insert into item(item_id, owner_id, item_name, price, filename, stock)
-		values(seq_item.nextval, #{owner_id}, #{item_name}, #{price}, #{filename}, #{stock})
+		insert into item(owner_id, item_name, price, filename, stock)
+		values(#{owner_id}, #{item_name}, #{price}, #{filename}, #{stock})
 		<selectKey keyProperty="item_id" resultType="int" order="AFTER">
 			select seq_item.currval from dual
 		</selectKey>

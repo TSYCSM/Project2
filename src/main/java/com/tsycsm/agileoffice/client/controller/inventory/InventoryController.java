@@ -246,7 +246,6 @@ public class InventoryController implements ServletContextAware {
 
 	// ----예외 핸들러 처리----
 	@ExceptionHandler(DMLException.class)
-	@ResponseBody
 	public ModelAndView handleException(DMLException e) {
 		MessageData messageData = new MessageData();
 		messageData.setMsg(e.getMessage());

@@ -19,7 +19,7 @@
 	<!-- Regist JNDI -->
 	<jee:jndi-lookup 
 		id="dataSource"
-		jndi-name="jdbc/myoracle"
+		jndi-name="jdbc/mysql"
 		resource-ref="true"/>
 		
 	<!-- Regist Transaction Object -->

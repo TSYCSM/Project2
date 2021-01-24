@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="OrderDetail">
 	<insert id="insert" parameterType="OrderDetail">
-		insert into order_detail(order_detail_id, order_summary_id, item_id, quantity, price, owner_id)
-		values(seq_order_detail.nextval, #{order_summary_id}, #{item.item_id}, #{quantity},#{price}, #{owner_id})
+		insert into order_detail(order_summary_id, item_id, quantity, price, owner_id)
+		values(#{order_summary_id}, #{item.item_id}, #{quantity},#{price}, #{owner_id})
 	</insert>
 	
 	<select id="selectAllByOrderSummaryId" parameterType="int" resultType="OrderDetail">
@@ -30,10 +30,10 @@
 	</resultMap>
 
 	<select id="selectAllByOwnerIdWithData" parameterType="OrderDetail" resultMap="orderDetailJoinItem">
-		select item_id, to_char(orderdate, 'yyyy-mm-dd') as orderdate, sum(quantity) as total_quantity, sum(price*quantity) as total_price
+		select item_id, date_format(orderdate, '%Y-%m-%d') as orderdate, sum(quantity) as total_quantity, sum(price*quantity) as total_price
 		from order_detail
-		where owner_id = #{owner_id} and to_char(orderdate, 'yyyy-mm-dd') = #{orderdate}
-		group by item_id, to_char(orderdate, 'yyyy-mm-dd')
+		where owner_id = #{owner_id} and date_format(orderdate, '%Y-%m-%d') = #{orderdate}
+		group by item_id, date_format(orderdate, '%Y-%m-%d')
 	</select>
 	
 	<select id="selectJoinItem" parameterType="int" resultMap="orderDetailJoinItem">

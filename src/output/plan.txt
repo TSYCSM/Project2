@@ -1,0 +1,35 @@
+일반 rest controller 분리
+rest에서 responseEntity로 반환형 바꾸기
+
+rest-context로 분리
+
+
+최종적으로 exception 처리
+
+	exception을 구성할 때 기능적으로 구분
+		select
+			login이 필요할 때
+			login이 필요 없을 때
+		DML
+			responseBody가 있을 때(비동기) -> async
+			responseBody가 없을 때(동기) -> 그냥
+
+	Global Exception 처리
+		동기
+		비동기
+
+
+
+AdminNotFoundException.java
+AsyncDMLException.java
+CustomerException.java
+CustomerNotFoundException.java
+DMLException.java
+LoginRequiredException.java
+MailSendException.java
+NameDuplicatedException.java
+OrderException.java
+OwnerException.java
+OwnerNotFoundException.java
+OwnerPasswordFailException.java	
+	
