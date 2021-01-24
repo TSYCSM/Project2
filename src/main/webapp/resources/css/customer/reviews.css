@@ -1,0 +1,89 @@
+@charset "UTF-8";
+
+#reviews {
+	overflow: scroll;
+}
+#reviews::-webkit-scrollbar {
+	display: none;
+}
+
+
+#reviewTable {
+	border-collapse: collapse;
+	border-spacing: 0;
+	width: 90%;
+	border: none;
+}
+
+.regist-area {
+	float: right;
+	margin-right: 10%;
+}
+
+button.regist-area {
+	padding: 10px 20px;
+	font-size: 20px;
+	border: none;
+	border-radius: 5px;
+	background-color: black;
+	color: white;
+}
+button.regist-area:hover {
+	opacity: 0.7;
+	transition: 0.3s;
+}
+
+
+.review-box {
+	width: 90%;
+}
+
+#reviewTable th, td {
+	text-align: left;
+	padding: 16px;
+}
+
+#reviewTable tr:nth-child(even) {
+	background-color: #E6E6E6;
+}
+
+#reviewTable tr th:nth-child(1), .review-box tr td:nth-child(1) {
+	width: 5%;
+}
+#reviewTable tr th:nth-child(2), .review-box tr td:nth-child(2) {
+	width: 15%;
+}
+#reviewTable tr th:nth-child(3), .review-box tr td:nth-child(3) {
+	width: 55%;
+}
+#reviewTable tr th:nth-child(4), .review-box tr td:nth-child(4) {
+	width: 15%;
+}
+#reviewTable tr th:nth-child(5), .review-box tr td:nth-child(5) {
+	width: 5%;
+}
+#reviewTable tr th:nth-child(6), .review-box tr td:nth-child(6) {
+	width: 5%;
+}
+
+#reviewTable button, .review-box button {
+	background-color: transparent;
+	padding: 5px;
+	border: 1px solid black;
+}
+#reviewTable button:hover, .review-box button:hover {
+	background-color: black;
+	color: white;
+	transition: 0.3s;
+}
+
+#reviewTable tr td a {
+	text-decoration: none;
+	color: black;
+}
+#reviewTable tr td a:hover {
+	color: #A4A4A4;
+	transition: 0.3s;
+}
+
+

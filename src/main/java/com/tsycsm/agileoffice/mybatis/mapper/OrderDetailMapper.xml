@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="OrderDetail">
+	<insert id="insert" parameterType="OrderDetail">
+		insert into order_detail(order_summary_id, item_id, quantity, price, owner_id)
+		values(#{order_summary_id}, #{item.item_id}, #{quantity},#{price}, #{owner_id})
+	</insert>
+	
+	<select id="selectAllByOrderSummaryId" parameterType="int" resultType="OrderDetail">
+		select * from order_detail where order_summary_id=#{order_summary_id}
+	</select>
+
+
+	<resultMap type="OrderDetail" id="orderDetailJoinItem">
+		<id column="order_detail_id" property="order_detail_id"/>
+		<result column="order_summary_id" property="order_summary_id"/>
+		<result column="owner_id" property="owner_id"/>
+		<result column="quantity" property="quantity"/>
+		<result column="price" property="price"/>
+		<result column="orderdate" property="orderdate"/>
+		<result column="total_quantity" property="total_quantity"/>
+		<result column="total_price" property="total_price"/>
+		<association
+			column="item_id"
+			property="item"
+			javaType="Item"
+			select="Item.select"
+			/>
+		
+	</resultMap>
+
+	<select id="selectAllByOwnerIdWithData" parameterType="OrderDetail" resultMap="orderDetailJoinItem">
+		select item_id, date_format(orderdate, '%Y-%m-%d') as orderdate, sum(quantity) as total_quantity, sum(price*quantity) as total_price
+		from order_detail
+		where owner_id = #{owner_id} and date_format(orderdate, '%Y-%m-%d') = #{orderdate}
+		group by item_id, date_format(orderdate, '%Y-%m-%d')
+	</select>
+	
+	<select id="selectJoinItem" parameterType="int" resultMap="orderDetailJoinItem">
+		select * from order_detail where order_summary_id =#{order_summary_id}
+	</select>
+	
+	<select id="select" parameterType="int" resultType="OrderDetail">
+		select * from order_detail where order_summary_id =#{order_summary_id}
+	</select>
+
+</mapper>
+
+
+
+
+
+
+
+

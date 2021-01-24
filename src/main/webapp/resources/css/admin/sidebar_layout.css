@@ -1,0 +1,64 @@
+@charset "UTF-8";
+
+/* Fixed sidenav, full height */
+.sidenav {
+	height: 100%;
+	width: 0px;
+	position: fixed;
+	z-index: 3;
+	top: 0;
+	left: 0;
+	background-color: #3b3b3b;
+	overflow-x: hidden;
+	transition: 0.3s;
+	padding-top: 70px;
+}
+
+.closebtn {
+	position: absolute;
+	top: 0px;
+	font-size: 36px;
+	margin-left: 0px;
+}
+
+/* Style the sidenav links and the dropdown button */
+.sidenav a, .dropdown-btn {
+	margin: 0;
+	padding: 10px 16px;
+	text-decoration: none;
+	font-size: 20px;
+	color: white;
+	display: block;
+ 	border: none;
+	background: none;
+	width: 100%;
+	text-align: left;
+	cursor: pointer;
+	outline: none;
+}
+
+
+.dropdown-container {
+	display: none;
+	margin-top: 8px;
+	padding-left: 20px;
+}
+
+.dropdown-btn {
+	border-radius: 0;
+}
+.active {
+	color: white;
+	background-color: #5062bf;
+}
+
+
+.dropdown-container a {
+	font-size: 18px;
+}
+
+/* Optional: Style the caret down icon */
+.fa-caret-down {
+	float: right;
+	padding-right: 8px;
+}
