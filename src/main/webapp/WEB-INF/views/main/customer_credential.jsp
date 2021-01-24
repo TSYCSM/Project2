@@ -99,7 +99,7 @@ function regist(){
 	if($(".signup_form")[0].checkValidity()){
 		var formData = $(".signup_form").serialize();
 		$.ajax({
-			url: "/client/main/customerRegist",
+			url: "/rest/main/customerRegist",
 			type: "POST",
 			data: formData,
 			success: function(responseData){
