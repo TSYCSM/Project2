@@ -220,7 +220,7 @@ function regist(){
 		$("body").show().css({"opacity":"0.5"});
 		var formData = $(".signup_form").serialize();
 		$.ajax({
-			url: "/client/main/ownerRegist",
+			url: "/rest/main/ownerRegist",
 			type: "POST",
 			data: formData,
 			success: function(responseData){
@@ -250,7 +250,7 @@ function checkId(){
 		alert("아이디는 6자 이상 입력하세요");
 	}else{
 		$.ajax({
-			url:"/client/main/checkid",
+			url:"/rest/main/checkid",
 			type: "POST",
 			data: {
 				user_id: id
