@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Board">
+
+	<insert id="insert" parameterType="Board">
+		insert into board(owner_id, writer, title, content)
+		values(#{owner_id}, #{writer}, #{title}, #{content})
+		<selectKey keyProperty="board_id" resultType="int" order="AFTER">
+			select last_insert_id() from dual
+		</selectKey>
+	</insert>
+	
+	<sql id="selectCommon">
+		select board_id, owner_id, writer, title, content, regdate, hit from board
+	</sql>
+
+	<select id="selectAll" resultType="Board">
+		<include refid="selectCommon"/>
+		order by board_id desc
+	</select>
+	
+	<select id="select" parameterType="int" resultType="Board">
+		<include refid="selectCommon"/>
+		where board_id=#{board_id}
+	</select>
+	
+	<update id="update" parameterType="Board">
+		update board(title, content)
+		values(#{title}, #{content})
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from board where board_id=#{board_id}
+	</delete>
+</mapper>

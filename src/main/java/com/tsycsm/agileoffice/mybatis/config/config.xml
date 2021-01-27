@@ -13,6 +13,8 @@
  	<typeAlias type="com.tsycsm.agileoffice.model.domain.OrderDetail" alias="OrderDetail"/>
  	<typeAlias type="com.tsycsm.agileoffice.model.domain.Review" alias="Review"/>
  	<typeAlias type="com.tsycsm.agileoffice.model.domain.Admin" alias="Admin"/>
+ 	<typeAlias type="com.tsycsm.agileoffice.model.domain.Board" alias="Board"/>
+ 	<typeAlias type="com.tsycsm.agileoffice.model.domain.Comments" alias="Comments"/>
  </typeAliases>
  
   <mappers>
@@ -24,5 +26,7 @@
     <mapper resource="com/tsycsm/agileoffice/mybatis/mapper/OrderDetailMapper.xml"/>
     <mapper resource="com/tsycsm/agileoffice/mybatis/mapper/ReviewMapper.xml"/>
     <mapper resource="com/tsycsm/agileoffice/mybatis/mapper/AdminMapper.xml"/>
+    <mapper resource="com/tsycsm/agileoffice/mybatis/mapper/BoardMapper.xml"/>
+    <mapper resource="com/tsycsm/agileoffice/mybatis/mapper/CommentsMapper.xml"/>
   </mappers>
 </configuration>

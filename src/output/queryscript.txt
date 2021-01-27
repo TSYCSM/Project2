@@ -123,4 +123,30 @@ create table admin(
 ) default charset utf8;
 
 
+create table board(
+	board_id int primary key auto_increment
+	, owner_id int
+	, writer varchar(20)
+	, title varchar(100)
+	, content text
+	, regdate datetime not null default current_timestamp
+	, hit int default 0
+	, constraint fk_owner_board
+		foreign key(owner_id) references owner(owner_id)
+		on delete cascade
+) default charset utf8;
+
+create table comments(
+	comments_id int primary key auto_increment
+	, owner_id int
+	, board_id int
+	, content text
+	, regdate datetime not null default current_timestamp
+	, constraint fk_owner_comments
+		foreign key(owner_id) references owner(owner_id)
+		on delete cascade
+	, constraint fk_board_comments
+		foreign key(board_id) references board(board_id)
+		on delete cascade
+) default charset utf8;
 

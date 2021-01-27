@@ -105,9 +105,8 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public void update(Item item, FileManager fileManager) throws AsyncInventoryDMLException {
 		MultipartFile photo = item.getPhoto();
-
-		// 해결해야할 문제 : 무조건 null로 들어간다. photo를 선택하여도 null로 들어감
 		
+		// error : update할 때, photo에 null값이 들어감
 		
 		if(photo != null) {
 			String ext = fileManager.getExtend(photo.getOriginalFilename());
@@ -119,7 +118,7 @@ public class ItemServiceImpl implements ItemService {
 			fileManager.saveFile(fileManager.getSaveDir() + File.separator + newFilename, photo);
 		} else {
 			itemDAO.update(item);
-			System.out.println("null" + fileManager.getSaveDir());
+			System.out.println("null : " + fileManager.getSaveDir());
 		}
 		
 	}

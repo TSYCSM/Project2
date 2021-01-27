@@ -29,5 +29,12 @@
 		직원 관리
 	</button>
 
+	<button onClick="location.href='/client/owner/board/list'" class="dropdown-btn">
+		커뮤니티
+	</button>
+
+	<button onClick="location.href='/client/owner/qna/sendform'" class="dropdown-btn">
+		운영자 메일
+	</button>
 
 </div>
