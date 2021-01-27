@@ -34,7 +34,6 @@
 body {
 	background-color: #F2F2F2;
 }
-
 a {
 	text-decoration: none;
 	color: black;
@@ -43,7 +42,6 @@ a:hover {
 	text-decoration: underline;
 	color: black;
 }
-
 #tabs {
 	position: fixed;
 	float: left;
@@ -76,11 +74,9 @@ a:hover {
 	width: 90%;
 	height: 100%;
 }
-
 h1, h3{
 	padding: 30px;
 }
-
 <%@ include file="/resources/css/customer/items.css" %>
 <%@ include file="/resources/css/customer/reviews.css" %>
 </style>
@@ -92,13 +88,10 @@ h1, h3{
 	$(function(){
 		getAsyncList(1);
 	});
-
-
 	<%@ include file="/resources/js/customer/items.js" %>
 	<%-- <%@ include file="/resources/js/client/customer/reviews.js" %> --%>
 	//----reviews.js에서 encoding 문제가 있어 임시로 reviews.js의 내용을 붙여넣는다
 	function modeChange(param) {
-
 		var contentTd = param.parentNode.parentNode.childNodes[2];
 		var contentTagName = contentTd.childNodes[0].tagName;
 		var buttonTd = param.parentNode.parentNode.childNodes[4];
@@ -223,7 +216,6 @@ h1, h3{
 				tag += "<tr>";
 				tag += "<td style=\"text-align:center\">";
 				tag += "<a href=\"#\">◀</a>";
-
 				for(var i=pager.firstPage; i<=pager.lastPage;i++){
 					if(i>pager.totalPage) break;
 					tag += "<a href=\"javascript:getAsyncList("+i+")\"> ["+i+"] </a>"
@@ -279,7 +271,6 @@ h1, h3{
 		
 		});
 	}
-
 	function showRegist(){
 		$(".regist-tr").show();
 	}
@@ -288,7 +279,6 @@ h1, h3{
 		$(".regist-tr").hide();
 		$(".comments").val("");
 	}
-
 	function registReview(){
 		var formData = $(".review-form").serialize();
 		if($("select[name='item.item_id']").val() !=0){
@@ -329,7 +319,6 @@ h1, h3{
 		document.getElementById(tabName).style.display = "block";
 		evt.currentTarget.className += " active";
 	}
-
 	window.addEventListener("load", function() {
 		openTab(event, 'items'); //initial tab울 items로 설정
 		document.getElementsByClassName("tab")[0].className += " active"; //inital tab을 시각적으로 items로 설정

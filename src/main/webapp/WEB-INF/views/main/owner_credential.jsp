@@ -191,7 +191,7 @@ $(function(){
 	$(".open_login_btn").removeAttr("style");	
 	$(".open_signup_btn").removeAttr("style");
 	$(".signupbtn").click(function(){
-		var password = $("input[name='password']").val();
+		var password = $("#password").val();
 		var repassword = $("#repassword").val();
 		
 		if(password == repassword) {
@@ -218,11 +218,22 @@ function regist(){
 	if($(".signup_form")[0].checkValidity()){
 		$("#loader").addClass("loader");//class 동적 적용
 		$("body").show().css({"opacity":"0.5"});
-		var formData = $(".signup_form").serialize();
+		
+		var obj={}; //define empty json
+		obj["user_id"]=$("#user_id").val();
+		obj["user_name"]=$("#user_name").val();
+		obj["shopname"]=$("#shopname").val();
+		obj["password"]=$("#password").val();
+		obj["email_id"]=$("#email_id").val();
+		obj["email_server"]=$("#email_server").val();
+		
+		var jsonString = JSON.stringify(obj);
+		
 		$.ajax({
-			url: "/rest/main/ownerRegist",
+			url: "/rest/main/owner",
 			type: "POST",
-			data: formData,
+			data: jsonString,
+			contentType:"application/json;charset=utf-8",
 			success: function(responseData){
 				console.log(responseData);
 				//서버로 부터 완료 응답을 받으면 로딩바 효과를 중단!!
@@ -244,13 +255,13 @@ function regist(){
 }
 
 function checkId(){
-	var id = $("[name='user_id']").val()
+	var id = $("#user_id").val()
 	
 	if(id.length<6){
 		alert("아이디는 6자 이상 입력하세요");
 	}else{
 		$.ajax({
-			url:"/rest/main/checkid",
+			url:"/rest/main/owner/"+id,
 			type: "POST",
 			data: {
 				user_id: id
@@ -302,23 +313,23 @@ function checkId(){
       
       <label for="ID"><b>아이디<span style="margin:20px; font-size: 12px; display:lnline-block"> (6~15자 사이로 입력하세요)</span></b></label>
       <button type="button" style="background-color:gray;" onclick="checkId()">중복체크</button>
-      <input type="text" placeholder="아이디를 입력하세요" name="user_id" minlength="6" maxlength="15" required>
+      <input type="text" placeholder="아이디를 입력하세요" id="user_id" minlength="6" maxlength="15" required>
 
       <label for="id"><b>이름</b></label>
-      <input type="text" name = "user_name" placeholder="이름을 입력하세요" required>
+      <input type="text" id = "user_name" placeholder="이름을 입력하세요" required>
       
       <label for="id"><b>상호명</b></label>
-      <input type="text" name = "shopname" placeholder="상호명을 입력하세요" required>
+      <input type="text" id= "shopname" placeholder="상호명을 입력하세요" required>
 
       <label for="psw"><b>비밀번호 <span style="margin:20px; font-size: 12px; display:lnline-block">(6~15자 사이로 입력하세요)</span></b></label>
-      <input type="password" placeholder="비밀번호를 입력하세요" name="password" minlength="6" maxlength="15" required>
+      <input type="password" placeholder="비밀번호를 입력하세요" id="password" minlength="6" maxlength="15" required>
 
       <label for="repsw"><b>비밀번호 재입력 <span style="margin:20px; font-size: 12px; display:lnline-block">(비밀번호를 다시 입력하세요)</span></b></label>
       <input type="password" placeholder="비밀번호를 한번 더 입력하세요" id="repassword" minlength="6" maxlength="15" required>
 
       <label for="email"><b>이메일</b></label><br>
-      <input type="text" placeholder="이메일 주소 입력" name="email_id" style="width: 35%" required>
-      <select name="email_server" style="width: 35%">
+      <input type="text" placeholder="이메일 주소 입력" id="email_id" style="width: 35%" required>
+      <select id="email_server" style="width: 35%">
       		<option value="gmail.com">gmail.com</option>
       		<option value="naver.com">naver.com</option>
       		<option value="daum.net">daum.net</option>

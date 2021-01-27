@@ -7,15 +7,15 @@
 <%@ include file="../inc/header.jsp"%>
 
 <style>
-input[name='user_name'], input[name='shopname'] {
+#user_name, #shopname {
 	width: 70%;
 }
 
-input[name='email_id'] {
+#email_id {
 	width: 40%;
 }
 
-input[name='email_server'] {
+#email_server {
 	width: 40%;
 }
 
@@ -69,12 +69,24 @@ input[name='email_server'] {
 	}
 
 	function deleteAccount() {
+		var obj = {};
+		
+		obj["owner_id"]=$("#owner_id").val();
+		obj["user_id"]=$("#user_id").val();
+		obj["user_name"]=$("#user_name").val();
+		obj["shopname"]=$("#shopname").val();
+		obj["email_id"]=$("#email_id").val();
+		obj["email_server"]=$("#email_server").val();
+		obj["regdate"]=$("#regdate").val();
+
+		var jsonString = JSON.stringify(obj);
+		
 		if (confirm("회원탈퇴 하시겠습니까?")) {
-			var formData = $("#mypage-form").serialize();
 			$.ajax({
-				url : "/rest/main/ownerQuit",
-				type : "post",
-				data : formData,
+				url : "/rest/main/owner",
+				type:"delete",
+				data : jsonString,
+				contentType:"application/json;charset=utf-8",
 				success : function(responseData) {
 					alert(responseData.msg)
 					location.href = responseData.url;
@@ -84,11 +96,24 @@ input[name='email_server'] {
 	}
 
 	function updateInfo() {
-		var formData = $("#mypage-form").serialize();
+
+		var obj = {};
+		
+		obj["owner_id"]=$("#owner_id").val();
+		obj["user_id"]=$("#user_id").val();
+		obj["user_name"]=$("#user_name").val();
+		obj["shopname"]=$("#shopname").val();
+		obj["email_id"]=$("#email_id").val();
+		obj["email_server"]=$("#email_server").val();
+		obj["regdate"]=$("#regdate").val();
+
+		var jsonString = JSON.stringify(obj);
+		
 		$.ajax({
-			url : "/rest/main/ownerUpdate",
-			type : "post",
-			data : formData,
+			url : "/rest/main/owner",
+			type : "put",
+			data : jsonString,
+			contentType:"application/json;charset=utf-8",
 			success : function(responseData) {
 				alert(responseData.msg)
 				location.href = responseData.url;
@@ -102,21 +127,21 @@ input[name='email_server'] {
 <%@ include file="../inc/common.jsp"%>
 <div class="container">
 	<form id="mypage-form">
-		<input type="hidden" name="owner_id" value="<%=owner.getOwner_id()%>" />
-		<input type="hidden" name="user_id" value="<%=owner.getUser_id()%>" />
-		<input type="hidden" name="regdate" value="<%=owner.getRegdate()%>" />
+		<input type="hidden" id="owner_id" value="<%=owner.getOwner_id()%>" />
+		<input type="hidden" id="user_id" value="<%=owner.getUser_id()%>" />
+		<input type="hidden" id="regdate" value="<%=owner.getRegdate()%>" />
 
 		<div class="outerbox">
 			<label>상호명</label>
 			<div class="box">
-				<input type="text" id="fname" name="shopname"
+				<input type="text" id="shopname"
 					value="<%=owner.getShopname()%>" placeholder="Your shop name..">
 			</div>
 		</div>
 		<div class="outerbox">
 			<label>사용자 이름</label>
 			<div class="box">
-				<input type="text" id="fname" name="user_name"
+				<input type="text" id="user_name"
 					value="<%=owner.getUser_name()%>" placeholder="Your name..">
 			</div>
 		</div>
@@ -129,8 +154,8 @@ input[name='email_server'] {
 		<div class="outerbox">
 			<label>이메일</label>
 			<div class="box">
-				<input type="text" width="40%" name="email_id" value="<%=owner.getEmail_id()%>" required> @ 
-				<input type="text" width="40%" name="email_server" value="<%=owner.getEmail_server()%>" required>
+				<input type="text" width="40%" id="email_id" value="<%=owner.getEmail_id()%>" required> @ 
+				<input type="text" width="40%" id="email_server" value="<%=owner.getEmail_server()%>" required>
 			</div>
 		</div>
 		<div class="passwordbox">
