@@ -31,12 +31,21 @@ function del(){
 
 
 function update(){
+	var obj={}; //define empty json
+	obj["owner_id"]=$("#owner_id").val();
+	obj["category_id"]=$("#category_id").val();
+	obj["category_name"]=$("#category_name").val();
+	obj["color"]=$("#color").val();
+	
+	var jsonString = JSON.stringify(obj);
+	console.log(jsonString);
 	var formData = $("#category_form").serialize();
 	if(confirm("수정하시겠습니까")){
 		$.ajax({
-			url: "/rest/owner/inventory/category/update",
-			type: "post",
-			data: formData,
+			url: "/rest/owner/inventory/category/"+$("#category_id").val(),
+			type: "put",
+			data: jsonString,
+			contentType:"application/json;charset=utf-8",
 			success: function(responseData){
 				alert(responseData.msg);
 				location.href="/client/owner/inventory/category/detail?category_id="+<%=category.getCategory_id()%>;
@@ -53,16 +62,16 @@ function update(){
 		<div class="outerbox">
 			<label for="fname">상품이름</label>
 			<div class="box">
-				<input type="hidden" name="owner_id" value="<%=category.getOwner_id()%>"/>
-				<input type="hidden" name="category_id" value="<%=category.getCategory_id()%>"/>
-				<input type="text" name="category_name" value="<%=category.getCategory_name()%>">
+				<input type="hidden" id="owner_id" value="<%=category.getOwner_id()%>"/>
+				<input type="hidden" id="category_id" value="<%=category.getCategory_id()%>"/>
+				<input type="text" id="category_name" value="<%=category.getCategory_name()%>">
 			</div>					
 		</div>
 		
 		<div class="outerbox">
 			<label for="lname">색상 및 모양</label><br>
 			<div class="box">
-				<input type="color" value = "<%=category.getColor()%>" name="color" list="presetColors">
+				<input type="color" value = "<%=category.getColor()%>" id="color" list="presetColors">
 				  <datalist id="presetColors">
 
 				  </datalist>

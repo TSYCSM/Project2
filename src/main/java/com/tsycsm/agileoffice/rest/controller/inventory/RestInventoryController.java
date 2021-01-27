@@ -10,6 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,7 +28,10 @@ import com.tsycsm.agileoffice.model.domain.Owner;
 import com.tsycsm.agileoffice.model.item.service.DumpService;
 import com.tsycsm.agileoffice.model.item.service.ItemService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
+@Slf4j
 public class RestInventoryController implements ServletContextAware {
 
 	private static final Logger logger = LoggerFactory.getLogger(InventoryController.class);
@@ -56,8 +61,9 @@ public class RestInventoryController implements ServletContextAware {
 	}
 
 
-	@RequestMapping(value = "/owner/inventory/category/update", method = RequestMethod.POST)
-	public ResponseEntity<MessageData> updateCategory(Category category) {
+	@PutMapping("/owner/inventory/category/{category_id}")
+	public ResponseEntity<MessageData> updateCategory(@RequestBody Category category) {
+	
 		categoryService.update(category);
 		
 		MessageData messageData = new MessageData();
