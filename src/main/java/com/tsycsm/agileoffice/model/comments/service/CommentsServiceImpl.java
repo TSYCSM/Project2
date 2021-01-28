@@ -16,8 +16,8 @@ public class CommentsServiceImpl implements CommentsService {
 	private CommentsDAO commentsDAO;
 
 	@Override
-	public List<Comments> selectAll() {
-		return commentsDAO.selectAll();
+	public List<Comments> selectAll(int board_id) {
+		return commentsDAO.selectAll(board_id);
 	}
 
 	@Override

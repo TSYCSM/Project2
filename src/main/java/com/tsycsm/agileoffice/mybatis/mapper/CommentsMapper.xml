@@ -14,8 +14,9 @@
 		select comments_id, owner_id, board_id, content, regdate from comments
 	</sql>
 
-	<select id="selectAll" resultType="Comments">
+	<select id="selectAll" parameterType="int" resultType="Comments">
 		<include refid="selectCommon"/>
+		where board_id=#{board_id}
 		order by comments_id desc
 	</select>
 	

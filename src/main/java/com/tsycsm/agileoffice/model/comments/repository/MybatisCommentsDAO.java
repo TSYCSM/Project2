@@ -16,8 +16,8 @@ public class MybatisCommentsDAO implements CommentsDAO {
 	private SqlSessionTemplate sqlSessionTemplate;
 
 	@Override
-	public List<Comments> selectAll() {
-		return sqlSessionTemplate.selectList("Comments.selectAll");
+	public List<Comments> selectAll(int board_id) {
+		return sqlSessionTemplate.selectList("Comments.selectAll", board_id);
 	}
 
 	@Override
