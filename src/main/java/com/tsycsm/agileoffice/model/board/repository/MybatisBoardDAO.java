@@ -21,6 +21,11 @@ public class MybatisBoardDAO implements BoardDAO {
 	}
 
 	@Override
+	public List<Board> search(String title) {
+		return sqlSessionTemplate.selectList("Board.search", title);
+	}
+	
+	@Override
 	public Board select(int board_id) {
 		return sqlSessionTemplate.selectOne("Board.select", board_id);
 	}

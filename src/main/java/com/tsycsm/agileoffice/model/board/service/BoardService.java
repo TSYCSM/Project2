@@ -6,6 +6,7 @@ import com.tsycsm.agileoffice.model.domain.Board;
 
 public interface BoardService {
 	public List<Board> selectAll();
+	public List<Board> search(String title);
 	public Board select(int board_id);
 	public void regist(Board board);
 	public void update(Board board);

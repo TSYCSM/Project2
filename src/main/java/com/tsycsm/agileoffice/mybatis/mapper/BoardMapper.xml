@@ -32,4 +32,14 @@
 	<delete id="delete" parameterType="int">
 		delete from board where board_id=#{board_id}
 	</delete>
+	
+	<select id="search" parameterType="String" resultType="Board">
+		<include refid="selectCommon"/>
+		where title LIKE CONCAT('%', #{title}, '%')
+		order by board_id desc
+	</select>
+	
+	
+	
+	
 </mapper>

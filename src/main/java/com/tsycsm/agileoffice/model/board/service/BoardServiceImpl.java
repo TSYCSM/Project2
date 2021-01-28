@@ -19,6 +19,11 @@ public class BoardServiceImpl implements BoardService {
 	public List<Board> selectAll() {
 		return boardDAO.selectAll();
 	}
+	
+	@Override
+	public List<Board> search(String title) {
+		return boardDAO.search(title);
+	}
 
 	@Override
 	public Board select(int board_id) {

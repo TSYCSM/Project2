@@ -14,7 +14,10 @@ import com.tsycsm.agileoffice.model.board.service.BoardService;
 import com.tsycsm.agileoffice.model.common.Pager;
 import com.tsycsm.agileoffice.model.domain.Board;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
+@Slf4j
 public class BoardController {
 	
 	@Autowired
@@ -53,6 +56,21 @@ public class BoardController {
 		
 		mav.addObject("board", board);
 		mav.setViewName("owner/board/board_detail");
+		
+		return mav;
+	}
+	
+	@RequestMapping(value="/owner/board/searchList", method=RequestMethod.GET)
+	public ModelAndView getSearchList(HttpServletRequest request, String title) {
+		ModelAndView mav = new ModelAndView();
+		List<Board> boardList = boardService.search(title);
+		log.debug("title= "+title);
+		
+		Pager pager = new Pager();
+		pager.init(request, boardList);
+		
+		mav.addObject("pager", pager);
+		mav.setViewName("owner/board/board_list");
 		
 		return mav;
 	}
