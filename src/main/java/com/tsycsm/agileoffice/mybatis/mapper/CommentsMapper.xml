@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Comments">
+
+	<insert id="insert" parameterType="Comments">
+		insert into comments(owner_id, board_id, writer, content)
+		values(#{owner_id}, #{board_id}, #{writer}, #{content})
+		<selectKey keyProperty="comments_id" resultType="int" order="AFTER">
+			select last_insert_id() from dual
+		</selectKey>
+	</insert>
+	
+	<sql id="selectCommon">
+		select comments_id, owner_id, board_id, writer, content, regdate from comments
+	</sql>
+
+	<select id="selectAll" parameterType="int" resultType="Comments">
+		<include refid="selectCommon"/>
+		where board_id=#{board_id}
+		order by comments_id desc
+	</select>
+	
+	<select id="select" parameterType="int" resultType="Comments">
+		<include refid="selectCommon"/>
+		where comments_id=#{comments_id}
+	</select>
+	
+	<update id="update" parameterType="Comments">
+		update comments(content)
+		values(#{content})
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from comments where comments_id=#{comments_id}
+	</delete>
+</mapper>

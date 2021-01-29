@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+ 
+ <typeAliases>
+ 	<typeAlias type="com.tsycsm.agileoffice.model.domain.Item" alias="Item"/>
+ 	<typeAlias type="com.tsycsm.agileoffice.model.domain.Category" alias="Category"/>
+ 	<typeAlias type="com.tsycsm.agileoffice.model.domain.Owner" alias="Owner"/>
+ 	<typeAlias type="com.tsycsm.agileoffice.model.domain.Customer" alias="Customer"/>
+ 	<typeAlias type="com.tsycsm.agileoffice.model.domain.OrderSummary" alias="OrderSummary"/>
+ 	<typeAlias type="com.tsycsm.agileoffice.model.domain.OrderDetail" alias="OrderDetail"/>
+ 	<typeAlias type="com.tsycsm.agileoffice.model.domain.Review" alias="Review"/>
+ 	<typeAlias type="com.tsycsm.agileoffice.model.domain.Admin" alias="Admin"/>
+ 	<typeAlias type="com.tsycsm.agileoffice.model.domain.Board" alias="Board"/>
+ 	<typeAlias type="com.tsycsm.agileoffice.model.domain.Comments" alias="Comments"/>
+ </typeAliases>
+ 
+  <mappers>
+    <mapper resource="com/tsycsm/agileoffice/mybatis/mapper/ItemMapper.xml"/>
+    <mapper resource="com/tsycsm/agileoffice/mybatis/mapper/CategoryMapper.xml"/>
+    <mapper resource="com/tsycsm/agileoffice/mybatis/mapper/OwnerMapper.xml"/>
+    <mapper resource="com/tsycsm/agileoffice/mybatis/mapper/CustomerMapper.xml"/>
+    <mapper resource="com/tsycsm/agileoffice/mybatis/mapper/OrderSummaryMapper.xml"/>
+    <mapper resource="com/tsycsm/agileoffice/mybatis/mapper/OrderDetailMapper.xml"/>
+    <mapper resource="com/tsycsm/agileoffice/mybatis/mapper/ReviewMapper.xml"/>
+    <mapper resource="com/tsycsm/agileoffice/mybatis/mapper/AdminMapper.xml"/>
+    <mapper resource="com/tsycsm/agileoffice/mybatis/mapper/BoardMapper.xml"/>
+    <mapper resource="com/tsycsm/agileoffice/mybatis/mapper/CommentsMapper.xml"/>
+  </mappers>
+</configuration>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="OrderSummary">
+	<insert id="insert" parameterType="OrderSummary">
+		insert into order_summary(owner_id, customer_id, total_price)
+		values(#{owner_id}, #{customer.customer_id}, #{total_price})
+		<selectKey order="AFTER" resultType="int" keyProperty="order_summary_id">
+			select last_insert_id() from dual
+		</selectKey>
+	</insert>
+	
+	<insert id="insertWithoutCustomerId">
+		insert into order_summary(owner_id, total_price)
+		values(#{owner_id}, #{total_price})
+		<selectKey order="AFTER" resultType="int" keyProperty="order_summary_id">
+			select last_insert_id() from dual
+		</selectKey>	
+	</insert>
+	
+	<select id="selectAllByOwner" parameterType="int" resultType="OrderSummary">
+		select * from order_summary where owner_id =#{owner_id} order by order_summary_id desc
+	</select>
+	
+	<select id="selectAllByOwnerWithDate" parameterType="int" resultType="OrderSummary">
+		select date_format(orderdate, '%Y-%m-%d') as orderdate, sum(total_price) as total_price
+		from order_summary
+		where owner_id = #{owner_id}
+		group by date_format(orderdate, '%Y-%m-%d')
+		order by orderdate desc
+	</select>
+	
+	<!-- 모든 영수증 mapping -->
+	<resultMap type="OrderSummary" id="orderSummaryJoinCustomer">
+		<id column="order_summary_id" property="order_summary_id"/>
+		<result column="owner_id" property="owner_id"/>
+		<result column="orderdate" property="orderdate"/>
+		<result column="total_price" property="total_price"/>
+		<association
+			column="customer_id"
+			property="customer"
+			javaType="Customer"
+			select="Customer.selectById"
+			/>
+	</resultMap>
+	
+	<select id="selectJoinCustomer" parameterType="int" resultMap="orderSummaryJoinCustomer">
+		select * from order_summary where owner_id =#{owner_id} order by order_summary_id desc
+	</select>
+	
+	<!-- 개별 영수증 mapping -->
+	<resultMap type="OrderSummary" id="orderSummaryJoinOrderDetail">
+		<id column="order_summary_id" property="order_summary_id"/>
+		<result column="owner_id" property="owner_id"/>
+		<result column="orderdate" property="orderdate"/>
+		<result column="total_price" property="total_price"/>
+		<result column="customer_id" property="customer.customer_id"/>
+		<collection
+			column="order_summary_id"
+			property="orderDetailList"
+			javaType="java.util.List"
+			ofType="OrderDetail"
+			select="OrderDetail.selectJoinItem"
+			/>
+	</resultMap>
+	
+	<select id="selectById" parameterType="int" resultMap="orderSummaryJoinOrderDetail">
+		select * from order_summary where order_summary_id =#{order_summary_id}
+	</select>
+	
+	<select id="selectByCustomerId" parameterType="int" resultType="OrderSummary">
+		select * from order_summary where customer_id =#{customer_id} order by order_summary_id desc
+	</select>
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
