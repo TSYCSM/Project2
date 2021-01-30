@@ -41,7 +41,7 @@ POS Management Web Application in Spring MVC
       </ul>
     </li>
     <li>
-      <a href="#Diagrams"></a>
+      <a href="#Diagrams">Diagrams</a>
       <ul>
         <li><a href="#DB">DB</a></li>
         <li><a href="#Design_Pattern">Design_Pattern</a></li>
@@ -50,8 +50,8 @@ POS Management Web Application in Spring MVC
     <li>
       <a href="#Development">Development</a>
       <ul>
-        <li><a href="#common_library">common_library</a></li>
-        <li><a href="#credential">credential</a></li>
+        <li><a href="#Common_Library">Common_Library</a></li>
+        <li><a href="#Credential">Credential</a></li>
         <li><a href="#Front_Office">Front Office</a></li>
         <li><a href="#Back_Office">Back Office</a></li>
       </ul>
@@ -149,7 +149,7 @@ Built in MVC design pattern<br>
 
 # Development
 
-## common_library
+## Common_Library
 
 **FileManager**<br>
 [FileManager.java](/src/main/java/com/tsycsm/agileoffice/model/common/FileManager.java)<br>
