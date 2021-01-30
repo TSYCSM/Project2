@@ -140,10 +140,7 @@ create table comments(
 	comments_id int primary key auto_increment
 	, owner_id int
 	, board_id int
-<<<<<<< HEAD
-=======
 	, writer varchar(20)
->>>>>>> 18b2a0714014775d79e2d93d7d84235f7c688678
 	, content text
 	, regdate datetime not null default current_timestamp
 	, constraint fk_owner_comments
