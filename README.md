@@ -200,14 +200,18 @@ Requests in async<br>
 ![alt text](/static/image/capture_image/kiosk.png)<br>
 
 **Order**<br>
+Each request(Order detail) is not committed without success of transactions(Order Summary)<br>
+Using AOP transaction<br>
+![alt text](/static/image/capture_image/menu.png)<br>
+
 [Open View source codes](/src/main/webapp/WEB-INF/views/customer/main.jsp)<br>
 [Open Rest Controller source codes](/src/main/java/com/tsycsm/agileoffice/rest/controller/order/RestOrderController.java)<br>
 [Open Service source codes](/src/main/java/com/tsycsm/agileoffice/model/order/service/OrderServiceImpl.java)<br>
-[Open DAO source codes](/src/main/java/com/tsycsm/agileoffice/model/order/repository/MybatisOrderDAO.java)<br>
-[Open Mapper source codes](/src/main/java/com/tsycsm/agileoffice/mybatis/mapper/OrderMapper.xml)<br><br>
-Each request is not committed without success of transactions<br>
-Using AOP transaction<br>
-![alt text](/static/image/capture_image/menu.png)<br>
+[Open Order Summary DAO source codes](/src/main/java/com/tsycsm/agileoffice/model/order/repository/MybatisOrderSummaryDAO.java)<br>
+[Open Order Summary Mapper source codes](/src/main/java/com/tsycsm/agileoffice/mybatis/mapper/OrderSummaryMapper.xml)<br><br>
+[Open Order Detail DAO source codes](/src/main/java/com/tsycsm/agileoffice/model/order/repository/MybatisOrderSummaryDAO.java)<br>
+[Open Order Detail Mapper source codes](/src/main/java/com/tsycsm/agileoffice/mybatis/mapper/OrderSummaryMapper.xml)<br><br>
+
 
 **Review**<br>
 [Open View source codes](/src/main/webapp/WEB-INF/views/customer/review.jsp)<br>
@@ -220,22 +224,29 @@ CRUD and paging in async<br>
 
 ## Back_Office<br>
 Add an Item<br>
+[Open View source codes](/src/main/webapp/WEB-INF/views/owner/inventory/item_add.jsp)<br>
 ![alt text](/static/image/capture_image/itemadd.png)<br>
 Show an list of items<br>
+[Open View source codes](/src/main/webapp/WEB-INF/views/owner/inventory/item_list.jsp)<br>
 ![alt text](/static/image/capture_image/itemlist.png)<br>
 Show an List of categories<br>
+[Open View source codes](/src/main/webapp/WEB-INF/views/owner/inventory/category_list.jsp)<br>
 ![alt text](/static/image/capture_image/categorylist.png)<br>
 
 **Sales Report**<br>
 Sales report by date<br>
+[Open View source codes](/src/main/webapp/WEB-INF/views/owner/reports/sales_summary.jsp)<br>
 ![alt text](/static/image/capture_image/report.png)<br>
 Sales report by an item<br>
+[Open View source codes](/src/main/webapp/WEB-INF/views/owner/reports/sales_detail.jsp)<br>
 ![alt text](/static/image/capture_image/reportbyitem.png)<br>
 Receipts list<br>
+[Open View source codes](/src/main/webapp/WEB-INF/views/owner/reports/receipts.jsp)<br>
 ![alt text](/static/image/capture_image/receipt_01.png)<br>
 A receipt<br>
 ![alt text](/static/image/capture_image/receipt_03.png)<br>
 Sales report by a customer
+[Open View source codes](/src/main/webapp/WEB-INF/views/owner/reports/customer_list.jsp)<br>
 ![alt text](/static/image/capture_image/receipt_02.png)<br>
 
 
