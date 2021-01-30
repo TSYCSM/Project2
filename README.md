@@ -70,11 +70,9 @@ POS Management Web Application in Spring MVC
 
 ## 개요
 **Agile Office**<br>
-'Agile'은 소프트웨어 개발론에서 고객의 요구사항 변화에 유연하게 대응할 수 있도록 일정한 주기를 반복하는 개발과정을 뜻합니다.
-이 개념에 착안하여 융통성있게 사용자 요구사항에 대응하는 웹사이트를 만드는 것을 목표로 하였습니다.<br>
-주 사용자 층을 사업자로 잡았으며, 사업자들의 상품을 효율적으로 관리하고자 하였습니다.<br>
-어떻게 상품을 효율적으로 관리할까를 고민하던 중, "사용자에게 직접 상품관리 기능을 제공하면 어떨까?"라는 질문을 던져보았습니다.
-상품관리하는 방법을 제시하고 사용자들이 그것을 토대로 이용하면, 개발자들은 개발에 전념할 수 있다는 기대를 해보았습니다.<br>
+in software development, agile practices involve discovering requirements and developing solutions through <br>
+the collaborative effort of self-organizing and cross-functional teams and their customer/end user<br>
+With this concept in mind, Agile Office aims to create a flexible website and respond to user requirements.<br>
 
 **Agile Office Aspects**<br>
 Agile Office는 쉽습니다. - 사용자들의 UI, UX를 고려하여 간단하게 만들었습니다.<br>
