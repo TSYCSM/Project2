@@ -3,15 +3,15 @@
 <mapper namespace="Comments">
 
 	<insert id="insert" parameterType="Comments">
-		insert into comments(owner_id, board_id, content)
-		values(#{owner_id}, #{board_id}, #{content})
+		insert into comments(owner_id, board_id, writer, content)
+		values(#{owner_id}, #{board_id}, #{writer}, #{content})
 		<selectKey keyProperty="comments_id" resultType="int" order="AFTER">
 			select last_insert_id() from dual
 		</selectKey>
 	</insert>
 	
 	<sql id="selectCommon">
-		select comments_id, owner_id, board_id, content, regdate from comments
+		select comments_id, owner_id, board_id, writer, content, regdate from comments
 	</sql>
 
 	<select id="selectAll" parameterType="int" resultType="Comments">

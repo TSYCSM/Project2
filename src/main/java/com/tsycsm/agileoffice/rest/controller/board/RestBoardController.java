@@ -28,9 +28,6 @@ public class RestBoardController {
 	
 	@RequestMapping(value="/comments", method=RequestMethod.POST)
 	public ResponseEntity<Comments> regist(@RequestBody Comments comments) {
-		System.out.println(comments.getOwner_id());
-		System.out.println(comments.getBoard_id());
-		System.out.println(comments.getContent());
 		commentsService.regist(comments);
 		return ResponseEntity.ok().body(comments);
 	}

@@ -8,7 +8,7 @@
 
 	<insert id="insert" parameterType="Owner">
 		insert into owner(user_id, password, user_name, shopname,email_id, email_server)
-		values(#{user_id}, #{password}, #{shopname}, #{user_name}, #{email_id}, #{email_server})
+		values(#{user_id}, #{password}, #{user_name}, #{shopname}, #{email_id}, #{email_server})
 	</insert>
 	
 	<select id="duplicateCheck" parameterType="String" resultType="Owner">
@@ -36,7 +36,3 @@
 	
 	
 </mapper>
-
-
-
-

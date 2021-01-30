@@ -6,7 +6,6 @@
 <title>owner page</title>
 <%@ include file="../inc/header.jsp"%>
 <style>
-
 </style>
 <script>
 	function regist() {
@@ -23,7 +22,7 @@
 <div class="container">
 	<form>
 		<input type="hidden" name="owner_id" value="<%=owner.getOwner_id()%>"/>
-		<input type="hidden" name="writer" value="<%=owner.getUser_name()%>"/>
+		<input type="hidden" name="writer" value="<%=owner.getShopname()%>"/>
 		<div class="outerbox">
 			<label for="title">제목</label>
 			<div id="title" class="box">

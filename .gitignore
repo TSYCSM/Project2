@@ -3,4 +3,7 @@ target
 .classpath
 .project
 .springBeans
+<<<<<<< HEAD
 pom.xml
+=======
+>>>>>>> 18b2a0714014775d79e2d93d7d84235f7c688678
