@@ -190,18 +190,31 @@ Forward requests in async<br>
 ## Front_Office
 **Customer Credential**<br>
 [Open View source codes](/src/main/webapp/WEB-INF/views/main/customer_credential.jsp)<br>
+[Open Rest Controller source codes](/src/main/java/com/tsycsm/agileoffice/rest/controller/customer/RestCustomerController.java)<br>
+[Open Service source codes](/src/main/java/com/tsycsm/agileoffice/model/customer/service/CustomerServiceImpl.java)<br>
+[Open DAO source codes](/src/main/java/com/tsycsm/agileoffice/model/customer/repository/MybatisCustomerDAO.java)<br>
+[Open Mapper source codes](/src/main/java/com/tsycsm/agileoffice/mybatis/mapper/CustomerMapper.xml)<br><br>
 Sign up, sign in, and ID check requests are in one page<br>
 Requests in async<br>
 
 ![alt text](/static/image/capture_image/kiosk.png)<br>
 
 **Order**<br>
+[Open View source codes](/src/main/webapp/WEB-INF/views/customer/main.jsp)<br>
+[Open Rest Controller source codes](/src/main/java/com/tsycsm/agileoffice/rest/controller/order/RestOrderController.java)<br>
+[Open Service source codes](/src/main/java/com/tsycsm/agileoffice/model/order/service/OrderServiceImpl.java)<br>
+[Open DAO source codes](/src/main/java/com/tsycsm/agileoffice/model/order/repository/MybatisOrderDAO.java)<br>
+[Open Mapper source codes](/src/main/java/com/tsycsm/agileoffice/mybatis/mapper/OrderMapper.xml)<br><br>
 Each request is not committed without success of transactions<br>
 Using AOP transaction<br>
 ![alt text](/static/image/capture_image/menu.png)<br>
 
 **Review**<br>
-[Open View source codes](/src/main/webapp/WEB-INF/views/customer/reviews.jsp)<br>
+[Open View source codes](/src/main/webapp/WEB-INF/views/customer/review.jsp)<br>
+[Open Rest Controller source codes](/src/main/java/com/tsycsm/agileoffice/rest/controller/review/RestReviewController.java)<br>
+[Open Service source codes](/src/main/java/com/tsycsm/agileoffice/model/Review/service/ReviewServiceImpl.java)<br>
+[Open DAO source codes](/src/main/java/com/tsycsm/agileoffice/model/Review/repository/MybatisReviewDAO.java)<br>
+[Open Mapper source codes](/src/main/java/com/tsycsm/agileoffice/mybatis/mapper/ReviewMapper.xml)<br><br>
 CRUD and paging in async<br>
 ![alt text](/static/image/capture_image/review.png)<br>
 
