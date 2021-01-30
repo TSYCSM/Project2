@@ -69,7 +69,7 @@ POS Management Web Application in Spring MVC
 
 ## Outline
 **Agile Office**<br>
-in software development, agile practices involve discovering requirements and developing solutions through <br>
+In software development, agile practices involve discovering requirements and developing solutions through <br>
 the collaborative effort of self-organizing and cross-functional teams and their customer/end user<br>
 With this concept in mind, Agile Office aims to create a flexible website and respond to user requirements.<br>
 
@@ -95,8 +95,9 @@ Agile Office Is Accurate. - Records in a report tables are based on DB.<br>
 <br>
 
 # Diagrams
-**Front Office**:  taking an order, make a payment
+**Front Office**:  taking an order, make a payment<br>
 **BackOffice**:  monitoring an inventory, displaying sales reports<br>
+![alt text](/static/image/capture_image/ownermain.png)<br>
 
 ## DB 
 DB tool: Excel, Dataedo<br>
@@ -129,6 +130,7 @@ Design ERD<br><br>
 
 
 ## Design_Pattern
+Built in MVC design pattern<br>
 **model**
 <br>
 ![alt text](/static/image/mvc/tree_model.png)
@@ -164,29 +166,65 @@ Design ERD<br><br>
 **SecureManager**<br>
 [SecureManager.java](/src/main/java/com/tsycsm/agileoffice/model/common/SecureManager.java)<br>
 
-**ExcelManager**<br>
-[ExcelManager.java](/src/main/java/com/tsycsm/agileoffice/model/common/)<br>
-
 **CustomerSessionCheckAspect**<br>
 [CustomerSessionCheckAspect.java](/src/main/java/com/tsycsm/agileoffice/client/aop/OwnerSessionCheckAspect.java)<br>
 
 ## Credential
+**Owner Credential**<br>
+[Open View source codes](/src/main/webapp/WEB-INF/views/main/owner_credential.jsp)<br>
+[Open Rest Controller source codes](/src/main/java/com/tsycsm/agileoffice/rest/controller/owner/RestOwnerController.java)<br>
+[Open Service source codes](/src/main/java/com/tsycsm/agileoffice/model/owner/service/OwnerServiceImpl.java)<br>
+[Open DAO source codes](/src/main/java/com/tsycsm/agileoffice/model/owner/repository/MybatisOwnerDAO.java)<br>
+[Open Mapper source codes](/src/main/java/com/tsycsm/agileoffice/mybatis/mapper/OwnerMapper.xml)<br><br>
+![alt text](/static/image/capture_image/ownerCredential.png)<br>
+
+Sign up, sign in, and ID check requests are all in one page<br>
+Forward requests in async<br>
 
 **Sign up**<br>
+![alt text](/static/image/capture_image/signup.png)<br>
 
 **Sign in**<br>
+![alt text](/static/image/capture_image/login.png)<br>
 
 ## Front_Office
 **Customer Credential**<br>
+[Open View source codes](/src/main/webapp/WEB-INF/views/main/customer_credential.jsp)<br>
+Sign up, sign in, and ID check requests are in one page<br>
+Requests in async<br>
+
+![alt text](/static/image/capture_image/kiosk.png)<br>
 
 **Order**<br>
+Each request is not committed without success of transactions<br>
+Using AOP transaction<br>
+![alt text](/static/image/capture_image/menu.png)<br>
 
 **Review**<br>
+[Open View source codes](/src/main/webapp/WEB-INF/views/customer/reviews.jsp)<br>
+CRUD and paging in async<br>
+![alt text](/static/image/capture_image/review.png)<br>
 
 ## Back_Office<br>
-
+Add an Item<br>
+![alt text](/static/image/capture_image/itemadd.png)<br>
+Show an list of items<br>
+![alt text](/static/image/capture_image/itemlist.png)<br>
+Show an List of categories<br>
+![alt text](/static/image/capture_image/categorylist.png)<br>
 
 **Sales Report**<br>
+Sales report by date<br>
+![alt text](/static/image/capture_image/report.png)<br>
+Sales report by an item<br>
+![alt text](/static/image/capture_image/reportbyitem.png)<br>
+Receipts list<br>
+![alt text](/static/image/capture_image/receipt_01.png)<br>
+A receipt<br>
+![alt text](/static/image/capture_image/receipt_03.png)<br>
+Sales report by a customer
+![alt text](/static/image/capture_image/receipt_02.png)<br>
+
 
 <!-- LICENSE -->
 # License
