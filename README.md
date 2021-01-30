@@ -34,7 +34,7 @@ POS Management Web Application in Spring MVC
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#Agile Office">Agile Office</a>
+      <a href="#Agile_Office">Agile Office</a>
       <ul>
         <li><a href="#Outline">Outline</a></li>
         <li><a href="#Built-in">Built-in</a></li>
@@ -64,7 +64,7 @@ POS Management Web Application in Spring MVC
 
 <!-- Agile Office -->
 
-# Agile Office
+## Agile_Office
 
 
 ## Outline
@@ -96,7 +96,7 @@ Agile Office Is Accurate. - Records in a report tables are based on DB.<br>
 
 # Diagrams
 **Front Office**:  taking an order, make a payment<br>
-**BackOffice**:  monitoring an inventory, displaying sales reports<br>
+**BackOffice**:  monitoring an inventory, displaying sales reports<br><br>
 ![alt text](/static/image/capture_image/ownermain.png)<br>
 
 ## DB 
@@ -147,7 +147,7 @@ Built in MVC design pattern<br>
 <br>
 ![alt text](/static/image/mvc/tree_mybatis.png)
 
-# 
+# Development
 
 ## common_library
 
@@ -167,7 +167,7 @@ Built in MVC design pattern<br>
 [SecureManager.java](/src/main/java/com/tsycsm/agileoffice/model/common/SecureManager.java)<br>
 
 **CustomerSessionCheckAspect**<br>
-[CustomerSessionCheckAspect.java](/src/main/java/com/tsycsm/agileoffice/client/aop/OwnerSessionCheckAspect.java)<br>
+[CustomerSessionCheckAspect.java](/src/main/java/com/tsycsm/agileoffice/client/aop/ClientSessionCheckAspect.java)<br>
 
 ## Credential
 **Owner Credential**<br>
@@ -209,45 +209,48 @@ Using AOP transaction<br>
 [Open Service source codes](/src/main/java/com/tsycsm/agileoffice/model/order/service/OrderServiceImpl.java)<br>
 [Open Order Summary DAO source codes](/src/main/java/com/tsycsm/agileoffice/model/order/repository/MybatisOrderSummaryDAO.java)<br>
 [Open Order Summary Mapper source codes](/src/main/java/com/tsycsm/agileoffice/mybatis/mapper/OrderSummaryMapper.xml)<br><br>
-[Open Order Detail DAO source codes](/src/main/java/com/tsycsm/agileoffice/model/order/repository/MybatisOrderSummaryDAO.java)<br>
-[Open Order Detail Mapper source codes](/src/main/java/com/tsycsm/agileoffice/mybatis/mapper/OrderSummaryMapper.xml)<br><br>
+[Open Order Detail DAO source codes](/src/main/java/com/tsycsm/agileoffice/model/order/repository/MybatisOrderDetailDAO.java)<br>
+[Open Order Detail Mapper source codes](/src/main/java/com/tsycsm/agileoffice/mybatis/mapper/OrderSummaryDetail.xml)<br><br>
 
 
 **Review**<br>
-[Open View source codes](/src/main/webapp/WEB-INF/views/customer/review.jsp)<br>
+[Open View source codes](/src/main/webapp/WEB-INF/views/customer/reviews.jsp)<br>
 [Open Rest Controller source codes](/src/main/java/com/tsycsm/agileoffice/rest/controller/review/RestReviewController.java)<br>
-[Open Service source codes](/src/main/java/com/tsycsm/agileoffice/model/Review/service/ReviewServiceImpl.java)<br>
-[Open DAO source codes](/src/main/java/com/tsycsm/agileoffice/model/Review/repository/MybatisReviewDAO.java)<br>
+[Open Service source codes](/src/main/java/com/tsycsm/agileoffice/model/review/service/ReviewServiceImpl.java)<br>
+[Open DAO source codes](/src/main/java/com/tsycsm/agileoffice/model/review/repository/MybatisReviewDAO.java)<br>
 [Open Mapper source codes](/src/main/java/com/tsycsm/agileoffice/mybatis/mapper/ReviewMapper.xml)<br><br>
 CRUD and paging in async<br>
 ![alt text](/static/image/capture_image/review.png)<br>
 
 ## Back_Office<br>
-Add an Item<br>
+Add an Item<br><br>
 [Open View source codes](/src/main/webapp/WEB-INF/views/owner/inventory/item_add.jsp)<br>
-![alt text](/static/image/capture_image/itemadd.png)<br>
+![alt text](/static/image/capture_image/itemadd.png)<br><br>
 Show an list of items<br>
 [Open View source codes](/src/main/webapp/WEB-INF/views/owner/inventory/item_list.jsp)<br>
-![alt text](/static/image/capture_image/itemlist.png)<br>
+![alt text](/static/image/capture_image/itemlist.png)<br><br>
 Show an List of categories<br>
 [Open View source codes](/src/main/webapp/WEB-INF/views/owner/inventory/category_list.jsp)<br>
-![alt text](/static/image/capture_image/categorylist.png)<br>
+![alt text](/static/image/capture_image/categorylist.png)<br><br>
 
 **Sales Report**<br>
+To show Sales in numerous ways, map with collection & association tags in Mapper XML<br>
+[Open report Mapper source codes](/src/main/java/com/tsycsm/agileoffice/mybatis/mapper/ReportMapper.xml)<br><br>
+
 Sales report by date<br>
 [Open View source codes](/src/main/webapp/WEB-INF/views/owner/reports/sales_summary.jsp)<br>
-![alt text](/static/image/capture_image/report.png)<br>
+![alt text](/static/image/capture_image/report.png)<br><br>
 Sales report by an item<br>
 [Open View source codes](/src/main/webapp/WEB-INF/views/owner/reports/sales_detail.jsp)<br>
-![alt text](/static/image/capture_image/reportbyitem.png)<br>
+![alt text](/static/image/capture_image/reportbyitem.png)<br><br>
 Receipts list<br>
 [Open View source codes](/src/main/webapp/WEB-INF/views/owner/reports/receipts.jsp)<br>
-![alt text](/static/image/capture_image/receipt_01.png)<br>
+![alt text](/static/image/capture_image/receipt_01.png)<br><br>
 A receipt<br>
-![alt text](/static/image/capture_image/receipt_03.png)<br>
+![alt text](/static/image/capture_image/receipt_03.png)<br><br>
 Sales report by a customer
 [Open View source codes](/src/main/webapp/WEB-INF/views/owner/reports/customer_list.jsp)<br>
-![alt text](/static/image/capture_image/receipt_02.png)<br>
+![alt text](/static/image/capture_image/receipt_02.png)<br><br>
 
 
 <!-- LICENSE -->
