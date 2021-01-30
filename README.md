@@ -305,7 +305,7 @@ MIT를 씀
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/TSYCSM/Project2?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/TSYCSM/project2?style=for-the-badge
 [contributors-url]: https://github.com/TSYCSM/Project2/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/TSYCSM/Project2?style=for-the-badge
 [forks-url]:  https://github.com/TSYCSM/Project2/forks
