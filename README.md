@@ -235,21 +235,26 @@ Show an List of categories<br>
 
 **Sales Report**<br>
 To show Sales in numerous ways, map with collection & association tags in Mapper XML<br>
-[Open report Mapper source codes](/src/main/java/com/tsycsm/agileoffice/mybatis/mapper/ReportsMapper.xml)<br><br><br>
+
+
 
 Sales report by date<br>
 [Open View source codes](/src/main/webapp/WEB-INF/views/owner/reports/sales_summary.jsp)<br>
+[Open Mapper source codes](/src/main/java/com/tsycsm/agileoffice/mybatis/mapper/OrderSummaryMapper.xml)<br>
 ![alt text](/static/image/capture_image/report.png)<br><br>
 Sales report by an item<br>
 [Open View source codes](/src/main/webapp/WEB-INF/views/owner/reports/sales_detail.jsp)<br>
+[Open Mapper source codes](/src/main/java/com/tsycsm/agileoffice/mybatis/mapper/OrderDetailMapper.xml)<br>
 ![alt text](/static/image/capture_image/reportbyitem.png)<br><br>
 Receipts list<br>
 [Open View source codes](/src/main/webapp/WEB-INF/views/owner/reports/receipts.jsp)<br>
+[Open Mapper source codes](/src/main/java/com/tsycsm/agileoffice/mybatis/mapper/OrderDetailMapper.xml)<br>
 ![alt text](/static/image/capture_image/receipt_01.png)<br><br>
 A receipt<br>
 ![alt text](/static/image/capture_image/receipt_03.png)<br><br>
 Sales report by a customer
 [Open View source codes](/src/main/webapp/WEB-INF/views/owner/reports/customer_list.jsp)<br>
+[Open Mapper source codes](/src/main/java/com/tsycsm/agileoffice/mybatis/mapper/CustomerMapper.xml)<br>
 ![alt text](/static/image/capture_image/receipt_02.png)<br><br>
 
 
