@@ -235,7 +235,7 @@ Show an List of categories<br>
 
 **Sales Report**<br>
 To show Sales in numerous ways, map with collection & association tags in Mapper XML<br>
-[Open report Mapper source codes](/src/main/java/com/tsycsm/agileoffice/mybatis/mapper/ReportMapper.xml)<br><br>
+[Open report Mapper source codes](/src/main/java/com/tsycsm/agileoffice/mybatis/mapper/ReportsMapper.xml)<br><br><br>
 
 Sales report by date<br>
 [Open View source codes](/src/main/webapp/WEB-INF/views/owner/reports/sales_summary.jsp)<br>
