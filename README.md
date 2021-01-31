@@ -250,10 +250,12 @@ Receipts list<br>
 [Open View source codes](/src/main/webapp/WEB-INF/views/owner/reports/receipts.jsp)<br>
 [Open Mapper source codes](/src/main/java/com/tsycsm/agileoffice/mybatis/mapper/OrderSummaryMapper.xml)<br>
 ![alt text](/static/image/capture_image/receipt_03.png)<br><br>
-Sales report by a customer
+Sales report by a customer<br>
 [Open View source codes](/src/main/webapp/WEB-INF/views/owner/reports/customer_list.jsp)<br>
-[Open Mapper source codes](/src/main/java/com/tsycsm/agileoffice/mybatis/mapper/CustomerMapper.xml)<br>
+[Open Mapper source codes](/src/main/java/com/tsycsm/agileoffice/mybatis/mapper/CustomerMapper.xml)<br><br>
+Customer List<br>
 ![alt text](/static/image/capture_image/receipt_01.png)<br><br>
+Customer info<br>
 ![alt text](/static/image/capture_image/receipt_02.png)<br><br>
 
 
