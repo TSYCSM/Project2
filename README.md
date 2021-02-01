@@ -226,10 +226,10 @@ CRUD and paging in async<br>
 Add an Item<br><br>
 [Open View source codes](/src/main/webapp/WEB-INF/views/owner/inventory/item_add.jsp)<br>
 ![alt text](/static/image/capture_image/itemadd.png)<br><br>
-Show an list of items<br>
+Show a list of items<br>
 [Open View source codes](/src/main/webapp/WEB-INF/views/owner/inventory/item_list.jsp)<br>
 ![alt text](/static/image/capture_image/itemlist.png)<br><br>
-Show an List of categories<br>
+Show a List of categories<br>
 [Open View source codes](/src/main/webapp/WEB-INF/views/owner/inventory/category_list.jsp)<br>
 ![alt text](/static/image/capture_image/categorylist.png)<br><br>
 
