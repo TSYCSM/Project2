@@ -247,11 +247,14 @@ bean에 등록하고 인스턴스를 호출할 시점을 aop를 통하여 정합
 **맴버 회원가입/로그인**<br>
 각 owner가 고객을 확보할 수 있도록 customer의 회원가입/로그인 처리를 할 수 있게끔 하였으며 이역시 비동기 방식으로 요청/응답합니다.<br>
 회원가입등록을 하지 않더라도 상품주문을 할 수 있게끔 하였으며, 회원가입을 한 고객은 주문 건당 point가 쌓이는 혜택을 제공하였습니다.<br>
-
+![alt text](/static/image/capture_image/kiosk.png)<br>
 **주문**<br>
 등록된 상품을 주문할 때 주문상세(주문자, 결제 총액), 주문요약(상품id, 상품별 수량/가격)을 db에 insert하였습니다.<br>
 또한 owner가 등록한 상품의 재고의 수가 0보다 아래가 되면 결제 처리를 못하도록 하였습니다.<br>
 aop로 commit되는 시점을 정하여 위의 트랜잭션 처리가 하나라도 실패되면 rollback하도록 TransactionManager를 사용하였습니다.<br>
+
+![alt text](/static/image/capture_image/menu.png)<br>
+
 ```
   	<tx:advice id="txAdvice" transaction-manager="dataSourceTransactionManager">
 		<tx:attributes>
@@ -276,12 +279,20 @@ aop로 commit되는 시점을 정하여 위의 트랜잭션 처리가 하나라�
 비동기 페이징 Pager객체를 반환하였습니다.
 비동기 방식으로 pager를 반환 받아 리스트의 정보를 클라이언트 영역에 출력합니다.
 
+![alt text](/static/image/capture_image/review.png)<br>
+
 ## Back_Office<br>
 **상품/카테고리 관리**<br>
+상품 추가
+![alt text](/static/image/capture_image/itemadd.png)<br><br>
+상품목록<br>
+![alt text](/static/image/capture_image/itemlist.png)<br><br>
 상품 등록 시 이미지도 파일업로드를 합니다. 이미지를 수정하면 원래 있던 이미지는 지워지고 새로운 이미지 파일로 대체시킵니다. <br>
 상품삭제를 하면 파일업로드된 이미지도 지워집니다.<br>
-상품을 일괄 추가할 수 있게끔 엑셀에서 미리 저장된 정보를 DB에 저장시킵니다.<br>
+상품을 일괄 추가할 수 있게끔 엑셀에서 미리 저장된 정보를 DB에 저장시킵니다.<br><br>
 
+카테고리 목록<br>
+![alt text](/static/image/capture_image/categorylist.png)<br><br>
 owner의 자유도를 고려한 만큼 owner가 직접 카테고리를 만들도록 하였습니다. 또한 카테고리가 없어도 상품을 등록할 수 있게끔하였습니다.<br>
 category는 이미지 파일이 아닌 color picker를 사용하여 사용자가 직접 색을 정하여 구분하게끔 하였습니다.<br>
 기볹거으로 상품의 목록은 비동기 페이징 방식을 사용하고, 카테고리 별로도 상품의 목록을 보게끔 비동기 sorting을 하였습니다.<br>
@@ -292,6 +303,16 @@ category는 이미지 파일이 아닌 color picker를 사용하여 사용자가
 item과 order_detail을 날짜별로 group하여 매출액을 보여줍니다.<br>
 영수증 보관함에서는 주문요약, 주문내역, item을 조인하여 영수증 형태로 매출을 보여줍니다.<br>
 고객 관리에서는 등록된 고객의 주문내역, point 마일리지를 보여줍니다.<br>
+날짜별 매출<br>
+![alt text](/static/image/capture_image/report.png)<br><br>
+아이템별 매출<br>
+![alt text](/static/image/capture_image/reportbyitem.png)<br><br>
+영수증 보관함<br>
+![alt text](/static/image/capture_image/receipt_03.png)<br><br>
+고객별 매출<br>
+![alt text](/static/image/capture_image/receipt_01.png)<br><br>
+![alt text](/static/image/capture_image/receipt_02.png)<br><br>
+
 
 <!-- LICENSE -->
 # License
@@ -302,6 +323,10 @@ MIT를 씀
 탁*연: https://github.com/SyngyeonTak<br>
 최*민: https://github.com/simin2<br>
 
+
+<!-- LICENSE -->
+# License
+MIT License
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
