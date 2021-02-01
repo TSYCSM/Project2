@@ -167,7 +167,7 @@ Built in MVC design pattern<br>
 [SecureManager.java](/src/main/java/com/tsycsm/agileoffice/model/common/SecureManager.java)<br>
 
 **CustomerSessionCheckAspect**<br>
-[CustomerSessionCheckAspect.java](/src/main/java/com/tsycsm/agileoffice/client/aop/ClientSessionCheckAspect.java)<br>
+[CustomerSessionCheckAspect.java](/src/main/java/com/tsycsm/agileoffice/rest/aop/CustomerSessionCheckAspect.java)<br>
 
 ## Credential
 **Owner Credential**<br>
@@ -265,8 +265,8 @@ MIT License
 
 <!-- CONTACT -->
 # Contact
-탁*연: https://github.com/SyngyeonTak<br>
-최*민: https://github.com/simin2<br>
+Syngyeon Tag: https://github.com/SyngyeonTak<br>
+Simin Choe: https://github.com/simin2<br>
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
