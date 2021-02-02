@@ -258,6 +258,11 @@ Customer List<br>
 Customer info<br>
 ![alt text](/static/image/capture_image/receipt_02.png)<br><br>
 
+**Board**<br>
+[Open View source codes](/src/main/webapp/WEB-INF/views/owner/board/board_list.jsp)<br>
+![alt text](/static/image/capture_image/board_list.png)<br><br>
+[Open View source codes](/src/main/webapp/WEB-INF/views/owner/board/board_detail.jsp)<br>
+![alt text](/static/image/capture_image/board_detail.png)<br><br>
 
 <!-- LICENSE -->
 # License
