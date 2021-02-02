@@ -44,13 +44,13 @@ input[type=text], select, textarea {
 <%@ include file="../inc/common.jsp"%>
 
 	<div class="container">
-	<h3>운영자에게 메일 보내기</h3>
+	<h3>Inquiry to Admin</h3>
 		<form>
 			<input type="text" name="title" placeholder="Title..">
 			<input type="hidden" name="email_address" value="<%=owner.getEmail_id()%>@<%=owner.getEmail_server()%>">
 			<input type="hidden" name="name" value="<%=owner.getUser_name()%>">
 			<textarea id="content" name="content" placeholder="Write something.." style="height: 200px"></textarea>
-			<input style="float: right" type="button" value="메일 보내기" onClick="send()">
+			<input style="float: right" type="button" value="Send" onClick="send()">
 		</form>
 	</div>
 <%@ include file="../inc/footer.jsp" %>

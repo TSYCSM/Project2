@@ -132,14 +132,14 @@
 		<input type="hidden" id="regdate" value="<%=owner.getRegdate()%>" />
 
 		<div class="outerbox">
-			<label>상호명</label>
+			<label>Shop name</label>
 			<div class="box">
 				<input type="text" id="shopname"
 					value="<%=owner.getShopname()%>" placeholder="Your shop name..">
 			</div>
 		</div>
 		<div class="outerbox">
-			<label>사용자 이름</label>
+			<label>User name</label>
 			<div class="box">
 				<input type="text" id="user_name"
 					value="<%=owner.getUser_name()%>" placeholder="Your name..">
@@ -152,49 +152,49 @@
 			</div>
 		</div>
 		<div class="outerbox">
-			<label>이메일</label>
+			<label>Email</label>
 			<div class="box">
 				<input type="text" width="40%" id="email_id" value="<%=owner.getEmail_id()%>" required> @ 
 				<input type="text" width="40%" id="email_server" value="<%=owner.getEmail_server()%>" required>
 			</div>
 		</div>
 		<div class="passwordbox">
-			<label>비밀번호</label><br>
+			<label>Password</label><br>
 			<div class="box">
 				<div style="color: black">********</div>
-				<input type="button" class="change_btn" onclick="showCheckBox()" value="변경">
+				<input type="button" class="change_btn" onclick="showCheckBox()" value="Change">
 			</div>
 		</div>
 	</form>
 	<form id="check-box-form">
 		<div class="check-box" style="display: none;">
-			<input type="password" name="password" placeholder="비밀번호를 입력하세요">
+			<input type="password" name="password" placeholder="Input your password...">
 			<input type="hidden" name="user_id" value="<%=owner.getUser_id()%>">
-			<input type="button" style="margin-right: 60px" onClick="hideCheckBox()" value="취소">
-			<input type="button" class="check_btn" onClick="checkPassword()" value="확인">
+			<input type="button" style="margin-right: 60px" onClick="hideCheckBox()" value="Cancel">
+			<input type="button" class="check_btn" onClick="checkPassword()" value="Done">
 		</div>
 	</form>
 	<form id="new-box-form">
 		<div class="new-box" style="display: none;">
-			<input type="password" name="password" placeholder="새로운 비밀번호를 입력하세요">
+			<input type="password" name="password" placeholder="Input your new password">
 			<input type="hidden" name="owner_id" value="<%=owner.getOwner_id()%>">
-			<input type="button" style="margin-right: 60px" onClick="hideNewBox()" value="취소">
-			<input type="button" class="check_btn" onClick="changePassword()" value="확인"> 
+			<input type="button" style="margin-right: 60px" onClick="hideNewBox()" value="Cancel">
+			<input type="button" class="check_btn" onClick="changePassword()" value="Save"> 
 		</div>
 	</form>
 	<div class="outerbox" style="padding-top: 30px">
-		<label for="lname">계정삭제</label><br>
+		<label for="lname">Leave Agile Office</label><br>
 		<div class="box">
 			<div style="color:black;">
-				계정과 관련된 모든 데이터를 영구적으로 <br>삭제할 수 있습니다.
+				Your information will be all deleted
 			</div>
-			<input type="button" onclick="deleteAccount()" value="삭제"><br>
+			<input type="button" onclick="deleteAccount()" value="Delete"><br>
 		</div>
 	</div>
 	<div>
 		<div class="buttonbox">
-			<input type="button" class="save_btn" onClick="updateInfo()" value="저장">
-			<input type="reset" value="reset"> 
+			<input type="button" class="save_btn" onClick="updateInfo()" value="Save">
+			<input type="reset" value="Reset"> 
 		</div>
 	</div>
 </div>

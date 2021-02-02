@@ -20,14 +20,14 @@
 <table>
 	<tr>
 		<td style="background-color: #F0F0F1; color: black;" colspan="3">
-			<span><%=customer.getCustomer_name() %>님 정보</span>
-			<span style="float: right;">연락처: <%=customer.getPhone() %></span>
+			<span><%=customer.getCustomer_name() %>'s Info</span>
+			<span style="float: right;">Tel.No: <%=customer.getPhone() %></span>
 		</td>
 	</tr>
 	<tr>
 		<th>No</th>
-		<th>합계</th>
-		<th>날짜</th>
+		<th>Total</th>
+		<th>Date</th>
 	</tr>
 	
 	<%

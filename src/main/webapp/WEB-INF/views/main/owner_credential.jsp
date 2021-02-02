@@ -197,7 +197,7 @@ $(function(){
 		if(password == repassword) {
 			regist();
 		} else {
-			alert("비밀번호가 다릅니다");
+			alert("Passwords dont match");
 		}
 	});
 	
@@ -250,7 +250,7 @@ function regist(){
 		});
 		
 	}else{
-		alert("아이디와 비밀번호는 6자 이상입니다.");
+		alert("ID and Password should be longer than 6 characters");
 	}
 }
 
@@ -258,7 +258,7 @@ function checkId(){
 	var id = $("#user_id").val()
 	
 	if(id.length<6){
-		alert("아이디는 6자 이상 입력하세요");
+		alert("IDshould be longer than 6 characters");
 	}else{
 		$.ajax({
 			url:"/rest/main/owner/"+id,
@@ -268,7 +268,7 @@ function checkId(){
 			},
 			success: function(responseData){
 				if(responseData.resultCode ==1){
-					alert("성공! "+responseData.msg);
+					alert("succeed! "+responseData.msg);
 					
 				}else{
 					alert(responseData.msg);				
@@ -295,10 +295,10 @@ function checkId(){
 	<h2>Agile Office</h2>
 	<%if(owner !=null){ %>
 		<button class="welcome_back_btn" onclick="location.href='/client/main/ownerMain'" style="width:auto;">Welcome Back!</button>	
-		<div class="welcome_box"><%=owner.getUser_id() %>님, 로그인 중입니다.</div>
+		<div class="welcome_box"><%=owner.getUser_id() %> is aleady logged in</div>
 	<%}else{ %>
-		<button class="open_login_btn" onclick="document.getElementById('id02').style.display='block'" style="width:auto;">로그인</button>
-		<button class="open_signup_btn" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">가입</button>
+		<button class="open_login_btn" onclick="document.getElementById('id02').style.display='block'" style="width:auto;">Sign in</button>
+		<button class="open_signup_btn" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Sign up</button>
 	
 	<%} %>
 </div>
@@ -308,27 +308,27 @@ function checkId(){
   <form class="signup_form">
     <div class="container">
  
-      <h1>가입</h1>
+      <h1>Sign up</h1>
       <hr>
       
-      <label for="ID"><b>아이디<span style="margin:20px; font-size: 12px; display:lnline-block"> (6~15자 사이로 입력하세요)</span></b></label>
-      <button type="button" style="background-color:gray;" onclick="checkId()">중복체크</button>
-      <input type="text" placeholder="아이디를 입력하세요" id="user_id" minlength="6" maxlength="15" required>
+      <label for="ID"><b>ID<span style="margin:20px; font-size: 12px; display:lnline-block"> (6~15 characters)</span></b></label>
+      <button type="button" style="background-color:gray;" onclick="checkId()">check ID</button>
+      <input type="text" placeholder="Input your Id..." id="user_id" minlength="6" maxlength="15" required>
 
-      <label for="id"><b>이름</b></label>
-      <input type="text" id = "user_name" placeholder="이름을 입력하세요" required>
+      <label for="id"><b>Name</b></label>
+      <input type="text" id = "user_name" placeholder="Input your name..." required>
       
-      <label for="id"><b>상호명</b></label>
-      <input type="text" id= "shopname" placeholder="상호명을 입력하세요" required>
+      <label for="id"><b>Shopname</b></label>
+      <input type="text" id= "shopname" placeholder="Input your shopname..." required>
 
-      <label for="psw"><b>비밀번호 <span style="margin:20px; font-size: 12px; display:lnline-block">(6~15자 사이로 입력하세요)</span></b></label>
-      <input type="password" placeholder="비밀번호를 입력하세요" id="password" minlength="6" maxlength="15" required>
+      <label for="psw"><b>Password <span style="margin:20px; font-size: 12px; display:lnline-block">(6~15 characters)</span></b></label>
+      <input type="password" placeholder="Input your password..." id="password" minlength="6" maxlength="15" required>
 
-      <label for="repsw"><b>비밀번호 재입력 <span style="margin:20px; font-size: 12px; display:lnline-block">(비밀번호를 다시 입력하세요)</span></b></label>
-      <input type="password" placeholder="비밀번호를 한번 더 입력하세요" id="repassword" minlength="6" maxlength="15" required>
+      <label for="repsw"><b>Repassword<span style="margin:20px; font-size: 12px; display:lnline-block">(Make sure your password)</span></b></label>
+      <input type="password" placeholder="Input your password agian..." id="repassword" minlength="6" maxlength="15" required>
 
-      <label for="email"><b>이메일</b></label><br>
-      <input type="text" placeholder="이메일 주소 입력" id="email_id" style="width: 35%" required>
+      <label for="email"><b>Email</b></label><br>
+      <input type="text" placeholder="Input your email ID..." id="email_id" style="width: 35%" required>
       <select id="email_server" style="width: 35%">
       		<option value="gmail.com">gmail.com</option>
       		<option value="naver.com">naver.com</option>
@@ -336,8 +336,8 @@ function checkId(){
       </select><br>
       
       <div class="clearfix">
-        <button type="button" class="signupbtn">가입</button>
-        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">취소</button>
+        <button type="button" class="signupbtn">Signup</button>
+        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
       </div>
     </div>
   </form>
@@ -347,18 +347,18 @@ function checkId(){
   <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
   <form class="login_form">
     <div class="container">
-      <h1>로그인</h1>
+      <h1>Sign in</h1>
       <hr>
-      <label for="id"><b>아이디</b></label>
-      <input type="text" name = "user_id" placeholder="아이디를 입력해주세요">
+      <label for="id"><b>ID</b></label>
+      <input type="text" name = "user_id" placeholder="Input your ID...">
       
 
-      <label for="psw"><b>비밀번호</b></label>
-      <input type="password" placeholder="비밀번호를 입력해주세요" name="password" required>
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Input your password..." name="password" required>
 
       <div class="clearfix">
-        <button type="button" class="loginbtn" onClick="login()">로그인</button>
-        <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">취소</button>
+        <button type="button" class="loginbtn" onClick="login()">Sign in</button>
+        <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
       </div>
     </div>
   </form>

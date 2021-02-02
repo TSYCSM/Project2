@@ -28,10 +28,10 @@
 
 <table>
 	<tr>
-		<th>상품명</th>
-		<th>판매수량</th>
-		<th>매출액</th>
-		<th>재고</th>
+		<th>Item</th>
+		<th>Stock</th>
+		<th>Sales</th>
+		<th>Stock</th>
 		
 	</tr>
 	<%

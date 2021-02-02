@@ -17,10 +17,10 @@
 <table>
 	<tr>
 		<th>No</th>
-		<th>이름</th>
+		<th>Customer</th>
 		<th>point</th>
-		<th>전화번호</th>
-		<th>등록일자</th>
+		<th>Tel.No</th>
+		<th>Registered Date</th>
 	</tr>
 	
 	<%

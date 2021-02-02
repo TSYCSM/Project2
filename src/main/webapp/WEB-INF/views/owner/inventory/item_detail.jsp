@@ -96,18 +96,18 @@
 		<input type="hidden" name="item_id" value="<%=item.getItem_id()%>"/>
 		<input type="hidden" name="filename" value="<%=item.getFilename()%>"/>
 		<div class="outerbox">
-			<label for="fname">상품이름</label>
+			<label for="fname">Item name</label>
 			<div class="box">
 				<input type="text" id="item_name" name="item_name" value="<%=item.getItem_name() %>">
-				<input type="button" value="중복 확인" onClick="nameCheck()">
+				<input type="button" value="Check name" onClick="nameCheck()">
 			</div>
 		</div>
 		<div class="outerbox">
-			<label for="lname">카테고리</label>
+			<label for="lname">Category</label>
 			<div class="box">
 				<div style="width: 60%;">
 					<select name="category_id">
-						<option value="0">선택하세요</option>
+						<option value="0">select a category</option>
 						<%for(Category category : categoryList){ %>
 						<option value="<%=category.getCategory_id() %>" <%if(item.getCategory_id()==category.getCategory_id()) {%>selected<%}%>>
 							<%=category.getCategory_name() %>
@@ -118,20 +118,20 @@
 			</div>
 		</div>
 		<div class="outerbox">
-			<label for="lname">상품가격</label>
+			<label for="lname">Price</label>
 			<div class="box">
 				<input type="number" min="0" name="price" value="<%=item.getPrice()%>" required />
 			</div>
 		</div>
 		<div class="outerbox">
-			<label for="lname">상품 수량</label><br>
+			<label for="lname">Stock</label><br>
 			<div class="box">
 				<input type="number" min="0" name="stock" value="<%=item.getStock()%>" required />
 			</div>
 		</div>
 
 		<div class="outerbox">
-			<label for="lname">이미지</label><br>
+			<label for="lname">Image</label><br>
 			<div class="box">
 				<input type="file" name="photo" required />
 			</div>

@@ -36,7 +36,7 @@
 	<tr>
 		<td colspan="5">
 			<div id="category-checkbox">
-			<input name="categoryIdList" onChange="filtering(1)" type="checkbox" value="0" checked/>카테고리 없음
+			<input name="categoryIdList" onChange="filtering(1)" type="checkbox" value="0" checked/>No Category
 			<%for(int i=0; i<categoryList.size(); i++) { %>
 				<%Category category = categoryList.get(i); %>
 				<input name="categoryIdList" onChange="filtering(1)" type="checkbox" value="<%=category.getCategory_id() %>" checked/><%=category.getCategory_name() %>
@@ -46,18 +46,18 @@
 	</tr>
 	<tr id="list-title">
 		<th>No</th>
-		<th>품명</th>
-		<th>가격</th>
-		<th>재고</th>
-		<th>등록일</th>
+		<th>Item name</th>
+		<th>Price</th>
+		<th>Stock</th>
+		<th>Registered date</th>
 	</tr>
 	<tbody id="list-contents"></tbody>
 	<tbody id="page-box" style="text-align:center"></tbody>
 	<tbody style="background-color:#f0f0f0;">
 		<tr style=" border:none;">
 			<td colspan="5">
-				<button class="add_btn" type="button" onclick="location.href='/client/owner/inventory/item/dump/registform'">상품 엑셀로 추가</button>
-				<button class="add_btn" type="button" onclick="location.href='/client/owner/inventory/item/registform'">상품 추가</button>
+				<button class="add_btn" type="button" onclick="location.href='/client/owner/inventory/item/dump/registform'">add Items with Excel</button>
+				<button class="add_btn" type="button" onclick="location.href='/client/owner/inventory/item/registform'">add an Item</button>
 			</td>
 		</tr>
 	</tbody>

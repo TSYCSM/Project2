@@ -66,7 +66,7 @@ h1 {
 </style>
 </head>
 <body>
-	<h1><%=owner.getUser_id() %>님 환영합니다.</h1>
+	<h1>Welcome!, <%=owner.getUser_id() %></h1>
 
 	<div id="wrapper">
 		<div id="front">

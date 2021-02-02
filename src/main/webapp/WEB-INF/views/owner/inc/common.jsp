@@ -6,7 +6,7 @@
 <div>
 	<div class = "header">
 		<span style="font-size:20px;cursor:pointer" onclick="openNav()">&#9776;&emsp;</span>
-		<span style="font-size:20px;"><%=owner.getUser_id() %>님 환영합니다.</span>
+		<span style="font-size:20px;">Welcome! <%=owner.getUser_id() %></span>
 		<a href="javascript:logout()" style="color:white; float:right; padding-right:50px; font-size:23px;">
 			<i class="fa fa-sign-out" aria-hidden="true"></i>
 		</a>

@@ -69,18 +69,18 @@
 	<form>
 		<input type="hidden" name="owner_id" value="<%=owner.getOwner_id()%>"/>
 		<div class="outerbox">
-			<label for="item_name">상품이름</label>
+			<label for="item_name">Item name</label>
 			<div class="box">
-				<input type="text" id="item_name" name="item_name" placeholder="상품이름을 등록하세요">
-				<input type="button" value="중복 확인" onClick="nameCheck()">
+				<input type="text" id="item_name" name="item_name" placeholder="Input an Item name">
+				<input type="button" value="Check name" onClick="nameCheck()">
 			</div>
 		</div>
 		<div class="outerbox">
-			<label>카테고리</label>
+			<label>Category</label>
 			<div class="box">
 				<div style="width: 60%;">
 					<select name="category_id">
-						<option value="0">선택하세요</option>
+						<option value="0">select a category</option>
 						<%for(Category category : categoryList){ %>
 						<option value="<%=category.getCategory_id() %>">
 							<%=category.getCategory_name() %>
@@ -91,28 +91,28 @@
 			</div>
 		</div>
 		<div class="outerbox">
-			<label for="lname">상품가격</label>
+			<label for="lname">Price</label>
 			<div class="box">
-				<input type="number" min="0" name="price" placeholder="상품가격을 등록하세요" required />
+				<input type="number" min="0" name="price" placeholder="input price..." required />
 			</div>
 		</div>
 		<div class="outerbox">
-			<label for="lname">상품 수량</label><br>
+			<label for="lname">Stock</label><br>
 			<div class="box">
-				<input type="number" min="0" name="stock" placeholder="상품 수량을 등록하세요" required />
+				<input type="number" min="0" name="stock" placeholder="input stock..." required />
 			</div>
 		</div>
 
 		<div class="outerbox">
-			<label for="lname">상품 이미지</label><br>
+			<label for="lname">Image</label><br>
 			<div class="box">
 				<input type="file" name="photo" required />
 			</div>
 		</div>
 		<div>
 			<div class="buttonbox">
-				<input type="reset" value="취소"> 
-				<input onClick="regist()" type="button" value="추가">
+				<input type="reset" value="Reset"> 
+				<input onClick="regist()" type="button" value="Add">
 			</div>
 		</div>
 	</form>

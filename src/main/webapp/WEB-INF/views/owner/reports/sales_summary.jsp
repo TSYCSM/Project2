@@ -49,8 +49,8 @@
 <%@ include file="../inc/common.jsp"%>
 	<table>
 	<tr>
-		<th>날짜</th>
-		<th>총 매출액</th>
+		<th>Date</th>
+		<th>Total Sales</th>
 	</tr>
 	<%
 		int num = pager.getNum();

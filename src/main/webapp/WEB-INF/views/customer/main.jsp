@@ -194,16 +194,16 @@ h1, h3{
 					tag += "<td>";
 					
 					if(current_customer_id == review.customer_id){
-						tag += "<button type='button' onclick='modeChange(this)'>수정</button>";						
+						tag += "<button type='button' onclick='modeChange(this)'>update</button>";						
 					}
 					
-					tag += "<button type='button' onclick='modeChange(this)' style='display:none'>확인</button>";
+					tag += "<button type='button' onclick='modeChange(this)' style='display:none'>Check</button>";
 					tag += "<input type='hidden' value='" + review.review_id + "'/>";
 					tag += "</td>";
 					tag += "<td>";
 					
 					if(current_customer_id == review.customer_id){
-						tag += "<button type='button' onclick='deleteReview(this)'>삭제<input type='hidden' value='"+review.review_id+"'/></button>"
+						tag += "<button type='button' onclick='deleteReview(this)'>Delete<input type='hidden' value='"+review.review_id+"'/></button>"
 					}
 					
 					tag += "</td>"
@@ -327,8 +327,8 @@ h1, h3{
 </script>
 <body>
 	<div id="tabs">
-		<button class="tab" onclick="openTab(event, 'items')">상품</button>
-		<button class="tab" onclick="openTab(event, 'reviews')">리뷰</button>
+		<button class="tab" onclick="openTab(event, 'items')">Menu</button>
+		<button class="tab" onclick="openTab(event, 'reviews')">Review</button>
 	</div>
 	<%@ include file="./items.jsp"%>
 	<%@ include file="./reviews.jsp"%>

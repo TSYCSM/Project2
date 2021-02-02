@@ -71,9 +71,9 @@ function hideReceipt(){
 <table>
 	<tr>
 		<th>No</th>
-		<th>날짜</th>
-		<th>고객</th>
-		<th>합계</th>
+		<th>Date</th>
+		<th>Customer</th>
+		<th>Total</th>
 		
 	</tr>
 	<%
@@ -91,7 +91,7 @@ function hideReceipt(){
 				<%if(orderSummary.getCustomer() !=null ){ %>
 					<%=orderSummary.getCustomer().getCustomer_name() %>
 				<%}else{ %>
-					맴버십 고객이 아닙니다.
+					Not a member
 				<%} %>
 			</td>
 			<td><%=Formatter.getCurrency(orderSummary.getTotal_price() ) %></td>

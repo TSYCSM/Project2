@@ -24,15 +24,15 @@ function regist(){
 <div class="container">
 	<form>
 		<div class="outerbox">
-			<label for="fname">카테고리이름</label>
+			<label for="fname">Category name</label>
 			<div class="box">
 				<input type="hidden" name="owner_id" value="<%=owner.getOwner_id()%>"/>
-				<input type="text" name="category_name" placeholder="카테고리 이름 입력" required>
+				<input type="text" name="category_name" placeholder="Input a category name" required>
 			</div>					
 		</div>
 		
 		<div class="outerbox">
-			<label for="lname">색상 및 모양</label><br>
+			<label for="lname">Color & Shape</label><br>
 			<div class="box">
 				<input type="color" name="color" list="presetColors">
 				  <datalist id="presetColors">
@@ -42,8 +42,8 @@ function regist(){
 		</div>					
 		<div>
 			<div class="buttonbox">
-				<input type="reset" value="취소">
-				<input type="button" value="저장" onClick="regist()">
+				<input type="reset" value="Reset">
+				<input type="button" value="Save" onClick="regist()">
 			</div>
 		</div>
 	</form>

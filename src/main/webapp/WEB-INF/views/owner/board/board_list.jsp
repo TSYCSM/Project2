@@ -47,10 +47,10 @@ function search(){
 	</tr>
 		<tr>
 			<th>No</th>
-			<th>제목</th>
-			<th>작성자</th>
-			<th>등록일</th>
-			<th>조회수</th>
+			<th>Title</th>
+			<th>Writer</th>
+			<th>Registered Date</th>
+			<th>Hit</th>
 		</tr>
 		
 		<%
@@ -88,7 +88,7 @@ function search(){
 		</tr>
 		<tr style="background-color: #f0f0f0;">
 			<td colspan="5">
-				<button onClick="location.href='/client/owner/board/registform'">등록</button>
+				<button onClick="location.href='/client/owner/board/registform'">Register</button>
 			</td>
 		</tr>
 	</table>

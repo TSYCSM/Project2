@@ -123,8 +123,8 @@ function regist() {
 	<h1 class="title"><%=board.getTitle()%></h1>
 	<p class="writer"><%=board.getWriter()%></p>
 	<p class="content"><%=board.getContent()%></p>
-	<button>삭제</button>
-	<button>수정</button>
+	<button>Delete</button>
+	<button>Update</button>
 </div>
 <table id="comments-container">
 	<tr>
@@ -135,8 +135,8 @@ function regist() {
 			<input id="content" type="text" name="content"/>
 		</td>
 		<td>
-			<button onClick="getList()">새로고침</button>
-			<button onClick="regist()">등록</button>
+			<button onClick="getList()">Refresh</button>
+			<button onClick="regist()">Register</button>
 		</td>
 	</tr>
 </table>

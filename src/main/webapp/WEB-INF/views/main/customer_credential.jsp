@@ -132,38 +132,38 @@ function login(){
 <body>
 	<div id="customer">
 		<div class="loginArea">
-			<h2>로그인</h2>
+			<h2>Sign in</h2>
 			<form class="login_form">
 				<table>
 					<tr>
-						<td>전화번호</td>
+						<td>Telephone</td>
 						<td>
 							<input type="tel" name="phone" placeholder="ex) 010-1234-5678">
 							<input type="hidden" name="owner_id" value="<%=owner.getOwner_id()%>">
 						</td>
 						<td>
-							<button type="button" onClick="login()">로그인</button>
+							<button type="button" onClick="login()">Sign in</button>
 						</td>
 					</tr>
 				</table>
 				<br>
-				<button type="button" onClick="location.href='/client/order/main'">로그인하지 않고 상품 보러가기</button>
+				<button type="button" onClick="location.href='/client/order/main'">Shop without signin</button>
 			</form>
 		</div>
 		
 		<div class="registArea">
-			<h2>가입</h2>
+			<h2>Sign up</h2>
 			<form class="signup_form">
 				<input type="hidden" name="owner_id" value="<%=owner.getOwner_id()%>">
 				<table>
 					<tr>
-						<td>이름</td>
+						<td>Name</td>
 						<td>
-							<input type="text" name="customer_name" placeholder="이름 입력..." min="2" required>
+							<input type="text" name="customer_name" placeholder="Input your name..." min="2" required>
 						</td>
 					</tr>
 					<tr>
-						<td>전화번호</td>
+						<td>Telephone</td>
 						<td>
 							<input type="tel" id="phone" name="phone" placeholder="ex) 000-1111-2222" 
 								pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required>
@@ -171,17 +171,17 @@ function login(){
 					</tr>
 					<tr>
 						<td colspan="2" align=center>
-							<button type="button" onClick="regist()">가입</button>
+							<button type="button" onClick="regist()">Sign up</button>
 						</td>
 					</tr>
 				</table>
 				<hr style="margin: 5% 10%;">
 				<p style="font-size: 18px; line-height: 24px;">
-					<가입 혜택>
+					Sign up benefits
 					<br>
 					<br>
-					- 물건 구매시 적립<br>
-					- 리뷰 작성 기능 사용
+					- Points<br>
+					- Review Board
 				</p>
 			</form>
 		</div>

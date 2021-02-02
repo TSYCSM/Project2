@@ -5,17 +5,17 @@
 
 <div id="reviews" class="tabcontent">
 	<div>
-		<h1>리뷰</h1>
-			<button class="regist-area" type="button" class="showRegist_btn" onClick="identifyCustomer()">등록</button>
+		<h1>Review Board</h1>
+			<button class="regist-area" type="button" class="showRegist_btn" onClick="identifyCustomer()">Register</button>
 	</div>
 	
 	<form class="review-form">
 		<table id="reviewTable">
 			<tr class="first-tr">
 				<th>No</th>
-				<th>상품</th>
-				<th>리뷰</th>
-				<th>작성일</th>
+				<th>Item</th>
+				<th>Review</th>
+				<th>Registed Date</th>
 				<th></th>
 				<th></th>
 			</tr>
@@ -23,7 +23,7 @@
 				<td></td>
 				<td>
 					<select name="item.item_id">
-						<option value="0">상품 선택</option>
+						<option value="0">select an item</option>
 						<%for(int i =0; i<itemList.size();i++){ %>
 							<%Item item = itemList.get(i); %>
 							<option value="<%=item.getItem_id()%>"><%=item.getItem_name() %></option>
@@ -37,7 +37,7 @@
 				</td>
 				<td></td>
 				<td>
-					<button type="button" class="regist_btn" onClick="registReview()">확인</button>
+					<button type="button" class="regist_btn" onClick="registReview()">Register</button>
 				</td>
 				<td>
 					<button type="button" class="hide_btn" onClick="hideRegist()">X</button>
