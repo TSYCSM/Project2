@@ -202,16 +202,14 @@ Requests in async<br>
 **Order**<br>
 Each request(Order detail) is not committed without success of transactions(Order Summary)<br>
 Using AOP transaction<br>
-![alt text](/static/image/capture_image/menu.png)<br>
-
 [Open View source codes](/src/main/webapp/WEB-INF/views/customer/main.jsp)<br>
 [Open Rest Controller source codes](/src/main/java/com/tsycsm/agileoffice/rest/controller/order/RestOrderController.java)<br>
 [Open Service source codes](/src/main/java/com/tsycsm/agileoffice/model/order/service/OrderServiceImpl.java)<br>
 [Open Order Summary DAO source codes](/src/main/java/com/tsycsm/agileoffice/model/order/repository/MybatisOrderSummaryDAO.java)<br>
-[Open Order Summary Mapper source codes](/src/main/java/com/tsycsm/agileoffice/mybatis/mapper/OrderSummaryMapper.xml)<br><br>
+[Open Order Summary Mapper source codes](/src/main/java/com/tsycsm/agileoffice/mybatis/mapper/OrderSummaryMapper.xml)<br>
 [Open Order Detail DAO source codes](/src/main/java/com/tsycsm/agileoffice/model/order/repository/MybatisOrderDetailDAO.java)<br>
 [Open Order Detail Mapper source codes](/src/main/java/com/tsycsm/agileoffice/mybatis/mapper/OrderSummaryDetail.xml)<br><br>
-
+![alt text](/static/image/capture_image/menu.png)<br>
 
 **Review**<br>
 [Open View source codes](/src/main/webapp/WEB-INF/views/customer/reviews.jsp)<br>
@@ -220,6 +218,7 @@ Using AOP transaction<br>
 [Open DAO source codes](/src/main/java/com/tsycsm/agileoffice/model/review/repository/MybatisReviewDAO.java)<br>
 [Open Mapper source codes](/src/main/java/com/tsycsm/agileoffice/mybatis/mapper/ReviewMapper.xml)<br><br>
 CRUD and paging in async<br>
+![alt text](/static/image/capture_image/review_regist.png)<br>
 ![alt text](/static/image/capture_image/review.png)<br>
 
 ## Back_Office<br>
@@ -249,14 +248,14 @@ Sales report by an item<br>
 Receipts list<br>
 [Open View source codes](/src/main/webapp/WEB-INF/views/owner/reports/receipts.jsp)<br>
 [Open Mapper source codes](/src/main/java/com/tsycsm/agileoffice/mybatis/mapper/OrderSummaryMapper.xml)<br>
-![alt text](/static/image/capture_image/receipt_03.png)<br><br>
+![alt text](/static/image/capture_image/receipt.png)<br><br>
 Sales report by a customer<br>
 [Open View source codes](/src/main/webapp/WEB-INF/views/owner/reports/customer_list.jsp)<br>
 [Open Mapper source codes](/src/main/java/com/tsycsm/agileoffice/mybatis/mapper/CustomerMapper.xml)<br><br>
 Customer List<br>
-![alt text](/static/image/capture_image/receipt_01.png)<br><br>
+![alt text](/static/image/capture_image/customerlist.png)<br><br>
 Customer info<br>
-![alt text](/static/image/capture_image/receipt_02.png)<br><br>
+![alt text](/static/image/capture_image/customerinfo.png)<br><br>
 
 **Board**<br>
 Board List<br>
