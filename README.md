@@ -104,7 +104,7 @@ Agile Office는 효율적입니다. - 사업자들이 직접 상품을 관리하
 상품을 주문하는 Front Office와 상품을 관리하는 Back Office를 나누어서 설계하였습니다.<br>
 **Front Office**:  고객의 주문을 받는 역할<br>
 **BackOffice**:  상품, 카테고리를 추가, 삭제, 수정, 매출을 확인<br>
-
+![alt text](/static/image/capture_image/ownermain.png)<br>
 
 ## Draw.io
 처음 설계할 때 도식화를 하기위해 Draw.io 툴을 사용하였습니다.
@@ -213,7 +213,7 @@ pager 객체는 페이지에 대한 정보들이 담아져있으며, 현재페�
 [ExcelManager.java](/src/main/java/com/tsycsm/agileoffice/model/common/)<br>
 
 **CustomerSessionCheckAspect**<br>
-[OwnerSessionCheckAspect.java](/src/main/java/com/tsycsm/agileoffice/client/aop/OwnerSessionCheckAspect.java)<br>
+[CustomerSessionCheckAspect.java](/src/main/java/com/tsycsm/agileoffice/rest/aop/CustomerSessionCheckAspect.java)<br>
 controller에서 조건문을 통한 세션검사를 하면 코드의 일관성이 떨어질 수 있습니다. 따라서 클래스로 조건문 로직을 따로 만듭니다.<br>
 이 클래스는 필요할때마다 new하지 않고 한 번만 메모리에 올려놓아야하므로 bean에 등록합니다. <br>
 bean에 등록하고 인스턴스를 호출할 시점을 aop를 통하여 정합니다.<br>
