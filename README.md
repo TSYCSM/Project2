@@ -222,7 +222,7 @@ bean에 등록하고 인스턴스를 호출할 시점을 aop를 통하여 정합
 
 ## 회원가입/로그인
 유저의 편의성을 고려하여 회원가입/로그인 페이지를 한 곳에 두었습니다.<br>
-
+![alt text](/static/image/capture_image/ownerCredential.png)<br>
 **회원가입**<br>
 회원가입을 할 때 비동기방식으로 요청을 하여 페이지 전환없이 id중복체크, 회원 등록을 구현 하였습니다.<br>
 ```
@@ -239,10 +239,10 @@ bean에 등록하고 인스턴스를 호출할 시점을 aop를 통하여 정합
 
 성공/실패 여부를 MessageData 객체에 담아 응답을 받았습니다.<br>
 가입성공 여부를 알리기 위해 메일을 보냅니다.<br>
-
+![alt text](/static/image/capture_image/signup.png)<br>
 **로그인**<br>
 로그인성공/실패 여부를 비동기로 요청하고 성공이라는 응답을 받았을 때 관리 page로 이동시킵니다.<br>
-
+![alt text](/static/image/capture_image/login.png)<br>
 ## Front_Office
 **맴버 회원가입/로그인**<br>
 각 owner가 고객을 확보할 수 있도록 customer의 회원가입/로그인 처리를 할 수 있게끔 하였으며 이역시 비동기 방식으로 요청/응답합니다.<br>
@@ -298,22 +298,26 @@ category는 이미지 파일이 아닌 color picker를 사용하여 사용자가
 기볹거으로 상품의 목록은 비동기 페이징 방식을 사용하고, 카테고리 별로도 상품의 목록을 보게끔 비동기 sorting을 하였습니다.<br>
 
 **매출 보고서**<br>
-매출요약 - 날짜별로 그룹화하여 매출총액을 보여줌<br>
-날짜별로 그룹화하여 매출총액을 보여줍니다. 또한 owner의 매출액 비교 편의성을 고려하여 매출액이 없는 날짜도 명시하였습니다.<br>
-item과 order_detail을 날짜별로 group하여 매출액을 보여줍니다.<br>
-영수증 보관함에서는 주문요약, 주문내역, item을 조인하여 영수증 형태로 매출을 보여줍니다.<br>
-고객 관리에서는 등록된 고객의 주문내역, point 마일리지를 보여줍니다.<br>
+
 날짜별 매출<br>
+날짜별로 그룹화하여 매출총액을 보여줍니다. 또한 owner의 매출액 비교 편의성을 고려하여 매출액이 없는 날짜도 명시하였습니다.<br>
 ![alt text](/static/image/capture_image/report.png)<br><br>
 아이템별 매출<br>
+item과 order_detail을 날짜별로 group하여 매출액을 보여줍니다.<br>
 ![alt text](/static/image/capture_image/reportbyitem.png)<br><br>
 영수증 보관함<br>
+영수증 보관함에서는 주문요약, 주문내역, item을 조인하여 영수증 형태로 매출을 보여줍니다.<br>
 ![alt text](/static/image/capture_image/receipt_03.png)<br><br>
 고객별 매출<br>
+고객 관리에서는 등록된 고객의 주문내역, point 마일리지를 보여줍니다.<br>
 ![alt text](/static/image/capture_image/receipt_01.png)<br><br>
 ![alt text](/static/image/capture_image/receipt_02.png)<br><br>
 
+**사업자 커뮤니티**<br>
+자영업자들이 정보를 공유할 수 있게끔 커뮤니티를 마련했습니다.
+![alt text](/static/image/capture_image/board_list.png)<br><br>
 
+![alt text](/static/image/capture_image/board_detail.png)<br><br>
 <!-- LICENSE -->
 # License
 MIT를 씀
