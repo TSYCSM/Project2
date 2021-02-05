@@ -171,6 +171,21 @@ hr {
   animation: spin 2s linear infinite;
 }
 
+#sample-set {
+	position: absolute;
+	top: 0%;
+	left: 50%;
+	width: 300px;
+	margin-top: 100px;
+	border: 1px solid #ddd;
+	border-collapse: collapse;
+	transform: translate(-50%);
+}
+th, td {
+	border: 1px solid #ddd;
+	padding: 10px;
+}
+
 /* Safari */
 @-webkit-keyframes spin {
   0% { -webkit-transform: rotate(0deg); }
@@ -291,7 +306,7 @@ function checkId(){
 </script>
 <body>
 <div id="credentialBox">
-<div id="loader" style="margin:auto"></div>
+	<div id="loader" style="margin:auto"></div>
 	<h2>Agile Office</h2>
 	<%if(owner !=null){ %>
 		<button class="welcome_back_btn" onclick="location.href='/client/main/ownerMain'" style="width:auto;">Welcome Back!</button>	
@@ -299,9 +314,22 @@ function checkId(){
 	<%}else{ %>
 		<button class="open_login_btn" onclick="document.getElementById('id02').style.display='block'" style="width:auto;">로그인</button>
 		<button class="open_signup_btn" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">가입</button>
-	
 	<%} %>
 </div>
+
+<table id="sample-set">
+	<tr>
+		<th colspan="2">샘플 아이디 입니다</th>
+	</tr>
+	<tr>
+		<td>ID</td>
+		<td>sampleID</td>
+	</tr>
+	<tr>
+		<td>PW</td>
+		<td>samplepw</td>
+	</tr>
+</table>
 
 <div id="id01" class="modal">
   <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>

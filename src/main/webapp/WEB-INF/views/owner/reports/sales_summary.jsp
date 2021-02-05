@@ -16,18 +16,29 @@
 	Pager pager = (Pager)request.getAttribute("pager");
 	List<OrderSummary> orderSummaryList = pager.getList();
 
-	String orderdate = orderSummaryList.get(orderSummaryList.size()-1).getOrderdate().substring(0, 10);
+	String orderdate = "";
+	LocalDate date = null;
+	LocalDate first_date = null;
+	Duration diff = null;
+	
+	long diff_days = 0;
+
+	if(orderSummaryList.size() > 0) {
+		orderdate = orderSummaryList.get(orderSummaryList.size()-1).getOrderdate().substring(0, 10);
+		date = LocalDate.parse(day);
+		first_date = LocalDate.parse(orderdate);
+		diff = Duration.between(first_date.atStartOfDay(), date.atStartOfDay());
+	
+		diff_days = (diff.toDays()+1);
+		
+		pager.init(pager.getCurrentPage(), (int)diff_days);
+	} else {
+		
+	}
 	
 	//out.print("date : " + orderSummaryList.get(orderSummaryList.size()-1).getOrderdate());
 	//out.print("size : " + orderSummaryList.size());
 	
-	LocalDate date = LocalDate.parse(day);
-	LocalDate first_date = LocalDate.parse(orderdate);
-	Duration diff = Duration.between(first_date.atStartOfDay(), date.atStartOfDay());
-	
-	long diff_days = (diff.toDays()+1);
-	
-	pager.init(pager.getCurrentPage(), (int)diff_days);
 	
 	//out.print("diff : " + diff_days);
 
@@ -58,6 +69,7 @@
 	%>
 	<%for(int i=0; i<pager.getTotalRecord(); i++){ %>
 		<%if(num < 1) break; %>
+
 		<%OrderSummary orderSummary = orderSummaryList.get(curPos); %>
 		
 		<tr>
