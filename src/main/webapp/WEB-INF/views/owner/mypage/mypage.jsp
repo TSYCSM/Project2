@@ -80,8 +80,10 @@
 		obj["regdate"]=$("#regdate").val();
 
 		var jsonString = JSON.stringify(obj);
-		
-		if (confirm("회원탈퇴 하시겠습니까?")) {
+
+		if($("#user_id").val() == "sampleID"){
+			alert("sampleID는 삭제할 수 없습니다.");
+		}else if (confirm("회원탈퇴 하시겠습니까?")) {
 			$.ajax({
 				url : "/rest/main/owner",
 				type:"delete",
@@ -130,7 +132,6 @@
 		<input type="hidden" id="owner_id" value="<%=owner.getOwner_id()%>" />
 		<input type="hidden" id="user_id" value="<%=owner.getUser_id()%>" />
 		<input type="hidden" id="regdate" value="<%=owner.getRegdate()%>" />
-
 		<div class="outerbox">
 			<label>상호명</label>
 			<div class="box">

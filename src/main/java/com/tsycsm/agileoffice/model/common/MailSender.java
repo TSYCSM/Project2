@@ -19,7 +19,7 @@ import com.tsycsm.agileoffice.exception.MailSendException;
 public class MailSender {
 	String host = "smtp.gmail.com";
 	String user = "a01055356349@gmail.com";
-	String password = "여기에 google에서 받은 password 입력";
+	String password = "";
 	Properties props = new Properties();
 
 	public void send(String to, String title, String content) throws MailSendException {

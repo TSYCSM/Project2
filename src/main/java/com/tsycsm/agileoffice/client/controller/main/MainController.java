@@ -32,7 +32,7 @@ public class MainController {
 		return "main/first";
 	}
 	
-	@RequestMapping(value="/main/ownerCredential", method=RequestMethod.GET)
+	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String viewSignup() {
 		return "main/owner_credential";
 	}

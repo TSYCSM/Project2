@@ -77,7 +77,7 @@ public class RestOwnerController {
 		MessageData messageData = new MessageData();
 		//messageData.setResultCode(1);
 		messageData.setMsg("로그아웃되었습니다.");
-		messageData.setUrl("/client/main/ownerCredential");
+		messageData.setUrl("/client/");
 		
 		ResponseEntity<MessageData> entity = ResponseEntity.ok().body(messageData);
 		
@@ -117,7 +117,7 @@ public class RestOwnerController {
 		MessageData messageData = new MessageData();
 		//messageData.setResultCode(1);
 		messageData.setMsg("회원탈퇴되었습니다. 그동안 이용해주셔서 감사합니다.");
-		messageData.setUrl("/client/main/ownerCredential");
+		messageData.setUrl("/client/");
 		
 		ResponseEntity<MessageData> entity = ResponseEntity.ok().body(messageData);
 		

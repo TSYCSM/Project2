@@ -173,7 +173,7 @@ hr {
 
 #sample-set {
 	position: absolute;
-	top: 0%;
+	top: -10%;
 	left: 50%;
 	width: 300px;
 	margin-top: 100px;
