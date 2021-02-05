@@ -17,7 +17,7 @@ create table owner(
  , email_server varchar(20) not null
  , regdate datetime not null default current_timestamp
 ) default charset utf8;
-
+show 
 
 create table customer(
  customer_id int primary key auto_increment
@@ -69,7 +69,7 @@ create table order_summary(
  , total_price int
  , constraint fk_owner_order_summary
    foreign key(owner_id) references owner(owner_id)
-   		on delete cascade
+   on delete cascade
  , constraint fk_customer_order_summary 
    foreign key(customer_id) references customer(customer_id)
    on delete set null
@@ -86,12 +86,12 @@ create table order_detail(
  , orderdate datetime not null default current_timestamp
  , constraint fk_order_summary_order_detail
    foreign key(order_summary_id) references order_summary(order_summary_id)
-   		on delete cascade
+   	on delete cascade
  , constraint fk_owner_order_detail
    foreign key(owner_id) references owner(owner_id)
  , constraint fk_item_order_detail
    foreign key(item_id) references item(item_id)
-   		on delete set null
+   	on delete set null
 ) default charset utf8;
 
 
@@ -103,14 +103,14 @@ create table review(
 	, comments varchar(500)
 	, regdate datetime not null default current_timestamp
 	, constraint fk_owner_review
-		foreign key(owner_id) references owner(owner_id)
-		on delete cascade
+	foreign key(owner_id) references owner(owner_id)
+	on delete cascade
 	, constraint fk_customer_review
-		foreign key(customer_id) references customer(customer_id)
-		on delete cascade
+	foreign key(customer_id) references customer(customer_id)
+	on delete cascade
 	, constraint fk_item_review
-		foreign key(item_id) references item(item_id)
-		on delete cascade
+	foreign key(item_id) references item(item_id)
+	on delete cascade
 ) default charset utf8;
 
 
@@ -132,8 +132,8 @@ create table board(
 	, regdate datetime not null default current_timestamp
 	, hit int default 0
 	, constraint fk_owner_board
-		foreign key(owner_id) references owner(owner_id)
-		on delete cascade
+	foreign key(owner_id) references owner(owner_id)
+	on delete cascade
 ) default charset utf8;
 
 create table comments(
@@ -144,10 +144,10 @@ create table comments(
 	, content text
 	, regdate datetime not null default current_timestamp
 	, constraint fk_owner_comments
-		foreign key(owner_id) references owner(owner_id)
-		on delete cascade
+	foreign key(owner_id) references owner(owner_id)
+	on delete cascade
 	, constraint fk_board_comments
-		foreign key(board_id) references board(board_id)
-		on delete cascade
+	foreign key(board_id) references board(board_id)
+	on delete cascade
 ) default charset utf8;
 
