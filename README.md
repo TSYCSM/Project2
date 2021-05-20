@@ -324,8 +324,8 @@ MIT를 씀
 
 <!-- CONTACT -->
 # Contact
-탁*연: https://github.com/SyngyeonTak<br>
-최*민: https://github.com/simin2<br>
+탁 * 연 : https://github.com/SyngyeonTak<br>
+최 * 민 : https://github.com/simiin<br>
 
 
 <!-- LICENSE -->
